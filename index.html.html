@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>UB Academic Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#003366;--blue2:#004b99;--blue3:#e8eef7;
+  --gold:#ffcc00;--gold2:#e6b800;--gold3:#fff8cc;
+  --green:#16a34a;--green2:#dcfce7;--green3:#bbf7d0;
+  --red:#dc2626;--red2:#fee2e2;
+  --orange:#ea580c;--orange2:#fff3e0;
+  --purple:#7c3aed;--purple2:#ede9fe;
+  --bg:#f0f3f8;--card:#fff;--text:#1a2540;--muted:#6b7a99;
+  --border:#e2e8f0;--shadow:0 4px 24px rgba(0,51,102,.09);
+  --sidebar:260px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
+.hidden{display:none!important;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* AUTH */
+#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,#001228 0%,#003366 50%,#00529e 100%);
+  position:relative;overflow:hidden;padding:16px;}
+#authScreen::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 80% 20%,rgba(255,204,0,.13),transparent),
+             radial-gradient(ellipse 50% 50% at 10% 80%,rgba(255,204,0,.07),transparent);}
+.auth-card{background:#fff;border-radius:24px;padding:44px 40px;width:100%;max-width:420px;
+  position:relative;z-index:1;box-shadow:0 40px 100px rgba(0,0,0,.4);
+  animation:fadeUp .6s cubic-bezier(.22,.68,0,1.15);}
+.auth-brand{display:flex;align-items:center;gap:13px;justify-content:center;margin-bottom:32px;}
+.auth-logo{width:52px;height:52px;background:var(--blue);border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:1.4rem;color:var(--gold);font-weight:900;}
+.auth-brand-text strong{display:block;font-family:'Fraunces',serif;font-size:1.25rem;color:var(--blue);}
+.auth-brand-text small{color:var(--muted);font-size:.76rem;}
+.auth-tabs{display:flex;border-radius:12px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:26px;}
+.auth-tab{flex:1;padding:10px;text-align:center;cursor:pointer;font-weight:600;font-size:.87rem;
+  background:#f8f9fa;color:var(--muted);transition:all .2s;border:none;}
+.auth-tab.on{background:var(--blue);color:#fff;}
+.ff{margin-bottom:16px;}
+.ff label{display:block;font-size:.76rem;font-weight:700;color:var(--muted);margin-bottom:5px;
+  text-transform:uppercase;letter-spacing:.5px;}
+.ff input,.ff select,.ff textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);
+  border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.93rem;outline:none;
+  transition:border .2s;background:#fafbfd;}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--blue);background:#fff;}
+.ff textarea{resize:vertical;min-height:72px;}
+.btn-auth{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:.97rem;font-weight:700;cursor:pointer;
+  transition:all .2s;margin-top:4px;}
+.btn-auth:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,51,102,.28);}
+.auth-msg{text-align:center;margin-top:12px;font-size:.83rem;min-height:18px;}
+
+/* APP SHELL */
+#appScreen{display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar);min-height:100vh;background:var(--blue);
+  display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;
+  z-index:50;transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+.sidebar-brand{padding:22px 20px 16px;border-bottom:1px solid rgba(255,255,255,.1);}
+.sb-logo{display:flex;align-items:center;gap:11px;}
+.sb-badge{width:38px;height:38px;background:var(--gold);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:1rem;color:var(--blue);font-weight:900;flex-shrink:0;}
+.sb-title{font-family:'Fraunces',serif;font-size:1.05rem;color:#fff;line-height:1.2;}
+.sb-sub{font-size:.7rem;color:rgba(255,255,255,.5);}
+.sidebar-user{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px;}
+.sb-av{width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0;}
+.sb-uinfo{min-width:0;}
+.sb-uname{color:#fff;font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sb-role{font-size:.7rem;padding:2px 8px;border-radius:20px;display:inline-block;margin-top:2px;}
+.sb-role.student{background:rgba(255,204,0,.2);color:var(--gold);}
+.sb-role.tutor{background:rgba(22,163,74,.25);color:#4ade80;}
+.sidebar-nav{flex:1;padding:12px;overflow-y:auto;}
+.nav-section{margin-bottom:6px;}
+.nav-section-label{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.35);
+  text-transform:uppercase;letter-spacing:1px;padding:8px 8px 4px;}
+.nav-item{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;
+  cursor:pointer;transition:all .2s;color:rgba(255,255,255,.65);font-size:.88rem;font-weight:500;
+  border:none;background:transparent;width:100%;text-align:left;font-family:'DM Sans',sans-serif;}
+.nav-item:hover{background:rgba(255,255,255,.1);color:#fff;}
+.nav-item.on{background:var(--gold);color:var(--blue);font-weight:700;}
+.nav-item .ni{font-size:1.05rem;width:22px;text-align:center;flex-shrink:0;}
+.sidebar-footer{padding:14px 12px;border-top:1px solid rgba(255,255,255,.1);}
+.btn-logout{display:flex;align-items:center;gap:9px;width:100%;padding:9px 12px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:9px;
+  color:rgba(255,255,255,.65);cursor:pointer;font-size:.84rem;font-weight:500;transition:all .2s;
+  font-family:'DM Sans',sans-serif;}
+.btn-logout:hover{background:rgba(255,255,255,.16);color:#fff;}
+
+/* TOPBAR mobile */
+.topbar{display:none;height:58px;background:var(--blue);align-items:center;
+  padding:0 16px;gap:12px;position:sticky;top:0;z-index:40;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.topbar-menu{background:transparent;border:none;color:#fff;font-size:1.4rem;cursor:pointer;padding:4px;}
+.topbar-title{font-family:'Fraunces',serif;color:#fff;font-size:1.05rem;}
+.topbar-av{width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;margin-left:auto;}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);flex:1;min-height:100vh;display:flex;flex-direction:column;}
+.page{display:none;padding:28px 26px;flex:1;animation:fadeUp .3s ease;}
+.page.on{display:block;}
+.page-header{margin-bottom:22px;}
+.page-header h1{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--blue);margin-bottom:3px;}
+.page-header p{color:var(--muted);font-size:.88rem;}
+
+/* CARDS */
+.card{background:var(--card);border-radius:16px;padding:24px;box-shadow:var(--shadow);
+  margin-bottom:20px;border:1px solid var(--border);}
+.card-title{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--blue);margin-bottom:14px;
+  display:flex;align-items:center;gap:9px;}
+.card-title::before{content:'';width:4px;height:20px;background:var(--gold);border-radius:2px;flex-shrink:0;}
+
+/* BUTTONS */
+.btn{padding:9px 18px;border:none;border-radius:9px;cursor:pointer;font-weight:600;
+  font-size:.86rem;transition:all .2s;display:inline-flex;align-items:center;gap:7px;
+  font-family:'DM Sans',sans-serif;}
+.btn:hover{transform:translateY(-1px);}
+.btn-green{background:var(--green);color:#fff;}
+.btn-red{background:var(--red);color:#fff;}
+.btn-gold{background:var(--gold);color:var(--blue);}
+.btn-blue{background:var(--blue);color:#fff;}
+.btn-outline{background:#fff;color:var(--blue);border:1.5px solid var(--blue);}
+.btn-sm{padding:6px 13px;font-size:.8rem;}
+
+/* HOME */
+.home-hero{background:linear-gradient(135deg,var(--blue) 0%,var(--blue2) 100%);
+  border-radius:20px;padding:28px 30px;margin-bottom:20px;position:relative;overflow:hidden;}
+.home-hero::after{content:'';position:absolute;right:-30px;top:-30px;width:180px;height:180px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,204,0,.2),transparent);}
+.home-hero h2{font-family:'Fraunces',serif;font-size:1.65rem;color:#fff;margin-bottom:5px;position:relative;z-index:1;}
+.home-hero p{color:rgba(255,255,255,.72);font-size:.88rem;position:relative;z-index:1;max-width:420px;}
+.home-hero .quote{background:rgba(255,255,255,.1);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;
+  padding:11px 15px;margin-top:16px;font-style:italic;color:rgba(255,255,255,.85);font-size:.85rem;position:relative;z-index:1;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:20px;}
+.quick-card{background:var(--card);border-radius:14px;padding:20px;border:1px solid var(--border);
+  cursor:pointer;transition:all .25s;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;}
+.quick-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,51,102,.13);border-color:var(--blue);}
+.qc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.qc-title{font-weight:700;font-size:.93rem;color:var(--text);}
+.qc-sub{font-size:.78rem;color:var(--muted);}
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tip-card{background:var(--bg);border-radius:11px;padding:14px 16px;border:1px solid var(--border);}
+.tip-card .ti{font-size:1.3rem;margin-bottom:7px;}
+.tip-card h4{font-size:.85rem;font-weight:700;margin-bottom:3px;color:var(--blue);}
+.tip-card p{font-size:.76rem;color:var(--muted);line-height:1.5;}
+
+/* GPA */
+.setup-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px;}
+.ig{display:flex;flex-direction:column;gap:5px;}
+.ig label{font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.ig input{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border .2s;width:168px;}
+.ig input:focus{border-color:var(--blue);}
+table{width:100%;border-collapse:collapse;margin-top:8px;}
+th{background:var(--blue3);color:var(--blue);padding:10px 12px;text-align:left;
+  font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
+td{padding:9px 12px;border-bottom:1px solid #f1f4f8;font-size:.86rem;}
+tr:hover td{background:#fafbff;}
+td input{padding:7px 9px;border:1.5px solid var(--border);border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:.84rem;outline:none;transition:border .2s;width:100%;}
+td input:focus{border-color:var(--blue);}
+.dashboard{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+.stat-card{background:linear-gradient(135deg,var(--blue),var(--blue2));
+  padding:20px;border-radius:14px;text-align:center;color:#fff;}
+.stat-card h3{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;opacity:.7;margin-bottom:7px;}
+.stat-val{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:var(--gold);line-height:1;}
+.stat-class{font-size:.74rem;margin-top:6px;color:var(--gold);opacity:.88;}
+
+/* STUDY */
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin:12px 0;}
+.mod-chip{padding:10px 14px;border-radius:10px;border:2px solid var(--border);background:#fff;
+  cursor:pointer;transition:all .2s;font-size:.84rem;font-weight:500;
+  display:flex;align-items:center;gap:8px;}
+.mod-chip:hover{border-color:var(--blue);background:var(--blue3);}
+.mod-chip.sel{border-color:var(--blue);background:var(--blue);color:#fff;}
+.mod-chip .rmv{margin-left:auto;opacity:.4;cursor:pointer;font-size:.9rem;}
+.mod-chip:hover .rmv{opacity:1;}
+.topic-row{display:flex;gap:10px;align-items:center;margin-top:12px;}
+.topic-row input{flex:1;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border .2s;}
+.topic-row input:focus{border-color:var(--blue);}
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:22px;text-align:center;
+  cursor:pointer;transition:all .2s;background:#fafbfd;}
+.upload-zone:hover{border-color:var(--blue);background:var(--blue3);}
+.upload-zone input{display:none;}
+.res-filter-tabs{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap;}
+.res-ftab{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:#fff;
+  cursor:pointer;font-size:.8rem;font-weight:600;transition:all .2s;}
+.res-ftab.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+.res-grid{display:grid;gap:11px;}
+.res-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px 16px;
+  display:flex;gap:12px;align-items:flex-start;transition:all .2s;text-decoration:none;color:inherit;}
+.res-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(0,51,102,.1);transform:translateY(-2px);}
+.ri{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.ri.youtube{background:#ffebeb;}.ri.article{background:#e8f4fd;}.ri.pdf{background:var(--orange2);}.ri.quiz{background:var(--green2);}
+.res-info h4{font-size:.88rem;font-weight:600;margin-bottom:3px;}
+.res-info p{font-size:.76rem;color:var(--muted);line-height:1.4;}
+.rbadge{margin-left:auto;padding:3px 9px;border-radius:20px;font-size:.72rem;font-weight:700;flex-shrink:0;align-self:center;}
+.ry{background:#ffebeb;color:#c00;}.ra{background:#e8f4fd;color:#0066cc;}
+.rp{background:var(--orange2);color:var(--orange);}.rq{background:var(--green2);color:var(--green);}
+
+/* PEERBRIDGE */
+.pb-banner{background:linear-gradient(135deg,#003366,#005599);border-radius:18px;padding:24px 26px;
+  margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.pb-banner h2{font-family:'Fraunces',serif;font-size:1.45rem;color:#fff;margin-bottom:3px;}
+.pb-banner p{color:rgba(255,255,255,.7);font-size:.84rem;}
+.pb-rate-badge{background:rgba(255,204,0,.15);border:1.5px solid var(--gold);border-radius:12px;padding:12px 20px;text-align:center;}
+.pb-rate-amt{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold);font-weight:900;line-height:1;}
+.pb-rate-lbl{font-size:.7rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.8px;}
+.seg-tabs{display:flex;border-radius:11px;overflow:hidden;border:1.5px solid var(--border);
+  width:fit-content;margin-bottom:18px;background:#fff;}
+.seg-tab{padding:9px 20px;cursor:pointer;font-weight:600;font-size:.85rem;
+  color:var(--muted);background:transparent;border:none;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.seg-tab.on{background:var(--blue);color:#fff;}
+.req-card{background:#fff;border-radius:14px;border:1px solid var(--border);
+  padding:17px 19px;transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:12px;}
+.req-card:hover{border-color:var(--blue2);box-shadow:var(--shadow);}
+.req-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;}
+.req-left h4{font-weight:700;font-size:.94rem;margin-bottom:3px;}
+.mod-tag{display:inline-block;padding:2px 10px;border-radius:20px;background:var(--blue3);
+  color:var(--blue);font-size:.73rem;font-weight:700;margin-bottom:5px;}
+.req-desc{font-size:.82rem;color:var(--muted);line-height:1.55;}
+.req-meta{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.meta-chip{font-size:.73rem;color:var(--muted);display:flex;align-items:center;gap:4px;}
+.pula-chip{background:var(--green2);color:var(--green);border:1px solid var(--green3);
+  padding:3px 10px;border-radius:20px;font-size:.74rem;font-weight:700;}
+.badge{padding:2px 9px;border-radius:20px;font-size:.71rem;font-weight:700;border:1px solid;}
+.badge-open{background:var(--green2);color:var(--green);border-color:var(--green3);}
+.badge-taken{background:var(--red2);color:var(--red);border-color:#fecaca;}
+.wa-btn{background:#25d366;color:#fff;padding:8px 15px;border:none;border-radius:9px;
+  font-weight:700;font-size:.83rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  text-decoration:none;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.wa-btn:hover{background:#1ebe5d;transform:translateY(-1px);}
+
+/* TUTORS */
+.tutor-card{background:#fff;border-radius:14px;border:1px solid var(--border);
+  padding:18px;box-shadow:var(--shadow);margin-bottom:14px;}
+.tutor-top{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+.tutor-av{width:50px;height:50px;border-radius:50%;background:var(--blue);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;
+  font-size:1.25rem;font-weight:900;flex-shrink:0;}
+.tutor-name{font-weight:700;font-size:.97rem;margin-bottom:1px;}
+.tutor-bio{font-size:.8rem;color:var(--muted);line-height:1.45;margin-bottom:9px;}
+.tutor-subjects{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
+.subj-tag{background:var(--blue3);color:var(--blue);padding:3px 10px;border-radius:20px;font-size:.74rem;font-weight:600;}
+.stars-row{display:flex;align-items:center;gap:3px;}
+.star{font-size:1rem;color:#d1d5db;}.star.on{color:var(--gold2);}
+.star-count{font-size:.76rem;color:var(--muted);margin-left:4px;}
+.rating-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.rtag{padding:3px 9px;border-radius:20px;font-size:.73rem;font-weight:600;
+  background:var(--blue3);color:var(--blue);border:1px solid #c7d9f0;}
+
+/* BECOME TUTOR */
+.become-hero{background:linear-gradient(135deg,#003366,#16a34a 200%);
+  border-radius:18px;padding:26px;margin-bottom:18px;text-align:center;}
+.become-hero h2{font-family:'Fraunces',serif;font-size:1.45rem;color:#fff;margin-bottom:5px;}
+.become-hero p{color:rgba(255,255,255,.72);font-size:.86rem;max-width:400px;margin:0 auto;}
+.how-step{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);}
+.how-step:last-child{border-bottom:none;}
+.step-num{width:34px;height:34px;background:var(--blue3);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--blue);flex-shrink:0;font-size:.9rem;}
+.step-text strong{font-size:.9rem;display:block;margin-bottom:2px;}
+.step-text span{font-size:.8rem;color:var(--muted);}
+
+/* PROFILE */
+.profile-hero{background:linear-gradient(135deg,var(--blue),var(--blue2));border-radius:18px;
+  padding:26px;margin-bottom:18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.profile-av-big{width:68px;height:68px;border-radius:50%;background:var(--gold);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;
+  font-size:1.8rem;font-weight:900;flex-shrink:0;}
+.profile-info h2{font-family:'Fraunces',serif;font-size:1.35rem;color:#fff;margin-bottom:3px;}
+.profile-info p{color:rgba(255,255,255,.62);font-size:.83rem;}
+.pd-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.pd-row:last-child{border-bottom:none;}
+.pd-row span{color:var(--muted);font-size:.84rem;}
+.pd-row strong{font-size:.88rem;}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:200;
+  align-items:center;justify-content:center;padding:16px;}
+.modal-bg.on{display:flex;}
+.modal{background:#fff;border-radius:20px;padding:28px;width:100%;max-width:460px;
+  box-shadow:0 24px 70px rgba(0,0,0,.28);animation:fadeUp .3s ease;max-height:90vh;overflow-y:auto;}
+.modal h3{font-family:'Fraunces',serif;color:var(--blue);margin-bottom:14px;font-size:1.22rem;}
+.modal-acts{display:flex;gap:10px;margin-top:16px;}
+.btn-sec{padding:10px 18px;border:1.5px solid var(--border);border-radius:9px;background:#fff;
+  cursor:pointer;font-weight:600;font-size:.84rem;font-family:'DM Sans',sans-serif;}
+
+/* RATINGS */
+.rate-stars{display:flex;gap:8px;justify-content:center;margin:14px 0;}
+.rate-star{font-size:2rem;cursor:pointer;transition:transform .15s;color:#d1d5db;}
+.rate-star:hover,.rate-star.on{color:var(--gold2);transform:scale(1.2);}
+.rate-tag-grid{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.rate-tag{padding:6px 13px;border-radius:20px;font-size:.81rem;font-weight:600;
+  cursor:pointer;border:1.5px solid var(--border);background:#fff;transition:all .2s;}
+.rate-tag.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+/* MISC */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:45;}
+.sidebar-overlay.on{display:block;}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty .ei{font-size:2.8rem;margin-bottom:11px;}
+.spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--blue);
+  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px;}
+.search-loading{text-align:center;padding:22px;color:var(--muted);font-size:.86rem;}
+.green-banner{background:var(--green2);border:1.5px solid var(--green3);border-radius:12px;padding:16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+
+/* req form inputs */
+.req-form-input{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:9px;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;background:#fafbfd;transition:border .2s;}
+.req-form-input:focus{border-color:var(--blue);background:#fff;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{display:flex;}
+  .page{padding:16px 13px;}
+  .dashboard{grid-template-columns:1fr;}
+  .tips-grid{grid-template-columns:1fr;}
+  .home-grid{grid-template-columns:1fr 1fr;}
+  .pb-banner{flex-direction:column;}
+  .auth-card{padding:32px 22px;}
+  .row2{grid-template-columns:1fr!important;}
+}
+@media(max-width:400px){.home-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="authScreen">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="auth-logo">UB</div>
+      <div class="auth-brand-text">
+        <strong>Academic Hub</strong>
+        <small>University of Botswana</small>
+      </div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab on" onclick="authTab('login')">Sign In</button>
+      <button class="auth-tab" onclick="authTab('register')">Register</button>
+    </div>
+    <div id="loginF">
+      <div class="ff"><label>Username</label><input id="lU" type="text" placeholder="Your username" autocomplete="username"></div>
+      <div class="ff"><label>Password</label><input id="lP" type="password" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="btn-auth" onclick="doLogin()">Sign In →</button>
+    </div>
+    <div id="regF" class="hidden">
+      <div class="ff"><label>Full Name</label><input id="rN" type="text" placeholder="e.g. Allen Mosimanegape"></div>
+      <div class="ff"><label>Username</label><input id="rU" type="text" placeholder="Choose a username"></div>
+      <div class="ff"><label>WhatsApp Number</label><input id="rW" type="tel" placeholder="e.g. 267 71234567"></div>
+      <div class="ff"><label>Year of Study</label>
+        <select id="rY"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>5th Year</option></select>
+      </div>
+      <div class="ff"><label>Password</label><input id="rP" type="password" placeholder="Min. 4 characters" onkeydown="if(event.key==='Enter')doRegister()"></div>
+      <button class="btn-auth" onclick="doRegister()">Create Account →</button>
+    </div>
+    <p class="auth-msg" id="aMsg"></p>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-bg" id="mMod">
+  <div class="modal">
+    <h3>📚 Add a Module</h3>
+    <div class="ff"><label>Module Code</label><input id="mC" placeholder="e.g. MEC 301"></div>
+    <div class="ff"><label>Module Name</label><input id="mN" placeholder="e.g. Thermodynamics II"></div>
+    <div class="ff"><label>Credits</label><input id="mK" type="number" placeholder="e.g. 3"></div>
+    <div class="modal-acts">
+      <button class="btn btn-green" onclick="saveMod()">✓ Add</button>
+      <button class="btn-sec" onclick="closeMod()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="waMod">
+  <div class="modal" style="text-align:center;">
+    <h3>🤝 Offer Help</h3>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:14px;">You're about to message this student on WhatsApp.</p>
+    <div id="waInfo" style="background:var(--green2);border:1px solid var(--green3);border-radius:12px;padding:16px;margin-bottom:12px;"></div>
+    <p style="font-size:.78rem;color:var(--muted);">Standard rate: <strong style="color:var(--green)">P50 / hour</strong> — settle payment directly with the student.</p>
+    <div class="modal-acts" style="justify-content:center;margin-top:16px;">
+      <a id="waLink" href="#" target="_blank" class="wa-btn" onclick="closeWA()">💬 Open WhatsApp</a>
+      <button class="btn-sec" onclick="closeWA()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="rateMod">
+  <div class="modal">
+    <h3>⭐ Rate Your Tutor</h3>
+    <p style="color:var(--muted);font-size:.84rem;" id="rateWho"></p>
+    <div class="rate-stars" id="rateStars">
+      <span class="rate-star" onclick="setStar(1)">★</span>
+      <span class="rate-star" onclick="setStar(2)">★</span>
+      <span class="rate-star" onclick="setStar(3)">★</span>
+      <span class="rate-star" onclick="setStar(4)">★</span>
+      <span class="rate-star" onclick="setStar(5)">★</span>
+    </div>
+    <label style="font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;">Tags</label>
+    <div class="rate-tag-grid">
+      <span class="rate-tag" onclick="toggleTag(this)">Patient</span>
+      <span class="rate-tag" onclick="toggleTag(this)">Clear explanations</span>
+      <span class="rate-tag" onclick="toggleTag(this)">Knowledgeable</span>
+      <span class="rate-tag" onclick="toggleTag(this)">Punctual</span>
+      <span class="rate-tag" onclick="toggleTag(this)">Friendly</span>
+      <span class="rate-tag" onclick="toggleTag(this)">Well prepared</span>
+      <span class="rate-tag" onclick="toggleTag(this)">Good examples</span>
+      <span class="rate-tag" onclick="toggleTag(this)">Encouraging</span>
+    </div>
+    <div class="ff" style="margin-top:12px;">
+      <label>Short note (optional)</label>
+      <textarea id="rateNote" class="req-form-input" placeholder="e.g. Really helped me understand the Carnot cycle!" style="min-height:56px;"></textarea>
+    </div>
+    <div class="modal-acts">
+      <button class="btn btn-gold" onclick="submitRating()">Submit Rating</button>
+      <button class="btn-sec" onclick="closeRate()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="btMod">
+  <div class="modal">
+    <h3>🎯 Become a Tutor</h3>
+    <p style="color:var(--muted);font-size:.83rem;margin-bottom:16px;">Fill in your profile to start earning P50/hr helping fellow students.</p>
+    <div class="ff"><label>Short Bio</label>
+      <textarea id="btBio" class="req-form-input" placeholder="e.g. 3rd year Mech Eng. Strong in Thermodynamics, Fluid Mechanics and Engineering Maths." style="min-height:80px;"></textarea></div>
+    <div class="ff"><label>Subjects You Can Teach</label>
+      <input id="btSubj" class="req-form-input" placeholder="e.g. Thermodynamics, Calculus, Statics (comma separated)"></div>
+    <div class="modal-acts">
+      <button class="btn btn-green" onclick="becomeTutor()">✓ Register as Tutor</button>
+      <button class="btn-sec" onclick="document.getElementById('btMod').classList.remove('on')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="appScreen" class="hidden">
+  <div class="sidebar-overlay" id="sbOverlay" onclick="closeSB()"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sb-logo">
+        <div class="sb-badge">UB</div>
+        <div><div class="sb-title">Academic Hub</div><div class="sb-sub">UB Student Platform</div></div>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sb-av" id="sbAv">A</div>
+      <div class="sb-uinfo">
+        <div class="sb-uname" id="sbUname">—</div>
+        <span class="sb-role student" id="sbRole">Student</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Main</div>
+        <button class="nav-item on" onclick="go('home')" id="ni-home"><span class="ni">🏠</span> Home</button>
+        <button class="nav-item" onclick="go('gpa')" id="ni-gpa"><span class="ni">📊</span> GPA Tracker</button>
+        <button class="nav-item" onclick="go('study')" id="ni-study"><span class="ni">🎓</span> Study Hub</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">PeerBridge</div>
+        <button class="nav-item" onclick="go('peer')" id="ni-peer"><span class="ni">🤝</span> Help Requests</button>
+        <button class="nav-item" onclick="go('tutors')" id="ni-tutors"><span class="ni">⭐</span> Find a Tutor</button>
+        <button class="nav-item" onclick="go('become')" id="ni-become"><span class="ni">🎯</span> Become a Tutor</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Account</div>
+        <button class="nav-item" onclick="go('profile')" id="ni-profile"><span class="ni">👤</span> My Profile</button>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="doLogout()">← Sign Out</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="topbar-menu" onclick="openSB()">☰</button>
+      <span class="topbar-title" id="topTitle">Home</span>
+      <div class="topbar-av" id="topAv">A</div>
+    </div>
+
+    <!-- HOME -->
+    <div class="page on" id="pg-home">
+      <div class="home-hero">
+        <h2 id="heroGreet">Welcome back! 👋</h2>
+        <p id="heroSub">Here's your academic dashboard for today.</p>
+        <div class="quote" id="heroQuote"></div>
+      </div>
+      <div class="home-grid">
+        <div class="quick-card" onclick="go('gpa')">
+          <div class="qc-icon" style="background:var(--blue3)">📊</div>
+          <div class="qc-title">GPA Tracker</div>
+          <div class="qc-sub">Calculate your GPA & project your CGPA</div>
+        </div>
+        <div class="quick-card" onclick="go('study')">
+          <div class="qc-icon" style="background:var(--green2)">🎓</div>
+          <div class="qc-title">Study Hub</div>
+          <div class="qc-sub">Find videos, papers & quizzes instantly</div>
+        </div>
+        <div class="quick-card" onclick="go('peer')">
+          <div class="qc-icon" style="background:var(--gold3)">🤝</div>
+          <div class="qc-title">Get Help</div>
+          <div class="qc-sub">Post a request & connect with a peer tutor</div>
+        </div>
+        <div class="quick-card" onclick="go('tutors')">
+          <div class="qc-icon" style="background:var(--purple2)">⭐</div>
+          <div class="qc-title">Find a Tutor</div>
+          <div class="qc-sub">Browse rated peer tutors by subject</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Study Tips</div>
+        <div class="tips-grid" id="tipsGrid"></div>
+      </div>
+    </div>
+
+    <!-- GPA -->
+    <div class="page" id="pg-gpa">
+      <div class="page-header"><h1>📊 GPA Tracker</h1><p>Track your grades and forecast your CGPA</p></div>
+      <div class="card" style="border-top:4px solid var(--gold)">
+        <div class="card-title">Previous Academic History</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:12px;">Go to ASAS → click the CGPA row to get these values</p>
+        <div class="setup-row">
+          <div class="ig"><label>Total Grade Points</label><input type="number" id="gPts" placeholder="e.g. 450.5" oninput="calcGPA()"></div>
+          <div class="ig"><label>Total Credits</label><input type="number" id="gCr" placeholder="e.g. 115" oninput="calcGPA()"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Current Term</div>
+        <div style="display:flex;gap:10px;margin-bottom:12px;">
+          <button class="btn btn-green btn-sm" onclick="addGRow()">+ Add Module</button>
+          <button class="btn btn-red btn-sm" onclick="clearGPA()">Clear</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table><thead><tr><th>Module</th><th>Credits</th><th>Mark%</th><th>Grade</th><th>MGP</th></tr></thead>
+          <tbody id="gBody"></tbody></table>
+        </div>
+        <div class="dashboard">
+          <div class="stat-card"><h3>Term GPA</h3><div class="stat-val" id="tGPA">0.000</div></div>
+          <div class="stat-card"><h3>Projected CGPA</h3><div class="stat-val" id="cGPA">0.000</div><div class="stat-class" id="cClass">Pending</div></div>
+        </div>
+      </div>
+      <div class="card" style="border-top:4px solid var(--gold)">
+        <div class="card-title">Exam Mark Forecaster</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:12px;">What score do you need in your exam to hit your target?</p>
+        <button class="btn btn-green btn-sm" style="margin-bottom:12px;" onclick="addFRow()">+ Add Module</button>
+        <div style="overflow-x:auto;">
+          <table><thead><tr><th>Module</th><th>CA Wt%</th><th>Exam Wt%</th><th>CA%</th><th>Target%</th><th>Needed</th></tr></thead>
+          <tbody id="fBody"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDY HUB -->
+    <div class="page" id="pg-study">
+      <div class="page-header"><h1>🎓 Study Hub</h1><p>AI-powered resource finder for your modules</p></div>
+      <div class="card">
+        <div class="card-title">My Modules</div>
+        <button class="btn btn-green btn-sm" onclick="document.getElementById('mMod').classList.add('on')">+ Add Module</button>
+        <div class="mod-grid" id="modGrid" style="margin-top:12px;"><div style="color:var(--muted);font-size:.83rem;padding:6px;">No modules yet.</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Upload Course Outline <span style="font-size:.75rem;color:var(--muted);font-weight:400;">(Optional)</span></div>
+        <label class="upload-zone" for="outF">
+          <input type="file" id="outF" accept=".pdf,.docx,.txt" onchange="handleOut(event)">
+          <div style="font-size:1.8rem;margin-bottom:6px;">📄</div>
+          <p style="font-size:.84rem;"><strong>Click to upload</strong> your course outline</p>
+          <p style="font-size:.74rem;color:var(--muted);margin-top:3px;">PDF, DOCX or TXT</p>
+        </label>
+        <div id="outDone" class="hidden" style="margin-top:8px;">
+          <span style="background:var(--green2);color:var(--green);border:1px solid var(--green3);border-radius:8px;padding:5px 11px;font-size:.77rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;">✓ Course outline loaded</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Find Resources</div>
+        <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px;">Select Module</label>
+        <div class="mod-grid" id="sMods"><div style="color:var(--muted);font-size:.83rem;">Add modules first.</div></div>
+        <div class="topic-row">
+          <input type="text" id="topicIn" placeholder="Enter topic e.g. Carnot Cycle" onkeydown="if(event.key==='Enter')searchRes()">
+          <button class="btn btn-gold" onclick="searchRes()">🔍 Search</button>
+        </div>
+        <div id="resArea" style="margin-top:16px;">
+          <div class="empty"><div class="ei">📚</div><p>Select a module & enter a topic</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PEER REQUESTS -->
+    <div class="page" id="pg-peer">
+      <div class="pb-banner">
+        <div><h2>🤝 PeerBridge</h2><p>Post a request or offer help and earn P50/hr</p></div>
+        <div class="pb-rate-badge"><div class="pb-rate-amt">P50</div><div class="pb-rate-lbl">Standard / Hour</div></div>
+      </div>
+      <div class="seg-tabs">
+        <button class="seg-tab on" onclick="peerTab('browse')" id="pt-browse">🔍 Browse</button>
+        <button class="seg-tab" onclick="peerTab('post')" id="pt-post">✏️ Post Request</button>
+        <button class="seg-tab" onclick="peerTab('mine')" id="pt-mine">📋 My Requests</button>
+      </div>
+      <div id="peer-browse">
+        <div class="card" style="padding:13px 17px;margin-bottom:13px;">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input id="pSrch" type="text" placeholder="Search module or topic…" oninput="renderReqs()" class="req-form-input" style="flex:1;min-width:140px;">
+            <select id="pFilt" onchange="renderReqs()" class="req-form-input" style="width:auto;">
+              <option value="all">All</option><option value="open">Open Only</option>
+            </select>
+          </div>
+        </div>
+        <div id="reqList"><div class="empty"><div class="ei">🔍</div><p>No requests yet. Post one!</p></div></div>
+      </div>
+      <div id="peer-post" class="hidden">
+        <div class="card">
+          <div class="card-title">Post a Help Request</div>
+          <div style="display:grid;gap:12px;">
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div><label style="font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Module</label>
+                <input id="pMod" class="req-form-input" placeholder="e.g. MEC 301 – Thermodynamics"></div>
+              <div><label style="font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Topic</label>
+                <input id="pTop" class="req-form-input" placeholder="e.g. Carnot Cycle"></div>
+            </div>
+            <div>
+              <label style="font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Describe Your Problem</label>
+              <textarea id="pDesc" class="req-form-input" placeholder="What exactly are you struggling with? The more detail, the better." style="min-height:80px;"></textarea>
+            </div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div><label style="font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Urgency</label>
+                <select id="pUrg" class="req-form-input">
+                  <option value="flexible">Flexible</option><option value="today">Today</option><option value="asap">ASAP</option>
+                </select></div>
+              <div><label style="font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Your WhatsApp</label>
+                <input id="pWA" type="tel" readonly class="req-form-input" style="background:#f5f5f5;"></div>
+            </div>
+            <button class="btn btn-blue" style="width:fit-content;" onclick="postReq()">📤 Post Request</button>
+          </div>
+        </div>
+      </div>
+      <div id="peer-mine" class="hidden">
+        <div id="myReqList"><div class="empty"><div class="ei">📋</div><p>No requests posted yet.</p></div></div>
+      </div>
+    </div>
+
+    <!-- FIND TUTOR -->
+    <div class="page" id="pg-tutors">
+      <div class="page-header"><h1>⭐ Find a Tutor</h1><p>Browse rated peer tutors and connect via WhatsApp</p></div>
+      <div class="card" style="padding:13px 17px;margin-bottom:13px;">
+        <input id="tSrch" type="text" placeholder="Search by name or subject…" oninput="renderTutors()" class="req-form-input">
+      </div>
+      <div id="tutorList"><div class="empty"><div class="ei">⭐</div><p>No tutors registered yet.<br>Be the first — go to <strong>Become a Tutor</strong>!</p></div></div>
+    </div>
+
+    <!-- BECOME TUTOR -->
+    <div class="page" id="pg-become">
+      <div class="become-hero">
+        <h2>🎯 Become a Peer Tutor</h2>
+        <p>Share your knowledge, help fellow students, and earn P50 per hour.</p>
+      </div>
+      <div id="alreadyTutor" class="hidden">
+        <div class="green-banner">
+          <div style="font-size:1.8rem;">✅</div>
+          <div><strong style="color:var(--green);">You're a registered tutor!</strong><p style="font-size:.82rem;color:var(--green);margin-top:2px;">Your profile is visible to students looking for help.</p></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Update Your Profile</div>
+          <div class="ff"><label>Bio</label><textarea id="editBio" class="req-form-input" style="min-height:70px;"></textarea></div>
+          <div class="ff"><label>Subjects</label><input id="editSubj" class="req-form-input" placeholder="Comma separated"></div>
+          <button class="btn btn-blue" onclick="updateTutorProfile()">Save Changes</button>
+        </div>
+      </div>
+      <div id="notTutor">
+        <div class="card">
+          <div class="card-title">How It Works</div>
+          <div>
+            <div class="how-step"><div class="step-num">1</div><div class="step-text"><strong>Register as a tutor</strong><span>Fill in your bio and subjects you're confident in.</span></div></div>
+            <div class="how-step"><div class="step-num">2</div><div class="step-text"><strong>Browse help requests</strong><span>See which students need help and click "Offer Help".</span></div></div>
+            <div class="how-step"><div class="step-num">3</div><div class="step-text"><strong>Connect & earn</strong><span>Chat on WhatsApp, agree on a time, earn P50/hr.</span></div></div>
+            <div class="how-step"><div class="step-num">4</div><div class="step-text"><strong>Build your reputation</strong><span>Students rate you with stars + tags — top tutors get more requests.</span></div></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding-bottom:20px;">
+          <button class="btn btn-green" style="font-size:.97rem;padding:13px 30px;" onclick="document.getElementById('btMod').classList.add('on')">🎓 Sign Up as a Tutor</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="page" id="pg-profile">
+      <div class="profile-hero">
+        <div class="profile-av-big" id="profAv">A</div>
+        <div class="profile-info">
+          <h2 id="profName">—</h2>
+          <p id="profMeta">Student · UB</p>
+          <span class="sb-role student" id="profRole" style="margin-top:6px;display:inline-block;">Student</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Account Details</div>
+        <div>
+          <div class="pd-row"><span>Full Name</span><strong id="pdName">—</strong></div>
+          <div class="pd-row"><span>Username</span><strong id="pdUser">—</strong></div>
+          <div class="pd-row"><span>WhatsApp</span><strong id="pdWA">—</strong></div>
+          <div class="pd-row"><span>Year of Study</span><strong id="pdYear">—</strong></div>
+        </div>
+      </div>
+      <div class="card hidden" id="tutorProfileCard">
+        <div class="card-title">Tutor Profile</div>
+        <div id="tutorProfileInfo"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// DATA
+const DB={
+  get users(){return JSON.parse(localStorage.getItem('ub_users')||'{}');},
+  set users(v){localStorage.setItem('ub_users',JSON.stringify(v));},
+  get requests(){return JSON.parse(localStorage.getItem('ub_reqs')||'[]');},
+  set requests(v){localStorage.setItem('ub_reqs',JSON.stringify(v));},
+  get ratings(){return JSON.parse(localStorage.getItem('ub_ratings')||'{}');},
+  set ratings(v){localStorage.setItem('ub_ratings',JSON.stringify(v));},
+};
+
+let CU=null,CUK=null,mods=[],selMod=null,rTarget=null,rStars=0,rTags=[];
+
+const QUOTES=[
+  '"The secret of getting ahead is getting started." — Mark Twain',
+  '"An investment in knowledge pays the best interest." — Benjamin Franklin',
+  '"Education is the most powerful weapon to change the world." — Nelson Mandela',
+  '"The beautiful thing about learning is no one can take it away from you." — B.B. King',
+  '"Success is the sum of small efforts, repeated day in and day out." — Robert Collier',
+  '"Believe you can and you\'re halfway there." — Theodore Roosevelt',
+];
+const TIPS=[
+  {i:'🕐',t:'Pomodoro Technique',d:'Study 25 min, break 5 min. Repeat 4 times, then a longer break. Keeps focus sharp.'},
+  {i:'📝',t:'Active Recall',d:'Close your notes and try to recall what you studied. Far more effective than re-reading.'},
+  {i:'🗂️',t:'Spaced Repetition',d:'Review at intervals: 1 day, 3 days, 1 week. Material sticks far longer.'},
+  {i:'👥',t:'Teach to Learn',d:'Explain a concept to someone else. If you can teach it, you truly understand it.'},
+];
+const PTITLES={home:'Home',gpa:'GPA Tracker',study:'Study Hub',peer:'PeerBridge',tutors:'Find a Tutor',become:'Become a Tutor',profile:'My Profile'};
+
+// AUTH
+function authTab(t){
+  document.querySelectorAll('.auth-tab').forEach((el,i)=>el.classList.toggle('on',(i===0&&t==='login')||(i===1&&t==='register')));
+  document.getElementById('loginF').classList.toggle('hidden',t!=='login');
+  document.getElementById('regF').classList.toggle('hidden',t!=='register');
+  setMsg('');
+}
+function setMsg(m,ok){const el=document.getElementById('aMsg');el.textContent=m;el.style.color=ok?'var(--green)':'var(--red)';}
+function doLogin(){
+  const u=document.getElementById('lU').value.trim(),p=document.getElementById('lP').value;
+  if(!u||!p){setMsg('Fill in all fields.');return;}
+  const users=DB.users;
+  if(!users[u]||users[u].password!==p){setMsg('Incorrect username or password.');return;}
+  enterApp(u);
+}
+function doRegister(){
+  const n=document.getElementById('rN').value.trim(),u=document.getElementById('rU').value.trim(),
+        w=document.getElementById('rW').value.trim(),y=document.getElementById('rY').value,
+        p=document.getElementById('rP').value;
+  if(!n||!u||!w||!p){setMsg('Fill in all fields.');return;}
+  const users=DB.users;
+  if(users[u]){setMsg('Username already taken.');return;}
+  if(p.length<4){setMsg('Password must be at least 4 characters.');return;}
+  users[u]={name:n,password:p,wa:w,year:y,modules:[],isTutor:false,tutorBio:'',tutorSubjects:[]};
+  DB.users=users;
+  setMsg('✓ Account created!',true);
+  setTimeout(()=>enterApp(u),700);
+}
+function enterApp(u){
+  const users=DB.users;
+  CUK=u;CU=users[u];mods=CU.modules||[];
+  const ini=CU.name[0].toUpperCase();
+  ['sbAv','topAv','profAv'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=ini;});
+  document.getElementById('sbUname').textContent=CU.name.split(' ')[0];
+  document.getElementById('pWA').value=CU.wa||'';
+  updateRole();
+  document.getElementById('authScreen').classList.add('hidden');
+  document.getElementById('appScreen').classList.remove('hidden');
+  setGreeting();renderTips();renderMods();renderSMods();renderTutors();renderReqs();renderProfile();
+  go('home');
+}
+function doLogout(){
+  CU=null;CUK=null;mods=[];selMod=null;
+  document.getElementById('appScreen').classList.add('hidden');
+  document.getElementById('authScreen').classList.remove('hidden');
+  document.getElementById('lU').value='';document.getElementById('lP').value='';
+}
+function updateRole(){
+  const iT=CU&&CU.isTutor;
+  ['sbRole','profRole'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.textContent=iT?'Tutor':'Student';
+    el.className='sb-role '+(iT?'tutor':'student');
+  });
+  if(CU){
+    document.getElementById('alreadyTutor').classList.toggle('hidden',!iT);
+    document.getElementById('notTutor').classList.toggle('hidden',iT);
+    if(iT){document.getElementById('editBio').value=CU.tutorBio||'';document.getElementById('editSubj').value=(CU.tutorSubjects||[]).join(', ');}
+  }
+}
+
+// NAV
+function go(pg){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
+  document.getElementById('pg-'+pg).classList.add('on');
+  const ni=document.getElementById('ni-'+pg);if(ni)ni.classList.add('on');
+  document.getElementById('topTitle').textContent=PTITLES[pg]||'';
+  closeSB();
+  if(pg==='tutors')renderTutors();
+  if(pg==='profile')renderProfile();
+  if(pg==='become')updateRole();
+}
+function openSB(){document.getElementById('sidebar').classList.add('open');document.getElementById('sbOverlay').classList.add('on');}
+function closeSB(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sbOverlay').classList.remove('on');}
+
+// HOME
+function setGreeting(){
+  const h=new Date().getHours();
+  const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('heroGreet').textContent=g+`, ${CU.name.split(' ')[0]}! 👋`;
+  document.getElementById('heroSub').textContent="Here's your academic dashboard. Let's make today count.";
+  document.getElementById('heroQuote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+}
+function renderTips(){
+  document.getElementById('tipsGrid').innerHTML=TIPS.map(t=>`<div class="tip-card"><div class="ti">${t.i}</div><h4>${t.t}</h4><p>${t.d}</p></div>`).join('');
+}
+
+// GPA
+function gradeInfo(m){
+  if(m>=80)return{l:'A',g:5};if(m>=75)return{l:'B+',g:4.5};if(m>=70)return{l:'B',g:4};
+  if(m>=65)return{l:'B-',g:3.5};if(m>=60)return{l:'C+',g:3};if(m>=55)return{l:'C',g:2.5};
+  if(m>=50)return{l:'C-',g:2};if(m>=45)return{l:'D+',g:1.5};if(m>=40)return{l:'D',g:1};
+  if(m>=35)return{l:'D-',g:.5};return{l:'E',g:0};
+}
+function classify(c){
+  if(c>=4.4)return'First Class';if(c>=3.6)return'Second Class Upper';
+  if(c>=2.8)return'Second Class Lower';if(c>=2)return'Pass';return'Fail / Probation';
+}
+function addGRow(){
+  const r=document.getElementById('gBody').insertRow();
+  r.innerHTML=`<td><input type="text" placeholder="Module" style="width:100%"></td>
+    <td><input type="number" class="gc" placeholder="0" oninput="calcGPA()" style="width:54px"></td>
+    <td><input type="number" class="gm" placeholder="%" oninput="calcGPA()" style="width:56px"></td>
+    <td class="gg">-</td><td class="gp">0.000</td>`;
+}
+function calcGPA(){
+  let tp=0,tc=0;
+  for(const r of document.getElementById('gBody').rows){
+    const c=parseFloat(r.querySelector('.gc').value)||0,m=parseFloat(r.querySelector('.gm').value)||0;
+    const{l,g}=gradeInfo(m);const mgp=Math.round(g*c*1000)/1000;
+    r.querySelector('.gg').textContent=l;r.querySelector('.gp').textContent=mgp.toFixed(3);
+    if(c>0){tp+=mgp;tc+=c;}
+  }
+  const tgpa=tc>0?tp/tc:0;
+  document.getElementById('tGPA').textContent=tgpa.toFixed(3);
+  const pp=parseFloat(document.getElementById('gPts').value)||0,pc=parseFloat(document.getElementById('gCr').value)||0;
+  const cgpa=(pc+tc)>0?(pp+tp)/(pc+tc):0;
+  document.getElementById('cGPA').textContent=cgpa.toFixed(3);
+  document.getElementById('cClass').textContent=(pc+tc)>0?classify(cgpa):'Pending';
+  calcFore();
+}
+function addFRow(){
+  const r=document.getElementById('fBody').insertRow();r.className='fr';
+  r.innerHTML=`<td><input type="text" placeholder="Module" style="width:100%"></td>
+    <td><input type="number" class="cw" value="50" oninput="calcGPA()" style="width:50px"></td>
+    <td><input type="number" class="ew" value="50" oninput="calcGPA()" style="width:50px"></td>
+    <td><input type="number" class="cv" placeholder="0" oninput="calcGPA()" style="width:50px"></td>
+    <td><input type="number" class="tv" placeholder="70" oninput="calcGPA()" style="width:50px"></td>
+    <td class="fn" style="font-weight:700">-</td>`;
+}
+function calcFore(){
+  document.querySelectorAll('.fr').forEach(r=>{
+    const cw=(parseFloat(r.querySelector('.cw').value)||0)/100,ew=(parseFloat(r.querySelector('.ew').value)||0)/100;
+    const cv=parseFloat(r.querySelector('.cv').value)||0,tv=parseFloat(r.querySelector('.tv').value)||0;
+    const out=r.querySelector('.fn');
+    if(ew>0){const n=(tv-cv*cw)/ew;out.textContent=n>100?n.toFixed(1)+'% ⚠️':n<=0?'✓ Goal Met!':n.toFixed(1)+'%';out.style.color=n>100?'var(--red)':n<=0?'var(--green)':'var(--orange)';}
+  });
+}
+function clearGPA(){
+  document.getElementById('gBody').innerHTML='';document.getElementById('fBody').innerHTML='';
+  document.getElementById('tGPA').textContent='0.000';document.getElementById('cGPA').textContent='0.000';document.getElementById('cClass').textContent='Pending';
+}
+
+// MODULES
+function closeMod(){document.getElementById('mMod').classList.remove('on');['mC','mN','mK'].forEach(id=>document.getElementById(id).value='');}
+function saveMod(){
+  const code=document.getElementById('mC').value.trim(),name=document.getElementById('mN').value.trim(),creds=document.getElementById('mK').value;
+  if(!name){alert('Enter a module name.');return;}
+  mods.push({code,name,creds});
+  const users=DB.users;users[CUK].modules=mods;DB.users=users;CU=users[CUK];
+  renderMods();renderSMods();closeMod();
+}
+function rmMod(i){
+  mods.splice(i,1);
+  const users=DB.users;users[CUK].modules=mods;DB.users=users;
+  renderMods();renderSMods();
+}
+function renderMods(){
+  const g=document.getElementById('modGrid');
+  if(!mods.length){g.innerHTML='<div style="color:var(--muted);font-size:.83rem;padding:6px;">No modules yet.</div>';return;}
+  g.innerHTML=mods.map((m,i)=>`<div class="mod-chip"><span>📘</span><span>${m.code?'<strong>'+m.code+'</strong> · ':''}${m.name}</span><span class="rmv" onclick="rmMod(${i})">✕</span></div>`).join('');
+}
+function renderSMods(){
+  const g=document.getElementById('sMods');
+  if(!mods.length){g.innerHTML='<div style="color:var(--muted);font-size:.83rem;">Add modules first.</div>';return;}
+  g.innerHTML=mods.map((m,i)=>`<div class="mod-chip${selMod===i?' sel':''}" onclick="pickMod(${i})">${m.code?m.code+' · ':''}${m.name}</div>`).join('');
+}
+function pickMod(i){selMod=i;renderSMods();}
+function handleOut(e){if(!e.target.files[0])return;document.getElementById('outDone').classList.remove('hidden');}
+
+// STUDY RESOURCES
+async function searchRes(){
+  const topic=document.getElementById('topicIn').value.trim();
+  if(!topic){alert('Enter a topic.');return;}
+  if(selMod===null&&mods.length){alert('Select a module first.');return;}
+  const mod=selMod!==null?mods[selMod].name:'Engineering';
+  const area=document.getElementById('resArea');
+  area.innerHTML=`<div class="search-loading"><div class="spinner"></div><p>Finding resources for <strong>${topic}</strong>…</p></div>`;
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",
+        content:`Generate a JSON array of 8 study resources for topic: "${topic}" in module: "${mod}" for a university engineering student. Return ONLY valid JSON array, no markdown. Each item: {"type":"youtube"|"article"|"pdf"|"quiz","title":"...","description":"1-2 sentences","url":"...","source":"..."}. 2 of each type. YouTube: use youtube.com/results search URLs. PDF: scholar.google.com. Quiz: quizlet.com. Article: educational sites like Khan Academy, MIT OpenCourseWare, etc.`}]})});
+    const data=await res.json();
+    const txt=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+    renderResources(JSON.parse(txt),topic,mod);
+  }catch{
+    area.innerHTML=`<div class="empty"><div class="ei">🔍</div><p>Quick links for <strong>${topic}</strong>:</p>
+      <div style="margin-top:14px;display:grid;gap:10px;">
+        <a class="res-card" href="https://www.youtube.com/results?search_query=${encodeURIComponent(mod+' '+topic)}" target="_blank"><div class="ri youtube">▶️</div><div class="res-info"><h4>YouTube</h4><p>${mod} – ${topic}</p></div><span class="rbadge ry">YouTube</span></a>
+        <a class="res-card" href="https://scholar.google.com/scholar?q=${encodeURIComponent(mod+' '+topic)}" target="_blank"><div class="ri pdf">📄</div><div class="res-info"><h4>Google Scholar</h4><p>Academic papers on ${topic}</p></div><span class="rbadge rp">Paper</span></a>
+        <a class="res-card" href="https://quizlet.com/search?query=${encodeURIComponent(topic)}" target="_blank"><div class="ri quiz">✏️</div><div class="res-info"><h4>Quizlet</h4><p>Flashcards and practice quizzes</p></div><span class="rbadge rq">Quiz</span></a>
+      </div></div>`;
+  }
+}
+function renderResources(rs,topic,mod){
+  const ic={youtube:'▶️',article:'📰',pdf:'📄',quiz:'✏️'},bc={youtube:'ry',article:'ra',pdf:'rp',quiz:'rq'},lb={youtube:'YouTube',article:'Article',pdf:'Paper',quiz:'Quiz'};
+  const byT={};rs.forEach(r=>{(byT[r.type]=byT[r.type]||[]).push(r);});
+  document.getElementById('resArea').innerHTML=`
+    <p style="font-size:.8rem;color:var(--muted);margin-bottom:10px;">Results: <strong>${topic}</strong> in <strong>${mod}</strong></p>
+    <div class="res-filter-tabs">
+      <button class="res-ftab on" onclick="fRes('all',this)">All (${rs.length})</button>
+      ${['youtube','article','pdf','quiz'].filter(t=>byT[t]).map(t=>`<button class="res-ftab" onclick="fRes('${t}',this)">${ic[t]} ${lb[t]}</button>`).join('')}
+    </div>
+    <div class="res-grid">${rs.map(r=>`<a class="res-card" href="${r.url}" target="_blank" data-type="${r.type}">
+      <div class="ri ${r.type}">${ic[r.type]||'📚'}</div>
+      <div class="res-info"><h4>${r.title}</h4><p>${r.description}</p></div>
+      <span class="rbadge ${bc[r.type]}">${r.source||lb[r.type]}</span></a>`).join('')}</div>`;
+}
+function fRes(type,btn){
+  document.querySelectorAll('.res-ftab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');
+  document.querySelectorAll('.res-card').forEach(c=>c.style.display=(type==='all'||c.dataset.type===type)?'flex':'none');
+}
+
+// PEERBRIDGE
+function peerTab(t){
+  ['browse','post','mine'].forEach(x=>{
+    document.getElementById('peer-'+x).classList.toggle('hidden',x!==t);
+    document.getElementById('pt-'+x).classList.toggle('on',x===t);
+  });
+  if(t==='mine')renderMyReqs();if(t==='browse')renderReqs();
+}
+function postReq(){
+  const mod=document.getElementById('pMod').value.trim(),top=document.getElementById('pTop').value.trim(),
+        desc=document.getElementById('pDesc').value.trim(),urg=document.getElementById('pUrg').value,
+        wa=document.getElementById('pWA').value.trim();
+  if(!mod||!top||!desc){alert('Fill in module, topic and description.');return;}
+  const reqs=DB.requests;
+  reqs.unshift({id:Date.now(),by:CUK,name:CU.name,mod,top,desc,urg,wa,status:'open',at:new Date().toISOString()});
+  DB.requests=reqs;
+  ['pMod','pTop','pDesc'].forEach(id=>document.getElementById(id).value='');
+  alert('✓ Request posted!');peerTab('browse');
+}
+function renderReqs(){
+  const q=(document.getElementById('pSrch').value||'').toLowerCase(),f=document.getElementById('pFilt').value;
+  const list=DB.requests.filter(r=>(f==='all'||r.status==='open')&&(q===''||r.mod.toLowerCase().includes(q)||r.top.toLowerCase().includes(q)));
+  document.getElementById('reqList').innerHTML=list.length?list.map(r=>reqHTML(r)).join(''):'<div class="empty"><div class="ei">🔍</div><p>No requests found.</p></div>';
+}
+function renderMyReqs(){
+  const list=DB.requests.filter(r=>r.by===CUK);
+  document.getElementById('myReqList').innerHTML=list.length?list.map(r=>reqHTML(r,true)).join(''):'<div class="empty"><div class="ei">📋</div><p>No requests yet.</p></div>';
+}
+function reqHTML(r,mine){
+  const urg={flexible:'🟢 Flexible',today:'🟡 Today',asap:'🔴 ASAP'};
+  const own=r.by===CUK;
+  const action=own?`<button class="btn btn-red btn-sm" onclick="delReq(${r.id})">🗑 Delete</button>`
+    :r.status==='open'?`<button class="btn btn-gold btn-sm" onclick="offerHelp(${r.id})">💬 Offer Help</button>`
+    :`<span style="color:var(--muted);font-size:.77rem;">Taken</span>`;
+  return`<div class="req-card">
+    <div class="req-top"><div class="req-left"><span class="mod-tag">📘 ${r.mod}</span><h4>${r.top}</h4></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;"><span class="badge badge-${r.status==='open'?'open':'taken'}">${r.status==='open'?'Open':'Taken'}</span>${action}</div></div>
+    <p class="req-desc">${r.desc}</p>
+    <div class="req-meta"><span class="meta-chip">👤 ${r.name}</span><span class="meta-chip">⏱ ${ago(r.at)}</span><span class="meta-chip">${urg[r.urg]||r.urg}</span><span class="pula-chip">P50/hr</span></div>
+  </div>`;
+}
+function offerHelp(id){
+  const reqs=DB.requests,r=reqs.find(x=>x.id===id);if(!r)return;
+  const num=(r.wa||'').replace(/\D/g,'');
+  const msg=encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*. Are you still looking for a tutor? (P50/hr)`);
+  document.getElementById('waInfo').innerHTML=`<p style="font-size:.82rem;color:var(--green);">Connecting with</p><strong style="color:#14532d;font-size:1rem;">${r.name} · ${r.wa}</strong>`;
+  document.getElementById('waLink').href=`https://wa.me/${num}?text=${msg}`;
+  document.getElementById('waMod').classList.add('on');
+}
+function closeWA(){document.getElementById('waMod').classList.remove('on');}
+function delReq(id){if(!confirm('Delete this request?'))return;const reqs=DB.requests.filter(r=>r.id!==id);DB.requests=reqs;renderReqs();renderMyReqs();}
+function ago(iso){const m=Math.floor((Date.now()-new Date(iso))/60000);return m<1?'Just now':m<60?m+'m ago':Math.floor(m/60)<24?Math.floor(m/60)+'h ago':Math.floor(m/1440)+'d ago';}
+
+// TUTORS
+function becomeTutor(){
+  const bio=document.getElementById('btBio').value.trim(),subj=document.getElementById('btSubj').value.trim();
+  if(!bio||!subj){alert('Fill in bio and subjects.');return;}
+  const users=DB.users;
+  users[CUK].isTutor=true;users[CUK].tutorBio=bio;users[CUK].tutorSubjects=subj.split(',').map(s=>s.trim()).filter(Boolean);
+  DB.users=users;CU=users[CUK];
+  document.getElementById('btMod').classList.remove('on');
+  updateRole();renderTutors();alert('✓ You are now a tutor!');
+}
+function updateTutorProfile(){
+  const bio=document.getElementById('editBio').value.trim(),subj=document.getElementById('editSubj').value.trim();
+  if(!bio||!subj){alert('Fill in all fields.');return;}
+  const users=DB.users;users[CUK].tutorBio=bio;users[CUK].tutorSubjects=subj.split(',').map(s=>s.trim()).filter(Boolean);
+  DB.users=users;CU=users[CUK];renderTutors();alert('✓ Profile updated!');
+}
+function renderTutors(){
+  const q=(document.getElementById('tSrch')&&document.getElementById('tSrch').value||'').toLowerCase();
+  const users=DB.users;
+  const tutors=Object.entries(users).filter(([k,u])=>u.isTutor&&(q===''||u.name.toLowerCase().includes(q)||(u.tutorSubjects||[]).some(s=>s.toLowerCase().includes(q))));
+  const cont=document.getElementById('tutorList');
+  if(!tutors.length){cont.innerHTML='<div class="empty"><div class="ei">⭐</div><p>No tutors yet.<br>Go to <strong>Become a Tutor</strong> to be first!</p></div>';return;}
+  const ratings=DB.ratings;
+  cont.innerHTML=tutors.map(([k,u])=>{
+    const rs=ratings[k]||[];
+    const avg=rs.length?rs.reduce((a,r)=>a+r.stars,0)/rs.length:0;
+    const allTags=[...new Set(rs.flatMap(r=>r.tags||[]))];
+    const stars=Array(5).fill(0).map((_,i)=>`<span class="star ${i<Math.round(avg)?'on':''}">★</span>`).join('');
+    const isMe=k===CUK;
+    return`<div class="tutor-card">
+      <div class="tutor-top">
+        <div class="tutor-av">${u.name[0].toUpperCase()}</div>
+        <div><div class="tutor-name">${u.name}${isMe?' (You)':''}</div>
+          <div style="color:var(--muted);font-size:.76rem;">${u.year||'Student'}</div>
+          <div class="stars-row">${stars}<span class="star-count">${avg>0?avg.toFixed(1)+' · '+rs.length+' rating(s)':'No ratings yet'}</span></div>
+        </div>
+      </div>
+      <p class="tutor-bio">${u.tutorBio||''}</p>
+      <div class="tutor-subjects">${(u.tutorSubjects||[]).map(s=>`<span class="subj-tag">${s}</span>`).join('')}</div>
+      ${allTags.length?`<div class="rating-tags">${allTags.slice(0,5).map(t=>`<span class="rtag">${t}</span>`).join('')}</div>`:''}
+      ${!isMe?`<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+        <a class="wa-btn" href="https://wa.me/${(u.wa||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hi '+u.name+'! I found you on UB Academic Hub. Are you available for tutoring? (P50/hr)')}" target="_blank">💬 WhatsApp</a>
+        <button class="btn btn-outline btn-sm" onclick="openRate('${k}','${u.name}')">⭐ Rate Tutor</button>
+      </div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// RATINGS
+function openRate(key,name){
+  rTarget=key;rStars=0;rTags=[];
+  document.getElementById('rateWho').textContent='Rating your session with '+name;
+  document.querySelectorAll('.rate-star').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.rate-tag').forEach(t=>t.classList.remove('on'));
+  document.getElementById('rateNote').value='';
+  document.getElementById('rateMod').classList.add('on');
+}
+function setStar(n){rStars=n;document.querySelectorAll('.rate-star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+function toggleTag(el){el.classList.toggle('on');const t=el.textContent;rTags=rTags.includes(t)?rTags.filter(x=>x!==t):[...rTags,t];}
+function submitRating(){
+  if(!rStars){alert('Please select a star rating.');return;}
+  const ratings=DB.ratings;
+  if(!ratings[rTarget])ratings[rTarget]=[];
+  ratings[rTarget].push({stars:rStars,tags:rTags,note:document.getElementById('rateNote').value,by:CUK,at:new Date().toISOString()});
+  DB.ratings=ratings;closeRate();renderTutors();alert('✓ Rating submitted!');
+}
+function closeRate(){document.getElementById('rateMod').classList.remove('on');}
+
+// PROFILE
+function renderProfile(){
+  if(!CU)return;
+  const ini=CU.name[0].toUpperCase();
+  document.getElementById('profAv').textContent=ini;
+  document.getElementById('profName').textContent=CU.name;
+  document.getElementById('profMeta').textContent=(CU.year||'Student')+' · University of Botswana';
+  document.getElementById('pdName').textContent=CU.name;
+  document.getElementById('pdUser').textContent=CUK;
+  document.getElementById('pdWA').textContent=CU.wa||'—';
+  document.getElementById('pdYear').textContent=CU.year||'—';
+  const tc=document.getElementById('tutorProfileCard');
+  if(CU.isTutor){
+    tc.classList.remove('hidden');
+    const ratings=DB.ratings[CUK]||[];
+    const avg=ratings.length?ratings.reduce((a,r)=>a+r.stars,0)/ratings.length:0;
+    document.getElementById('tutorProfileInfo').innerHTML=`
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:8px;">${CU.tutorBio||''}</p>
+      <div class="tutor-subjects">${(CU.tutorSubjects||[]).map(s=>`<span class="subj-tag">${s}</span>`).join('')}</div>
+      <div class="stars-row" style="margin-top:10px;">${Array(5).fill(0).map((_,i)=>`<span class="star ${i<Math.round(avg)?'on':''}">★</span>`).join('')}
+        <span class="star-count">${avg>0?avg.toFixed(1)+' avg · '+ratings.length+' rating(s)':'No ratings yet'}</span></div>`;
+  }else{tc.classList.add('hidden');}
+}
+</script>
+</body>
+</html>
