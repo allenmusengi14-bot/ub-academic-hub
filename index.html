@@ -520,7 +520,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
     <h3>🤝 Offer Help</h3>
     <p style="color:var(--muted);font-size:.85rem;margin-bottom:14px;">You're about to message this student on WhatsApp.</p>
     <div id="waInfo" style="background:linear-gradient(135deg,var(--green2),var(--teal2));border:1px solid var(--green3);border-radius:14px;padding:18px;margin-bottom:13px;"></div>
-    <p style="font-size:.78rem;color:var(--muted);">Standard rate: <strong style="color:var(--green)">P50 / hour</strong></p>
+    <p style="font-size:.78rem;color:var(--muted);">Standard rate: <strong style="color:var(--green)">P20 / hour</strong></p>
     <div class="modal-acts" style="justify-content:center;margin-top:16px;">
       <a id="waLink" href="#" target="_blank" class="wa-btn" onclick="closeWA()">💬 Open WhatsApp</a>
       <button class="btn-sec" onclick="closeWA()">Cancel</button>
@@ -562,7 +562,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
 <div class="modal-bg" id="btMod">
   <div class="modal">
     <h3>🎯 Become a Peer Tutor</h3>
-    <p style="color:var(--muted);font-size:.83rem;margin-bottom:18px;">Fill in your profile to start earning P50/hr helping fellow students.</p>
+    <p style="color:var(--muted);font-size:.83rem;margin-bottom:18px;">Fill in your profile to start earning P20/hr helping fellow students.</p>
     <div class="ff"><label>Short Bio</label>
       <textarea id="btBio" placeholder="e.g. 3rd year Mech Eng. Strong in Thermodynamics, Fluid Mechanics and Engineering Maths." style="min-height:80px;"></textarea></div>
     <div class="ff"><label>Subjects You Can Teach</label>
@@ -733,8 +733,8 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
     <!-- PEER -->
     <div class="page" id="pg-peer">
       <div class="pb-banner">
-        <div><h2>🤝 PeerBridge</h2><p>Post a request or offer help and earn P50/hr</p></div>
-        <div class="pb-rate-badge"><div class="pb-rate-amt">P50</div><div class="pb-rate-lbl">Standard / Hour</div></div>
+        <div><h2>🤝 PeerBridge</h2><p>Post a request or offer help and earn P20/hr</p></div>
+        <div class="pb-rate-badge"><div class="pb-rate-amt">P20</div><div class="pb-rate-lbl">Standard / Hour</div></div>
       </div>
       <div class="seg-tabs">
         <button class="seg-tab on" onclick="peerTab('browse')" id="pt-browse">🔍 Browse</button>
@@ -764,6 +764,38 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
             </div>
             <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Describe Your Problem</label>
               <textarea id="pDesc" class="req-fi" placeholder="What exactly are you struggling with?" style="min-height:80px;resize:vertical;"></textarea></div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Time Needed</label>
+                <select id="pTime" class="req-fi" onchange="calcPrice()">
+                  <option value="0.5">30 Minutes</option>
+                  <option value="0.75">45 Minutes</option>
+                  <option value="1">1 Hour</option>
+                  <option value="1.25">1h 15m</option>
+                  <option value="1.5">1h 30m</option>
+                  <option value="1.75">1h 45m</option>
+                  <option value="2">2 Hours</option>
+                  <option value="2.25">2h 15m</option>
+                  <option value="2.5">2h 30m</option>
+                  <option value="2.75">2h 45m</option>
+                  <option value="3">3 Hours</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Type of Help</label>
+                <select id="pType" class="req-fi">
+                  <option value="Virtual">Virtual (Zoom / Meet)</option>
+                  <option value="WhatsApp">WhatsApp Call</option>
+                  <option value="Physical">Physical Meet</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-top:6px;font-weight:700;">
+              Estimated Cost: <span id="pCost">P10</span>
+            </div>
+
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Urgency</label>
                 <select id="pUrg" class="req-fi"><option value="flexible">Flexible</option><option value="today">Today</option><option value="asap">ASAP</option></select></div>
@@ -812,7 +844,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
           <div>
             <div class="how-step"><div class="step-num">1</div><div class="step-text"><strong>Register as a tutor</strong><span>Fill in your bio and subjects you're confident in.</span></div></div>
             <div class="how-step"><div class="step-num">2</div><div class="step-text"><strong>Browse help requests</strong><span>See which students need help and click "Offer Help".</span></div></div>
-            <div class="how-step"><div class="step-num">3</div><div class="step-text"><strong>Connect & earn</strong><span>Chat on WhatsApp, agree on a time, earn P50/hr.</span></div></div>
+            <div class="how-step"><div class="step-num">3</div><div class="step-text"><strong>Connect & earn</strong><span>Chat on WhatsApp, agree on a time, earn P20/hr.</span></div></div>
             <div class="how-step"><div class="step-num">4</div><div class="step-text"><strong>Build your reputation</strong><span>Students rate you — top tutors get more requests.</span></div></div>
           </div>
         </div>
@@ -1137,13 +1169,13 @@ function reqHTML(r){
     <div class="req-top"><div class="req-left"><span class="mod-tag">📘 ${r.mod}</span><h4>${r.top}</h4></div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;"><span class="badge badge-${r.status==='open'?'open':'taken'}">${r.status==='open'?'Open':'Taken'}</span>${action}</div></div>
     <p class="req-desc">${r.desc}</p>
-    <div class="req-meta"><span class="meta-chip">👤 ${r.name}</span><span class="meta-chip">⏱ ${ago(r.at)}</span><span class="meta-chip">${urg[r.urg]||r.urg}</span><span class="pula-chip">P50/hr</span></div>
+    <div class="req-meta"><span class="meta-chip">👤 ${r.name}</span><span class="meta-chip">⏱ ${ago(r.at)}</span><span class="meta-chip">${urg[r.urg]||r.urg}</span><span class="pula-chip">P20/hr</span></div>
   </div>`;
 }
 function offerHelp(id){
   const r=DB.requests.find(x=>x.id===id);if(!r)return;
   const num=(r.wa||'').replace(/\D/g,'');
-  const msg=encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*. Still looking for a tutor? (P50/hr)`);
+  const msg=encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*. Still looking for a tutor? (P20/hr)`);
   document.getElementById('waInfo').innerHTML=`<p style="font-size:.82rem;color:var(--green);font-weight:600;">Connecting with</p><strong style="color:#065f46;font-size:1.05rem;">${r.name} · ${r.wa}</strong>`;
   document.getElementById('waLink').href=`https://wa.me/${num}?text=${msg}`;
   document.getElementById('waMod').classList.add('on');
@@ -1189,7 +1221,7 @@ function renderTutors(){
       <div class="tutor-subjects">${(u.tutorSubjects||[]).map(s=>`<span class="subj-tag">${s}</span>`).join('')}</div>
       ${allTags.length?`<div class="rating-tags">${allTags.slice(0,5).map(t=>`<span class="rtag">${t}</span>`).join('')}</div>`:''}
       ${!isMe?`<div style="display:flex;gap:9px;margin-top:13px;flex-wrap:wrap;">
-        <a class="wa-btn" href="https://wa.me/${(u.wa||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hi '+u.name+'! I found you on UB Academic Hub. Are you available for tutoring? (P50/hr)')}" target="_blank">💬 WhatsApp</a>
+        <a class="wa-btn" href="https://wa.me/${(u.wa||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hi '+u.name+'! I found you on UB Academic Hub. Are you available for tutoring? (P20/hr)')}" target="_blank">💬 WhatsApp</a>
         <button class="btn btn-outline btn-sm" onclick="openRate('${k}','${u.name}')">⭐ Rate Tutor</button>
       </div>`:''}
     </div>`;
@@ -1237,6 +1269,16 @@ function renderProfile(){
         <span class="star-count">${avg>0?avg.toFixed(1)+' avg · '+rs.length+' rating(s)':'No ratings yet'}</span></div>`;
   }else{tc.classList.add('hidden');}
 }
+
+function calcPrice(){
+  let hours = parseFloat(document.getElementById("pTime")?.value || 0.5);
+  let rate = 20;
+  let price = hours * rate;
+  let el = document.getElementById("pCost");
+  if(el){ el.innerText = "P" + price.toFixed(2); }
+}
+document.addEventListener("DOMContentLoaded",calcPrice);
+
 </script>
 </body>
 </html>
