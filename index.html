@@ -199,21 +199,9 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .btn-sm{padding:7px 14px;font-size:.8rem;}
 
 /* HOME */
-.home-hero{border-radius:24px;padding:36px;margin-bottom:24px;position:relative;overflow:hidden;
-  background:linear-gradient(-45deg,#1e3a8a,#7c3aed,#ec4899,#f59e0b);
-  background-size:400% 400%;animation:gradientShift 8s ease infinite;}
-.home-hero::after{content:'';position:absolute;right:-60px;top:-60px;width:250px;height:250px;
-  border-radius:50%;background:rgba(255,255,255,.08);}
-.home-hero::before{content:'';position:absolute;left:-40px;bottom:-40px;width:180px;height:180px;
-  border-radius:50%;background:rgba(255,255,255,.06);}
-.home-hero h2{font-family:'Fraunces',serif;font-size:2rem;color:#fff;margin-bottom:6px;position:relative;z-index:1;}
-.home-hero p{color:rgba(255,255,255,.8);font-size:.93rem;position:relative;z-index:1;max-width:460px;}
-.hero-quote{background:rgba(255,255,255,.12);backdrop-filter:blur(10px);
-  border-left:4px solid rgba(255,255,255,.6);border-radius:0 14px 14px 0;
-  padding:13px 18px;margin-top:20px;font-style:italic;color:rgba(255,255,255,.9);
-  font-size:.88rem;position:relative;z-index:1;}
 
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px;margin-bottom:22px;}
+
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;margin-bottom:22px;}
 .quick-card{background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--border);
   cursor:pointer;transition:all .3s;box-shadow:var(--shadow);
   display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;}
@@ -226,13 +214,88 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .qc-title{font-weight:800;font-size:.97rem;color:var(--text);}
 .qc-sub{font-size:.78rem;color:var(--muted);line-height:1.5;}
 
-.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+/* HOME TOP ROW */
+.home-top-row{margin-bottom:22px;}
+.home-greet-block h2{font-family:'Fraunces',serif;font-size:1.75rem;
+  background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:6px;}
+.hero-quote{font-size:.83rem;color:var(--muted);font-style:italic;line-height:1.5;max-width:480px;}
+
+/* HOME SECTION CARDS */
+.home-section-card{background:var(--card);border-radius:20px;padding:20px 22px;
+  border:1px solid var(--border);box-shadow:var(--shadow);
+  border-top:3px solid transparent;
+  border-image:linear-gradient(90deg,var(--sc1),var(--sc2)) 1;}
+.hsc-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+  background:linear-gradient(135deg,var(--sc1),var(--sc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:14px;}
+.hsc-grid{display:flex;gap:12px;flex-wrap:wrap;}
+.hsc-item{flex:1;min-width:130px;background:var(--bg);border:1px solid var(--border);border-radius:14px;
+  padding:16px;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:9px;}
+.hsc-item:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,138,.12);background:#fff;border-color:rgba(37,99,235,.2);}
+.hsc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.hsc-title{font-weight:800;font-size:.92rem;color:var(--text);}
+.hsc-sub{font-size:.76rem;color:var(--muted);line-height:1.45;}
+
+/* CAREER SPOTLIGHT PANEL */
+.career-panel{border-radius:22px;padding:22px 24px 20px;margin-bottom:22px;
+  background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#2d1b69 100%);
+  position:relative;overflow:hidden;}
+.career-panel::before{content:'';position:absolute;top:-40px;right:-40px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.3),transparent 70%);pointer-events:none;}
+.career-panel-header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
+/* HORIZONTAL SCROLL */
+.career-videos-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
+.career-videos-scroll::-webkit-scrollbar{height:4px;}
+.career-videos-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.08);border-radius:4px;}
+.career-videos-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:4px;}
+.career-loading{flex:1;text-align:center;padding:28px 0;min-width:200px;}
+.career-card{border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  text-decoration:none;display:block;flex-shrink:0;width:220px;scroll-snap-align:start;}
+.career-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.13);
+  box-shadow:0 12px 32px rgba(0,0,0,.4);}
+.career-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#1e293b;}
+.career-thumb-wrap{position:relative;overflow:hidden;}
+.career-thumb-wrap::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-size:1.8rem;color:rgba(255,255,255,.9);
+  background:rgba(0,0,0,.3);opacity:0;transition:opacity .25s;}
+.career-card:hover .career-thumb-wrap::after{opacity:1;}
+.career-card-body{padding:10px 12px 12px;}
+.career-card-title{font-size:.8rem;font-weight:700;color:#fff;line-height:1.4;margin-bottom:3px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.career-card-ch{font-size:.71rem;color:rgba(255,255,255,.5);}
+
+
+/* STUDY METHODS */
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 .tip-card{background:linear-gradient(135deg,var(--tc1,#f8faff),var(--tc2,#f0f4ff));
-  border-radius:14px;padding:18px;border:1px solid var(--border);transition:all .3s;}
-.tip-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,138,.1);}
+  border-radius:14px;padding:18px;border:2px solid transparent;transition:all .25s;cursor:pointer;
+  position:relative;overflow:hidden;}
+.tip-card::after{content:'Tap to explore →';position:absolute;bottom:10px;right:12px;
+  font-size:.68rem;color:var(--muted);font-weight:600;opacity:0;transition:opacity .25s;}
+.tip-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,138,.12);border-color:var(--tc3,var(--border));}
+.tip-card:hover::after{opacity:1;}
+.tip-card.active{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.15);}
 .tip-icon{font-size:1.5rem;margin-bottom:9px;}
 .tip-card h4{font-size:.88rem;font-weight:700;margin-bottom:4px;color:var(--text);}
 .tip-card p{font-size:.77rem;color:var(--muted);line-height:1.55;}
+/* Q&A bubbles */
+.qa-user{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;
+  border-radius:14px 14px 4px 14px;padding:10px 14px;font-size:.84rem;line-height:1.5;
+  max-width:85%;margin-left:auto;}
+.qa-ai{background:#fff;border:1px solid var(--border);
+  border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:.84rem;line-height:1.6;
+  max-width:90%;box-shadow:0 2px 8px rgba(30,58,138,.06);}
+.qa-loading{display:flex;gap:5px;align-items:center;padding:10px 14px;}
+.qa-dot{width:7px;height:7px;border-radius:50%;background:var(--purple);
+  animation:pulse .9s ease-in-out infinite;}
+.qa-dot:nth-child(2){animation-delay:.2s;}
+.qa-dot:nth-child(3){animation-delay:.4s;}
+
+
 
 /* GPA */
 .setup-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px;}
@@ -456,7 +519,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
   .pb-banner{flex-direction:column;}
   .auth-card{padding:34px 24px;}
   .row2{grid-template-columns:1fr!important;}
-  .home-hero h2{font-size:1.5rem;}
+  .home-greet-block h2{font-size:1.4rem;}
 }
 @media(max-width:400px){.home-grid{grid-template-columns:1fr;}}
 </style>
@@ -574,6 +637,50 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
   </div>
 </div>
 
+<!-- SETUP PROFILE MODAL (shown after first login) -->
+<div class="modal-bg" id="setupMod">
+  <div class="modal" style="max-width:520px;">
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-size:2.8rem;margin-bottom:8px;">🎓</div>
+      <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:6px;">Welcome to UB Academic Hub!</h3>
+      <p style="color:var(--muted);font-size:.84rem;">Tell us your programme and this semester's modules — this powers everything in the app. You can edit anytime in Profile.</p>
+    </div>
+    <div class="ff"><label>Programme / Degree</label>
+      <input id="setupProg" class="req-fi" placeholder="e.g. BSc Mechanical Engineering"></div>
+    <div class="ff"><label>Current Semester</label>
+      <select id="setupSem" class="req-fi"><option>Semester 1</option><option>Semester 2</option></select></div>
+    <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:9px;">This Semester's Modules</label>
+    <div id="setupModList" style="display:grid;gap:7px;margin-bottom:10px;min-height:20px;"></div>
+    <div style="display:grid;grid-template-columns:120px 1fr auto;gap:8px;align-items:end;margin-bottom:18px;">
+      <div>
+        <label style="font-size:.72rem;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;">Code</label>
+        <input id="setupCode" class="req-fi" placeholder="MEC 301" style="font-size:.85rem;padding:9px 12px;">
+      </div>
+      <div>
+        <label style="font-size:.72rem;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;">Module Name</label>
+        <input id="setupName" class="req-fi" placeholder="e.g. Thermodynamics II" style="font-size:.85rem;padding:9px 12px;" onkeydown="if(event.key==='Enter')addSetupMod()">
+      </div>
+      <button class="btn btn-green btn-sm" onclick="addSetupMod()" style="height:40px;white-space:nowrap;">+ Add</button>
+    </div>
+    <div class="modal-acts">
+      <button class="btn btn-blue" onclick="saveSetup()">✓ Save & Continue</button>
+      <button class="btn-sec" onclick="closeSetup()">Skip for now</button>
+    </div>
+  </div>
+</div>
+
+<!-- SESSION DETAIL MODAL -->
+<div class="modal-bg" id="sessionMod">
+  <div class="modal" style="max-width:460px;">
+    <h3 id="sesModTitle" style="font-family:'Fraunces',serif;margin-bottom:5px;"></h3>
+    <div id="sesModBody" style="font-size:.88rem;color:var(--muted);line-height:1.7;"></div>
+    <div class="modal-acts" style="margin-top:18px;">
+      <a id="sesModWA" href="#" target="_blank" class="btn btn-green">💬 Join via WhatsApp</a>
+      <button class="btn-sec" onclick="document.getElementById('sessionMod').classList.remove('on')">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- APP -->
 <div id="appScreen" class="hidden">
   <div class="sidebar-overlay" id="sbOverlay" onclick="closeSB()"></div>
@@ -593,16 +700,23 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section">
-        <div class="nav-section-label">Main</div>
+        <div class="nav-section-label">Dashboard</div>
         <button class="nav-item on" onclick="go('home')" id="ni-home"><span class="ni">🏠</span><span>Home</span></button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">📚 Academic Tools</div>
         <button class="nav-item" onclick="go('gpa')" id="ni-gpa"><span class="ni">📊</span><span>GPA Tracker</span></button>
         <button class="nav-item" onclick="go('study')" id="ni-study"><span class="ni">🎓</span><span>Study Hub</span></button>
       </div>
       <div class="nav-section">
-        <div class="nav-section-label">PeerBridge</div>
-        <button class="nav-item" onclick="go('peer')" id="ni-peer"><span class="ni">🤝</span><span>Help Requests</span></button>
+        <div class="nav-section-label">🤝 PeerBridge</div>
+        <button class="nav-item" onclick="go('peer')" id="ni-peer"><span class="ni">🙋</span><span>Get Help</span></button>
         <button class="nav-item" onclick="go('tutors')" id="ni-tutors"><span class="ni">⭐</span><span>Find a Tutor</span></button>
         <button class="nav-item" onclick="go('become')" id="ni-become"><span class="ni">🎯</span><span>Become a Tutor</span></button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">👥 Community</div>
+        <button class="nav-item" onclick="go('squad')" id="ni-squad"><span class="ni">📅</span><span>Study Squad</span></button>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Account</div>
@@ -623,37 +737,117 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
 
     <!-- HOME -->
     <div class="page on" id="pg-home">
-      <div class="home-hero">
-        <h2 id="heroGreet">Welcome back! 👋</h2>
-        <p id="heroSub">Here's your academic dashboard for today.</p>
-        <div class="hero-quote" id="heroQuote"></div>
-      </div>
-      <div class="home-grid">
-        <div class="quick-card" style="--c1:#2563eb;--c2:#7c3aed" onclick="go('gpa')">
-          <div class="qc-icon" style="background:linear-gradient(135deg,#dbeafe,#ede9fe)">📊</div>
-          <div class="qc-title">GPA Tracker</div>
-          <div class="qc-sub">Calculate your GPA & project your CGPA</div>
-        </div>
-        <div class="quick-card" style="--c1:#059669;--c2:#0d9488" onclick="go('study')">
-          <div class="qc-icon" style="background:linear-gradient(135deg,#d1fae5,#ccfbf1)">🎓</div>
-          <div class="qc-title">Study Hub</div>
-          <div class="qc-sub">Find videos, papers & quizzes instantly</div>
-        </div>
-        <div class="quick-card" style="--c1:#f59e0b;--c2:#f97316" onclick="go('peer')">
-          <div class="qc-icon" style="background:linear-gradient(135deg,#fef3c7,#ffedd5)">🤝</div>
-          <div class="qc-title">Get Help</div>
-          <div class="qc-sub">Post a request & connect with a peer tutor</div>
-        </div>
-        <div class="quick-card" style="--c1:#ec4899;--c2:#7c3aed" onclick="go('tutors')">
-          <div class="qc-icon" style="background:linear-gradient(135deg,#fce7f3,#ede9fe)">⭐</div>
-          <div class="qc-title">Find a Tutor</div>
-          <div class="qc-sub">Browse rated peer tutors by subject</div>
+
+      <!-- TOP ROW: Greeting left, Quote right -->
+      <div class="home-top-row">
+        <div class="home-greet-block">
+          <h2 id="heroGreet">Welcome back! 👋</h2>
+          <div class="hero-quote" id="heroQuote"></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title">Study Tips</div>
+
+      <!-- SECTION CARDS -->
+      <div style="display:grid;gap:16px;margin-bottom:22px;">
+
+        <!-- Academic Tools -->
+        <div class="home-section-card" style="--sc1:#2563eb;--sc2:#7c3aed;">
+          <div class="hsc-label">📚 Academic Tools</div>
+          <div class="hsc-grid">
+            <div class="hsc-item" onclick="go('gpa')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#dbeafe,#ede9fe)">📊</div>
+              <div class="hsc-title">GPA Tracker</div>
+              <div class="hsc-sub">Calculate your GPA & project your CGPA</div>
+            </div>
+            <div class="hsc-item" onclick="go('study')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#d1fae5,#ccfbf1)">🎓</div>
+              <div class="hsc-title">Study Hub</div>
+              <div class="hsc-sub">Find videos, papers & quizzes instantly</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PeerBridge -->
+        <div class="home-section-card" style="--sc1:#f59e0b;--sc2:#ec4899;">
+          <div class="hsc-label">🤝 PeerBridge</div>
+          <div class="hsc-grid">
+            <div class="hsc-item" onclick="go('peer')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#fef3c7,#ffedd5)">🙋</div>
+              <div class="hsc-title">Get Help</div>
+              <div class="hsc-sub">Post a request & connect with a peer tutor</div>
+            </div>
+            <div class="hsc-item" onclick="go('tutors')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#fce7f3,#ede9fe)">⭐</div>
+              <div class="hsc-title">Find a Tutor</div>
+              <div class="hsc-sub">Browse rated peer tutors by subject</div>
+            </div>
+            <div class="hsc-item" onclick="go('become')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#ede9fe,#fce7f3)">🎯</div>
+              <div class="hsc-title">Become a Tutor</div>
+              <div class="hsc-sub">Earn by helping fellow students</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Community -->
+        <div class="home-section-card" style="--sc1:#0d9488;--sc2:#059669;">
+          <div class="hsc-label">👥 Community</div>
+          <div class="hsc-grid">
+            <div class="hsc-item" onclick="go('squad')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#ccfbf1,#d1fae5)">📅</div>
+              <div class="hsc-title">Study Squad</div>
+              <div class="hsc-sub">Schedule group sessions with classmates</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CAREER SPOTLIGHT — horizontal scroll -->
+      <div class="career-panel">
+        <div class="career-panel-header">
+          <div>
+            <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;color:#fff;margin-bottom:4px;">🚀 Your Career Spotlight</h3>
+            <p style="color:rgba(255,255,255,.65);font-size:.83rem;" id="careerSubtitle">Curated videos and insights for your field</p>
+          </div>
+          <button class="btn btn-sm" onclick="loadCareerVideos()" id="careerRefreshBtn"
+            style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);">
+            🔄 Refresh
+          </button>
+        </div>
+        <div id="careerVideos" class="career-videos-scroll">
+          <div class="career-loading">
+            <div class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div>
+            <p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:12px;">Loading your career content…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STUDY METHODS — interactive -->
+      <div class="card" style="border-top:4px solid var(--purple);">
+        <div class="card-title" style="margin-bottom:6px;">🧠 Study Methods</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:16px;">Pick a method to learn how to use it — then ask the AI any follow-up questions.</p>
         <div class="tips-grid" id="tipsGrid"></div>
+        <!-- expanded method panel -->
+        <div id="tipDetail" class="hidden" style="margin-top:20px;border-top:2px solid var(--border);padding-top:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div id="tipDetailIcon" style="font-size:2rem;"></div>
+            <h3 id="tipDetailTitle" style="font-family:'Fraunces',serif;font-size:1.15rem;"></h3>
+            <button onclick="closeTipDetail()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;">✕</button>
+          </div>
+          <div id="tipDetailBody" style="font-size:.88rem;color:var(--text);line-height:1.75;margin-bottom:18px;"></div>
+          <!-- AI Q&A -->
+          <div style="background:linear-gradient(135deg,#f8faff,#f5f0ff);border-radius:14px;padding:16px;">
+            <p style="font-size:.8rem;font-weight:700;color:var(--purple);margin-bottom:10px;">💬 Ask anything about this method</p>
+            <div id="tipQAHistory" style="display:grid;gap:10px;margin-bottom:12px;max-height:280px;overflow-y:auto;"></div>
+            <div style="display:flex;gap:9px;">
+              <input id="tipQuestion" class="req-fi" placeholder="e.g. How do I apply this to exam prep?" style="flex:1;"
+                onkeydown="if(event.key==='Enter')askTipQuestion()">
+              <button class="btn btn-purple btn-sm" onclick="askTipQuestion()" id="tipAskBtn">Ask</button>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
 
     <!-- GPA -->
@@ -669,13 +863,18 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       </div>
       <div class="card">
         <div class="card-title">Current Term</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:13px;">Your enrolled modules are pre-loaded. Just enter credits and your mark.</p>
         <div style="display:flex;gap:10px;margin-bottom:13px;">
-          <button class="btn btn-green btn-sm" onclick="addGRow()">+ Add Module</button>
-          <button class="btn btn-red btn-sm" onclick="clearGPA()">Clear</button>
+          <button class="btn btn-red btn-sm" onclick="clearGPA()">Clear Marks</button>
         </div>
         <div style="overflow-x:auto;">
           <table><thead><tr><th>Module</th><th>Credits</th><th>Mark%</th><th>Grade</th><th>MGP</th></tr></thead>
           <tbody id="gBody"></tbody></table>
+        </div>
+        <div id="gpaNoMods" class="hidden" style="text-align:center;padding:24px;color:var(--muted);">
+          <div style="font-size:2rem;margin-bottom:8px;">📚</div>
+          <p style="font-size:.85rem;">No modules set up yet.</p>
+          <button class="btn btn-blue btn-sm" style="margin-top:10px;" onclick="go('profile')">Go to Profile → Set Up Modules</button>
         </div>
         <div class="dashboard">
           <div class="stat-card" style="background:linear-gradient(135deg,#1e3a8a,#2563eb)">
@@ -687,31 +886,30 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       </div>
       <div class="card" style="border-top:4px solid var(--purple)">
         <div class="card-title">Exam Mark Forecaster</div>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:13px;">What score do you need in your exam to hit your target?</p>
-        <button class="btn btn-purple btn-sm" style="margin-bottom:13px;" onclick="addFRow()">+ Add Module</button>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:13px;">Your modules are pre-loaded. Enter CA weight, exam weight, your CA score and your target.</p>
         <div style="overflow-x:auto;">
           <table><thead><tr><th>Module</th><th>CA Wt%</th><th>Exam Wt%</th><th>CA%</th><th>Target%</th><th>Needed</th></tr></thead>
           <tbody id="fBody"></tbody></table>
+        </div>
+        <div id="foreNoMods" class="hidden" style="text-align:center;padding:24px;color:var(--muted);">
+          <div style="font-size:2rem;margin-bottom:8px;">📊</div>
+          <p style="font-size:.85rem;">No modules set up yet.</p>
+          <button class="btn btn-purple btn-sm" style="margin-top:10px;" onclick="go('profile')">Go to Profile → Set Up Modules</button>
         </div>
       </div>
     </div>
 
     <!-- STUDY -->
     <div class="page" id="pg-study">
-      <div class="page-header"><h1>🎓 Study Hub</h1><p>AI-powered resource finder for your modules</p></div>
-      <div class="card">
-        <div class="card-title">My Modules</div>
-        <button class="btn btn-green btn-sm" onclick="document.getElementById('mMod').classList.add('on')">+ Add Module</button>
-        <div class="mod-grid" id="modGrid" style="margin-top:13px;"><div style="color:var(--muted);font-size:.83rem;padding:6px;">No modules yet.</div></div>
-      </div>
+      <div class="page-header"><h1>🎓 Study Hub</h1><p>AI-powered resource finder for your enrolled modules</p></div>
       <div class="card">
         <div class="card-title">Upload Course Outline <span style="font-size:.75rem;color:var(--muted);font-weight:400;">(Optional)</span></div>
-        <label class="upload-zone" for="outF">
-          <input type="file" id="outF" accept=".pdf,.docx,.txt" onchange="handleOut(event)">
+        <div class="upload-zone" onclick="document.getElementById('outF').click()" style="cursor:pointer;">
+          <input type="file" id="outF" accept=".pdf,.docx,.txt" onchange="handleOut(event)" style="display:none;">
           <div style="font-size:2rem;margin-bottom:8px;">📄</div>
           <p style="font-size:.85rem;font-weight:600;">Click to upload your course outline</p>
           <p style="font-size:.75rem;color:var(--muted);margin-top:3px;">PDF, DOCX or TXT</p>
-        </label>
+        </div>
         <div id="outDone" class="hidden" style="margin-top:9px;">
           <span style="background:linear-gradient(135deg,var(--green2),var(--teal2));color:var(--green);border:1px solid var(--green3);border-radius:9px;padding:6px 13px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Course outline loaded</span>
         </div>
@@ -719,7 +917,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       <div class="card">
         <div class="card-title">Find Resources</div>
         <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:9px;">Select Module</label>
-        <div class="mod-grid" id="sMods"><div style="color:var(--muted);font-size:.83rem;">Add modules first.</div></div>
+        <div class="mod-grid" id="sMods"><div style="color:var(--muted);font-size:.83rem;">No modules set up. Go to Profile to add your semester modules.</div></div>
         <div class="topic-row">
           <input type="text" id="topicIn" placeholder="Enter topic e.g. Carnot Cycle" onkeydown="if(event.key==='Enter')searchRes()">
           <button class="btn btn-purple" onclick="searchRes()">🔍 Search</button>
@@ -733,8 +931,8 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
     <!-- PEER -->
     <div class="page" id="pg-peer">
       <div class="pb-banner">
-        <div><h2>🤝 PeerBridge</h2><p>Post a request or offer help and earn P20/hr</p></div>
-        <div class="pb-rate-badge"><div class="pb-rate-amt">P20</div><div class="pb-rate-lbl">Standard / Hour</div></div>
+        <div><h2>🤝 PeerBridge</h2><p>Post a help request and set your own price — connect with peer tutors at UB</p></div>
+        <div class="pb-rate-badge"><div class="pb-rate-amt">P15+</div><div class="pb-rate-lbl">Student sets the price</div></div>
       </div>
       <div class="seg-tabs">
         <button class="seg-tab on" onclick="peerTab('browse')" id="pt-browse">🔍 Browse</button>
@@ -758,16 +956,15 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
           <div style="display:grid;gap:13px;">
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Module</label>
-                <input id="pMod" class="req-fi" placeholder="e.g. MEC 301"></div>
+                <select id="pMod" class="req-fi"><option value="">— Select module —</option></select></div>
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Topic</label>
                 <input id="pTop" class="req-fi" placeholder="e.g. Carnot Cycle"></div>
             </div>
             <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Describe Your Problem</label>
               <textarea id="pDesc" class="req-fi" placeholder="What exactly are you struggling with?" style="min-height:80px;resize:vertical;"></textarea></div>
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Time Needed</label>
-                <select id="pTime" class="req-fi" onchange="calcPrice()">
+              <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Time Needed</label>
+                <select id="pTime" class="req-fi">
                   <option value="0.5">30 Minutes</option>
                   <option value="0.75">45 Minutes</option>
                   <option value="1">1 Hour</option>
@@ -797,11 +994,18 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
             </div>
 
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">💰 Your Offer (Pula)</label>
+                <div style="position:relative;">
+                  <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--green);">P</span>
+                  <input id="pPrice" type="number" min="15" class="req-fi" placeholder="Min. 15" style="padding-left:28px;" oninput="validatePrice()">
+                </div>
+                <p style="font-size:.72rem;color:var(--muted);margin-top:4px;">Minimum P15 · No limit</p>
+              </div>
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Urgency</label>
                 <select id="pUrg" class="req-fi"><option value="flexible">Flexible</option><option value="today">Today</option><option value="asap">ASAP</option></select></div>
-              <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Your WhatsApp</label>
-                <input id="pWA" type="tel" readonly class="req-fi" style="background:#f5f5f5;"></div>
             </div>
+            <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Your WhatsApp</label>
+              <input id="pWA" type="tel" readonly class="req-fi" style="background:#f5f5f5;"></div>
             <button class="btn btn-blue" style="width:fit-content;" onclick="postReq()">📤 Post Request</button>
           </div>
         </div>
@@ -873,9 +1077,111 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
           <div class="pd-row"><span>Year of Study</span><strong id="pdYear">—</strong></div>
         </div>
       </div>
+      <!-- PROGRAMME & MODULES SETUP -->
+      <div class="card" style="border-top:4px solid var(--blue2)">
+        <div class="card-title">📚 Programme & Semester Modules</div>
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">This info is used across GPA Tracker, Study Hub, Get Help and Study Squad.</p>
+        <div class="ff">
+          <label>Programme / Degree</label>
+          <input id="profProgramme" class="req-fi" placeholder="e.g. BSc Mechanical Engineering">
+        </div>
+        <div class="ff">
+          <label>Current Semester</label>
+          <select id="profSemester" class="req-fi">
+            <option>Semester 1</option><option>Semester 2</option>
+          </select>
+        </div>
+        <div style="margin-bottom:10px;">
+          <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:9px;">Semester Modules</label>
+          <div id="modList" style="display:grid;gap:8px;margin-bottom:11px;"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;">
+            <div>
+              <label style="font-size:.72rem;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;">Module Code</label>
+              <input id="newModCode" class="req-fi" placeholder="e.g. MEC 301" style="font-size:.85rem;padding:9px 12px;">
+            </div>
+            <div>
+              <label style="font-size:.72rem;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;">Module Name</label>
+              <input id="newModName" class="req-fi" placeholder="e.g. Thermodynamics II" style="font-size:.85rem;padding:9px 12px;" onkeydown="if(event.key==='Enter')addProfileMod()">
+            </div>
+            <button class="btn btn-green btn-sm" onclick="addProfileMod()" style="height:40px;">+ Add</button>
+          </div>
+        </div>
+        <button class="btn btn-blue" onclick="saveProfile()">💾 Save Profile</button>
+      </div>
       <div class="card hidden" id="tutorProfileCard">
         <div class="card-title">Tutor Profile</div>
         <div id="tutorProfileInfo"></div>
+      </div>
+    </div>
+
+    <!-- STUDY SQUAD -->
+    <div class="page" id="pg-squad">
+      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b,#2d1b69);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-20px;top:-20px;font-size:6rem;opacity:.08;">👥</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">📅 Study Squad</h2>
+        <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Schedule group study sessions and connect with students in your programme.</p>
+      </div>
+      <div class="seg-tabs">
+        <button class="seg-tab on" onclick="squadTab('browse')" id="sq-browse">📋 All Sessions</button>
+        <button class="seg-tab" onclick="squadTab('mine')" id="sq-mine">🙋 My Sessions</button>
+        <button class="seg-tab" onclick="squadTab('create')" id="sq-create">➕ Create Session</button>
+      </div>
+      <div id="squad-browse">
+        <div class="card" style="padding:13px 17px;margin-bottom:14px;">
+          <input id="sqSrch" type="text" placeholder="Search by module or programme…" oninput="renderSessions()" class="req-fi">
+        </div>
+        <div id="sessionList"><div class="empty"><div class="ei">📅</div><p>No study sessions yet.<br>Create one and invite your classmates!</p></div></div>
+      </div>
+      <div id="squad-mine" class="hidden">
+        <div id="mySessionList"><div class="empty"><div class="ei">🙋</div><p>You haven't created any sessions yet.</p></div></div>
+      </div>
+      <div id="squad-create" class="hidden">
+        <div class="card">
+          <div class="card-title">📅 Schedule a Study Session</div>
+          <div style="display:grid;gap:13px;">
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Module</label>
+              <select id="sqMod" class="req-fi"><option value="">— Select module —</option></select>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Topic / What to Cover</label>
+              <input id="sqTopic" class="req-fi" placeholder="e.g. Past paper questions on heat transfer">
+            </div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📅 Date</label>
+                <input id="sqDate" type="date" class="req-fi">
+              </div>
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">⏰ Time</label>
+                <input id="sqTime" type="time" class="req-fi">
+              </div>
+            </div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📍 Location / Platform</label>
+                <select id="sqLoc" class="req-fi">
+                  <option>Library</option><option>WhatsApp Group</option><option>Zoom</option>
+                  <option>Google Meet</option><option>UB Campus — Block A</option>
+                  <option>UB Campus — Block B</option><option>UB Campus — Block C</option>
+                  <option>Online (TBD)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">👥 Max Students</label>
+                <select id="sqMax" class="req-fi">
+                  <option value="3">3</option><option value="5" selected>5</option>
+                  <option value="8">8</option><option value="10">10</option><option value="15">15</option><option value="0">No limit</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📝 Extra Notes (optional)</label>
+              <textarea id="sqNotes" class="req-fi" placeholder="e.g. Bring past papers from 2021-2023. Focus on question 3 types." style="min-height:70px;resize:vertical;"></textarea>
+            </div>
+            <button class="btn btn-blue" style="width:fit-content;" onclick="createSession()">📅 Schedule Session</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -915,7 +1221,7 @@ const DB={
   set ratings(v){localStorage.setItem('ub_ratings',JSON.stringify(v));},
 };
 let CU=null,CUK=null,mods=[],selMod=null,rTarget=null,rStars=0,rTags=[];
-const PTITLES={home:'Home',gpa:'GPA Tracker',study:'Study Hub',peer:'PeerBridge',tutors:'Find a Tutor',become:'Become a Tutor',profile:'My Profile'};
+const PTITLES={home:'Home',gpa:'GPA Tracker',study:'Study Hub',peer:'Get Help',tutors:'Find a Tutor',become:'Become a Tutor',profile:'My Profile',squad:'Study Squad'};
 const QUOTES=[
   '"The secret of getting ahead is getting started." — Mark Twain',
   '"An investment in knowledge pays the best interest." — Benjamin Franklin',
@@ -927,11 +1233,80 @@ const QUOTES=[
   '"Great things never came from comfort zones." — Unknown',
 ];
 const TIPS=[
-  {i:'🕐',t:'Pomodoro Technique',d:'Study 25 min, break 5 min. Repeat 4 times, then a longer break.',c1:'#f0f4ff',c2:'#f5f0ff'},
-  {i:'📝',t:'Active Recall',d:'Close your notes and try to recall what you studied. Far more effective than re-reading.',c1:'#f0fdf4',c2:'#ccfbf1'},
-  {i:'🗂️',t:'Spaced Repetition',d:'Review at intervals: 1 day, 3 days, 1 week. Material sticks far longer.',c1:'#fff7ed',c2:'#fef3c7'},
-  {i:'👥',t:'Teach to Learn',d:'Explain a concept to someone else. If you can teach it, you truly understand it.',c1:'#fdf2f8',c2:'#ede9fe'},
+  {i:'🕐',t:'Pomodoro Technique',d:'Study 25 min, break 5 min. Repeat 4 times, then a longer break.',
+   c1:'#f0f4ff',c2:'#f5f0ff',cc:'#a5b4fc',
+   full:`<p style="margin-bottom:10px;">The <strong>Pomodoro Technique</strong> breaks your study time into focused 25-minute sprints (called "Pomodoros"), each followed by a 5-minute break. After 4 Pomodoros, take a longer 15–30 minute break.</p>
+   <p style="margin-bottom:10px;"><strong>How to use it:</strong></p>
+   <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+     <li>Choose ONE task to work on</li>
+     <li>Set a timer for 25 minutes — no distractions</li>
+     <li>Work until the timer rings, then tick off one Pomodoro</li>
+     <li>Take a 5-minute break (walk, stretch, water)</li>
+     <li>After 4 Pomodoros → take a 15–30 min break</li>
+   </ol>
+   <p style="margin-top:10px;background:#f0f4ff;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#4338ca;">💡 <strong>Pro tip:</strong> Use a physical timer or a free app like "Forest" to stay accountable and avoid checking your phone.</p>`},
+  {i:'📝',t:'Active Recall',d:'Close your notes and try to recall what you studied. Far more effective than re-reading.',
+   c1:'#f0fdf4',c2:'#ccfbf1',cc:'#6ee7b7',
+   full:`<p style="margin-bottom:10px;"><strong>Active Recall</strong> forces your brain to retrieve information rather than passively re-read it. Studies show it can be up to <strong>2–3× more effective</strong> than highlighting or re-reading notes.</p>
+   <p style="margin-bottom:10px;"><strong>How to use it:</strong></p>
+   <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+     <li>Study a section of your notes normally</li>
+     <li>Close the notes completely</li>
+     <li>On a blank page, write everything you can remember</li>
+     <li>Check your notes — what did you miss?</li>
+     <li>Repeat for the gaps until you can recall everything</li>
+   </ol>
+   <p style="margin-top:10px;background:#f0fdf4;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#065f46;">💡 <strong>Pro tip:</strong> Turn headings in your notes into questions. e.g. "First Law of Thermodynamics" → "What does the First Law of Thermodynamics state?"</p>`},
+  {i:'🗂️',t:'Spaced Repetition',d:'Review at intervals: 1 day, 3 days, 1 week. Material sticks far longer.',
+   c1:'#fff7ed',c2:'#fef3c7',cc:'#fcd34d',
+   full:`<p style="margin-bottom:10px;"><strong>Spaced Repetition</strong> uses the science of the "forgetting curve" — you review material just before you're about to forget it. This dramatically strengthens long-term memory.</p>
+   <p style="margin-bottom:10px;"><strong>The schedule:</strong></p>
+   <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+     <li>Day 0 — Learn the material</li>
+     <li>Day 1 — First review (quick recap)</li>
+     <li>Day 3 — Second review</li>
+     <li>Day 7 — Third review</li>
+     <li>Day 14 → Day 30 → long-term memory ✓</li>
+   </ol>
+   <p style="margin-top:10px;background:#fff7ed;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#92400e;">💡 <strong>Pro tip:</strong> Use flashcard apps like Anki — they automatically schedule your reviews using spaced repetition algorithms. Great for definitions, formulae and diagrams.</p>`},
+  {i:'👥',t:'Teach to Learn',d:'Explain a concept to someone else. If you can teach it, you truly understand it.',
+   c1:'#fdf2f8',c2:'#ede9fe',cc:'#d8b4fe',
+   full:`<p style="margin-bottom:10px;">The <strong>Feynman Technique</strong> (Teach to Learn) is based on the idea that if you can explain something simply, you truly understand it. It's also the fastest way to find your blind spots.</p>
+   <p style="margin-bottom:10px;"><strong>How to use it:</strong></p>
+   <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+     <li>Pick a concept you're studying</li>
+     <li>Explain it out loud as if teaching a 10-year-old</li>
+     <li>When you get stuck — that's your knowledge gap</li>
+     <li>Go back to your notes, fill the gap</li>
+     <li>Repeat until your explanation is smooth and simple</li>
+   </ol>
+   <p style="margin-top:10px;background:#fdf2f8;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#6d28d9;">💡 <strong>Pro tip:</strong> Use the <strong>Study Squad</strong> feature to schedule a group session — teaching your peers is the fastest way to apply this technique and everyone benefits.</p>`},
+  {i:'🎯',t:'Mind Mapping',d:'Visual diagrams linking ideas together — great for understanding complex systems.',
+   c1:'#f0fdfa',c2:'#d1fae5',cc:'#5eead4',
+   full:`<p style="margin-bottom:10px;"><strong>Mind Mapping</strong> is a visual brainstorming tool that connects ideas around a central concept. It's especially powerful in engineering and sciences where systems have many interrelated parts.</p>
+   <p style="margin-bottom:10px;"><strong>How to build one:</strong></p>
+   <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+     <li>Write the main topic in the centre of a page</li>
+     <li>Draw branches for each major sub-topic</li>
+     <li>Add smaller branches for details, examples, and connections</li>
+     <li>Use colours, symbols and short keywords (not full sentences)</li>
+     <li>Review and add to it as you learn more</li>
+   </ol>
+   <p style="margin-top:10px;background:#f0fdfa;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#0f766e;">💡 <strong>Pro tip:</strong> Free tools like <strong>Miro</strong> or <strong>XMind</strong> let you build digital mind maps you can share with your study group.</p>`},
+  {i:'⏰',t:'Time Blocking',d:'Schedule specific subjects into your calendar like meetings — no more "I\'ll study later".',
+   c1:'#fff1f2',c2:'#ffe4e6',cc:'#fda4af',
+   full:`<p style="margin-bottom:10px;"><strong>Time Blocking</strong> turns your intentions into appointments. Instead of a vague "study today", you block "Thermodynamics — 2pm to 4pm". This reduces decision fatigue and eliminates procrastination.</p>
+   <p style="margin-bottom:10px;"><strong>How to set it up:</strong></p>
+   <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+     <li>Each Sunday, review your week ahead</li>
+     <li>List all subjects/assignments that need attention</li>
+     <li>Assign specific time slots in your calendar for each</li>
+     <li>Treat these blocks like a class — don't skip</li>
+     <li>Leave buffer blocks for unexpected tasks</li>
+   </ol>
+   <p style="margin-top:10px;background:#fff1f2;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#be123c;">💡 <strong>Pro tip:</strong> Schedule your hardest subjects during your peak energy time — for most people that's in the morning. Leave lighter tasks for lower-energy afternoon slots.</p>`},
 ];
+
 
 // AUTH
 function authTab(t){
@@ -968,11 +1343,18 @@ function enterApp(u){
   updateRole();
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('appScreen').classList.remove('hidden');
-  setGreeting();renderTips();renderMods();renderSMods();renderTutors();renderReqs();renderProfile();
+  setGreeting();renderTips();renderSMods();renderTutors();renderReqs();renderProfile();
+  populateModDropdowns();populateGPARows();populateForeRows();
   go('home');
+  setTimeout(loadCareerVideos, 400);
+  // Show setup modal if no programme set yet
+  if(!CU.programme){
+    setTimeout(()=>document.getElementById('setupMod').classList.add('on'),600);
+  }
 }
 function doLogout(){
   CU=null;CUK=null;mods=[];selMod=null;
+  if(window._quoteTimer)clearInterval(window._quoteTimer);
   document.getElementById('appScreen').classList.add('hidden');
   document.getElementById('authScreen').classList.remove('hidden');
   document.getElementById('lU').value='';document.getElementById('lP').value='';
@@ -982,6 +1364,128 @@ function updateRole(){
   ['sbRole','profRole'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.textContent=iT?'Tutor':'Student';el.className='sb-role '+(iT?'tutor':'student');});
   if(CU){document.getElementById('alreadyTutor').classList.toggle('hidden',!iT);document.getElementById('notTutor').classList.toggle('hidden',iT);
     if(iT){document.getElementById('editBio').value=CU.tutorBio||'';document.getElementById('editSubj').value=(CU.tutorSubjects||[]).join(', ');}}
+}
+
+// SETUP MODAL (post-login first time)
+let setupMods=[];
+function addSetupMod(){
+  const code=document.getElementById('setupCode').value.trim();
+  const name=document.getElementById('setupName').value.trim();
+  if(!name){alert('Enter a module name.');return;}
+  setupMods.push({code,name,creds:''});
+  document.getElementById('setupCode').value='';
+  document.getElementById('setupName').value='';
+  renderSetupMods();
+}
+function renderSetupMods(){
+  const el=document.getElementById('setupModList');
+  el.innerHTML=setupMods.map((m,i)=>`
+    <div style="display:flex;align-items:center;gap:9px;background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:9px 13px;">
+      <span style="font-size:1rem;">📘</span>
+      <span style="flex:1;font-size:.87rem;font-weight:600;">${m.code?'<strong>'+m.code+'</strong> · ':''}${m.name}</span>
+      <button onclick="setupMods.splice(${i},1);renderSetupMods()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:1rem;">✕</button>
+    </div>`).join('');
+}
+function saveSetup(){
+  const prog=document.getElementById('setupProg').value.trim();
+  const sem=document.getElementById('setupSem').value;
+  if(!prog){alert('Please enter your programme.');return;}
+  const users=DB.users;
+  users[CUK].programme=prog;
+  users[CUK].semester=sem;
+  users[CUK].modules=setupMods.map(m=>({...m}));
+  DB.users=users;CU=users[CUK];mods=CU.modules||[];
+  setupMods=[];renderSetupMods();
+  closeSetup();
+  renderProfile();renderSMods();populateModDropdowns();populateGPARows();populateForeRows();
+}
+function closeSetup(){document.getElementById('setupMod').classList.remove('on');}
+function skipSetup(){closeSetup();}
+
+// PROFILE MODULE EDITOR
+let profileMods=[];
+function addProfileMod(){
+  const code=document.getElementById('newModCode').value.trim();
+  const name=document.getElementById('newModName').value.trim();
+  if(!name){alert('Enter a module name.');return;}
+  profileMods.push({code,name,creds:''});
+  document.getElementById('newModCode').value='';
+  document.getElementById('newModName').value='';
+  renderProfileMods();
+}
+function removeProfileMod(i){profileMods.splice(i,1);renderProfileMods();}
+function renderProfileMods(){
+  const el=document.getElementById('modList');
+  if(!el)return;
+  el.innerHTML=profileMods.length?profileMods.map((m,i)=>`
+    <div style="display:flex;align-items:center;gap:9px;background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:9px 13px;">
+      <span>📘</span>
+      <span style="flex:1;font-size:.87rem;font-weight:600;">${m.code?'<strong>'+m.code+'</strong> · ':''}${m.name}</span>
+      <button onclick="removeProfileMod(${i})" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:1rem;">✕</button>
+    </div>`).join('')
+  :'<div style="color:var(--muted);font-size:.83rem;padding:4px;">No modules added yet.</div>';
+}
+function saveProfile(){
+  const prog=document.getElementById('profProgramme').value.trim();
+  const sem=document.getElementById('profSemester').value;
+  if(!prog){alert('Please enter your programme.');return;}
+  const users=DB.users;
+  users[CUK].programme=prog;
+  users[CUK].semester=sem;
+  users[CUK].modules=profileMods.map(m=>({...m}));
+  DB.users=users;CU=users[CUK];mods=CU.modules||[];
+  renderSMods();populateModDropdowns();populateGPARows();populateForeRows();
+  alert('✓ Profile saved!');
+}
+
+// POPULATE MODULE DROPDOWNS (peer request + study squad)
+function populateModDropdowns(){
+  const opts=mods.length
+    ?mods.map(m=>`<option value="${m.code?m.code+' – '+m.name:m.name}">${m.code?m.code+' – ':''}${m.name}</option>`).join('')
+    :'<option value="">No modules — set up in Profile</option>';
+  ['pMod','sqMod'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.innerHTML='<option value="">— Select module —</option>'+opts;}
+  });
+}
+
+// AUTO-POPULATE GPA ROWS FROM MODULES
+function populateGPARows(){
+  const tbody=document.getElementById('gBody');
+  const noEl=document.getElementById('gpaNoMods');
+  if(!mods.length){
+    if(tbody)tbody.innerHTML='';
+    if(noEl)noEl.classList.remove('hidden');
+    return;
+  }
+  if(noEl)noEl.classList.add('hidden');
+  tbody.innerHTML=mods.map(m=>`<tr>
+    <td style="font-weight:600;">${m.code?'<span style="color:var(--blue2);font-size:.8rem;">'+m.code+'</span><br>':''}${m.name}</td>
+    <td><input type="number" class="gc" placeholder="e.g. 3" oninput="calcGPA()" style="width:60px;"></td>
+    <td><input type="number" class="gm" placeholder="%" oninput="calcGPA()" style="width:60px;"></td>
+    <td class="gg" style="font-weight:700;">-</td>
+    <td class="gp" style="color:var(--purple);font-weight:700;">0.000</td>
+  </tr>`).join('');
+}
+
+// AUTO-POPULATE FORECASTER ROWS FROM MODULES
+function populateForeRows(){
+  const tbody=document.getElementById('fBody');
+  const noEl=document.getElementById('foreNoMods');
+  if(!mods.length){
+    if(tbody)tbody.innerHTML='';
+    if(noEl)noEl.classList.remove('hidden');
+    return;
+  }
+  if(noEl)noEl.classList.add('hidden');
+  tbody.innerHTML=mods.map(m=>`<tr class="fr">
+    <td style="font-weight:600;">${m.code?'<span style="color:var(--blue2);font-size:.8rem;">'+m.code+'</span><br>':''}${m.name}</td>
+    <td><input type="number" class="cw" value="50" oninput="calcGPA()" style="width:55px;"></td>
+    <td><input type="number" class="ew" value="50" oninput="calcGPA()" style="width:55px;"></td>
+    <td><input type="number" class="cv" placeholder="0" oninput="calcGPA()" style="width:55px;"></td>
+    <td><input type="number" class="tv" placeholder="70" oninput="calcGPA()" style="width:55px;"></td>
+    <td class="fn" style="font-weight:700;">-</td>
+  </tr>`).join('');
 }
 
 // NAV
@@ -995,8 +1499,10 @@ function go(pg){
     document.getElementById('topTitle').textContent=PTITLES[pg]||'';
     closeSB();
     if(pg==='tutors')renderTutors();
-    if(pg==='profile')renderProfile();
+    if(pg==='profile'){renderProfile();loadProfileEditor();}
     if(pg==='become')updateRole();
+    if(pg==='squad'){renderSessions();renderMySessions();}
+    if(pg==='home'){setGreeting();}
   },150);
 }
 function openSB(){document.getElementById('sidebar').classList.add('open');document.getElementById('sbOverlay').classList.add('on');}
@@ -1005,13 +1511,196 @@ function closeSB(){document.getElementById('sidebar').classList.remove('open');d
 // HOME
 function setGreeting(){
   const h=new Date().getHours();
-  const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
-  document.getElementById('heroGreet').textContent=g+`, ${CU.name.split(' ')[0]}! 👋`;
-  document.getElementById('heroSub').textContent="Here's your academic dashboard. Let's make today count.";
-  document.getElementById('heroQuote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  const g=h<12?'Good morning ☀️':h<17?'Good afternoon 👋':'Good evening 🌙';
+  document.getElementById('heroGreet').textContent=g+`, ${CU.name.split(' ')[0]}!`;
+  rotateQuote();
+  if(window._quoteTimer)clearInterval(window._quoteTimer);
+  window._quoteTimer=setInterval(rotateQuote,600000);
+}
+function rotateQuote(){
+  const el=document.getElementById('heroQuote');
+  el.style.transition='opacity .6s';
+  el.style.opacity='0';
+  setTimeout(()=>{
+    el.textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+    el.style.opacity='1';
+  },600);
 }
 function renderTips(){
-  document.getElementById('tipsGrid').innerHTML=TIPS.map(t=>`<div class="tip-card" style="--tc1:${t.c1};--tc2:${t.c2}"><div class="tip-icon">${t.i}</div><h4>${t.t}</h4><p>${t.d}</p></div>`).join('');
+  document.getElementById('tipsGrid').innerHTML=TIPS.map((t,i)=>`
+    <div class="tip-card" style="--tc1:${t.c1};--tc2:${t.c2};--tc3:${t.cc||'var(--border)'}" onclick="openTip(${i})">
+      <div class="tip-icon">${t.i}</div>
+      <h4>${t.t}</h4>
+      <p>${t.d}</p>
+    </div>`).join('');
+}
+
+// CAREER SPOTLIGHT — real YouTube videos
+const CAREER_VIDEOS={
+  default:[
+    {videoId:'Wpmk4YNmF3s',title:'How to Learn Anything Faster',channel:'Thomas Frank'},
+    {videoId:'IlU-zDU6aQ0',title:'Studying & Working as an Engineer',channel:'Zach Star'},
+    {videoId:'rfscVS0vtbw',title:'Learn Python in 4 Hours',channel:'freeCodeCamp'},
+    {videoId:'_uQrJ0TkZlc',title:'Python Tutorial for Beginners',channel:'Programming with Mosh'},
+    {videoId:'aircAruvnKk',title:'But what is a Neural Network?',channel:'3Blue1Brown'},
+    {videoId:'HAnw168huqA',title:'The Future of Careers in Tech',channel:'TED'},
+  ],
+  engineering:[
+    {videoId:'1FQ8Oi0OGRY',title:'What do Mechanical Engineers Actually Do?',channel:'Zach Star'},
+    {videoId:'SFbjqVOgVqA',title:'How Engines Work',channel:'Lesics'},
+    {videoId:'6m9QHVkAN1c',title:'How do Wind Turbines Work?',channel:'Lesics'},
+    {videoId:'MiIsI7kzE2g',title:'First Law of Thermodynamics',channel:'Engineering Mindset'},
+    {videoId:'KAqUy6oKKHk',title:'Fluid Mechanics Overview',channel:'The Efficient Engineer'},
+    {videoId:'C3bTFn9cL8U',title:'Engineering Mechanics — Statics',channel:'The Organic Chemistry Tutor'},
+  ],
+  civil:[
+    {videoId:'gzCn_5MIoJ4',title:'What do Civil Engineers Do?',channel:'Zach Star'},
+    {videoId:'dEP-qpHJEkk',title:'How Bridges are Built',channel:'Practical Engineering'},
+    {videoId:'AwHqanyMJRQ',title:'Structural Engineering Basics',channel:'The Efficient Engineer'},
+    {videoId:'FIlNBpW-MfI',title:'How Dams Work',channel:'Practical Engineering'},
+    {videoId:'EGT_-3WvLZ4',title:'Soil Mechanics Introduction',channel:'NPTEL'},
+    {videoId:'YD5S1ZgDN04',title:'How Skyscrapers are Built',channel:'Lesics'},
+  ],
+  electrical:[
+    {videoId:'mc979OhitAg',title:'How does Electricity Work?',channel:'Lesics'},
+    {videoId:'LFW1saNOp20',title:'Basics of Electrical Engineering',channel:'The Engineering Mindset'},
+    {videoId:'Nfiew7gL-mU',title:'How Transformers Work',channel:'Lesics'},
+    {videoId:'qMwmnFNzNb8',title:'Introduction to Circuit Analysis',channel:'The Organic Chemistry Tutor'},
+    {videoId:'J4IOsByNeHI',title:'Power Systems Engineering',channel:'NPTEL'},
+    {videoId:'6j0GS_bxFAQ',title:'Renewable Energy Technologies',channel:'Lesics'},
+  ],
+  computer:[
+    {videoId:'aircAruvnKk',title:'But what is a Neural Network?',channel:'3Blue1Brown'},
+    {videoId:'rfscVS0vtbw',title:'Learn Python — Full Course',channel:'freeCodeCamp'},
+    {videoId:'zOjov-2OZ0E',title:'How the Internet Works',channel:'Lesics'},
+    {videoId:'SFbjqVOgVqA',title:'How Computers Work — CPU Explained',channel:'Lesics'},
+    {videoId:'I1f45REi3k4',title:'Data Structures & Algorithms',channel:'CS Dojo'},
+    {videoId:'8hly31xKli0',title:'Software Engineering Career Guide',channel:'Traversy Media'},
+  ],
+  accounting:[
+    {videoId:'yYX4bvQSqbo',title:'Accounting Basics Explained',channel:'Accounting Stuff'},
+    {videoId:'7EBWnVHY6pU',title:'Financial Statements Explained',channel:'Accounting Stuff'},
+    {videoId:'bCDJe9gSMBk',title:'How to Read a Balance Sheet',channel:'Accounting Stuff'},
+    {videoId:'3m3tKGNiMTs',title:'Career in Finance & Accounting',channel:'TED-Ed'},
+    {videoId:'HSnFkPNZ8Kk',title:'Introduction to Auditing',channel:'ACCA Learning'},
+    {videoId:'AJl77Nt8pGg',title:'Tax Basics for Beginners',channel:'Accounting Stuff'},
+  ],
+  business:[
+    {videoId:'Wpmk4YNmF3s',title:'How to Learn Any Skill Fast',channel:'Thomas Frank'},
+    {videoId:'t_Mx9ZsAFaM',title:'How to Build a Business',channel:'Simon Sinek'},
+    {videoId:'IRVdiHu1pAI',title:'Marketing Fundamentals',channel:'TED-Ed'},
+    {videoId:'f4J9EmcchpY',title:'Economics of Entrepreneurship',channel:'Marginal Revolution University'},
+    {videoId:'iuwUUlDfHcw',title:'Leadership Skills at University',channel:'TED'},
+    {videoId:'fW8amMCVAJQ',title:'Strategic Management Overview',channel:'Harvard Business Review'},
+  ],
+  medicine:[
+    {videoId:'ezoO2t0B_1Y',title:'How the Human Body Works',channel:'TED-Ed'},
+    {videoId:'H0K2dvB-7WY',title:'Medical School vs Reality',channel:'Jubilee'},
+    {videoId:'Ow_BO5uHJYg',title:'How the Heart Works',channel:'TED-Ed'},
+    {videoId:'z0ZFTRhFbW0',title:'Pharmacology Basics',channel:'Osmosis'},
+    {videoId:'qPix_X-9t7E',title:'How Vaccines Work',channel:'Kurzgesagt'},
+    {videoId:'2NKZGG7VMZY',title:'Anatomy of the Human Brain',channel:'Osmosis'},
+  ],
+  law:[
+    {videoId:'3bK9nzkGwmQ',title:'How Does the Legal System Work?',channel:'TED-Ed'},
+    {videoId:'OFC9JVn4oqE',title:'Criminal Law vs Civil Law',channel:'TED-Ed'},
+    {videoId:'RBFhyVFXGIg',title:'Introduction to Contract Law',channel:'CrashCourse'},
+    {videoId:'Hzgzim5m7oU',title:'What Lawyers Actually Do All Day',channel:'Law School Toolbox'},
+    {videoId:'nPmHBj_5JOM',title:'International Law Explained',channel:'TED-Ed'},
+    {videoId:'fcC7VBZOWSI',title:'Human Rights Law Overview',channel:'Amnesty International'},
+  ],
+};
+
+function getCareerKey(prog){
+  const p=(prog||'').toLowerCase();
+  if(p.includes('mechanic')||p.includes('mec')||p.includes('thermo'))return'engineering';
+  if(p.includes('civil')||p.includes('struct'))return'civil';
+  if(p.includes('electr'))return'electrical';
+  if(p.includes('computer')||p.includes('software')||p.includes('cs ')||p.includes('ict'))return'computer';
+  if(p.includes('account')||p.includes('finance')||p.includes('bcom'))return'accounting';
+  if(p.includes('business')||p.includes('management')||p.includes('bba'))return'business';
+  if(p.includes('medic')||p.includes('nurs')||p.includes('health'))return'medicine';
+  if(p.includes('law')||p.includes('legal'))return'law';
+  return'default';
+}
+
+async function loadCareerVideos(){
+  const prog=CU.programme||'';
+  const el=document.getElementById('careerVideos');
+  document.getElementById('careerSubtitle').textContent=prog?`Curated for: ${prog}`:'Curated videos for your field';
+  el.innerHTML=`<div class="career-loading"><div class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div><p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:12px;">Loading your career content…</p></div>`;
+
+  // Use curated real videos based on programme
+  const key=getCareerKey(prog);
+  let videos=[...(CAREER_VIDEOS[key]||CAREER_VIDEOS.default)];
+  // shuffle for variety
+  videos=videos.sort(()=>Math.random()-.5);
+
+  el.innerHTML=videos.map(v=>`
+    <a class="career-card" href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" rel="noopener">
+      <div class="career-thumb-wrap">
+        <img class="career-thumb" src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.title}">
+      </div>
+      <div class="career-card-body">
+        <div class="career-card-title">${v.title}</div>
+        <div class="career-card-ch">📺 ${v.channel}</div>
+      </div>
+    </a>`).join('');
+}
+
+// STUDY METHOD DETAIL + AI Q&A
+let activeTipIdx=null,tipContext='',tipQAHistory=[];
+function openTip(i){
+  const t=TIPS[i];
+  activeTipIdx=i;tipQAHistory=[];
+  tipContext=`The study method is: "${t.t}". Full description: ${t.full||t.d}`;
+  document.querySelectorAll('.tip-card').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.getElementById('tipDetailIcon').textContent=t.i;
+  document.getElementById('tipDetailTitle').textContent=t.t;
+  document.getElementById('tipDetailBody').innerHTML=t.full||`<p>${t.d}</p>`;
+  document.getElementById('tipQAHistory').innerHTML='';
+  document.getElementById('tipQuestion').value='';
+  const det=document.getElementById('tipDetail');
+  det.classList.remove('hidden');
+  det.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function closeTipDetail(){
+  document.getElementById('tipDetail').classList.add('hidden');
+  document.querySelectorAll('.tip-card').forEach(el=>el.classList.remove('active'));
+  activeTipIdx=null;
+}
+async function askTipQuestion(){
+  const q=document.getElementById('tipQuestion').value.trim();
+  if(!q)return;
+  const btn=document.getElementById('tipAskBtn');
+  btn.disabled=true;btn.textContent='…';
+  document.getElementById('tipQuestion').value='';
+  const hist=document.getElementById('tipQAHistory');
+  // Add user bubble
+  const userDiv=document.createElement('div');
+  userDiv.innerHTML=`<div class="qa-user">${q}</div>`;
+  hist.appendChild(userDiv);
+  // Add loading bubble
+  const loadDiv=document.createElement('div');
+  loadDiv.innerHTML=`<div class="qa-loading"><div class="qa-dot"></div><div class="qa-dot"></div><div class="qa-dot"></div></div>`;
+  hist.appendChild(loadDiv);
+  hist.scrollTop=hist.scrollHeight;
+  tipQAHistory.push({role:'user',content:q});
+  try{
+    const sysPrompt=`You are a friendly academic coach helping a UB (University of Botswana) student understand study methods. ${tipContext}. Keep answers concise (2-4 sentences), practical, and encouraging. Use simple language.`;
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,
+        system:sysPrompt,messages:tipQAHistory})});
+    const data=await res.json();
+    const ans=data.content.map(b=>b.text||'').join('');
+    tipQAHistory.push({role:'assistant',content:ans});
+    loadDiv.innerHTML=`<div class="qa-ai">${ans.replace(/\n/g,'<br>')}</div>`;
+  }catch(e){
+    loadDiv.innerHTML=`<div class="qa-ai" style="color:var(--red);">Couldn't connect right now. Try again.</div>`;
+  }
+  btn.disabled=false;btn.textContent='Ask';
+  hist.scrollTop=hist.scrollHeight;
 }
 
 // GPA
@@ -1024,13 +1713,6 @@ function gradeInfo(m){
 function classify(c){
   if(c>=4.4)return'🏆 First Class';if(c>=3.6)return'🥇 Second Class Upper';
   if(c>=2.8)return'🥈 Second Class Lower';if(c>=2)return'✅ Pass';return'⚠️ Fail / Probation';
-}
-function addGRow(){
-  const r=document.getElementById('gBody').insertRow();
-  r.innerHTML=`<td><input type="text" placeholder="Module" style="width:100%"></td>
-    <td><input type="number" class="gc" placeholder="0" oninput="calcGPA()" style="width:54px"></td>
-    <td><input type="number" class="gm" placeholder="%" oninput="calcGPA()" style="width:56px"></td>
-    <td class="gg" style="font-weight:700">-</td><td class="gp" style="color:var(--purple);font-weight:700">0.000</td>`;
 }
 function calcGPA(){
   let tp=0,tc=0;
@@ -1048,15 +1730,6 @@ function calcGPA(){
   document.getElementById('cClass').textContent=(pc+tc)>0?classify(cgpa):'Pending';
   calcFore();
 }
-function addFRow(){
-  const r=document.getElementById('fBody').insertRow();r.className='fr';
-  r.innerHTML=`<td><input type="text" placeholder="Module" style="width:100%"></td>
-    <td><input type="number" class="cw" value="50" oninput="calcGPA()" style="width:50px"></td>
-    <td><input type="number" class="ew" value="50" oninput="calcGPA()" style="width:50px"></td>
-    <td><input type="number" class="cv" placeholder="0" oninput="calcGPA()" style="width:50px"></td>
-    <td><input type="number" class="tv" placeholder="70" oninput="calcGPA()" style="width:50px"></td>
-    <td class="fn" style="font-weight:700">-</td>`;
-}
 function calcFore(){
   document.querySelectorAll('.fr').forEach(r=>{
     const cw=(parseFloat(r.querySelector('.cw').value)||0)/100,ew=(parseFloat(r.querySelector('.ew').value)||0)/100;
@@ -1066,28 +1739,12 @@ function calcFore(){
   });
 }
 function clearGPA(){
-  document.getElementById('gBody').innerHTML='';document.getElementById('fBody').innerHTML='';
+  populateGPARows();populateForeRows();
   document.getElementById('tGPA').textContent='0.000';document.getElementById('cGPA').textContent='0.000';document.getElementById('cClass').textContent='Pending';
-}
-
-// MODULES
-function closeMod(){document.getElementById('mMod').classList.remove('on');['mC','mN','mK'].forEach(id=>document.getElementById(id).value='');}
-function saveMod(){
-  const code=document.getElementById('mC').value.trim(),name=document.getElementById('mN').value.trim(),creds=document.getElementById('mK').value;
-  if(!name){alert('Enter a module name.');return;}
-  mods.push({code,name,creds});
-  const users=DB.users;users[CUK].modules=mods;DB.users=users;CU=users[CUK];
-  renderMods();renderSMods();closeMod();
-}
-function rmMod(i){mods.splice(i,1);const users=DB.users;users[CUK].modules=mods;DB.users=users;renderMods();renderSMods();}
-function renderMods(){
-  const g=document.getElementById('modGrid');
-  if(!mods.length){g.innerHTML='<div style="color:var(--muted);font-size:.83rem;padding:6px;">No modules yet.</div>';return;}
-  g.innerHTML=mods.map((m,i)=>`<div class="mod-chip"><span>📘</span><span>${m.code?'<strong>'+m.code+'</strong> · ':''}${m.name}</span><span class="rmv" onclick="rmMod(${i})">✕</span></div>`).join('');
 }
 function renderSMods(){
   const g=document.getElementById('sMods');
-  if(!mods.length){g.innerHTML='<div style="color:var(--muted);font-size:.83rem;">Add modules first.</div>';return;}
+  if(!mods.length){g.innerHTML='<div style="color:var(--muted);font-size:.83rem;">No modules set up. Go to Profile to add your semester modules.</div>';return;}
   g.innerHTML=mods.map((m,i)=>`<div class="mod-chip${selMod===i?' sel':''}" onclick="pickMod(${i})">${m.code?m.code+' · ':''}${m.name}</div>`).join('');
 }
 function pickMod(i){selMod=i;renderSMods();}
@@ -1141,13 +1798,29 @@ function peerTab(t){
   ['browse','post','mine'].forEach(x=>{document.getElementById('peer-'+x).classList.toggle('hidden',x!==t);document.getElementById('pt-'+x).classList.toggle('on',x===t);});
   if(t==='mine')renderMyReqs();if(t==='browse')renderReqs();
 }
+function validatePrice(){
+  const el=document.getElementById('pPrice');
+  const v=parseFloat(el.value);
+  if(v&&v<15){el.style.borderColor='var(--red)';el.title='Minimum is P15';}
+  else{el.style.borderColor='';}
+}
 function postReq(){
-  const mod=document.getElementById('pMod').value.trim(),top=document.getElementById('pTop').value.trim(),
-        desc=document.getElementById('pDesc').value.trim(),urg=document.getElementById('pUrg').value,wa=document.getElementById('pWA').value.trim();
-  if(!mod||!top||!desc){alert('Fill in module, topic and description.');return;}
+  const modEl=document.getElementById('pMod');
+  const mod=modEl.value;
+  const top=document.getElementById('pTop').value.trim(),
+        desc=document.getElementById('pDesc').value.trim(),urg=document.getElementById('pUrg').value,
+        wa=document.getElementById('pWA').value.trim(),
+        price=parseFloat(document.getElementById('pPrice').value)||0,
+        time=document.getElementById('pTime').value,
+        type=document.getElementById('pType').value;
+  if(!mod){alert('Please select a module. Add modules in your Profile first.');return;}
+  if(!top||!desc){alert('Fill in topic and description.');return;}
+  if(price<15){alert('Please set a price of at least P15.');document.getElementById('pPrice').focus();return;}
   const reqs=DB.requests;
-  reqs.unshift({id:Date.now(),by:CUK,name:CU.name,mod,top,desc,urg,wa,status:'open',at:new Date().toISOString()});
-  DB.requests=reqs;['pMod','pTop','pDesc'].forEach(id=>document.getElementById(id).value='');
+  reqs.unshift({id:Date.now(),by:CUK,name:CU.name,mod,top,desc,urg,wa,price,time,type,status:'open',at:new Date().toISOString()});
+  DB.requests=reqs;
+  modEl.value='';
+  ['pTop','pDesc','pPrice'].forEach(id=>document.getElementById(id).value='');
   alert('✓ Request posted!');peerTab('browse');
 }
 function renderReqs(){
@@ -1159,24 +1832,32 @@ function renderMyReqs(){
   const list=DB.requests.filter(r=>r.by===CUK);
   document.getElementById('myReqList').innerHTML=list.length?list.map(r=>reqHTML(r,true)).join(''):'<div class="empty"><div class="ei">📋</div><p>No requests posted yet.</p></div>';
 }
-function reqHTML(r){
+function reqHTML(r,mine){
   const urg={flexible:'🟢 Flexible',today:'🟡 Today',asap:'🔴 ASAP'};
   const own=r.by===CUK;
   const action=own?`<button class="btn btn-red btn-sm" onclick="delReq(${r.id})">🗑 Delete</button>`
     :r.status==='open'?`<button class="btn btn-gold btn-sm" onclick="offerHelp(${r.id})">💬 Offer Help</button>`
     :`<span style="color:var(--muted);font-size:.77rem;">Taken</span>`;
+  // Price only shown to the request owner (student who posted it)
+  const priceChip=own&&r.price?`<span class="pula-chip">💰 P${r.price}</span>`:'';
+  const typeChip=r.type?`<span class="meta-chip">📍 ${r.type}</span>`:'';
+  const timeChip=r.time?`<span class="meta-chip">⏱ ${r.time}hr session</span>`:'';
   return`<div class="req-card">
     <div class="req-top"><div class="req-left"><span class="mod-tag">📘 ${r.mod}</span><h4>${r.top}</h4></div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;"><span class="badge badge-${r.status==='open'?'open':'taken'}">${r.status==='open'?'Open':'Taken'}</span>${action}</div></div>
     <p class="req-desc">${r.desc}</p>
-    <div class="req-meta"><span class="meta-chip">👤 ${r.name}</span><span class="meta-chip">⏱ ${ago(r.at)}</span><span class="meta-chip">${urg[r.urg]||r.urg}</span><span class="pula-chip">P20/hr</span></div>
+    <div class="req-meta"><span class="meta-chip">👤 ${r.name}</span><span class="meta-chip">🕐 ${ago(r.at)}</span><span class="meta-chip">${urg[r.urg]||r.urg}</span>${timeChip}${typeChip}${priceChip}</div>
   </div>`;
 }
 function offerHelp(id){
   const r=DB.requests.find(x=>x.id===id);if(!r)return;
   const num=(r.wa||'').replace(/\D/g,'');
-  const msg=encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*. Still looking for a tutor? (P20/hr)`);
-  document.getElementById('waInfo').innerHTML=`<p style="font-size:.82rem;color:var(--green);font-weight:600;">Connecting with</p><strong style="color:#065f46;font-size:1.05rem;">${r.name} · ${r.wa}</strong>`;
+  const priceInfo=r.price?` The student is offering *P${r.price}*${r.time?' for a '+r.time+'hr session':''}.`:'';
+  const msg=encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*.${priceInfo} Still looking for a tutor?`);
+  document.getElementById('waInfo').innerHTML=`
+    <p style="font-size:.82rem;color:var(--green);font-weight:600;margin-bottom:4px;">Connecting with</p>
+    <strong style="color:#065f46;font-size:1.05rem;">${r.name} · ${r.wa}</strong>
+    ${r.price?`<div style="margin-top:8px;background:rgba(5,150,105,.15);border-radius:8px;padding:8px 12px;font-size:.85rem;"><span style="color:var(--green);font-weight:700;">💰 Student's offer: P${r.price}${r.time?' / '+r.time+'hr':''}</span></div>`:''}`;
   document.getElementById('waLink').href=`https://wa.me/${num}?text=${msg}`;
   document.getElementById('waMod').classList.add('on');
 }
@@ -1253,7 +1934,7 @@ function renderProfile(){
   const ini=CU.name[0].toUpperCase();
   document.getElementById('profAv').textContent=ini;
   document.getElementById('profName').textContent=CU.name;
-  document.getElementById('profMeta').textContent=(CU.year||'Student')+' · University of Botswana';
+  document.getElementById('profMeta').textContent=(CU.programme||CU.year||'Student')+' · University of Botswana';
   document.getElementById('pdName').textContent=CU.name;
   document.getElementById('pdUser').textContent=CUK;
   document.getElementById('pdWA').textContent=CU.wa||'—';
@@ -1269,15 +1950,128 @@ function renderProfile(){
         <span class="star-count">${avg>0?avg.toFixed(1)+' avg · '+rs.length+' rating(s)':'No ratings yet'}</span></div>`;
   }else{tc.classList.add('hidden');}
 }
-
-function calcPrice(){
-  let hours = parseFloat(document.getElementById("pTime")?.value || 0.5);
-  let rate = 20;
-  let price = hours * rate;
-  let el = document.getElementById("pCost");
-  if(el){ el.innerText = "P" + price.toFixed(2); }
+function loadProfileEditor(){
+  if(!CU)return;
+  const pe=document.getElementById('profProgramme');
+  const se=document.getElementById('profSemester');
+  if(pe)pe.value=CU.programme||'';
+  if(se)se.value=CU.semester||'Semester 1';
+  profileMods=(CU.modules||[]).map(m=>({...m}));
+  renderProfileMods();
 }
-document.addEventListener("DOMContentLoaded",calcPrice);
+
+// STUDY SQUAD
+const DBsessions={
+  get all(){return JSON.parse(localStorage.getItem('ub_sessions')||'[]');},
+  set all(v){localStorage.setItem('ub_sessions',JSON.stringify(v));}
+};
+let squadMods_temp=[];
+
+function squadTab(t){
+  ['browse','mine','create'].forEach(x=>{
+    document.getElementById('squad-'+x).classList.toggle('hidden',x!==t);
+    document.getElementById('sq-'+x).classList.toggle('on',x===t);
+  });
+  if(t==='browse')renderSessions();
+  if(t==='mine')renderMySessions();
+  if(t==='create')populateModDropdowns();
+}
+
+function createSession(){
+  const mod=document.getElementById('sqMod').value;
+  const topic=document.getElementById('sqTopic').value.trim();
+  const date=document.getElementById('sqDate').value;
+  const time=document.getElementById('sqTime').value;
+  const loc=document.getElementById('sqLoc').value;
+  const max=document.getElementById('sqMax').value;
+  const notes=document.getElementById('sqNotes').value.trim();
+  if(!mod){alert('Please select a module.');return;}
+  if(!topic){alert('Please describe what you want to cover.');return;}
+  if(!date||!time){alert('Please set a date and time.');return;}
+  const sessions=DBsessions.all;
+  sessions.unshift({
+    id:Date.now(),by:CUK,byName:CU.name,wa:CU.wa||'',
+    programme:CU.programme||'',mod,topic,date,time,loc,
+    max:parseInt(max)||0,notes,attendees:[CUK],
+    at:new Date().toISOString()
+  });
+  DBsessions.all=sessions;
+  // Clear form
+  ['sqMod','sqTopic','sqDate','sqTime','sqNotes'].forEach(id=>document.getElementById(id).value='');
+  alert('✓ Study session scheduled!');
+  squadTab('browse');
+}
+
+function sessionCard(s,own){
+  const dt=new Date(s.date+'T'+s.time);
+  const dateStr=dt.toLocaleDateString('en-BW',{weekday:'short',day:'numeric',month:'short'});
+  const timeStr=dt.toLocaleTimeString('en-BW',{hour:'2-digit',minute:'2-digit'});
+  const isPast=dt<new Date();
+  const spots=s.max>0?`${s.attendees.length}/${s.max} joined`:'Open';
+  const full=s.max>0&&s.attendees.length>=s.max;
+  const joined=s.attendees.includes(CUK);
+  const prog=s.programme?`<span class="meta-chip">🎓 ${s.programme}</span>`:'';
+  const joinBtn=own
+    ?`<button class="btn btn-red btn-sm" onclick="deleteSession(${s.id})">🗑 Delete</button>`
+    :isPast?`<span style="color:var(--muted);font-size:.78rem;">Ended</span>`
+    :full&&!joined?`<span style="color:var(--muted);font-size:.78rem;">Full</span>`
+    :joined?`<button class="btn btn-outline btn-sm" onclick="leaveSession(${s.id})">✓ Joined</button>`
+    :`<button class="btn btn-blue btn-sm" onclick="joinSession(${s.id})">+ Join</button>`;
+  return`<div class="req-card">
+    <div class="req-top">
+      <div class="req-left">
+        <span class="mod-tag">📘 ${s.mod}</span>
+        <h4>${s.topic}</h4>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">
+        <span class="badge ${isPast?'badge-taken':'badge-open'}">${isPast?'Ended':'Upcoming'}</span>
+        ${joinBtn}
+      </div>
+    </div>
+    ${s.notes?`<p class="req-desc">${s.notes}</p>`:''}
+    <div class="req-meta">
+      <span class="meta-chip">📅 ${dateStr}</span>
+      <span class="meta-chip">⏰ ${timeStr}</span>
+      <span class="meta-chip">📍 ${s.loc}</span>
+      <span class="meta-chip">👥 ${spots}</span>
+      ${prog}
+      <span class="meta-chip">👤 ${s.byName}</span>
+    </div>
+  </div>`;
+}
+
+function renderSessions(){
+  const q=(document.getElementById('sqSrch')?.value||'').toLowerCase();
+  const all=DBsessions.all.filter(s=>!q||(s.mod+s.topic+s.programme).toLowerCase().includes(q));
+  document.getElementById('sessionList').innerHTML=all.length
+    ?all.map(s=>sessionCard(s,s.by===CUK)).join('')
+    :'<div class="empty"><div class="ei">📅</div><p>No sessions yet. Create one!</p></div>';
+}
+function renderMySessions(){
+  const mine=DBsessions.all.filter(s=>s.by===CUK);
+  document.getElementById('mySessionList').innerHTML=mine.length
+    ?mine.map(s=>sessionCard(s,true)).join('')
+    :'<div class="empty"><div class="ei">🙋</div><p>You have no sessions yet.</p></div>';
+}
+function joinSession(id){
+  const sessions=DBsessions.all;
+  const s=sessions.find(x=>x.id===id);if(!s)return;
+  if(!s.attendees.includes(CUK))s.attendees.push(CUK);
+  DBsessions.all=sessions;renderSessions();renderMySessions();
+}
+function leaveSession(id){
+  const sessions=DBsessions.all;
+  const s=sessions.find(x=>x.id===id);if(!s)return;
+  s.attendees=s.attendees.filter(a=>a!==CUK);
+  DBsessions.all=sessions;renderSessions();renderMySessions();
+}
+function deleteSession(id){
+  if(!confirm('Delete this session?'))return;
+  DBsessions.all=DBsessions.all.filter(s=>s.id!==id);
+  renderSessions();renderMySessions();
+}
+
+
 
 </script>
 </body>
