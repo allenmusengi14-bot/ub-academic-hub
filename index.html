@@ -566,6 +566,18 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       <div class="ff"><label>Full Name</label><input id="rN" placeholder="e.g. Allen Mosimanegape"></div>
       <div class="ff"><label>Student ID <span style="font-weight:400;color:var(--muted);">(9 digits)</span></label><input id="rU" type="text" inputmode="numeric" maxlength="9" placeholder="e.g. 201901234"></div>
       <div class="ff"><label>WhatsApp Number</label><input id="rW" type="tel" placeholder="e.g. 267 71234567"></div>
+      <div class="ff"><label>Faculty</label>
+        <select id="rFac">
+          <option value="Engineering &amp; Technology">Engineering &amp; Technology</option>
+          <option value="Science">Science</option>
+          <option value="Business">Business</option>
+          <option value="Social Sciences">Social Sciences</option>
+          <option value="Humanities">Humanities</option>
+          <option value="Education">Education</option>
+          <option value="Law">Law</option>
+          <option value="Medicine">Medicine</option>
+          <option value="Graduate Studies">Graduate Studies</option>
+        </select></div>
       <div class="ff"><label>Year of Study</label>
         <select id="rY"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>5th Year</option></select></div>
       <div class="ff"><label>Password</label><input id="rP" type="password" placeholder="Choose a password" onkeydown="if(event.key==='Enter')doRegister()"></div>
@@ -729,6 +741,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
         <div class="nav-section-label">👥 Community</div>
         <button class="nav-item" onclick="go('squad')" id="ni-squad"><span class="ni">📅</span><span>Study Squad</span></button>
         <button class="nav-item" onclick="go('contest')" id="ni-contest"><span class="ni">🏆</span><span>Study Contest</span></button>
+        <button class="nav-item" onclick="go('points')" id="ni-points"><span class="ni">⭐</span><span>Earn Points</span></button>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Account</div>
@@ -813,6 +826,11 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
               <div class="hsc-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🏆</div>
               <div class="hsc-title">Study Contest</div>
               <div class="hsc-sub">Compete, submit your test score & win prizes</div>
+            </div>
+            <div class="hsc-item" onclick="go('points')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#fde68a,#fbbf24)">⭐</div>
+              <div class="hsc-title">Earn Points</div>
+              <div class="hsc-sub">Submit test marks & climb the faculty leaderboard</div>
             </div>
           </div>
         </div>
@@ -1312,6 +1330,137 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       </div>
     </div>
 
+    <!-- EARN POINTS -->
+    <div class="page" id="pg-points">
+      <div style="background:linear-gradient(135deg,#78350f,#b45309,#f59e0b);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-10px;top:-10px;font-size:7rem;opacity:.1;">⭐</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">⭐ Earn Points</h2>
+            <p style="color:rgba(255,255,255,.75);font-size:.88rem;">Upload your test script to earn points. Leaderboard is faculty-specific & resets monthly.</p>
+          </div>
+          <div id="myPointsBadge" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:12px 20px;text-align:center;backdrop-filter:blur(8px);">
+            <div style="font-family:'Fraunces',serif;font-size:2rem;color:#fff;font-weight:900;" id="myPtsTotal">0</div>
+            <div style="color:rgba(255,255,255,.7);font-size:.75rem;font-weight:600;">MY POINTS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Points table -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title">📊 How Points Work</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:4px;">
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">😔</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">Below 40%</div>
+            <div style="font-size:.75rem;color:var(--muted);">0 pts — Keep going!</div>
+          </div>
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">📗</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">40–49%</div>
+            <div style="font-size:.75rem;color:var(--muted);">5 pts</div>
+          </div>
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">📘</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">50–59%</div>
+            <div style="font-size:.75rem;color:var(--muted);">10 pts</div>
+          </div>
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">📙</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">60–69%</div>
+            <div style="font-size:.75rem;color:var(--muted);">15 pts</div>
+          </div>
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">🌟</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">70–79%</div>
+            <div style="font-size:.75rem;color:var(--muted);">20 pts</div>
+          </div>
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">🔥</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">80–89%</div>
+            <div style="font-size:.75rem;color:var(--muted);">25 pts</div>
+          </div>
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">🏆</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">90–100%</div>
+            <div style="font-size:.75rem;color:var(--muted);">30 pts</div>
+          </div>
+        </div>
+        <p style="font-size:.77rem;color:var(--muted);margin-top:12px;">⚡ <strong>Most Improved:</strong> If your latest mark is 10%+ higher than your previous submission on the same module, you earn <strong>+5 bonus points</strong>.</p>
+      </div>
+
+      <div class="seg-tabs">
+        <button class="seg-tab on" onclick="pointsTab('leaderboard')" id="ptb-leaderboard">🏅 Faculty Leaderboard</button>
+        <button class="seg-tab" onclick="pointsTab('submit')" id="ptb-submit">📤 Submit Score</button>
+        <button class="seg-tab" onclick="pointsTab('mine')" id="ptb-mine">📋 My Submissions</button>
+      </div>
+
+      <!-- LEADERBOARD -->
+      <div id="pts-leaderboard-panel">
+        <div class="card" style="padding:13px 17px;margin-bottom:14px;">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <select id="ptsFacFilter" class="req-fi" style="flex:1;min-width:180px;" onchange="renderPointsLeaderboard()">
+              <option value="">— All Faculties —</option>
+              <option>Engineering &amp; Technology</option>
+              <option>Science</option>
+              <option>Business</option>
+              <option>Social Sciences</option>
+              <option>Humanities</option>
+              <option>Education</option>
+              <option>Law</option>
+              <option>Medicine</option>
+              <option>Graduate Studies</option>
+            </select>
+            <div style="font-size:.78rem;color:var(--muted);">Resets: <strong id="ptsResetDate"></strong></div>
+          </div>
+        </div>
+        <div id="ptsLeaderboardList"><div class="empty"><div class="ei">🏅</div><p>No submissions yet this month.</p></div></div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div id="pts-submit-panel" class="hidden">
+        <div class="card">
+          <div class="card-title">📤 Submit Your Test Score</div>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your script must clearly show your <strong>Student ID</strong> and the mark. Upload a clear photo or scan.</p>
+          <div style="display:grid;gap:13px;">
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Module</label>
+                <select id="ptsModule" class="req-fi"><option value="">— Select module —</option></select>
+              </div>
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test / Assessment</label>
+                <input id="ptsTestName" class="req-fi" placeholder="e.g. Test 1, Assignment 2">
+              </div>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Your Mark (%)</label>
+              <input id="ptsMark" type="number" min="0" max="100" class="req-fi" placeholder="e.g. 72" oninput="previewPoints()">
+              <div id="ptsPreview" style="margin-top:8px;font-size:.85rem;font-weight:700;min-height:20px;"></div>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script <span style="color:var(--red);">*</span></label>
+              <div class="upload-zone" onclick="document.getElementById('ptsScript').click()" style="cursor:pointer;">
+                <input type="file" id="ptsScript" accept="image/*,.pdf" onchange="handlePtsScript(event)" style="display:none;">
+                <div style="font-size:2rem;margin-bottom:6px;">📄</div>
+                <p style="font-size:.84rem;font-weight:600;">Click to upload your test script</p>
+                <p style="font-size:.73rem;color:var(--muted);margin-top:3px;">Must show your Student ID clearly</p>
+              </div>
+              <div id="ptsScriptDone" class="hidden" style="margin-top:8px;">
+                <span style="background:var(--green2);color:var(--green);border:1px solid var(--green3);border-radius:8px;padding:5px 12px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Script uploaded</span>
+              </div>
+            </div>
+            <button class="btn btn-gold" style="width:fit-content;" onclick="submitPoints()">⭐ Submit & Earn Points</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY SUBMISSIONS -->
+      <div id="pts-mine-panel" class="hidden">
+        <div id="ptsMyList"><div class="empty"><div class="ei">📋</div><p>No submissions yet.</p></div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 <script type="module">
@@ -1353,18 +1502,46 @@ const FS = {
   async addScore(data){ return await addDoc(collection(_db,'scores'),{...data,at:serverTimestamp()}); },
   onScores(cb){ return onSnapshot(query(collection(_db,'scores'),orderBy('score','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
   async getAllUsers(){ const s=await getDocs(collection(_db,'users')); const r={}; s.docs.forEach(d=>r[d.id]=d.data()); return r; },
+  // POINTS
+  async addPoint(data){ return await addDoc(collection(_db,'points'),{...data,at:serverTimestamp()}); },
+  async getPoints(){ const s=await getDocs(query(collection(_db,'points'),orderBy('at','desc'))); return s.docs.map(d=>({id:d.id,...d.data()})); },
+  onPoints(cb){ return onSnapshot(query(collection(_db,'points'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
 };
 
 window.FS = FS;
 </script>
 
 <script>
+// ── PARTICLES ────────────────────────────────────────────────────
+(function(){
+  const cont=document.getElementById('particles');
+  if(!cont)return;
+  const colors=['#2563eb','#7c3aed','#ec4899','#f59e0b','#059669','#0d9488'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const s=Math.random()*12+4;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;bottom:-${s}px;`+
+      `background:${colors[Math.floor(Math.random()*colors.length)]};`+
+      `animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;
+    cont.appendChild(p);
+  }
+})();
+
+// ── PAGE TRANSITION ───────────────────────────────────────────────
+function flashTransition(){
+  const pt=document.getElementById('pt');
+  if(!pt)return;
+  pt.classList.add('flash');
+  setTimeout(()=>pt.classList.remove('flash'),400);
+}
+
 // ── LOCAL CACHE (synced from Firestore) ─────────────────────────
-let _users={}, _requests=[], _sessions=[], _contests=[], _scores=[], _ratings={};
+let _users={}, _requests=[], _sessions=[], _contests=[], _scores=[], _ratings={}, _points=[];
 let CU=null,CUK=null,mods=[],selMod=null,rTarget=null,rStars=0,rTags=[];
 const PTITLES={home:'Home',gpa:'GPA Tracker',study:'Study Hub',peer:'Get Help',
   tutors:'Find a Tutor',become:'Become a Tutor',profile:'My Profile',
-  squad:'Study Squad',contest:'Study Contest'};
+  squad:'Study Squad',contest:'Study Contest',points:'Earn Points'};
 
 // ── Helper: show loading overlay ────────────────────────────────
 function showLoading(msg='Loading…'){
@@ -1407,7 +1584,8 @@ async function doRegister(){
   try{
     const existing=await window.FS.getUser(u);
     if(existing){setMsg('This Student ID is already registered.');return;}
-    const userData={name:n,password:p,wa:w,year:y,studentId:u,
+    const fac=document.getElementById('rFac').value;
+    const userData={name:n,password:p,wa:w,year:y,faculty:fac,studentId:u,
       modules:[],isTutor:false,tutorBio:'',tutorSubjects:[],programme:'',semester:'Semester 1'};
     await window.FS.setUser(u,userData);
     setMsg('✓ Account created!',true);
@@ -1509,6 +1687,7 @@ async function enterApp(u, userData){
   window._unsubSess  = window.FS.onSessions(data=>{_sessions=data;if(document.getElementById('pg-squad').classList.contains('on')){renderSessions();renderMySessions();}});
   window._unsubConts = window.FS.onContests(data=>{_contests=data;if(document.getElementById('pg-contest').classList.contains('on')){renderContests();populateContestDropdowns();}});
   window._unsubScores= window.FS.onScores(data=>{_scores=data;if(document.getElementById('pg-contest').classList.contains('on'))renderLeaderboard();});
+  window._unsubPoints= window.FS.onPoints(data=>{_points=data;if(document.getElementById('pg-points').classList.contains('on')){renderPointsLeaderboard();renderMyPoints();}updateMyPointsBadge();});
   // Load ratings once
   _ratings = await window.FS.getRatings();
   const ini=CU.name[0].toUpperCase();
@@ -1532,6 +1711,7 @@ function doLogout(){
   if(window._unsubSess)window._unsubSess();
   if(window._unsubConts)window._unsubConts();
   if(window._unsubScores)window._unsubScores();
+  if(window._unsubPoints)window._unsubPoints();
   document.getElementById('appScreen').classList.add('hidden');
   document.getElementById('authScreen').classList.remove('hidden');
   document.getElementById('lU').value='';document.getElementById('lP').value='';
@@ -1677,6 +1857,7 @@ function go(pg){
     if(pg==='squad'){renderSessions();renderMySessions();}
     if(pg==='home'){setGreeting();}
     if(pg==='contest'){renderContests();renderLeaderboard();populateContestDropdowns();}
+    if(pg==='points'){renderPointsLeaderboard();}
   },150);
 }
 function openSB(){document.getElementById('sidebar').classList.add('open');document.getElementById('sbOverlay').classList.add('on');}
@@ -2399,6 +2580,144 @@ function renderLeaderboard(){
     :'<div class="empty"><div class="ei">🏅</div><p>No entries yet. Be the first to submit!</p></div>';
 }
 
+
+// ══════════════════════════════════════════════════
+// EARN POINTS SYSTEM
+// ══════════════════════════════════════════════════
+let ptsScriptData = null;
+
+function calcPoints(mark){
+  if(mark<40)return 0; if(mark<50)return 5; if(mark<60)return 10;
+  if(mark<70)return 15; if(mark<80)return 20; if(mark<90)return 25; return 30;
+}
+function currentMonth(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;}
+function pointsResetDate(){const d=new Date();const last=new Date(d.getFullYear(),d.getMonth()+1,0);return last.toLocaleDateString('en-BW',{day:'numeric',month:'long',year:'numeric'});}
+
+function pointsTab(t){
+  ['leaderboard','submit','mine'].forEach(x=>{
+    document.getElementById('pts-'+x+'-panel').classList.toggle('hidden',x!==t);
+    document.getElementById('ptb-'+x).classList.toggle('on',x===t);
+  });
+  if(t==='leaderboard')renderPointsLeaderboard();
+  if(t==='submit')populatePtsModuleDropdown();
+  if(t==='mine')renderMyPoints();
+  const rd=document.getElementById('ptsResetDate');
+  if(rd)rd.textContent=pointsResetDate();
+}
+
+function populatePtsModuleDropdown(){
+  const el=document.getElementById('ptsModule');
+  if(!el)return;
+  el.innerHTML='<option value="">— Select module —</option>'+
+    (mods.length?mods.map(m=>`<option value="${m.code?m.code+' – '+m.name:m.name}">${m.code?m.code+' – ':''}${m.name}</option>`).join(''):'<option value="">No modules — set in Profile</option>');
+}
+
+function previewPoints(){
+  const mark=parseFloat(document.getElementById('ptsMark').value);
+  const el=document.getElementById('ptsPreview');
+  if(isNaN(mark)||mark<0||mark>100){el.textContent='';return;}
+  const pts=calcPoints(mark);
+  if(pts===0){el.innerHTML=`<span style="color:var(--red);">😔 Sorry, keep working hard! You need 40%+ to earn points.</span>`;}
+  else{el.innerHTML=`<span style="color:var(--green);">✓ You'll earn <strong>${pts} points</strong> for this mark!</span>`;}
+}
+
+function handlePtsScript(e){
+  const file=e.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{ptsScriptData=ev.target.result;document.getElementById('ptsScriptDone').classList.remove('hidden');};
+  reader.readAsDataURL(file);
+}
+
+async function submitPoints(){
+  const mod=document.getElementById('ptsModule').value;
+  const testName=document.getElementById('ptsTestName').value.trim();
+  const mark=parseFloat(document.getElementById('ptsMark').value);
+  if(!mod){alert('Please select a module.');return;}
+  if(!testName){alert('Enter the test/assessment name.');return;}
+  if(isNaN(mark)||mark<0||mark>100){alert('Enter a valid mark (0–100).');return;}
+  if(!ptsScriptData){alert('Please upload your test script.');return;}
+  const month=currentMonth();
+  const pts=calcPoints(mark);
+  const existing=_points.find(p=>p.by===CUK&&p.module===mod&&p.testName===testName&&p.month===month);
+  if(existing){alert('You already submitted this test this month.');return;}
+  // Most improved bonus
+  let bonus=0;
+  const prev=_points.filter(p=>p.by===CUK&&p.module===mod).sort((a,b)=>new Date(b.at||0)-new Date(a.at||0));
+  if(prev.length&&mark-prev[0].mark>=10)bonus=5;
+  if(pts===0){alert('😔 Sorry, keep working hard! You scored below 40% so no points this time. Try again next test!');return;}
+  await window.FS.addPoint({by:CUK,name:CU.name,studentId:CUK,
+    faculty:CU.faculty||'Unknown',programme:CU.programme||'',
+    module:mod,testName,mark,points:pts+bonus,basePoints:pts,bonus,month,hasScript:true});
+  ptsScriptData=null;
+  document.getElementById('ptsScriptDone').classList.add('hidden');
+  document.getElementById('ptsScript').value='';
+  ['ptsModule','ptsTestName','ptsMark'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ptsPreview').textContent='';
+  alert(`✓ ${pts+bonus} points earned!${bonus?' (includes +5 Most Improved bonus 🚀)':''}`);
+  pointsTab('leaderboard');
+}
+
+function updateMyPointsBadge(){
+  const month=currentMonth();
+  const total=_points.filter(p=>p.by===CUK&&p.month===month).reduce((s,p)=>s+(p.points||0),0);
+  const el=document.getElementById('myPtsTotal'); if(el)el.textContent=total;
+}
+
+function renderPointsLeaderboard(){
+  const month=currentMonth();
+  const facFilter=(document.getElementById('ptsFacFilter')?.value)||'';
+  const rd=document.getElementById('ptsResetDate'); if(rd)rd.textContent=pointsResetDate();
+  let entries=_points.filter(p=>p.month===month&&(p.points||0)>0);
+  if(facFilter)entries=entries.filter(p=>p.faculty===facFilter);
+  const byStudent={};
+  entries.forEach(p=>{
+    if(!byStudent[p.by])byStudent[p.by]={name:p.name,studentId:p.studentId,faculty:p.faculty,total:0,count:0};
+    byStudent[p.by].total+=p.points||0; byStudent[p.by].count++;
+  });
+  const sorted=Object.values(byStudent).sort((a,b)=>b.total-a.total);
+  const medals=['🥇','🥈','🥉'];
+  document.getElementById('ptsLeaderboardList').innerHTML=sorted.length
+    ?`<div style="display:grid;gap:10px;">${sorted.map((e,i)=>`
+        <div style="background:${i===0?'linear-gradient(135deg,#fef3c7,#fde68a)':i===1?'linear-gradient(135deg,#f1f5f9,#e2e8f0)':i===2?'linear-gradient(135deg,#fff7ed,#fed7aa)':'var(--card)'};
+          border-radius:14px;padding:14px 18px;border:1px solid ${i===0?'#fbbf24':i===1?'#cbd5e1':i===2?'#fdba74':'var(--border)'};
+          display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);${e.studentId===CUK?'outline:2px solid var(--blue2);':''}">
+          <div style="font-size:${i<3?'1.8rem':'1.1rem'};flex-shrink:0;min-width:32px;text-align:center;">${i<3?medals[i]:`#${i+1}`}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:800;font-size:.93rem;">${e.name}${e.studentId===CUK?' (You)':''}</div>
+            <div style="font-size:.75rem;color:var(--muted);">${e.faculty||'—'} · ${e.count} submission${e.count!==1?'s':''}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:${i===0?'#92400e':i===1?'#475569':i===2?'#c2410c':'var(--blue2)'};">${e.total}</div>
+            <div style="font-size:.7rem;color:var(--muted);">pts</div>
+          </div>
+        </div>`).join('')}</div>`
+    :'<div class="empty"><div class="ei">🏅</div><p>No entries yet this month.<br>Be the first to submit!</p></div>';
+}
+
+function renderMyPoints(){
+  const month=currentMonth();
+  const mine=_points.filter(p=>p.by===CUK&&p.month===month).sort((a,b)=>new Date(b.at||0)-new Date(a.at||0));
+  const total=mine.reduce((s,p)=>s+(p.points||0),0);
+  document.getElementById('ptsMyList').innerHTML=mine.length
+    ?`<div class="card" style="padding:13px 17px;margin-bottom:14px;background:linear-gradient(135deg,#fef3c7,#fffbeb);">
+        <span style="font-weight:800;font-size:1rem;">Total this month: <span style="color:#92400e;">${total} pts</span></span>
+      </div>`+mine.map(p=>`
+        <div class="req-card">
+          <div class="req-top">
+            <div class="req-left"><span class="mod-tag">📘 ${p.module}</span><h4>${p.testName}</h4></div>
+            <div style="text-align:right;">
+              <div style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--gold);">${p.points} pts</div>
+              ${p.bonus?`<div style="font-size:.72rem;color:var(--green);font-weight:700;">+${p.bonus} improved bonus!</div>`:''}
+            </div>
+          </div>
+          <div class="req-meta">
+            <span class="meta-chip">📊 ${p.mark}%</span>
+            <span class="meta-chip">🏫 ${p.faculty||'—'}</span>
+            <span class="meta-chip">${p.hasScript?'✓ Verified':'Pending'}</span>
+          </div>
+        </div>`).join('')
+    :'<div class="empty"><div class="ei">📋</div><p>No submissions this month yet.</p></div>';
+}
 
 </script>
 
