@@ -560,6 +560,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
     <div id="loginF">
       <div class="ff"><label>Student ID</label><input id="lU" type="text" inputmode="numeric" maxlength="9" placeholder="9-digit Student ID" autocomplete="username"></div>
       <div class="ff"><label>Password</label><input id="lP" type="password" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div id="fsStatus" style="font-size:.75rem;color:var(--muted);text-align:center;margin-bottom:8px;display:none;">⏳ Connecting to server…</div>
       <button class="btn-auth" onclick="doLogin()"><span>Sign In →</span></button>
     </div>
     <div id="regF" class="hidden">
@@ -1509,9 +1510,23 @@ const FS = {
 };
 
 window.FS = FS;
+// Signal that Firebase is ready
+window._fsReady = true;
+document.dispatchEvent(new CustomEvent('fs-ready'));
 </script>
 
 <script>
+// ── Wait for Firebase, show status ──────────────────────────────
+(function(){
+  const el = document.getElementById('fsStatus');
+  if(el) el.style.display = 'block';
+  document.addEventListener('fs-ready', function(){
+    if(el) el.style.display = 'none';
+  });
+  // Fallback: hide after 8s even if event missed
+  setTimeout(()=>{ if(el) el.style.display='none'; }, 8000);
+})();
+
 // ── PARTICLES ────────────────────────────────────────────────────
 (function(){
   const cont=document.getElementById('particles');
@@ -1564,6 +1579,7 @@ function authTab(t){
 function setMsg(m,ok){const el=document.getElementById('aMsg');el.textContent=m;el.style.color=ok?'var(--green)':'var(--red)';}
 
 async function doLogin(){
+  if(!window.FS){setMsg('Still connecting… please wait a second and try again.');return;}
   const u=document.getElementById('lU').value.trim(),p=document.getElementById('lP').value;
   if(!u||!p){setMsg('Fill in all fields.');return;}
   if(!/^\d{9}$/.test(u)){setMsg('Student ID must be exactly 9 digits.');return;}
@@ -1576,6 +1592,7 @@ async function doLogin(){
 }
 
 async function doRegister(){
+  if(!window.FS){setMsg('Still connecting… please wait a second and try again.');return;}
   const n=document.getElementById('rN').value.trim(),u=document.getElementById('rU').value.trim(),
         w=document.getElementById('rW').value.trim(),y=document.getElementById('rY').value,p=document.getElementById('rP').value;
   if(!n||!u||!w||!p){setMsg('Fill in all fields.');return;}
@@ -1681,6 +1698,14 @@ const TIPS=[
 
 // AUTH
 async function enterApp(u, userData){
+  // Wait for Firebase if not ready yet
+  if(!window.FS){
+    await new Promise(resolve=>{
+      if(window._fsReady){resolve();return;}
+      document.addEventListener('fs-ready',resolve,{once:true});
+      setTimeout(resolve,8000); // fallback timeout
+    });
+  }
   CUK=u; CU=userData; mods=CU.modules||[];
   // Set up real-time listeners
   window._unsubReqs  = window.FS.onRequests(data=>{_requests=data;renderReqs();renderMyReqs();});
@@ -1693,7 +1718,7 @@ async function enterApp(u, userData){
   const ini=CU.name[0].toUpperCase();
   ['sbAv','topAv','profAv'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=ini;});
   document.getElementById('sbUname').textContent=CU.name.split(' ')[0];
-  document.getElementById('pWA').value=CU.wa||'';
+  const pwaEl=document.getElementById('pWA');if(pwaEl)pwaEl.value=CU.wa||'';
   updateRole();
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('appScreen').classList.remove('hidden');
@@ -1701,7 +1726,7 @@ async function enterApp(u, userData){
   populateModDropdowns();populateGPARows();populateForeRows();
   go('home');
   setTimeout(loadCareerVideos,400);
-  if(!CU.programme){setTimeout(()=>document.getElementById('setupMod').classList.add('on'),600);}
+  if(!CU.programme||CU.programme===''){setTimeout(()=>{const m=document.getElementById('setupMod');if(m)m.classList.add('on');},800);}
 }
 function doLogout(){
   CU=null;CUK=null;mods=[];selMod=null;
@@ -1847,9 +1872,11 @@ function go(pg){
   setTimeout(()=>{
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
-    document.getElementById('pg-'+pg).classList.add('on');
+    const pgEl=document.getElementById('pg-'+pg);
+    if(!pgEl){console.warn('Page not found:',pg);return;}
+    pgEl.classList.add('on');
     const ni=document.getElementById('ni-'+pg);if(ni)ni.classList.add('on');
-    document.getElementById('topTitle').textContent=PTITLES[pg]||'';
+    const tt=document.getElementById('topTitle');if(tt)tt.textContent=PTITLES[pg]||'';
     closeSB();
     if(pg==='tutors')renderTutors();
     if(pg==='profile'){renderProfile();loadProfileEditor();}
