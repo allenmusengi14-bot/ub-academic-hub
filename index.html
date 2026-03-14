@@ -266,22 +266,25 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .career-card-body{padding:10px 12px 12px;}
 .career-card-title{font-size:.8rem;font-weight:700;color:#fff;line-height:1.4;margin-bottom:3px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.career-card-ch{font-size:.71rem;color:rgba(255,255,255,.5);}
+.career-scroll-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);color:#fff;font-size:1.3rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1;padding:0;}
+.career-scroll-btn:hover{background:rgba(255,255,255,.3);}
 
 
 /* STUDY METHODS */
 .tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 .tip-card{background:linear-gradient(135deg,var(--tc1,#f8faff),var(--tc2,#f0f4ff));
-  border-radius:14px;padding:18px;border:2px solid transparent;transition:all .25s;cursor:pointer;
-  position:relative;overflow:hidden;}
-.tip-card::after{content:'Tap to explore →';position:absolute;bottom:10px;right:12px;
-  font-size:.68rem;color:var(--muted);font-weight:600;opacity:0;transition:opacity .25s;}
+  border-radius:14px;padding:16px;border:2px solid transparent;transition:all .25s;cursor:pointer;
+  position:relative;overflow:hidden;min-width:0;word-break:break-word;}
+.tip-card::after{content:'Tap to explore →';position:absolute;bottom:8px;right:10px;
+  font-size:.66rem;color:var(--muted);font-weight:600;opacity:0;transition:opacity .25s;white-space:nowrap;}
 .tip-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,138,.12);border-color:var(--tc3,var(--border));}
 .tip-card:hover::after{opacity:1;}
 .tip-card.active{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.15);}
-.tip-icon{font-size:1.5rem;margin-bottom:9px;}
-.tip-card h4{font-size:.88rem;font-weight:700;margin-bottom:4px;color:var(--text);}
-.tip-card p{font-size:.77rem;color:var(--muted);line-height:1.55;}
+.tip-icon{font-size:1.4rem;margin-bottom:8px;}
+.tip-card h4{font-size:.85rem;font-weight:700;margin-bottom:4px;color:var(--text);line-height:1.3;}
+.tip-card p{font-size:.75rem;color:var(--muted);line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
 /* Q&A bubbles */
 .qa-user{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;
   border-radius:14px 14px 4px 14px;padding:10px 14px;font-size:.84rem;line-height:1.5;
@@ -512,17 +515,25 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
   .sidebar.open{transform:translateX(0);}
   .main{margin-left:0;}
   .topbar{display:flex;}
-  .page{padding:16px 14px;}
+  .page{padding:14px 12px;}
   .dashboard{grid-template-columns:1fr;}
-  .tips-grid{grid-template-columns:1fr;}
-  .home-grid{grid-template-columns:1fr 1fr;}
+  .tips-grid{grid-template-columns:1fr!important;}
+  .hsc-grid{flex-wrap:wrap;}
+  .hsc-item{min-width:calc(50% - 6px);}
   .pb-banner{flex-direction:column;}
   .auth-card{padding:34px 24px;}
   .row2{grid-template-columns:1fr!important;}
   .home-greet-block h2{font-size:1.4rem;}
+  .career-card{width:180px!important;}
 }
-@media(max-width:400px){.home-grid{grid-template-columns:1fr;}}
+@media(max-width:480px){
+  .hsc-item{min-width:100%;}
+  .tips-grid{grid-template-columns:1fr!important;}
+  .career-card{width:160px!important;}
+}
 </style>
+
+
 </head>
 <body>
 
@@ -547,17 +558,17 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       <button class="auth-tab" onclick="authTab('register')">Register</button>
     </div>
     <div id="loginF">
-      <div class="ff"><label>Username</label><input id="lU" type="text" placeholder="Your username" autocomplete="username"></div>
+      <div class="ff"><label>Student ID</label><input id="lU" type="text" inputmode="numeric" maxlength="9" placeholder="9-digit Student ID" autocomplete="username"></div>
       <div class="ff"><label>Password</label><input id="lP" type="password" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <button class="btn-auth" onclick="doLogin()"><span>Sign In →</span></button>
     </div>
     <div id="regF" class="hidden">
       <div class="ff"><label>Full Name</label><input id="rN" placeholder="e.g. Allen Mosimanegape"></div>
-      <div class="ff"><label>Username</label><input id="rU" placeholder="Choose a username"></div>
+      <div class="ff"><label>Student ID <span style="font-weight:400;color:var(--muted);">(9 digits)</span></label><input id="rU" type="text" inputmode="numeric" maxlength="9" placeholder="e.g. 201901234"></div>
       <div class="ff"><label>WhatsApp Number</label><input id="rW" type="tel" placeholder="e.g. 267 71234567"></div>
       <div class="ff"><label>Year of Study</label>
         <select id="rY"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>5th Year</option></select></div>
-      <div class="ff"><label>Password</label><input id="rP" type="password" placeholder="Min. 4 characters" onkeydown="if(event.key==='Enter')doRegister()"></div>
+      <div class="ff"><label>Password</label><input id="rP" type="password" placeholder="Choose a password" onkeydown="if(event.key==='Enter')doRegister()"></div>
       <button class="btn-auth" onclick="doRegister()"><span>Create Account →</span></button>
     </div>
     <p class="auth-msg" id="aMsg"></p>
@@ -717,6 +728,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       <div class="nav-section">
         <div class="nav-section-label">👥 Community</div>
         <button class="nav-item" onclick="go('squad')" id="ni-squad"><span class="ni">📅</span><span>Study Squad</span></button>
+        <button class="nav-item" onclick="go('contest')" id="ni-contest"><span class="ni">🏆</span><span>Study Contest</span></button>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Account</div>
@@ -797,6 +809,11 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
               <div class="hsc-title">Study Squad</div>
               <div class="hsc-sub">Schedule group sessions with classmates</div>
             </div>
+            <div class="hsc-item" onclick="go('contest')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🏆</div>
+              <div class="hsc-title">Study Contest</div>
+              <div class="hsc-sub">Compete, submit your test score & win prizes</div>
+            </div>
           </div>
         </div>
 
@@ -809,10 +826,14 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
             <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;color:#fff;margin-bottom:4px;">🚀 Your Career Spotlight</h3>
             <p style="color:rgba(255,255,255,.65);font-size:.83rem;" id="careerSubtitle">Curated videos and insights for your field</p>
           </div>
-          <button class="btn btn-sm" onclick="loadCareerVideos()" id="careerRefreshBtn"
-            style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);">
-            🔄 Refresh
-          </button>
+          <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+            <button onclick="scrollCareer(-1)" class="career-scroll-btn" title="Scroll left">‹</button>
+            <button onclick="scrollCareer(1)" class="career-scroll-btn" title="Scroll right">›</button>
+            <button class="btn btn-sm" onclick="loadCareerVideos()" id="careerRefreshBtn"
+              style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);">
+              🔄 Refresh
+            </button>
+          </div>
         </div>
         <div id="careerVideos" class="career-videos-scroll">
           <div class="career-loading">
@@ -1072,7 +1093,7 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
         <div class="card-title">Account Details</div>
         <div>
           <div class="pd-row"><span>Full Name</span><strong id="pdName">—</strong></div>
-          <div class="pd-row"><span>Username</span><strong id="pdUser">—</strong></div>
+          <div class="pd-row"><span>Student ID</span><strong id="pdUser">—</strong></div>
           <div class="pd-row"><span>WhatsApp</span><strong id="pdWA">—</strong></div>
           <div class="pd-row"><span>Year of Study</span><strong id="pdYear">—</strong></div>
         </div>
@@ -1130,6 +1151,9 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
         <div class="card" style="padding:13px 17px;margin-bottom:14px;">
           <input id="sqSrch" type="text" placeholder="Search by module or programme…" oninput="renderSessions()" class="req-fi">
         </div>
+        <div style="background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border-radius:12px;padding:11px 14px;margin-bottom:14px;font-size:.8rem;color:var(--blue);border:1px solid #dbeafe;">
+          💡 <strong>Note:</strong> Sessions are visible to all students using this app on the same device or network. Share the app link with classmates to coordinate sessions!
+        </div>
         <div id="sessionList"><div class="empty"><div class="ei">📅</div><p>No study sessions yet.<br>Create one and invite your classmates!</p></div></div>
       </div>
       <div id="squad-mine" class="hidden">
@@ -1185,43 +1209,212 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       </div>
     </div>
 
+    <!-- STUDY CONTEST -->
+    <div class="page" id="pg-contest">
+      <div style="background:linear-gradient(135deg,#92400e,#b45309,#d97706);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-10px;top:-10px;font-size:7rem;opacity:.1;">🏆</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">🏆 Study Contest</h2>
+        <p style="color:rgba(255,255,255,.75);font-size:.88rem;">Submit your test score, verified by your test script with your Student ID. Top 3 win prizes!</p>
+      </div>
+
+      <div class="seg-tabs">
+        <button class="seg-tab on" onclick="contestTab('leaderboard')" id="ct-leaderboard">🏅 Leaderboard</button>
+        <button class="seg-tab" onclick="contestTab('submit')" id="ct-submit">📤 Submit Score</button>
+        <button class="seg-tab" onclick="contestTab('active')" id="ct-active">📋 Active Contests</button>
+        <button class="seg-tab" onclick="contestTab('create')" id="ct-create">➕ Create Contest</button>
+      </div>
+
+      <!-- LEADERBOARD -->
+      <div id="ct-leaderboard-panel">
+        <div class="ff" style="margin-bottom:14px;">
+          <select id="ctFilter" class="req-fi" onchange="renderLeaderboard()">
+            <option value="">— All Contests —</option>
+          </select>
+        </div>
+        <div id="leaderboardList"><div class="empty"><div class="ei">🏅</div><p>No submissions yet.</p></div></div>
+      </div>
+
+      <!-- SUBMIT SCORE -->
+      <div id="ct-submit-panel" class="hidden">
+        <div class="card">
+          <div class="card-title">📤 Submit Your Test Score</div>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your test script must clearly show your <strong>Student ID (${CUK})</strong> and the score. Upload a clear photo or scan.</p>
+          <div style="display:grid;gap:13px;">
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Contest</label>
+              <select id="submitContestId" class="req-fi"><option value="">— Select contest —</option></select>
+            </div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Your Score (%)</label>
+                <input id="submitScore" type="number" min="0" max="100" class="req-fi" placeholder="e.g. 78">
+              </div>
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test / Module</label>
+                <input id="submitModule" class="req-fi" placeholder="e.g. MEC 301 Test 2">
+              </div>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script <span style="color:var(--red);">*</span></label>
+              <div class="upload-zone" onclick="document.getElementById('scriptUpload').click()" style="cursor:pointer;">
+                <input type="file" id="scriptUpload" accept="image/*,.pdf" onchange="handleScriptUpload(event)" style="display:none;">
+                <div style="font-size:2rem;margin-bottom:6px;">📄</div>
+                <p style="font-size:.84rem;font-weight:600;">Click to upload your test script</p>
+                <p style="font-size:.73rem;color:var(--muted);margin-top:3px;">Photo or PDF — must show your Student ID clearly</p>
+              </div>
+              <div id="scriptDone" class="hidden" style="margin-top:8px;">
+                <span style="background:var(--green2);color:var(--green);border:1px solid var(--green3);border-radius:8px;padding:5px 12px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Script uploaded</span>
+              </div>
+            </div>
+            <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px 14px;font-size:.8rem;color:#92400e;">
+              ⚠️ <strong>Honesty pledge:</strong> By submitting, you confirm this is your genuine test result. False submissions will result in disqualification.
+            </div>
+            <button class="btn btn-gold" style="width:fit-content;" onclick="submitScore()">🏆 Submit My Score</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE CONTESTS -->
+      <div id="ct-active-panel" class="hidden">
+        <div id="contestList"><div class="empty"><div class="ei">📋</div><p>No active contests yet.</p></div></div>
+      </div>
+
+      <!-- CREATE CONTEST -->
+      <div id="ct-create-panel" class="hidden">
+        <div class="card">
+          <div class="card-title">➕ Create a Study Contest</div>
+          <div style="display:grid;gap:13px;">
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Contest Name</label>
+              <input id="ctName" class="req-fi" placeholder="e.g. MEC 301 Test 1 Showdown">
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Module / Subject</label>
+              <select id="ctMod" class="req-fi"><option value="">— Select module —</option></select>
+            </div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📅 Deadline</label>
+                <input id="ctDeadline" type="date" class="req-fi">
+              </div>
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">🏆 Prize Description</label>
+                <input id="ctPrize" class="req-fi" placeholder="e.g. Bragging rights + P50 airtime">
+              </div>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Description (optional)</label>
+              <textarea id="ctDesc" class="req-fi" placeholder="What test is this for? Any rules?" style="min-height:65px;resize:vertical;"></textarea>
+            </div>
+            <button class="btn btn-gold" style="width:fit-content;" onclick="createContest()">🚀 Create Contest</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
+<script type="module">
+
+// ── Firebase imports ─────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection,
+         addDoc, getDocs, deleteDoc, onSnapshot, query, orderBy, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBg8om9AP7dase-Zoc8OeojfP8kQI5qtho",
+  authDomain: "ub-academic-hub.firebaseapp.com",
+  projectId: "ub-academic-hub",
+  storageBucket: "ub-academic-hub.firebasestorage.app",
+  messagingSenderId: "972839460503",
+  appId: "1:972839460503:web:34b8d9d99da370239f13d2"
+};
+const _app = initializeApp(firebaseConfig);
+const _db  = getFirestore(_app);
+
+// ── Firestore helpers (scoped to this module) ────────────────────
+const FS = {
+  async getUser(id){ const s=await getDoc(doc(_db,'users',id)); return s.exists()?s.data():null; },
+  async setUser(id,data){ await setDoc(doc(_db,'users',id),data,{merge:true}); },
+  async addRequest(data){ return await addDoc(collection(_db,'requests'),{...data,at:serverTimestamp()}); },
+  async deleteRequest(id){ await deleteDoc(doc(_db,'requests',id)); },
+  async updateRequest(id,data){ await updateDoc(doc(_db,'requests',id),data); },
+  onRequests(cb){ return onSnapshot(query(collection(_db,'requests'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
+  async getRatings(){ const s=await getDocs(collection(_db,'ratings')); const r={}; s.docs.forEach(d=>r[d.id]=d.data().list||[]); return r; },
+  async addRating(tutorId,rating){ const ref=doc(_db,'ratings',tutorId); const s=await getDoc(ref); const list=s.exists()?(s.data().list||[]):[];list.push(rating);await setDoc(ref,{list}); },
+  async addSession(data){ return await addDoc(collection(_db,'sessions'),{...data,at:serverTimestamp()}); },
+  async deleteSession(id){ await deleteDoc(doc(_db,'sessions',id)); },
+  async updateSession(id,data){ await updateDoc(doc(_db,'sessions',id),data); },
+  onSessions(cb){ return onSnapshot(query(collection(_db,'sessions'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
+  async addContest(data){ return await addDoc(collection(_db,'contests'),{...data,at:serverTimestamp()}); },
+  async deleteContest(id){ await deleteDoc(doc(_db,'contests',id)); },
+  onContests(cb){ return onSnapshot(query(collection(_db,'contests'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
+  async addScore(data){ return await addDoc(collection(_db,'scores'),{...data,at:serverTimestamp()}); },
+  onScores(cb){ return onSnapshot(query(collection(_db,'scores'),orderBy('score','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
+  async getAllUsers(){ const s=await getDocs(collection(_db,'users')); const r={}; s.docs.forEach(d=>r[d.id]=d.data()); return r; },
+};
+
+window.FS = FS;
+</script>
 
 <script>
-// PARTICLES
-(function(){
-  const c=document.getElementById('particles');
-  const colors=['#2563eb','#7c3aed','#ec4899','#f59e0b','#059669','#0d9488'];
-  for(let i=0;i<18;i++){
-    const p=document.createElement('div');
-    p.className='particle';
-    const s=Math.random()*12+4;
-    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;bottom:-${s}px;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;
-    c.appendChild(p);
-  }
-})();
+// ── LOCAL CACHE (synced from Firestore) ─────────────────────────
+let _users={}, _requests=[], _sessions=[], _contests=[], _scores=[], _ratings={};
+let CU=null,CUK=null,mods=[],selMod=null,rTarget=null,rStars=0,rTags=[];
+const PTITLES={home:'Home',gpa:'GPA Tracker',study:'Study Hub',peer:'Get Help',
+  tutors:'Find a Tutor',become:'Become a Tutor',profile:'My Profile',
+  squad:'Study Squad',contest:'Study Contest'};
 
-// PAGE TRANSITION
-function flashTransition(){
-  const pt=document.getElementById('pt');
-  pt.classList.add('flash');
-  setTimeout(()=>pt.classList.remove('flash'),400);
+// ── Helper: show loading overlay ────────────────────────────────
+function showLoading(msg='Loading…'){
+  let el=document.getElementById('_loadOverlay');
+  if(!el){el=document.createElement('div');el.id='_loadOverlay';
+    el.style.cssText='position:fixed;inset:0;background:rgba(15,23,42,.7);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;';
+    el.innerHTML=`<div class="spinner" style="width:36px;height:36px;border-width:4px;border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div><p style="color:#fff;font-size:.9rem;font-weight:600;">${msg}</p>`;
+    document.body.appendChild(el);}
+  else{el.querySelector('p').textContent=msg;el.style.display='flex';}
+}
+function hideLoading(){const el=document.getElementById('_loadOverlay');if(el)el.style.display='none';}
+
+// ── AUTH ─────────────────────────────────────────────────────────
+function authTab(t){
+  document.querySelectorAll('.auth-tab').forEach((el,i)=>el.classList.toggle('on',(i===0&&t==='login')||(i===1&&t==='register')));
+  document.getElementById('loginF').classList.toggle('hidden',t!=='login');
+  document.getElementById('regF').classList.toggle('hidden',t!=='register');
+  setMsg('');
+}
+function setMsg(m,ok){const el=document.getElementById('aMsg');el.textContent=m;el.style.color=ok?'var(--green)':'var(--red)';}
+
+async function doLogin(){
+  const u=document.getElementById('lU').value.trim(),p=document.getElementById('lP').value;
+  if(!u||!p){setMsg('Fill in all fields.');return;}
+  if(!/^\d{9}$/.test(u)){setMsg('Student ID must be exactly 9 digits.');return;}
+  setMsg('Signing in…');
+  try{
+    const user=await window.FS.getUser(u);
+    if(!user||user.password!==p){setMsg('Incorrect Student ID or password.');return;}
+    await enterApp(u,user);
+  }catch(e){setMsg('Connection error. Check your internet.');}
 }
 
-// DATA
-const DB={
-  get users(){return JSON.parse(localStorage.getItem('ub_users')||'{}');},
-  set users(v){localStorage.setItem('ub_users',JSON.stringify(v));},
-  get requests(){return JSON.parse(localStorage.getItem('ub_reqs')||'[]');},
-  set requests(v){localStorage.setItem('ub_reqs',JSON.stringify(v));},
-  get ratings(){return JSON.parse(localStorage.getItem('ub_ratings')||'{}');},
-  set ratings(v){localStorage.setItem('ub_ratings',JSON.stringify(v));},
-};
-let CU=null,CUK=null,mods=[],selMod=null,rTarget=null,rStars=0,rTags=[];
-const PTITLES={home:'Home',gpa:'GPA Tracker',study:'Study Hub',peer:'Get Help',tutors:'Find a Tutor',become:'Become a Tutor',profile:'My Profile',squad:'Study Squad'};
+async function doRegister(){
+  const n=document.getElementById('rN').value.trim(),u=document.getElementById('rU').value.trim(),
+        w=document.getElementById('rW').value.trim(),y=document.getElementById('rY').value,p=document.getElementById('rP').value;
+  if(!n||!u||!w||!p){setMsg('Fill in all fields.');return;}
+  if(!/^\d{9}$/.test(u)){setMsg('Student ID must be exactly 9 digits.');return;}
+  setMsg('Creating account…');
+  try{
+    const existing=await window.FS.getUser(u);
+    if(existing){setMsg('This Student ID is already registered.');return;}
+    const userData={name:n,password:p,wa:w,year:y,studentId:u,
+      modules:[],isTutor:false,tutorBio:'',tutorSubjects:[],programme:'',semester:'Semester 1'};
+    await window.FS.setUser(u,userData);
+    setMsg('✓ Account created!',true);
+    setTimeout(()=>enterApp(u,userData),700);
+  }catch(e){console.error(e);setMsg('Connection error. Check your internet.');}
+}
+
 const QUOTES=[
   '"The secret of getting ahead is getting started." — Mark Twain',
   '"An investment in knowledge pays the best interest." — Benjamin Franklin',
@@ -1309,33 +1502,15 @@ const TIPS=[
 
 
 // AUTH
-function authTab(t){
-  document.querySelectorAll('.auth-tab').forEach((el,i)=>el.classList.toggle('on',(i===0&&t==='login')||(i===1&&t==='register')));
-  document.getElementById('loginF').classList.toggle('hidden',t!=='login');
-  document.getElementById('regF').classList.toggle('hidden',t!=='register');
-  setMsg('');
-}
-function setMsg(m,ok){const el=document.getElementById('aMsg');el.textContent=m;el.style.color=ok?'var(--green)':'var(--red)';}
-function doLogin(){
-  const u=document.getElementById('lU').value.trim(),p=document.getElementById('lP').value;
-  if(!u||!p){setMsg('Fill in all fields.');return;}
-  const users=DB.users;
-  if(!users[u]||users[u].password!==p){setMsg('Incorrect username or password.');return;}
-  enterApp(u);
-}
-function doRegister(){
-  const n=document.getElementById('rN').value.trim(),u=document.getElementById('rU').value.trim(),
-        w=document.getElementById('rW').value.trim(),y=document.getElementById('rY').value,p=document.getElementById('rP').value;
-  if(!n||!u||!w||!p){setMsg('Fill in all fields.');return;}
-  const users=DB.users;
-  if(users[u]){setMsg('Username already taken.');return;}
-  if(p.length<4){setMsg('Password must be at least 4 characters.');return;}
-  users[u]={name:n,password:p,wa:w,year:y,modules:[],isTutor:false,tutorBio:'',tutorSubjects:[]};
-  DB.users=users;setMsg('✓ Account created!',true);
-  setTimeout(()=>enterApp(u),700);
-}
-function enterApp(u){
-  const users=DB.users;CUK=u;CU=users[u];mods=CU.modules||[];
+async function enterApp(u, userData){
+  CUK=u; CU=userData; mods=CU.modules||[];
+  // Set up real-time listeners
+  window._unsubReqs  = window.FS.onRequests(data=>{_requests=data;renderReqs();renderMyReqs();});
+  window._unsubSess  = window.FS.onSessions(data=>{_sessions=data;if(document.getElementById('pg-squad').classList.contains('on')){renderSessions();renderMySessions();}});
+  window._unsubConts = window.FS.onContests(data=>{_contests=data;if(document.getElementById('pg-contest').classList.contains('on')){renderContests();populateContestDropdowns();}});
+  window._unsubScores= window.FS.onScores(data=>{_scores=data;if(document.getElementById('pg-contest').classList.contains('on'))renderLeaderboard();});
+  // Load ratings once
+  _ratings = await window.FS.getRatings();
   const ini=CU.name[0].toUpperCase();
   ['sbAv','topAv','profAv'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=ini;});
   document.getElementById('sbUname').textContent=CU.name.split(' ')[0];
@@ -1343,18 +1518,20 @@ function enterApp(u){
   updateRole();
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('appScreen').classList.remove('hidden');
-  setGreeting();renderTips();renderSMods();renderTutors();renderReqs();renderProfile();
+  setGreeting();renderTips();renderSMods();renderTutors();renderProfile();
   populateModDropdowns();populateGPARows();populateForeRows();
   go('home');
-  setTimeout(loadCareerVideos, 400);
-  // Show setup modal if no programme set yet
-  if(!CU.programme){
-    setTimeout(()=>document.getElementById('setupMod').classList.add('on'),600);
-  }
+  setTimeout(loadCareerVideos,400);
+  if(!CU.programme){setTimeout(()=>document.getElementById('setupMod').classList.add('on'),600);}
 }
 function doLogout(){
   CU=null;CUK=null;mods=[];selMod=null;
   if(window._quoteTimer)clearInterval(window._quoteTimer);
+  if(window._careerTimer)clearInterval(window._careerTimer);
+  if(window._unsubReqs)window._unsubReqs();
+  if(window._unsubSess)window._unsubSess();
+  if(window._unsubConts)window._unsubConts();
+  if(window._unsubScores)window._unsubScores();
   document.getElementById('appScreen').classList.add('hidden');
   document.getElementById('authScreen').classList.remove('hidden');
   document.getElementById('lU').value='';document.getElementById('lP').value='';
@@ -1386,15 +1563,13 @@ function renderSetupMods(){
       <button onclick="setupMods.splice(${i},1);renderSetupMods()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:1rem;">✕</button>
     </div>`).join('');
 }
-function saveSetup(){
+async function saveSetup(){
   const prog=document.getElementById('setupProg').value.trim();
   const sem=document.getElementById('setupSem').value;
   if(!prog){alert('Please enter your programme.');return;}
-  const users=DB.users;
-  users[CUK].programme=prog;
-  users[CUK].semester=sem;
-  users[CUK].modules=setupMods.map(m=>({...m}));
-  DB.users=users;CU=users[CUK];mods=CU.modules||[];
+  CU.programme=prog; CU.semester=sem; CU.modules=setupMods.map(m=>({...m}));
+  mods=CU.modules;
+  await window.FS.setUser(CUK,{programme:prog,semester:sem,modules:CU.modules});
   setupMods=[];renderSetupMods();
   closeSetup();
   renderProfile();renderSMods();populateModDropdowns();populateGPARows();populateForeRows();
@@ -1425,15 +1600,13 @@ function renderProfileMods(){
     </div>`).join('')
   :'<div style="color:var(--muted);font-size:.83rem;padding:4px;">No modules added yet.</div>';
 }
-function saveProfile(){
+async function saveProfile(){
   const prog=document.getElementById('profProgramme').value.trim();
   const sem=document.getElementById('profSemester').value;
   if(!prog){alert('Please enter your programme.');return;}
-  const users=DB.users;
-  users[CUK].programme=prog;
-  users[CUK].semester=sem;
-  users[CUK].modules=profileMods.map(m=>({...m}));
-  DB.users=users;CU=users[CUK];mods=CU.modules||[];
+  CU.programme=prog; CU.semester=sem; CU.modules=profileMods.map(m=>({...m}));
+  mods=CU.modules;
+  await window.FS.setUser(CUK,{programme:prog,semester:sem,modules:CU.modules});
   renderSMods();populateModDropdowns();populateGPARows();populateForeRows();
   alert('✓ Profile saved!');
 }
@@ -1503,6 +1676,7 @@ function go(pg){
     if(pg==='become')updateRole();
     if(pg==='squad'){renderSessions();renderMySessions();}
     if(pg==='home'){setGreeting();}
+    if(pg==='contest'){renderContests();renderLeaderboard();populateContestDropdowns();}
   },150);
 }
 function openSB(){document.getElementById('sidebar').classList.add('open');document.getElementById('sbOverlay').classList.add('on');}
@@ -1535,7 +1709,13 @@ function renderTips(){
     </div>`).join('');
 }
 
-// CAREER SPOTLIGHT — real YouTube videos
+// CAREER scroll button
+function scrollCareer(dir){
+  const el=document.getElementById('careerVideos');
+  el.scrollBy({left:dir*240,behavior:'smooth'});
+}
+
+// CAREER SPOTLIGHT — real YouTube videos (max 10, refresh every 3hrs)
 const CAREER_VIDEOS={
   default:[
     {videoId:'Wpmk4YNmF3s',title:'How to Learn Anything Faster',channel:'Thomas Frank'},
@@ -1630,11 +1810,12 @@ async function loadCareerVideos(){
   document.getElementById('careerSubtitle').textContent=prog?`Curated for: ${prog}`:'Curated videos for your field';
   el.innerHTML=`<div class="career-loading"><div class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div><p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:12px;">Loading your career content…</p></div>`;
 
-  // Use curated real videos based on programme
   const key=getCareerKey(prog);
-  let videos=[...(CAREER_VIDEOS[key]||CAREER_VIDEOS.default)];
-  // shuffle for variety
-  videos=videos.sort(()=>Math.random()-.5);
+  // Combine field-specific + default for variety, shuffle, cap at 10
+  const pool=[...(CAREER_VIDEOS[key]||[]),...(key!=='default'?CAREER_VIDEOS.default:[])];
+  const seen=new Set();
+  const unique=pool.filter(v=>{if(seen.has(v.videoId))return false;seen.add(v.videoId);return true;});
+  const videos=unique.sort(()=>Math.random()-.5).slice(0,10);
 
   el.innerHTML=videos.map(v=>`
     <a class="career-card" href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" rel="noopener">
@@ -1646,6 +1827,10 @@ async function loadCareerVideos(){
         <div class="career-card-ch">📺 ${v.channel}</div>
       </div>
     </a>`).join('');
+
+  // Auto-refresh every 3 hours
+  if(window._careerTimer)clearInterval(window._careerTimer);
+  window._careerTimer=setInterval(loadCareerVideos, 3*60*60*1000);
 }
 
 // STUDY METHOD DETAIL + AI Q&A
@@ -1804,7 +1989,7 @@ function validatePrice(){
   if(v&&v<15){el.style.borderColor='var(--red)';el.title='Minimum is P15';}
   else{el.style.borderColor='';}
 }
-function postReq(){
+async function postReq(){
   const modEl=document.getElementById('pMod');
   const mod=modEl.value;
   const top=document.getElementById('pTop').value.trim(),
@@ -1816,20 +2001,18 @@ function postReq(){
   if(!mod){alert('Please select a module. Add modules in your Profile first.');return;}
   if(!top||!desc){alert('Fill in topic and description.');return;}
   if(price<15){alert('Please set a price of at least P15.');document.getElementById('pPrice').focus();return;}
-  const reqs=DB.requests;
-  reqs.unshift({id:Date.now(),by:CUK,name:CU.name,mod,top,desc,urg,wa,price,time,type,status:'open',at:new Date().toISOString()});
-  DB.requests=reqs;
+  await window.FS.addRequest({by:CUK,name:CU.name,mod,top,desc,urg,wa,price,time,type,status:'open'});
   modEl.value='';
   ['pTop','pDesc','pPrice'].forEach(id=>document.getElementById(id).value='');
   alert('✓ Request posted!');peerTab('browse');
 }
 function renderReqs(){
-  const q=(document.getElementById('pSrch').value||'').toLowerCase(),f=document.getElementById('pFilt').value;
-  const list=DB.requests.filter(r=>(f==='all'||r.status==='open')&&(q===''||r.mod.toLowerCase().includes(q)||r.top.toLowerCase().includes(q)));
+  const q=(document.getElementById('pSrch')?.value||'').toLowerCase(),f=document.getElementById('pFilt')?.value||'all';
+  const list=_requests.filter(r=>r.by!==undefined&&(f==='all'||r.status==='open')&&(q===''||String(r.mod||'').toLowerCase().includes(q)||String(r.top||'').toLowerCase().includes(q)));
   document.getElementById('reqList').innerHTML=list.length?list.map(r=>reqHTML(r)).join(''):'<div class="empty"><div class="ei">🔍</div><p>No requests found.</p></div>';
 }
 function renderMyReqs(){
-  const list=DB.requests.filter(r=>r.by===CUK);
+  const list=_requests.filter(r=>r.by===CUK);
   document.getElementById('myReqList').innerHTML=list.length?list.map(r=>reqHTML(r,true)).join(''):'<div class="empty"><div class="ei">📋</div><p>No requests posted yet.</p></div>';
 }
 function reqHTML(r,mine){
@@ -1850,7 +2033,7 @@ function reqHTML(r,mine){
   </div>`;
 }
 function offerHelp(id){
-  const r=DB.requests.find(x=>x.id===id);if(!r)return;
+  const r=_requests.find(x=>x.id===id);if(!r)return;
   const num=(r.wa||'').replace(/\D/g,'');
   const priceInfo=r.price?` The student is offering *P${r.price}*${r.time?' for a '+r.time+'hr session':''}.`:'';
   const msg=encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*.${priceInfo} Still looking for a tutor?`);
@@ -1862,29 +2045,40 @@ function offerHelp(id){
   document.getElementById('waMod').classList.add('on');
 }
 function closeWA(){document.getElementById('waMod').classList.remove('on');}
-function delReq(id){if(!confirm('Delete this request?'))return;DB.requests=DB.requests.filter(r=>r.id!==id);renderReqs();renderMyReqs();}
+async function delReq(id){if(!confirm('Delete this request?'))return;await window.FS.deleteRequest(id);}
 function ago(iso){const m=Math.floor((Date.now()-new Date(iso))/60000);return m<1?'Just now':m<60?m+'m ago':Math.floor(m/60)<24?Math.floor(m/60)+'h ago':Math.floor(m/1440)+'d ago';}
 
 // TUTORS
-function becomeTutor(){
+async function becomeTutor(){
   const bio=document.getElementById('btBio').value.trim(),subj=document.getElementById('btSubj').value.trim();
   if(!bio||!subj){alert('Fill in bio and subjects.');return;}
-  const users=DB.users;users[CUK].isTutor=true;users[CUK].tutorBio=bio;users[CUK].tutorSubjects=subj.split(',').map(s=>s.trim()).filter(Boolean);
-  DB.users=users;CU=users[CUK];document.getElementById('btMod').classList.remove('on');updateRole();renderTutors();alert('✓ You are now a tutor!');
+  await window.FS.setUser(CUK,{isTutor:true,tutorBio:bio,tutorSubjects:subj.split(',').map(s=>s.trim()).filter(Boolean)});
+  CU.isTutor=true;CU.tutorBio=bio;CU.tutorSubjects=subj.split(',').map(s=>s.trim()).filter(Boolean);
+  document.getElementById('btMod').classList.remove('on');updateRole();renderTutors();alert('✓ You are now a tutor!');
 }
-function updateTutorProfile(){
+async function updateTutorProfile(){
   const bio=document.getElementById('editBio').value.trim(),subj=document.getElementById('editSubj').value.trim();
   if(!bio||!subj){alert('Fill in all fields.');return;}
-  const users=DB.users;users[CUK].tutorBio=bio;users[CUK].tutorSubjects=subj.split(',').map(s=>s.trim()).filter(Boolean);
-  DB.users=users;CU=users[CUK];renderTutors();alert('✓ Profile updated!');
+  await window.FS.setUser(CUK,{tutorBio:bio,tutorSubjects:subj.split(',').map(s=>s.trim()).filter(Boolean)});
+  CU.tutorBio=bio;CU.tutorSubjects=subj.split(',').map(s=>s.trim()).filter(Boolean);
+  renderTutors();alert('✓ Profile updated!');
 }
-function renderTutors(){
+async function renderTutors(){
   const q=(document.getElementById('tSrch')&&document.getElementById('tSrch').value||'').toLowerCase();
-  const users=DB.users;
-  const tutors=Object.entries(users).filter(([k,u])=>u.isTutor&&(q===''||u.name.toLowerCase().includes(q)||(u.tutorSubjects||[]).some(s=>s.toLowerCase().includes(q))));
+  // Merge current user into cache
+  if(CUK&&CU)_users[CUK]=CU;
+  // Try to load all users from Firestore for tutor discovery
+  try{
+    if(!window._tutorsFetched){
+      const snap=await window.FS.getAllUsers();
+      Object.assign(_users, snap);
+      window._tutorsFetched=true;
+    }
+  }catch(e){console.warn('Could not load all users:',e);}
+  const tutors=Object.entries(_users).filter(([k,u])=>u&&u.isTutor&&(q===''||u.name.toLowerCase().includes(q)||(u.tutorSubjects||[]).some(s=>s.toLowerCase().includes(q))));
   const cont=document.getElementById('tutorList');
   if(!tutors.length){cont.innerHTML='<div class="empty"><div class="ei">⭐</div><p>No tutors yet.<br>Go to <strong>Become a Tutor</strong> to be first!</p></div>';return;}
-  const ratings=DB.ratings;
+  const ratings=_ratings;
   cont.innerHTML=tutors.map(([k,u])=>{
     const rs=ratings[k]||[];const avg=rs.length?rs.reduce((a,r)=>a+r.stars,0)/rs.length:0;
     const allTags=[...new Set(rs.flatMap(r=>r.tags||[]))];
@@ -1920,11 +2114,11 @@ function openRate(key,name){
 }
 function setStar(n){rStars=n;document.querySelectorAll('.rate-star').forEach((s,i)=>s.classList.toggle('on',i<n));}
 function toggleTag(el){el.classList.toggle('on');const t=el.textContent;rTags=rTags.includes(t)?rTags.filter(x=>x!==t):[...rTags,t];}
-function submitRating(){
+async function submitRating(){
   if(!rStars){alert('Please select a star rating.');return;}
-  const ratings=DB.ratings;if(!ratings[rTarget])ratings[rTarget]=[];
-  ratings[rTarget].push({stars:rStars,tags:rTags,note:document.getElementById('rateNote').value,by:CUK,at:new Date().toISOString()});
-  DB.ratings=ratings;closeRate();renderTutors();alert('✓ Rating submitted!');
+  await window.FS.addRating(rTarget,{stars:rStars,tags:rTags,note:document.getElementById('rateNote').value,by:CUK,at:new Date().toISOString()});
+  _ratings=await window.FS.getRatings();
+  closeRate();renderTutors();alert('✓ Rating submitted!');
 }
 function closeRate(){document.getElementById('rateMod').classList.remove('on');}
 
@@ -1942,7 +2136,7 @@ function renderProfile(){
   const tc=document.getElementById('tutorProfileCard');
   if(CU.isTutor){
     tc.classList.remove('hidden');
-    const rs=DB.ratings[CUK]||[];const avg=rs.length?rs.reduce((a,r)=>a+r.stars,0)/rs.length:0;
+    const rs=(_ratings[CUK]||[]);const avg=rs.length?rs.reduce((a,r)=>a+r.stars,0)/rs.length:0;
     document.getElementById('tutorProfileInfo').innerHTML=`
       <p style="font-size:.82rem;color:var(--muted);margin-bottom:9px;">${CU.tutorBio||''}</p>
       <div class="tutor-subjects">${(CU.tutorSubjects||[]).map(s=>`<span class="subj-tag">${s}</span>`).join('')}</div>
@@ -1961,10 +2155,6 @@ function loadProfileEditor(){
 }
 
 // STUDY SQUAD
-const DBsessions={
-  get all(){return JSON.parse(localStorage.getItem('ub_sessions')||'[]');},
-  set all(v){localStorage.setItem('ub_sessions',JSON.stringify(v));}
-};
 let squadMods_temp=[];
 
 function squadTab(t){
@@ -1977,7 +2167,7 @@ function squadTab(t){
   if(t==='create')populateModDropdowns();
 }
 
-function createSession(){
+async function createSession(){
   const mod=document.getElementById('sqMod').value;
   const topic=document.getElementById('sqTopic').value.trim();
   const date=document.getElementById('sqDate').value;
@@ -1988,15 +2178,11 @@ function createSession(){
   if(!mod){alert('Please select a module.');return;}
   if(!topic){alert('Please describe what you want to cover.');return;}
   if(!date||!time){alert('Please set a date and time.');return;}
-  const sessions=DBsessions.all;
-  sessions.unshift({
-    id:Date.now(),by:CUK,byName:CU.name,wa:CU.wa||'',
+  await window.FS.addSession({
+    by:CUK,byName:CU.name,wa:CU.wa||'',
     programme:CU.programme||'',mod,topic,date,time,loc,
-    max:parseInt(max)||0,notes,attendees:[CUK],
-    at:new Date().toISOString()
+    max:parseInt(max)||0,notes,attendees:[CUK]
   });
-  DBsessions.all=sessions;
-  // Clear form
   ['sqMod','sqTopic','sqDate','sqTime','sqNotes'].forEach(id=>document.getElementById(id).value='');
   alert('✓ Study session scheduled!');
   squadTab('browse');
@@ -2042,37 +2228,179 @@ function sessionCard(s,own){
 
 function renderSessions(){
   const q=(document.getElementById('sqSrch')?.value||'').toLowerCase();
-  const all=DBsessions.all.filter(s=>!q||(s.mod+s.topic+s.programme).toLowerCase().includes(q));
+  const all=_sessions.filter(s=>!q||(String(s.mod||'')+String(s.topic||'')+String(s.programme||'')).toLowerCase().includes(q));
+  all.sort((a,b)=>{
+    const da=new Date(a.date+'T'+a.time), db=new Date(b.date+'T'+b.time);
+    const now=new Date();
+    const aUp=da>=now, bUp=db>=now;
+    if(aUp&&!bUp)return -1; if(!aUp&&bUp)return 1;
+    return da-db;
+  });
   document.getElementById('sessionList').innerHTML=all.length
     ?all.map(s=>sessionCard(s,s.by===CUK)).join('')
-    :'<div class="empty"><div class="ei">📅</div><p>No sessions yet. Create one!</p></div>';
+    :'<div class="empty"><div class="ei">📅</div><p>No sessions yet.<br>Be the first — create one for your classmates!</p></div>';
 }
 function renderMySessions(){
-  const mine=DBsessions.all.filter(s=>s.by===CUK);
+  const mine=_sessions.filter(s=>s.by===CUK);
   document.getElementById('mySessionList').innerHTML=mine.length
     ?mine.map(s=>sessionCard(s,true)).join('')
     :'<div class="empty"><div class="ei">🙋</div><p>You have no sessions yet.</p></div>';
 }
-function joinSession(id){
-  const sessions=DBsessions.all;
-  const s=sessions.find(x=>x.id===id);if(!s)return;
-  if(!s.attendees.includes(CUK))s.attendees.push(CUK);
-  DBsessions.all=sessions;renderSessions();renderMySessions();
+async function joinSession(id){
+  const s=_sessions.find(x=>x.id===id);if(!s)return;
+  const att=[...(s.attendees||[])];
+  if(!att.includes(CUK))att.push(CUK);
+  await window.FS.updateSession(id,{attendees:att});
 }
-function leaveSession(id){
-  const sessions=DBsessions.all;
-  const s=sessions.find(x=>x.id===id);if(!s)return;
-  s.attendees=s.attendees.filter(a=>a!==CUK);
-  DBsessions.all=sessions;renderSessions();renderMySessions();
+async function leaveSession(id){
+  const s=_sessions.find(x=>x.id===id);if(!s)return;
+  const att=(s.attendees||[]).filter(a=>a!==CUK);
+  await window.FS.updateSession(id,{attendees:att});
 }
-function deleteSession(id){
+async function deleteSession(id){
   if(!confirm('Delete this session?'))return;
-  DBsessions.all=DBsessions.all.filter(s=>s.id!==id);
-  renderSessions();renderMySessions();
+  await window.FS.deleteSession(id);
 }
 
+// ============ STUDY CONTEST ============
+let scriptFileData=null;
+
+function contestTab(t){
+  ['leaderboard','submit','active','create'].forEach(x=>{
+    document.getElementById('ct-'+x+'-panel').classList.toggle('hidden',x!==t);
+    document.getElementById('ct-'+x).classList.toggle('on',x===t);
+  });
+  if(t==='leaderboard')renderLeaderboard();
+  if(t==='active')renderContests();
+  if(t==='submit'||t==='create')populateContestDropdowns();
+}
+
+function populateContestDropdowns(){
+  const contests=_contests.filter(c=>new Date(c.deadline)>=new Date()||!c.deadline);
+  const opts=contests.length
+    ?contests.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')
+    :'<option value="">No active contests</option>';
+  ['submitContestId','ctFilter'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    if(id==='ctFilter'){
+      el.innerHTML='<option value="">— All Contests —</option>'+_contests.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+    } else {
+      el.innerHTML='<option value="">— Select contest —</option>'+opts;
+    }
+  });
+  // module dropdown for create
+  const ctModEl=document.getElementById('ctMod');
+  if(ctModEl){
+    ctModEl.innerHTML='<option value="">— Select module —</option>'+
+      (mods.length?mods.map(m=>`<option value="${m.code?m.code+' – '+m.name:m.name}">${m.code?m.code+' – ':''}${m.name}</option>`).join('')
+      :'<option value="">No modules — set in Profile</option>');
+  }
+  // update submit panel student id display
+  const sp=document.getElementById('ct-submit-panel');
+  if(sp)sp.innerHTML=sp.innerHTML.replace(/\$\{CUK\}/g,CUK||'');
+}
+
+async function createContest(){
+  const name=document.getElementById('ctName').value.trim();
+  const mod=document.getElementById('ctMod').value;
+  const deadline=document.getElementById('ctDeadline').value;
+  const prize=document.getElementById('ctPrize').value.trim();
+  const desc=document.getElementById('ctDesc').value.trim();
+  if(!name){alert('Enter a contest name.');return;}
+  if(!deadline){alert('Set a deadline.');return;}
+  await window.FS.addContest({by:CUK,byName:CU.name,name,mod,deadline,prize,desc});
+  ['ctName','ctDeadline','ctPrize','ctDesc'].forEach(id=>document.getElementById(id).value='');
+  alert('✓ Contest created!');
+  contestTab('active');
+}
+
+function renderContests(){
+  const all=_contests;
+  document.getElementById('contestList').innerHTML=all.length
+    ?all.map(c=>{
+      const closed=c.deadline&&new Date(c.deadline)<new Date();
+      const myEntry=getMyEntry(c.id);
+      return`<div class="req-card">
+        <div class="req-top">
+          <div class="req-left"><span class="mod-tag">🏆 ${c.mod||'Open'}</span><h4>${c.name}</h4></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">
+            <span class="badge ${closed?'badge-taken':'badge-open'}">${closed?'Closed':'Open'}</span>
+            ${!closed&&!myEntry?`<button class="btn btn-gold btn-sm" onclick="contestTab('submit')">📤 Enter</button>`:myEntry?`<span style="color:var(--green);font-size:.78rem;font-weight:700;">✓ Submitted ${myEntry.score}%</span>`:''}
+          </div>
+        </div>
+        ${c.desc?`<p class="req-desc">${c.desc}</p>`:''}
+        <div class="req-meta">
+          <span class="meta-chip">📅 Deadline: ${c.deadline||'Open-ended'}</span>
+          ${c.prize?`<span class="meta-chip">🎁 ${c.prize}</span>`:''}
+          <span class="meta-chip">👤 By ${c.byName}</span>
+        </div>
+      </div>`;
+    }).join('')
+    :'<div class="empty"><div class="ei">📋</div><p>No contests yet. Create one!</p></div>';
+}
+
+function getMyEntry(contestId){
+  return(_scores.find(s=>s.contestId==contestId&&s.by===CUK))||null;
+}
+
+function handleScriptUpload(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{scriptFileData=ev.target.result;document.getElementById('scriptDone').classList.remove('hidden');};
+  reader.readAsDataURL(file);
+}
+
+async function submitScore(){
+  const contestId=document.getElementById('submitContestId').value;
+  const score=parseFloat(document.getElementById('submitScore').value);
+  const module=document.getElementById('submitModule').value.trim();
+  if(!contestId){alert('Select a contest.');return;}
+  if(isNaN(score)||score<0||score>100){alert('Enter a valid score (0–100).');return;}
+  if(!module){alert('Enter the module/test name.');return;}
+  if(!scriptFileData){alert('Please upload your test script photo.');return;}
+  const existing=_scores.find(s=>s.contestId==contestId&&s.by===CUK);
+  if(existing){alert('You have already submitted for this contest.');return;}
+  await window.FS.addScore({by:CUK,name:CU.name,studentId:CUK,
+    contestId,module,score,hasScript:true});
+  scriptFileData=null;
+  document.getElementById('scriptDone').classList.add('hidden');
+  document.getElementById('scriptUpload').value='';
+  ['submitContestId','submitScore','submitModule'].forEach(id=>document.getElementById(id).value='');
+  alert('✓ Score submitted! Check the leaderboard.');
+  contestTab('leaderboard');
+}
+
+function renderLeaderboard(){
+  const filterContest=document.getElementById('ctFilter')?.value;
+  let entries=[..._scores];
+  if(filterContest)entries=entries.filter(e=>e.contestId==filterContest);
+  // Sort by score desc
+  entries.sort((a,b)=>b.score-a.score);
+  const medals=['🥇','🥈','🥉'];
+  document.getElementById('leaderboardList').innerHTML=entries.length
+    ?`<div style="display:grid;gap:10px;">
+      ${entries.map((e,i)=>`
+        <div style="background:${i===0?'linear-gradient(135deg,#fef3c7,#fde68a)':i===1?'linear-gradient(135deg,#f1f5f9,#e2e8f0)':i===2?'linear-gradient(135deg,#fff7ed,#fed7aa)':'var(--card)'};
+          border-radius:14px;padding:14px 18px;border:1px solid ${i===0?'#fbbf24':i===1?'#cbd5e1':i===2?'#fdba74':'var(--border)'};
+          display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);">
+          <div style="font-size:${i<3?'1.8rem':'1.2rem'};flex-shrink:0;">${i<3?medals[i]:'#'+(i+1)}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:800;font-size:.95rem;">${e.name}</div>
+            <div style="font-size:.78rem;color:var(--muted);">ID: ${e.studentId} · ${e.module}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:${i===0?'#92400e':i===1?'#475569':i===2?'#c2410c':'var(--text)'};">${e.score}%</div>
+            <div style="font-size:.7rem;color:var(--muted);">${e.hasScript?'✓ Verified':'Unverified'}</div>
+          </div>
+        </div>`).join('')}
+    </div>`
+    :'<div class="empty"><div class="ei">🏅</div><p>No entries yet. Be the first to submit!</p></div>';
+}
 
 
 </script>
+
 </body>
 </html>
