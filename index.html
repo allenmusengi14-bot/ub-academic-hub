@@ -101,6 +101,9 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
   display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;
   z-index:50;transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;
   border-right:1px solid rgba(255,255,255,.06);}
+/* Collapsed state — works on ALL screen sizes */
+.sidebar.collapsed{transform:translateX(-100%);}
+.main.expanded{margin-left:0;}
 .sidebar-brand{padding:24px 20px 18px;border-bottom:1px solid rgba(255,255,255,.08);}
 .sb-logo{display:flex;align-items:center;gap:12px;}
 .sb-badge{width:40px;height:40px;
@@ -158,7 +161,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
   font-weight:800;font-size:.9rem;margin-left:auto;}
 
 /* MAIN */
-.main{margin-left:var(--sidebar);flex:1;min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1;}
+.main{margin-left:var(--sidebar);flex:1;min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1;transition:margin-left .35s cubic-bezier(.4,0,.2,1);}
 .page{display:none;padding:30px 28px;flex:1;}
 .page.on{display:block;animation:fadeUp .4s ease;}
 .page-header{margin-bottom:24px;}
@@ -224,8 +227,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 /* HOME SECTION CARDS */
 .home-section-card{background:var(--card);border-radius:20px;padding:20px 22px;
   border:1px solid var(--border);box-shadow:var(--shadow);
-  border-top:3px solid transparent;
-  border-image:linear-gradient(90deg,var(--sc1),var(--sc2)) 1;}
+  border-top:3px solid var(--sc1,var(--blue2));}
 .hsc-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;
   background:linear-gradient(135deg,var(--sc1),var(--sc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
   margin-bottom:14px;}
@@ -275,16 +277,18 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 /* STUDY METHODS */
 .tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 .tip-card{background:linear-gradient(135deg,var(--tc1,#f8faff),var(--tc2,#f0f4ff));
-  border-radius:14px;padding:16px;border:2px solid transparent;transition:all .25s;cursor:pointer;
-  position:relative;overflow:hidden;min-width:0;word-break:break-word;}
-.tip-card::after{content:'Tap to explore →';position:absolute;bottom:8px;right:10px;
+  border-radius:14px;padding:15px 15px 22px;border:2px solid transparent;transition:all .25s;cursor:pointer;
+  position:relative;overflow:hidden;min-width:0;box-sizing:border-box;}
+.tip-card::after{content:'Tap →';position:absolute;bottom:7px;right:10px;
   font-size:.66rem;color:var(--muted);font-weight:600;opacity:0;transition:opacity .25s;white-space:nowrap;}
-.tip-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,138,.12);border-color:var(--tc3,var(--border));}
+.tip-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,58,138,.1);border-color:var(--tc3,var(--border));}
 .tip-card:hover::after{opacity:1;}
 .tip-card.active{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.15);}
-.tip-icon{font-size:1.4rem;margin-bottom:8px;}
-.tip-card h4{font-size:.85rem;font-weight:700;margin-bottom:4px;color:var(--text);line-height:1.3;}
-.tip-card p{font-size:.75rem;color:var(--muted);line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+.tip-icon{font-size:1.3rem;margin-bottom:7px;display:block;}
+.tip-card h4{font-size:.83rem;font-weight:700;margin-bottom:4px;color:var(--text);line-height:1.3;
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.tip-card p{font-size:.74rem;color:var(--muted);line-height:1.5;overflow:hidden;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin:0;}
 /* Q&A bubbles */
 .qa-user{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;
   border-radius:14px 14px 4px 14px;padding:10px 14px;font-size:.84rem;line-height:1.5;
@@ -510,26 +514,61 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
   border:1.5px solid var(--green3);border-radius:14px;padding:17px;margin-bottom:16px;
   display:flex;align-items:center;gap:13px;}
 
+/* ── MOBILE RESPONSIVE ─────────────────────────────────────── */
 @media(max-width:768px){
-  .sidebar{transform:translateX(-100%);}
-  .sidebar.open{transform:translateX(0);}
-  .main{margin-left:0;}
+  /* Sidebar slides in/out */
+  .sidebar{transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);}
+  .sidebar.open{transform:translateX(0)!important;box-shadow:4px 0 24px rgba(0,0,0,.4);}
+  .sidebar.collapsed{transform:translateX(-100%)!important;}
+  .main{margin-left:0!important;}
   .topbar{display:flex;}
+  #sidebarOpenBtn{display:none!important;}
+
+  /* Page padding */
   .page{padding:14px 12px;}
+
+  /* Grids collapse */
   .dashboard{grid-template-columns:1fr;}
-  .tips-grid{grid-template-columns:1fr!important;}
+  .tips-grid{grid-template-columns:1fr 1fr!important;}
   .hsc-grid{flex-wrap:wrap;}
-  .hsc-item{min-width:calc(50% - 6px);}
+  .hsc-item{flex:1;min-width:calc(50% - 6px);}
   .pb-banner{flex-direction:column;}
-  .auth-card{padding:34px 24px;}
+  .auth-card{padding:28px 20px;}
   .row2{grid-template-columns:1fr!important;}
-  .home-greet-block h2{font-size:1.4rem;}
-  .career-card{width:180px!important;}
+  .home-greet-block h2{font-size:1.3rem;}
+  .career-card{width:175px!important;}
+
+  /* Tables scroll on small screens */
+  table{font-size:.8rem;}
+  th,td{padding:8px 9px;}
+
+  /* Modals full width */
+  .modal{margin:12px;width:calc(100% - 24px);max-width:100%!important;border-radius:18px;}
+
+  /* Squad chat full screen on mobile */
+  #squadChatMod > div{border-radius:0!important;max-height:100vh!important;height:100vh;}
+
+  /* Tutor cards */
+  .tutor-card{padding:16px;}
+
+  /* Req cards */
+  .req-top{flex-wrap:wrap;gap:8px;}
+  .req-top > div:last-child{width:100%;display:flex!important;flex-direction:row!important;justify-content:space-between;align-items:center;}
 }
+
 @media(max-width:480px){
   .hsc-item{min-width:100%;}
   .tips-grid{grid-template-columns:1fr!important;}
-  .career-card{width:160px!important;}
+  .career-card{width:155px!important;}
+  .home-greet-block h2{font-size:1.15rem;}
+  .hero-quote{font-size:.78rem;}
+  .seg-tabs{gap:4px;}
+  .seg-tab{font-size:.78rem;padding:9px 10px;}
+  .career-panel{padding:18px 16px 16px;}
+  .home-section-card{padding:16px;}
+  /* Auth card compact */
+  .auth-card{padding:24px 16px;}
+  .auth-brand-text strong{font-size:1.1rem;}
 }
 </style>
 
@@ -728,9 +767,15 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
   <div class="sidebar-overlay" id="sbOverlay" onclick="closeSB()"></div>
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-      <div class="sb-logo">
-        <div class="sb-badge">UB</div>
-        <div><div class="sb-title">Academic Hub</div><div class="sb-sub">UB Student Platform</div></div>
+      <div class="sb-logo" style="justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="sb-badge">UB</div>
+          <div><div class="sb-title">Academic Hub</div><div class="sb-sub">UB Student Platform</div></div>
+        </div>
+        <button onclick="toggleSB()" id="sbToggleBtn" title="Collapse sidebar"
+          style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);
+          width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;transition:all .2s;">◀</button>
       </div>
     </div>
     <div class="sidebar-user">
@@ -778,6 +823,14 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
       <span class="topbar-title" id="topTitle">Home</span>
       <div class="topbar-av" id="topAv">A</div>
     </div>
+    <!-- Desktop "open sidebar" button — visible only when sidebar is collapsed -->
+    <button id="sidebarOpenBtn" onclick="toggleSB()" title="Open sidebar"
+      style="display:none;position:fixed;left:16px;top:16px;z-index:48;
+      width:42px;height:42px;border-radius:12px;
+      background:linear-gradient(135deg,#0f172a,#1e1b4b);
+      border:1px solid rgba(255,255,255,.15);color:#fff;
+      font-size:1.1rem;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);
+      display:none;align-items:center;justify-content:center;transition:all .2s;">▶</button>
 
     <!-- HOME -->
     <div class="page on" id="pg-home">
@@ -1928,8 +1981,41 @@ function go(pg){
     if(pg==='points'){renderPointsLeaderboard();}
   },150);
 }
-function openSB(){document.getElementById('sidebar').classList.add('open');document.getElementById('sbOverlay').classList.add('on');}
-function closeSB(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sbOverlay').classList.remove('on');}
+function openSB(){
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar').classList.remove('collapsed');
+  document.getElementById('sbOverlay').classList.add('on');
+  document.getElementById('sidebarOpenBtn').style.display='none';
+}
+function closeSB(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sbOverlay').classList.remove('on');
+}
+function toggleSB(){
+  const sb=document.getElementById('sidebar');
+  const main=document.querySelector('.main');
+  const openBtn=document.getElementById('sidebarOpenBtn');
+  const toggleBtn=document.getElementById('sbToggleBtn');
+  const isMobile=window.innerWidth<=768;
+  if(isMobile){
+    // On mobile: just close it
+    closeSB(); return;
+  }
+  // On desktop: collapse/expand
+  const isCollapsed=sb.classList.contains('collapsed');
+  if(isCollapsed){
+    sb.classList.remove('collapsed');
+    main.style.marginLeft='var(--sidebar)';
+    if(openBtn)openBtn.style.display='none';
+    if(toggleBtn)toggleBtn.textContent='◀';
+  } else {
+    sb.classList.add('collapsed');
+    main.style.marginLeft='0';
+    if(openBtn){openBtn.style.display='flex';}
+    if(toggleBtn)toggleBtn.textContent='▶';
+    document.getElementById('sbOverlay').classList.remove('on');
+  }
+}
 
 // HOME
 function setGreeting(){
@@ -2275,7 +2361,7 @@ function fmtTime(val){
 function reqHTML(r,mine){
   const urg={flexible:'🟢 Flexible',today:'🟡 Today',asap:'🔴 ASAP'};
   const own=r.by===CUK;
-  const rid=r.id; // Firestore string ID — pass as string
+  const rid=String(r.id);
   const action=own
     ?`<button class="btn btn-red btn-sm" onclick="delReq('${rid}')">🗑 Delete</button>`
     :r.status==='open'
@@ -2292,7 +2378,9 @@ function reqHTML(r,mine){
   </div>`;
 }
 function offerHelp(id){
-  const r=_requests.find(x=>x.id===id||x.id==id);if(!r){alert('Request not found. Please refresh.');return;}
+  const sid=String(id);
+  const r=_requests.find(x=>String(x.id)===sid);
+  if(!r){alert('Request not found. Please refresh the page.');return;}
   const num=(r.wa||'').replace(/\D/g,'');
   const priceInfo=r.price?` The student is offering *P${r.price}*${r.time?' for a '+r.time+'hr session':''}.`:'';
   const msg=encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*.${priceInfo} Still looking for a tutor?`);
@@ -2478,12 +2566,13 @@ function sessionCard(s,own){
   const full=s.max>0&&s.attendees.length>=s.max;
   const joined=s.attendees.includes(CUK);
   const prog=s.programme?`<span class="meta-chip">🎓 ${s.programme}</span>`:'';
+  const sid=s.id;
   const joinBtn=own
-    ?`<button class="btn btn-red btn-sm" onclick="deleteSession(${s.id})">🗑 Delete</button>`
+    ?`<button class="btn btn-red btn-sm" onclick="deleteSession('${sid}')">🗑 Delete</button>`
     :isPast?`<span style="color:var(--muted);font-size:.78rem;">Ended</span>`
     :full&&!joined?`<span style="color:var(--muted);font-size:.78rem;">Full</span>`
-    :joined?`<button class="btn btn-outline btn-sm" onclick="leaveSession(${s.id})">✓ Joined</button>`
-    :`<button class="btn btn-blue btn-sm" onclick="joinSession(${s.id})">+ Join</button>`;
+    :joined?`<button class="btn btn-outline btn-sm" onclick="leaveSession('${sid}')">✓ Joined</button>`
+    :`<button class="btn btn-blue btn-sm" onclick="joinSession('${sid}')">+ Join</button>`;
   const endTimeStr=s.endTime?new Date(s.date+'T'+s.endTime).toLocaleTimeString('en-BW',{hour:'2-digit',minute:'2-digit'}):'';
   const timeRange=endTimeStr?`${timeStr} – ${endTimeStr}`:timeStr;
   const canChat=joined||own;
@@ -2533,19 +2622,23 @@ function renderMySessions(){
     :'<div class="empty"><div class="ei">🙋</div><p>You have no sessions yet.</p></div>';
 }
 async function joinSession(id){
-  const s=_sessions.find(x=>x.id===id);if(!s)return;
+  const sid=String(id);
+  const s=_sessions.find(x=>String(x.id)===sid);
+  if(!s){alert('Session not found. Please refresh.');return;}
   const att=[...(s.attendees||[])];
   if(!att.includes(CUK))att.push(CUK);
-  await window.FS.updateSession(id,{attendees:att});
+  await window.FS.updateSession(sid,{attendees:att});
 }
 async function leaveSession(id){
-  const s=_sessions.find(x=>x.id===id);if(!s)return;
+  const sid=String(id);
+  const s=_sessions.find(x=>String(x.id)===sid);
+  if(!s)return;
   const att=(s.attendees||[]).filter(a=>a!==CUK);
-  await window.FS.updateSession(id,{attendees:att});
+  await window.FS.updateSession(sid,{attendees:att});
 }
 async function deleteSession(id){
   if(!confirm('Delete this session?'))return;
-  await window.FS.deleteSession(id);
+  await window.FS.deleteSession(String(id));
 }
 
 // ============ STUDY CONTEST ============
