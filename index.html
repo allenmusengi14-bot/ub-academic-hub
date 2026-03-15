@@ -36,7 +36,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes bounceIn{0%{opacity:0;transform:scale(.3)}50%{transform:scale(1.05)}70%{transform:scale(.9)}100%{opacity:1;transform:scale(1)}}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes timerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);color:var(--red)}}
+@keyframes timerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);color:var(--red);}}
 
 /* PAGE TRANSITION */
 .page-transition{position:fixed;inset:0;background:linear-gradient(135deg,var(--blue2),var(--purple),var(--pink));
@@ -228,7 +228,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .badge-info{background:var(--blue3);color:var(--blue);border:1px solid #b3d4ff;}
 .badge-purple{background:var(--purple2);color:var(--purple);border:1px solid #d4b8ff;}
 
-/* HOME - UPDATED: Removed GPA panel */
+/* HOME - Updated */
 .home-top-row{margin-bottom:22px;}
 .home-greet-block h2{font-family:'Fraunces',serif;font-size:1.75rem;
   background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
@@ -278,7 +278,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .session-join-btn:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(5,150,105,.3);}
 .session-join-btn.disabled{opacity:.5;cursor:not-allowed;}
 .create-session-modal{max-width:520px;}
-.location-input-group{display:flex;gap:8px;margin-bottom:10px;}
+.location-input-group{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
 .location-preset{background:#fff;border:2px solid var(--border);border-radius:30px;padding:6px 14px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;}
 .location-preset:hover{border-color:var(--blue2);background:var(--blue3);}
 .location-preset.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
@@ -307,7 +307,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .room-participants span{background:var(--blue3);border-radius:30px;padding:3px 8px;font-size:.7rem;font-weight:600;color:var(--blue2);}
 .create-room-form{padding:15px;background:linear-gradient(135deg,#f8faff,#f5f0ff);border-radius:16px;margin-bottom:20px;}
 
-/* STUDY STREAK - Updated with dual timer and calendar */
+/* STUDY STREAK */
 .streak-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:15px;}
 .streak-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--gold3),var(--orange2));padding:8px 15px;border-radius:30px;color:var(--orange);font-weight:700;margin-right:10px;}
 .streak-fire{font-size:1.3rem;}
@@ -360,7 +360,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .session-time{color:var(--muted);font-size:.8rem;}
 .session-duration{font-weight:700;color:var(--purple);}
 
-/* STUDY SQUAD */
+/* STUDY SQUAD (Combined with Sessions) */
 .faculty-tabs{display:flex;overflow-x:auto;gap:8px;padding-bottom:10px;margin-bottom:20px;-webkit-overflow-scrolling:touch;}
 .faculty-tab{padding:8px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;cursor:pointer;font-size:.8rem;font-weight:600;white-space:nowrap;transition:all .2s;}
 .faculty-tab:hover{border-color:var(--blue2);background:var(--blue3);}
@@ -376,7 +376,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .group-stat{font-size:.8rem;}
 .group-stat strong{color:var(--purple);}
 
-/* GPA (keeping but moving to sidebar) */
+/* GPA Tracker */
 .setup-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px;}
 .ig{display:flex;flex-direction:column;gap:6px;}
 .ig label{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
@@ -398,9 +398,6 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
 .stat-card h3{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;opacity:.8;margin-bottom:8px;position:relative;z-index:1;}
 .stat-val{font-family:'Fraunces',serif;font-size:2.8rem;font-weight:900;line-height:1;position:relative;z-index:1;}
 .stat-class{font-size:.76rem;margin-top:7px;opacity:.9;position:relative;z-index:1;}
-
-/* Rest of existing styles remain unchanged... */
-/* (Keeping all existing styles for other components) */
 
 /* STUDY */
 .mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:11px;margin:12px 0;}
@@ -662,7 +659,7 @@ input:checked + .slider:before{transform:translateX(26px);}
 <!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- AUTH (unchanged) -->
+<!-- AUTH -->
 <div id="authScreen">
   <div class="auth-blob" style="width:400px;height:400px;background:rgba(124,58,237,.4);top:-100px;right:-100px;"></div>
   <div class="auth-blob" style="width:300px;height:300px;background:rgba(236,72,153,.3);bottom:-80px;left:-80px;animation-delay:-3s;"></div>
@@ -686,7 +683,6 @@ input:checked + .slider:before{transform:translateX(26px);}
           <input type="checkbox" id="rememberMe"> Remember me
         </label>
       </div>
-      <div id="fsStatus" style="font-size:.75rem;color:var(--muted);text-align:center;margin-bottom:8px;display:none;">⏳ Connecting to server…</div>
       <button class="btn-auth" onclick="doLogin()"><span>Sign In →</span></button>
       <p style="text-align:center;margin-top:12px;"><a href="#" onclick="showForgotPassword()" style="color:var(--blue2);font-size:.8rem;">Forgot Password?</a></p>
     </div>
@@ -705,7 +701,6 @@ input:checked + .slider:before{transform:translateX(26px);}
           <option value="Education">Education</option>
           <option value="Law">Law</option>
           <option value="Medicine">Medicine</option>
-          <option value="Graduate Studies">Graduate Studies</option>
         </select></div>
       <div class="ff"><label>Year of Study</label>
         <select id="rY"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>5th Year</option></select></div>
@@ -725,7 +720,6 @@ input:checked + .slider:before{transform:translateX(26px);}
     <h3>📚 Add a Module</h3>
     <div class="ff"><label>Module Code</label><input id="mC" placeholder="e.g. MEC 301"></div>
     <div class="ff"><label>Module Name</label><input id="mN" placeholder="e.g. Thermodynamics II"></div>
-    <div class="ff"><label>Credits</label><input id="mK" type="number" placeholder="e.g. 3"></div>
     <div class="modal-acts">
       <button class="btn btn-green" onclick="saveMod()">✓ Add Module</button>
       <button class="btn-sec" onclick="closeMod()">Cancel</button>
@@ -827,16 +821,16 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- Setup Profile Modal -->
+<!-- Setup Profile Modal - Fixed to show automatically after registration -->
 <div class="modal-bg" id="setupMod">
   <div class="modal" style="max-width:520px;">
     <div style="text-align:center;margin-bottom:20px;">
       <div style="font-size:2.8rem;margin-bottom:8px;">🎓</div>
       <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:6px;">Welcome to UB Academic Hub!</h3>
-      <p style="color:var(--muted);font-size:.84rem;">Tell us your programme and this semester's modules — this powers everything in the app. You can edit anytime in Profile.</p>
+      <p style="color:var(--muted);font-size:.84rem;">Tell us your programme and this semester's modules — this powers everything in the app.</p>
     </div>
     <div class="ff"><label>Programme / Degree</label>
-      <input id="setupProg" class="req-fi" placeholder="e.g. BSc Mechanical Engineering"></div>
+      <input id="setupProg" class="req-fi" placeholder="e.g. BSc Mechanical Engineering" value=""></div>
     <div class="ff"><label>Current Semester</label>
       <select id="setupSem" class="req-fi"><option>Semester 1</option><option>Semester 2</option></select></div>
     <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:9px;">This Semester's Modules</label>
@@ -907,7 +901,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         <option value="Education">Education</option>
         <option value="Law">Law</option>
         <option value="Medicine">Medicine</option>
-        <option value="Graduate Studies">Graduate Studies</option>
       </select>
     </div>
     <div class="modal-acts">
@@ -917,11 +910,23 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- NEW: Create Study Session Modal -->
+<!-- Create Study Session Modal (Now integrated with Study Squad) -->
 <div class="modal-bg" id="createSessionMod">
   <div class="modal create-session-modal">
     <h3>📅 Create Study Session</h3>
-    <p style="color:var(--muted);font-size:.82rem;margin-bottom:18px;">Schedule a study session with classmates</p>
+    <p style="color:var(--muted);font-size:.82rem;margin-bottom:18px;">Schedule a one-time or recurring study session with classmates</p>
+    
+    <div class="ff">
+      <label>Session Type</label>
+      <div style="display:flex;gap:10px;margin-top:5px;">
+        <label style="display:flex;align-items:center;gap:5px;">
+          <input type="radio" name="sessionType" value="temporary" checked> ⏱️ One-time
+        </label>
+        <label style="display:flex;align-items:center;gap:5px;">
+          <input type="radio" name="sessionType" value="permanent"> 👥 Create Permanent Group
+        </label>
+      </div>
+    </div>
     
     <div class="ff">
       <label>Module</label>
@@ -947,8 +952,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         <option value="60" selected>1 hour</option>
         <option value="90">1 hour 30 minutes</option>
         <option value="120">2 hours</option>
-        <option value="150">2 hours 30 minutes</option>
-        <option value="180">3 hours</option>
       </select>
     </div>
     
@@ -990,7 +993,7 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- NEW: Create Focus Room Modal (Study Together) -->
+<!-- Create Focus Room Modal -->
 <div class="modal-bg" id="createRoomMod">
   <div class="modal create-session-modal">
     <h3>👥 Create Focus Room</h3>
@@ -1091,7 +1094,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         <button class="nav-item" onclick="go('gpa')" id="ni-gpa"><span class="ni">📊</span><span>GPA Tracker</span></button>
         <button class="nav-item" onclick="go('study')" id="ni-study"><span class="ni">🎓</span><span>Study Hub</span></button>
         <button class="nav-item" onclick="go('streak')" id="ni-streak"><span class="ni">🔥</span><span>Study Streak</span></button>
-        <button class="nav-item" onclick="go('sessions')" id="ni-sessions"><span class="ni">📅</span><span>Study Sessions</span></button>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">🤝 PeerBridge</div>
@@ -1103,7 +1105,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         <div class="nav-section-label">👥 Community</div>
         <button class="nav-item" onclick="go('squad')" id="ni-squad"><span class="ni">📅</span><span>Study Squad</span></button>
         <button class="nav-item" onclick="go('rooms')" id="ni-rooms"><span class="ni">👥</span><span>Focus Rooms</span></button>
-        <button class="nav-item" onclick="go('contest')" id="ni-contest"><span class="ni">🏆</span><span>Study Contest</span></button>
         <button class="nav-item" onclick="go('points')" id="ni-points"><span class="ni">⭐</span><span>Earn Points</span></button>
       </div>
       <div class="nav-section">
@@ -1132,7 +1133,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       font-size:1.1rem;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);
       display:none;align-items:center;justify-content:center;transition:all .2s;">▶</button>
 
-    <!-- HOME (UPDATED: Removed GPA panel) -->
+    <!-- HOME -->
     <div class="page on" id="pg-home">
       <div class="home-top-row">
         <div class="home-greet-block">
@@ -1141,7 +1142,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
-      <!-- UPDATED: Only Study Streak and Points (GPA removed) -->
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:22px;">
         <div class="stat-card" style="background:linear-gradient(135deg,#7c3aed,#ec4899);padding:15px;">
           <h3>Study Streak</h3>
@@ -1153,9 +1153,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
-      <!-- SECTION CARDS (unchanged) -->
       <div style="display:grid;gap:16px;margin-bottom:22px;">
-        <!-- Academic Tools -->
         <div class="home-section-card" style="--sc1:#2563eb;--sc2:#7c3aed;">
           <div class="hsc-label">📚 Academic Tools</div>
           <div class="hsc-grid">
@@ -1177,7 +1175,6 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
         </div>
 
-        <!-- PeerBridge (unchanged) -->
         <div class="home-section-card" style="--sc1:#f59e0b;--sc2:#ec4899;">
           <div class="hsc-label">🤝 PeerBridge</div>
           <div class="hsc-grid">
@@ -1199,14 +1196,13 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
         </div>
 
-        <!-- Community -->
         <div class="home-section-card" style="--sc1:#0d9488;--sc2:#059669;">
           <div class="hsc-label">👥 Community</div>
           <div class="hsc-grid">
             <div class="hsc-item" onclick="go('squad')">
               <div class="hsc-icon" style="background:linear-gradient(135deg,#ccfbf1,#d1fae5)">📅</div>
               <div class="hsc-title">Study Squad</div>
-              <div class="hsc-sub">Join permanent study groups by faculty</div>
+              <div class="hsc-sub">Join study groups & sessions</div>
             </div>
             <div class="hsc-item" onclick="go('rooms')">
               <div class="hsc-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">👥</div>
@@ -1221,57 +1217,9 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
         </div>
       </div>
-
-      <!-- CAREER SPOTLIGHT (unchanged) -->
-      <div class="career-panel">
-        <div class="career-panel-header">
-          <div>
-            <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;color:#fff;margin-bottom:4px;">🚀 Your Career Spotlight</h3>
-            <p style="color:rgba(255,255,255,.65);font-size:.83rem;" id="careerSubtitle">Curated videos and insights for your field</p>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
-            <button onclick="scrollCareer(-1)" class="career-scroll-btn" title="Scroll left">‹</button>
-            <button onclick="scrollCareer(1)" class="career-scroll-btn" title="Scroll right">›</button>
-            <button class="btn btn-sm" onclick="loadCareerVideos()" id="careerRefreshBtn"
-              style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);">
-              🔄 Refresh
-            </button>
-          </div>
-        </div>
-        <div id="careerVideos" class="career-videos-scroll">
-          <div class="career-loading">
-            <div class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div>
-            <p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:12px;">Loading your career content…</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- STUDY METHODS (unchanged) -->
-      <div class="card" style="border-top:4px solid var(--purple);">
-        <div class="card-title" style="margin-bottom:6px;">🧠 Study Methods</div>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:16px;">Pick a method to learn how to use it — then ask the AI any follow-up questions.</p>
-        <div class="tips-grid" id="tipsGrid"></div>
-        <div id="tipDetail" class="hidden" style="margin-top:20px;border-top:2px solid var(--border);padding-top:18px;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-            <div id="tipDetailIcon" style="font-size:2rem;"></div>
-            <h3 id="tipDetailTitle" style="font-family:'Fraunces',serif;font-size:1.15rem;"></h3>
-            <button onclick="closeTipDetail()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;">✕</button>
-          </div>
-          <div id="tipDetailBody" style="font-size:.88rem;color:var(--text);line-height:1.75;margin-bottom:18px;"></div>
-          <div style="background:linear-gradient(135deg,#f8faff,#f5f0ff);border-radius:14px;padding:16px;">
-            <p style="font-size:.8rem;font-weight:700;color:var(--purple);margin-bottom:10px;">💬 Ask anything about this method</p>
-            <div id="tipQAHistory" style="display:grid;gap:10px;margin-bottom:12px;max-height:280px;overflow-y:auto;"></div>
-            <div style="display:flex;gap:9px;">
-              <input id="tipQuestion" class="req-fi" placeholder="e.g. How do I apply this to exam prep?" style="flex:1;"
-                onkeydown="if(event.key==='Enter')askTipQuestion()">
-              <button class="btn btn-purple btn-sm" onclick="askTipQuestion()" id="tipAskBtn">Ask</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- GPA TRACKER (unchanged) -->
+    <!-- GPA TRACKER -->
     <div class="page" id="pg-gpa">
       <div class="page-header"><h1>📊 GPA Tracker</h1><p>Track your grades and forecast your CGPA</p></div>
       
@@ -1328,7 +1276,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- STUDY HUB (unchanged) -->
+    <!-- STUDY HUB -->
     <div class="page" id="pg-study">
       <div class="page-header"><h1>🎓 Study Hub</h1><p>AI-powered resource finder for your enrolled modules</p></div>
       <div class="card">
@@ -1357,11 +1305,10 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- STUDY STREAK (UPDATED: Dual timer + Calendar) -->
+    <!-- STUDY STREAK -->
     <div class="page" id="pg-streak">
       <div class="page-header"><h1>🔥 Study Streak</h1><p>Track your study time with dual timers and calendar view</p></div>
 
-      <!-- Streak Stats -->
       <div class="streak-header">
         <div class="streak-badge">
           <span class="streak-fire">🔥</span>
@@ -1380,9 +1327,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
-      <!-- Dual Timer Section -->
       <div class="timer-section">
-        <!-- Pomodoro Timer -->
         <div class="timer-card">
           <div class="timer-card-title">
             <i>🍅</i> Pomodoro Timer
@@ -1414,7 +1359,6 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
         </div>
         
-        <!-- Stopwatch / Count Up Timer -->
         <div class="timer-card">
           <div class="timer-card-title">
             <i>⏱️</i> Stopwatch (Count Up)
@@ -1439,7 +1383,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
-      <!-- Calendar Section (YPT-style) -->
       <div class="calendar-section">
         <div class="calendar-header">
           <div class="calendar-month" id="calendarMonthYear">May 2025</div>
@@ -1478,7 +1421,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
-      <!-- Log Study Session (unchanged) -->
       <div class="session-form">
         <h4 style="margin-bottom:15px;">📝 Log Study Session</h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">
@@ -1497,14 +1439,8 @@ input:checked + .slider:before{transform:translateX(26px);}
             <button class="btn btn-green btn-block" onclick="logStudySession()">✓ Log Session</button>
           </div>
         </div>
-        <div style="margin-top:10px;">
-          <label style="display:flex;align-items:center;gap:8px;">
-            <input type="checkbox" id="recordAudio"> 🎤 Record audio notes (optional)
-          </label>
-        </div>
       </div>
 
-      <!-- Forecast Card (unchanged) -->
       <div class="forecast-card">
         <div class="forecast-title">📊 Study Forecast</div>
         <div class="forecast-value" id="forecastText">On track to reach 50 hours this month</div>
@@ -1514,7 +1450,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         <p style="font-size:.75rem;color:var(--muted);margin-top:5px;" id="monthlyGoal">0/50 hours this month</p>
       </div>
 
-      <!-- Session History (unchanged) -->
       <div class="card">
         <div class="card-title">Recent Study Sessions</div>
         <div id="sessionHistory" class="session-history">
@@ -1522,7 +1457,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
-      <!-- Achievements (unchanged) -->
       <div class="card">
         <div class="card-title">🏆 Achievements</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;" id="achievementsList">
@@ -1533,33 +1467,40 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- NEW: STUDY SESSIONS PAGE -->
-    <div class="page" id="pg-sessions">
-      <div class="page-header">
-        <h1>📅 Study Sessions</h1>
-        <p>Schedule and join study sessions with classmates</p>
+    <!-- STUDY SQUAD (Combined with Sessions) -->
+    <div class="page" id="pg-squad">
+      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b,#2d1b69);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-20px;top:-20px;font-size:6rem;opacity:.08;">👥</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">📅 Study Squad</h2>
+        <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Join study groups and sessions. Create permanent groups for ongoing collaboration.</p>
       </div>
-      
-      <div class="sessions-header">
-        <div class="sessions-tabs">
-          <button class="session-tab active" onclick="sessionsTab('all', this)">All Sessions</button>
-          <button class="session-tab" onclick="sessionsTab('my', this)">My Sessions</button>
-        </div>
+
+      <!-- Action Buttons -->
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
         <button class="btn btn-blue" onclick="document.getElementById('createSessionMod').classList.add('on')">
-          ➕ Create Session
+          📅 Create Study Session
+        </button>
+        <button class="btn btn-purple" onclick="document.getElementById('createGroupMod').classList.add('on')">
+          👥 Create Permanent Group
         </button>
       </div>
-      
-      <!-- Faculty filter badge (shows current filter) -->
-      <div class="faculty-filter-badge" id="facultyFilterBadge">
-        📍 Showing: All Faculties
-        <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>
+
+      <!-- Tabs for Sessions vs Groups -->
+      <div class="sessions-header">
+        <div class="sessions-tabs">
+          <button class="session-tab active" onclick="squadTab('sessions', this)">📅 Study Sessions</button>
+          <button class="session-tab" onclick="squadTab('groups', this)">👥 Permanent Groups</button>
+        </div>
+        <div class="faculty-filter-badge" id="squadFilterBadge">
+          📍 Showing: All
+          <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>
+        </div>
       </div>
-      
+
       <!-- Search -->
       <div class="session-search">
-        <input type="text" id="sessionSearch" placeholder="Search by module, topic or location..." oninput="filterSessions()">
-        <select id="sessionFacultyFilter" class="req-fi" style="width:auto;min-width:150px;" onchange="filterSessions()">
+        <input type="text" id="squadSearch" placeholder="Search by module, topic or group name..." oninput="filterSquad()">
+        <select id="squadFacultyFilter" class="req-fi" style="width:auto;min-width:150px;" onchange="filterSquad()">
           <option value="">All Faculties</option>
           <option value="Engineering & Technology">Engineering</option>
           <option value="Science">Science</option>
@@ -1571,62 +1512,19 @@ input:checked + .slider:before{transform:translateX(26px);}
           <option value="Medicine">Medicine</option>
         </select>
       </div>
-      
-      <!-- Note about sharing -->
-      <div class="session-note">
-        <i>ℹ️</i>
-        <span>Sessions are visible to all students. Share the app link with classmates to coordinate sessions!</span>
+
+      <!-- Sessions Container (visible by default) -->
+      <div id="sessionsContainer">
+        <div class="empty"><div class="ei">📅</div><p>No study sessions yet. Create one!</p></div>
       </div>
-      
-      <!-- Sessions Container -->
-      <div id="sessionsList">
-        <div class="empty"><div class="ei">📅</div><p>No study sessions yet. Be the first to create one!</p></div>
+
+      <!-- Groups Container (hidden by default) -->
+      <div id="groupsContainer" class="hidden">
+        <div class="empty"><div class="ei">👥</div><p>No groups yet. Create one!</p></div>
       </div>
     </div>
 
-    <!-- STUDY SQUAD (existing) -->
-    <div class="page" id="pg-squad">
-      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b,#2d1b69);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-20px;top:-20px;font-size:6rem;opacity:.08;">👥</div>
-        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">📅 Study Squad</h2>
-        <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Join permanent study groups by faculty. Create or join groups and chat anytime.</p>
-      </div>
-
-      <!-- Faculty Tabs -->
-      <div class="faculty-tabs" id="facultyTabs">
-        <span class="faculty-tab active" onclick="filterGroups('all', this)">All Groups</span>
-        <span class="faculty-tab" onclick="filterGroups('Engineering & Technology', this)">Engineering</span>
-        <span class="faculty-tab" onclick="filterGroups('Science', this)">Science</span>
-        <span class="faculty-tab" onclick="filterGroups('Business', this)">Business</span>
-        <span class="faculty-tab" onclick="filterGroups('Social Sciences', this)">Social Sciences</span>
-        <span class="faculty-tab" onclick="filterGroups('Humanities', this)">Humanities</span>
-        <span class="faculty-tab" onclick="filterGroups('Education', this)">Education</span>
-        <span class="faculty-tab" onclick="filterGroups('Law', this)">Law</span>
-        <span class="faculty-tab" onclick="filterGroups('Medicine', this)">Medicine</span>
-      </div>
-
-      <!-- Action Buttons -->
-      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
-        <button class="btn btn-blue" onclick="document.getElementById('createGroupMod').classList.add('on')">
-          ➕ Create Permanent Group
-        </button>
-        <button class="btn btn-purple" onclick="showMyGroups()">
-          👥 My Groups
-        </button>
-      </div>
-
-      <!-- Search -->
-      <div class="card" style="padding:13px 17px;margin-bottom:14px;">
-        <input id="groupSearch" type="text" placeholder="Search groups by name or module…" oninput="filterGroups()" class="req-fi">
-      </div>
-
-      <!-- Groups Container -->
-      <div id="groupsList">
-        <div class="empty"><div class="ei">👥</div><p>No groups yet. Be the first to create one!</p></div>
-      </div>
-    </div>
-
-    <!-- NEW: FOCUS ROOMS (Study Together) -->
+    <!-- FOCUS ROOMS -->
     <div class="page" id="pg-rooms">
       <div class="study-rooms-header">
         <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">👥 Focus Rooms</h2>
@@ -1638,7 +1536,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
       
-      <!-- Active Rooms -->
       <div style="margin-bottom:20px;">
         <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;margin-bottom:12px;">🟢 Active Rooms</h3>
         <div id="activeRooms" class="rooms-grid">
@@ -1646,7 +1543,6 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
       
-      <!-- How it works -->
       <div class="card">
         <div class="card-title">✨ How Focus Rooms Work</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;">
@@ -1669,14 +1565,14 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- PEER (existing) -->
+    <!-- PEERBRIDGE - Get Help (Fixed to hide own requests and handle taken status) -->
     <div class="page" id="pg-peer">
       <div class="pb-banner">
         <div><h2>🤝 PeerBridge</h2><p>Post a help request and set your own price — connect with peer tutors at UB</p></div>
         <div class="pb-rate-badge"><div class="pb-rate-amt">P15+</div><div class="pb-rate-lbl">Student sets the price</div></div>
       </div>
       <div class="seg-tabs">
-        <button class="seg-tab on" onclick="peerTab('browse')" id="pt-browse">🔍 Browse</button>
+        <button class="seg-tab on" onclick="peerTab('browse')" id="pt-browse">🔍 Browse Requests</button>
         <button class="seg-tab" onclick="peerTab('post')" id="pt-post">✏️ Post Request</button>
         <button class="seg-tab" onclick="peerTab('mine')" id="pt-mine">📋 My Requests</button>
       </div>
@@ -1685,11 +1581,12 @@ input:checked + .slider:before{transform:translateX(26px);}
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <input id="pSrch" type="text" placeholder="Search module or topic…" oninput="renderReqs()" class="req-fi" style="flex:1;min-width:140px;">
             <select id="pFilt" onchange="renderReqs()" class="req-fi" style="width:auto;">
-              <option value="all">All</option><option value="open">Open Only</option>
+              <option value="all">All Requests</option>
+              <option value="open">Open Only</option>
             </select>
           </div>
         </div>
-        <div id="reqList"><div class="empty"><div class="ei">🔍</div><p>No requests yet. Post one!</p></div></div>
+        <div id="reqList"><div class="empty"><div class="ei">🔍</div><p>No open requests available.</p></div></div>
       </div>
       <div id="peer-post" class="hidden">
         <div class="card">
@@ -1709,13 +1606,8 @@ input:checked + .slider:before{transform:translateX(26px);}
                   <option value="0.5">30 Minutes</option>
                   <option value="0.75">45 Minutes</option>
                   <option value="1">1 Hour</option>
-                  <option value="1.25">1h 15m</option>
                   <option value="1.5">1h 30m</option>
-                  <option value="1.75">1h 45m</option>
                   <option value="2">2 Hours</option>
-                  <option value="2.25">2h 15m</option>
-                  <option value="2.5">2h 30m</option>
-                  <option value="2.75">2h 45m</option>
                   <option value="3">3 Hours</option>
                 </select>
               </div>
@@ -1728,16 +1620,13 @@ input:checked + .slider:before{transform:translateX(26px);}
                 </select>
               </div>
             </div>
-            <div style="margin-top:6px;font-weight:700;">
-              Estimated Cost: <span id="pCost">P10</span>
-            </div>
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">💰 Your Offer (Pula)</label>
                 <div style="position:relative;">
                   <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--green);">P</span>
                   <input id="pPrice" type="number" min="15" class="req-fi" placeholder="Min. 15" style="padding-left:28px;" oninput="validatePrice()">
                 </div>
-                <p style="font-size:.72rem;color:var(--muted);margin-top:4px;">Minimum P15 · No limit</p>
+                <p style="font-size:.72rem;color:var(--muted);margin-top:4px;">Minimum P15</p>
               </div>
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Urgency</label>
                 <select id="pUrg" class="req-fi"><option value="flexible">Flexible</option><option value="today">Today</option><option value="asap">ASAP</option></select></div>
@@ -1753,7 +1642,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- TUTORS (existing) -->
+    <!-- TUTORS -->
     <div class="page" id="pg-tutors">
       <div class="page-header"><h1>⭐ Find a Tutor</h1><p>Browse rated peer tutors and connect via WhatsApp</p></div>
       <div class="card" style="padding:14px 18px;margin-bottom:14px;">
@@ -1769,18 +1658,17 @@ input:checked + .slider:before{transform:translateX(26px);}
             <option>Education</option>
             <option>Law</option>
             <option>Medicine</option>
-            <option>Graduate Studies</option>
           </select>
         </div>
       </div>
       <div id="tutorList"><div class="empty"><div class="ei">⭐</div><p>No tutors yet.<br>Go to <strong>Become a Tutor</strong> to be first!</p></div></div>
     </div>
 
-    <!-- BECOME (existing) -->
+    <!-- BECOME TUTOR -->
     <div class="page" id="pg-become">
       <div class="become-hero">
         <h2>🎯 Become a Peer Tutor</h2>
-        <p>Share your knowledge, help fellow students, and earn P50 per hour.</p>
+        <p>Share your knowledge, help fellow students, and earn P20 per hour.</p>
       </div>
       <div id="alreadyTutor" class="hidden">
         <div class="green-banner">
@@ -1810,7 +1698,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- PROFILE (existing) -->
+    <!-- PROFILE - Fixed to show data correctly -->
     <div class="page" id="pg-profile">
       <div class="profile-hero">
         <div class="profile-av-big" id="profAv">A</div>
@@ -1829,6 +1717,7 @@ input:checked + .slider:before{transform:translateX(26px);}
           <div class="pd-row"><span>Email</span><strong id="pdEmail">—</strong></div>
           <div class="pd-row"><span>Year of Study</span><strong id="pdYear">—</strong></div>
           <div class="pd-row"><span>Faculty</span><strong id="pdFaculty">—</strong></div>
+          <div class="pd-row"><span>Programme</span><strong id="pdProgramme">—</strong></div>
         </div>
       </div>
       <div class="card" style="border-top:4px solid var(--blue2)">
@@ -1836,7 +1725,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">This info is used across GPA Tracker, Study Hub, Get Help and Study Squad.</p>
         <div class="ff">
           <label>Programme / Degree</label>
-          <input id="profProgramme" class="req-fi" placeholder="e.g. BSc Mechanical Engineering">
+          <input id="profProgramme" class="req-fi" placeholder="e.g. BSc Mechanical Engineering" value="">
         </div>
         <div class="ff">
           <label>Current Semester</label>
@@ -1867,7 +1756,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- SETTINGS (existing) -->
+    <!-- SETTINGS -->
     <div class="page" id="pg-settings">
       <div class="page-header"><h1>⚙️ Settings</h1><p>Customize your experience</p></div>
 
@@ -1925,106 +1814,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- STUDY CONTEST (existing) -->
-    <div class="page" id="pg-contest">
-      <div style="background:linear-gradient(135deg,#92400e,#b45309,#d97706);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-10px;top:-10px;font-size:7rem;opacity:.1;">🏆</div>
-        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">🏆 Study Contest</h2>
-        <p style="color:rgba(255,255,255,.75);font-size:.88rem;">Submit your test score, verified by your test script with your Student ID. Top 3 win prizes!</p>
-      </div>
-
-      <div class="seg-tabs">
-        <button class="seg-tab on" onclick="contestTab('leaderboard')" id="ct-leaderboard">🏅 Leaderboard</button>
-        <button class="seg-tab" onclick="contestTab('submit')" id="ct-submit">📤 Submit Score</button>
-        <button class="seg-tab" onclick="contestTab('active')" id="ct-active">📋 Active Contests</button>
-        <button class="seg-tab" onclick="contestTab('create')" id="ct-create">➕ Create Contest</button>
-      </div>
-
-      <div id="ct-leaderboard-panel">
-        <div class="ff" style="margin-bottom:14px;">
-          <select id="ctFilter" class="req-fi" onchange="renderLeaderboard()">
-            <option value="">— All Contests —</option>
-          </select>
-        </div>
-        <div id="leaderboardList"><div class="empty"><div class="ei">🏅</div><p>No submissions yet.</p></div></div>
-      </div>
-
-      <div id="ct-submit-panel" class="hidden">
-        <div class="card">
-          <div class="card-title">📤 Submit Your Test Score</div>
-          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your test script must clearly show your <strong>Student ID</strong> and the score. Upload a clear photo or scan.</p>
-          <div style="display:grid;gap:13px;">
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Contest</label>
-              <select id="submitContestId" class="req-fi"><option value="">— Select contest —</option></select>
-            </div>
-            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Your Score (%)</label>
-                <input id="submitScore" type="number" min="0" max="100" class="req-fi" placeholder="e.g. 78">
-              </div>
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test / Module</label>
-                <input id="submitModule" class="req-fi" placeholder="e.g. MEC 301 Test 2">
-              </div>
-            </div>
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script <span style="color:var(--red);">*</span></label>
-              <div class="upload-zone" onclick="document.getElementById('scriptUpload').click()" style="cursor:pointer;">
-                <input type="file" id="scriptUpload" accept="image/*,.pdf" onchange="handleScriptUpload(event)" style="display:none;">
-                <div style="font-size:2rem;margin-bottom:6px;">📄</div>
-                <p style="font-size:.84rem;font-weight:600;">Click to upload your test script</p>
-                <p style="font-size:.73rem;color:var(--muted);margin-top:3px;">Photo or PDF — must show your Student ID clearly</p>
-              </div>
-              <div id="scriptDone" class="hidden" style="margin-top:8px;">
-                <span style="background:var(--green2);color:var(--green);border:1px solid var(--green3);border-radius:8px;padding:5px 12px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Script uploaded</span>
-              </div>
-            </div>
-            <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px 14px;font-size:.8rem;color:#92400e;">
-              ⚠️ <strong>Honesty pledge:</strong> By submitting, you confirm this is your genuine test result. False submissions will result in disqualification.
-            </div>
-            <button class="btn btn-gold" style="width:fit-content;" onclick="submitScore()">🏆 Submit My Score</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="ct-active-panel" class="hidden">
-        <div id="contestList"><div class="empty"><div class="ei">📋</div><p>No active contests yet.</p></div></div>
-      </div>
-
-      <div id="ct-create-panel" class="hidden">
-        <div class="card">
-          <div class="card-title">➕ Create a Study Contest</div>
-          <div style="display:grid;gap:13px;">
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Contest Name</label>
-              <input id="ctName" class="req-fi" placeholder="e.g. MEC 301 Test 1 Showdown">
-            </div>
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Module / Subject</label>
-              <select id="ctMod" class="req-fi"><option value="">— Select module —</option></select>
-            </div>
-            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📅 Deadline</label>
-                <input id="ctDeadline" type="date" class="req-fi">
-              </div>
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">🏆 Prize Description</label>
-                <input id="ctPrize" class="req-fi" placeholder="e.g. Bragging rights + P50 airtime">
-              </div>
-            </div>
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Description (optional)</label>
-              <textarea id="ctDesc" class="req-fi" placeholder="What test is this for? Any rules?" style="min-height:65px;resize:vertical;"></textarea>
-            </div>
-            <button class="btn btn-gold" style="width:fit-content;" onclick="createContest()">🚀 Create Contest</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EARN POINTS (existing) -->
+    <!-- EARN POINTS -->
     <div class="page" id="pg-points">
       <div style="background:linear-gradient(135deg,#78350f,#b45309,#f59e0b);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
         <div style="position:absolute;right:-10px;top:-10px;font-size:7rem;opacity:.1;">⭐</div>
@@ -2043,11 +1833,6 @@ input:checked + .slider:before{transform:translateX(26px);}
       <div class="card" style="margin-bottom:16px;">
         <div class="card-title">📊 How Points Work</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:4px;">
-          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
-            <div style="font-size:1.3rem;">😔</div>
-            <div style="font-weight:800;font-size:.9rem;color:#92400e;">Below 40%</div>
-            <div style="font-size:.75rem;color:var(--muted);">0 pts</div>
-          </div>
           <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
             <div style="font-size:1.3rem;">📗</div>
             <div style="font-weight:800;font-size:.9rem;color:#92400e;">40–49%</div>
@@ -2079,8 +1864,7 @@ input:checked + .slider:before{transform:translateX(26px);}
             <div style="font-size:.75rem;color:var(--muted);">30 pts</div>
           </div>
         </div>
-        <p style="font-size:.77rem;color:var(--muted);margin-top:12px;">⚡ <strong>Most Improved:</strong> If your latest mark is 10%+ higher than your previous submission on the same module, you earn <strong>+5 bonus points</strong>.</p>
-        <p style="font-size:.77rem;color:var(--muted);margin-top:5px;">👥 <strong>Group Study Bonus:</strong> Studying in Focus Rooms gives you 2x points!</p>
+        <p style="font-size:.77rem;color:var(--muted);margin-top:12px;">⚡ <strong>Most Improved:</strong> +5 bonus points if your mark improves by 10%+.</p>
       </div>
 
       <div class="seg-tabs">
@@ -2102,7 +1886,6 @@ input:checked + .slider:before{transform:translateX(26px);}
               <option>Education</option>
               <option>Law</option>
               <option>Medicine</option>
-              <option>Graduate Studies</option>
             </select>
             <div style="font-size:.78rem;color:var(--muted);">Resets: <strong id="ptsResetDate"></strong></div>
           </div>
@@ -2113,7 +1896,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       <div id="pts-submit-panel" class="hidden">
         <div class="card">
           <div class="card-title">📤 Submit Your Test Score</div>
-          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your script must clearly show your <strong>Student ID</strong> and the mark. Upload a clear photo or scan.</p>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your script must clearly show your <strong>Student ID</strong> and the mark.</p>
           <div style="display:grid;gap:13px;">
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
               <div>
@@ -2121,8 +1904,8 @@ input:checked + .slider:before{transform:translateX(26px);}
                 <select id="ptsModule" class="req-fi"><option value="">— Select module —</option></select>
               </div>
               <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test / Assessment</label>
-                <input id="ptsTestName" class="req-fi" placeholder="e.g. Test 1, Assignment 2">
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test Name</label>
+                <input id="ptsTestName" class="req-fi" placeholder="e.g. Test 1">
               </div>
             </div>
             <div>
@@ -2131,12 +1914,11 @@ input:checked + .slider:before{transform:translateX(26px);}
               <div id="ptsPreview" style="margin-top:8px;font-size:.85rem;font-weight:700;min-height:20px;"></div>
             </div>
             <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script <span style="color:var(--red);">*</span></label>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script</label>
               <div class="upload-zone" onclick="document.getElementById('ptsScript').click()" style="cursor:pointer;">
                 <input type="file" id="ptsScript" accept="image/*,.pdf" onchange="handlePtsScript(event)" style="display:none;">
                 <div style="font-size:2rem;margin-bottom:6px;">📄</div>
-                <p style="font-size:.84rem;font-weight:600;">Click to upload your test script</p>
-                <p style="font-size:.73rem;color:var(--muted);margin-top:3px;">Must show your Student ID clearly</p>
+                <p style="font-size:.84rem;font-weight:600;">Click to upload</p>
               </div>
               <div id="ptsScriptDone" class="hidden" style="margin-top:8px;">
                 <span style="background:var(--green2);color:var(--green);border:1px solid var(--green3);border-radius:8px;padding:5px 12px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Script uploaded</span>
@@ -2156,7 +1938,7 @@ input:checked + .slider:before{transform:translateX(26px);}
 </div>
 
 <script type="module">
-// ── Firebase imports ─────────────────────────────────────────────
+// Firebase imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, collection,
          addDoc, getDocs, deleteDoc, onSnapshot, query, orderBy, serverTimestamp,
@@ -2174,7 +1956,7 @@ const firebaseConfig = {
 const _app = initializeApp(firebaseConfig);
 const _db  = getFirestore(_app);
 
-// ── Firestore helpers ────────────────────────────────────────────
+// Firestore helpers
 const FS = {
   async getUser(id){ const s=await getDoc(doc(_db,'users',id)); return s.exists()?s.data():null; },
   async setUser(id,data){ await setDoc(doc(_db,'users',id),data,{merge:true}); },
@@ -2188,11 +1970,6 @@ const FS = {
   async deleteSession(id){ await deleteDoc(doc(_db,'sessions',id)); },
   async updateSession(id,data){ await updateDoc(doc(_db,'sessions',id),data); },
   onSessions(cb){ return onSnapshot(query(collection(_db,'sessions'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
-  async addContest(data){ return await addDoc(collection(_db,'contests'),{...data,at:serverTimestamp()}); },
-  async deleteContest(id){ await deleteDoc(doc(_db,'contests',id)); },
-  onContests(cb){ return onSnapshot(query(collection(_db,'contests'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
-  async addScore(data){ return await addDoc(collection(_db,'scores'),{...data,at:serverTimestamp()}); },
-  onScores(cb){ return onSnapshot(query(collection(_db,'scores'),orderBy('score','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
   async getAllUsers(){ const s=await getDocs(collection(_db,'users')); const r={}; s.docs.forEach(d=>r[d.id]=d.data()); return r; },
   async addPoint(data){ return await addDoc(collection(_db,'points'),{...data,at:serverTimestamp()}); },
   async getPoints(){ const s=await getDocs(query(collection(_db,'points'),orderBy('at','desc'))); return s.docs.map(d=>({id:d.id,...d.data()})); },
@@ -2212,13 +1989,13 @@ const FS = {
   async sendGroupMsg(groupId,data){ return await addDoc(collection(_db,'groupChats',groupId,'messages'),{...data,at:serverTimestamp()}); },
   onGroupMsgs(groupId,cb){ return onSnapshot(query(collection(_db,'groupChats',groupId,'messages'),orderBy('at','asc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
   
-  // NEW: Study Sessions
+  // Study Sessions Posts
   async addStudySessionPost(data){ return await addDoc(collection(_db,'studySessionsPosts'),{...data,at:serverTimestamp()}); },
   async deleteStudySessionPost(id){ await deleteDoc(doc(_db,'studySessionsPosts',id)); },
   async updateStudySessionPost(id,data){ await updateDoc(doc(_db,'studySessionsPosts',id),data); },
   onStudySessionsPosts(cb){ return onSnapshot(query(collection(_db,'studySessionsPosts'),orderBy('dateTime','asc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
   
-  // NEW: Focus Rooms
+  // Focus Rooms
   async addFocusRoom(data){ return await addDoc(collection(_db,'focusRooms'),{...data,at:serverTimestamp(),participants:[data.createdBy]}); },
   async deleteFocusRoom(id){ await deleteDoc(doc(_db,'focusRooms',id)); },
   async updateFocusRoom(id,data){ await updateDoc(doc(_db,'focusRooms',id),data); },
@@ -2234,7 +2011,7 @@ document.dispatchEvent(new CustomEvent('fs-ready'));
 </script>
 
 <script>
-// ── Toast Notification System ───────────────────────────────────
+// Toast Notification System
 function showToast(title, message, type = 'info', duration = 5000) {
   const container = document.getElementById('toastContainer');
   const toast = document.createElement('div');
@@ -2260,7 +2037,7 @@ function showToast(title, message, type = 'info', duration = 5000) {
   setTimeout(() => toast.remove(), duration);
 }
 
-// ── Loading States ──────────────────────────────────────────────
+// Loading States
 function showLoading(msg = 'Loading...') {
   let el = document.getElementById('_loadOverlay');
   if (!el) {
@@ -2280,7 +2057,7 @@ function hideLoading() {
   if (el) el.style.display = 'none';
 }
 
-// ── Local Storage Helpers ───────────────────────────────────────
+// Local Storage Helpers
 function saveToLocal(key, data) {
   try {
     localStorage.setItem(`ub_${key}`, JSON.stringify(data));
@@ -2298,77 +2075,24 @@ function loadFromLocal(key, defaultValue = null) {
   }
 }
 
-// ── AUTH ────────────────────────────────────────────────────────
-let _users = {}, _requests = [], _sessions = [], _contests = [], _scores = [], _ratings = {}, _points = [], _studySessions = [], _groups = [], _studySessionsPosts = [], _focusRooms = [];
+// Global variables
+let _users = {}, _requests = [], _sessions = [], _ratings = {}, _points = [], _studySessions = [], _groups = [], _studySessionsPosts = [], _focusRooms = [];
 let CU = null, CUK = null, mods = [], selMod = null, rTarget = null, rStars = 0, rTags = [];
+
 const PTITLES = {
   home: 'Home', gpa: 'GPA Tracker', study: 'Study Hub',
-  streak: 'Study Streak', sessions: 'Study Sessions', peer: 'Get Help', 
+  streak: 'Study Streak', peer: 'Get Help', 
   tutors: 'Find a Tutor', become: 'Become a Tutor', profile: 'My Profile', 
-  squad: 'Study Squad', rooms: 'Focus Rooms', contest: 'Study Contest', 
-  points: 'Earn Points', settings: 'Settings'
+  squad: 'Study Squad', rooms: 'Focus Rooms', points: 'Earn Points', settings: 'Settings'
 };
 
-// ── Expanded Quotes ─────────────────────────────────────
 const QUOTES = [
   '"The secret of getting ahead is getting started." — Mark Twain',
   '"An investment in knowledge pays the best interest." — Benjamin Franklin',
   '"Education is the most powerful weapon to change the world." — Nelson Mandela',
-  '"The beautiful thing about learning is no one can take it away from you." — B.B. King',
   '"Success is the sum of small efforts, repeated day in and day out." — Robert Collier',
   '"Believe you can and you\'re halfway there." — Theodore Roosevelt',
-  '"Push yourself, because no one else is going to do it for you." — Unknown',
-  '"Great things never came from comfort zones." — Unknown',
-  '"The expert in anything was once a beginner." — Helen Hayes',
-  '"Don\'t watch the clock; do what it does. Keep going." — Sam Levenson',
-  '"The future belongs to those who believe in the beauty of their dreams." — Eleanor Roosevelt',
-  '"It always seems impossible until it\'s done." — Nelson Mandela',
-  '"Success is not final, failure is not fatal: it is the courage to continue that counts." — Winston Churchill',
-  '"Your time is limited, don\'t waste it living someone else\'s life." — Steve Jobs',
-  '"The only way to do great work is to love what you do." — Steve Jobs',
-  '"Strive not to be a success, but rather to be of value." — Albert Einstein',
-  '"The mind is not a vessel to be filled, but a fire to be kindled." — Plutarch',
-  '"Learning never exhausts the mind." — Leonardo da Vinci',
-  '"The more that you read, the more things you will know. The more that you learn, the more places you\'ll go." — Dr. Seuss',
-  '"Education is the passport to the future, for tomorrow belongs to those who prepare for it today." — Malcolm X',
-  '"The roots of education are bitter, but the fruit is sweet." — Aristotle',
-  '"Intelligence plus character — that is the goal of true education." — Martin Luther King Jr.',
-  '"The capacity to learn is a gift; the ability to learn is a skill; the willingness to learn is a choice." — Brian Herbert',
-  '"Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing." — William Arthur Ward',
-  '"The difference between ordinary and extraordinary is that little extra." — Jimmy Johnson',
-  '"Excellence is not a skill. It is an attitude." — Ralph Marston',
-  '"The only place where success comes before work is in the dictionary." — Vidal Sassoon',
-  '"There are no shortcuts to any place worth going." — Beverly Sills',
-  '"The best way to predict your future is to create it." — Abraham Lincoln',
-  '"Don\'t let what you cannot do interfere with what you can do." — John Wooden',
-  '"Start where you are. Use what you have. Do what you can." — Arthur Ashe',
-  '"It does not matter how slowly you go as long as you do not stop." — Confucius',
-  '"The secret of getting ahead is getting started." — Mark Twain',
-  '"Quality is not an act, it is a habit." — Aristotle',
-  '"The journey of a thousand miles begins with one step." — Lao Tzu',
-  '"What you get by achieving your goals is not as important as what you become by achieving your goals." — Zig Ziglar',
-  '"You don\'t have to be great to start, but you have to start to be great." — Zig Ziglar',
-  '"The expert in anything was once a beginner." — Helen Hayes',
-  '"Success is walking from failure to failure with no loss of enthusiasm." — Winston Churchill',
-  '"Everything you\'ve ever wanted is on the other side of fear." — George Addair',
-  '"The harder you work for something, the greater you\'ll feel when you achieve it." — Unknown',
-  '"Dreams don\'t work unless you do." — John C. Maxwell',
-  '"The future depends on what you do today." — Mahatma Gandhi',
-  '"Little things make big days." — Unknown',
-  '"Motivation is what gets you started. Habit is what keeps you going." — Jim Ryun',
-  '"The best preparation for tomorrow is doing your best today." — H. Jackson Brown Jr.',
-  '"Your attitude, not your aptitude, will determine your altitude." — Zig Ziglar',
-  '"The way to get started is to quit talking and begin doing." — Walt Disney',
-  '"If you are working on something that you really care about, you don\'t have to be pushed. The vision pulls you." — Steve Jobs',
-  '"The only limit to our realization of tomorrow will be our doubts of today." — Franklin D. Roosevelt',
-  '"There is no substitute for hard work." — Thomas Edison',
-  '"The only person you are destined to become is the person you decide to be." — Ralph Waldo Emerson',
-  '"Successful men and women keep moving. They make mistakes, but they don\'t quit." — Conrad Hilton',
-  '"The difference between who you are and who you want to be is what you do." — Unknown',
-  '"Act as if what you do makes a difference. It does." — William James',
-  '"Keep your eyes on the stars, and your feet on the ground." — Theodore Roosevelt',
-  '"The only way to achieve the impossible is to believe it is possible." — Charles Kingsleigh',
-  '"It always seems impossible until it is done." — Nelson Mandela'
+  '"The future belongs to those who believe in the beauty of their dreams." — Eleanor Roosevelt'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -2470,7 +2194,12 @@ async function doRegister() {
     hideLoading();
     setMsg('✓ Account created!', true);
     showToast('Registration Successful', 'Welcome to UB Academic Hub!', 'success');
-    setTimeout(() => enterApp(u, userData), 700);
+    
+    // Show setup modal after registration
+    setTimeout(() => {
+      enterApp(u, userData);
+      document.getElementById('setupMod').classList.add('on');
+    }, 700);
   } catch (e) {
     hideLoading();
     console.error(e);
@@ -2517,7 +2246,7 @@ async function resetPassword() {
   }
 }
 
-// ── App Entry ───────────────────────────────────────────────────
+// App Entry
 async function enterApp(u, userData) {
   if (!window.FS) {
     await new Promise(resolve => {
@@ -2533,19 +2262,16 @@ async function enterApp(u, userData) {
   
   // Set up real-time listeners
   window._unsubReqs = window.FS.onRequests(data => { _requests = data; renderReqs(); renderMyReqs(); });
-  window._unsubSess = window.FS.onSessions(data => { _sessions = data; });
-  window._unsubConts = window.FS.onContests(data => { _contests = data; if (document.getElementById('pg-contest').classList.contains('on')) { renderContests(); populateContestDropdowns(); } });
-  window._unsubScores = window.FS.onScores(data => { _scores = data; if (document.getElementById('pg-contest').classList.contains('on')) renderLeaderboard(); });
-  window._unsubPoints = window.FS.onPoints(data => { _points = data; if (document.getElementById('pg-points').classList.contains('on')) { renderPointsLeaderboard(); renderMyPoints(); } updateMyPointsBadge(); updateHomeStats(); });
-  window._unsubGroups = window.FS.onGroups(data => { _groups = data; if (document.getElementById('pg-squad').classList.contains('on')) renderGroups(); });
+  window._unsubPoints = window.FS.onPoints(data => { _points = data; renderPointsLeaderboard(); renderMyPoints(); updateMyPointsBadge(); updateHomeStats(); });
+  window._unsubGroups = window.FS.onGroups(data => { _groups = data; if (document.getElementById('pg-squad').classList.contains('on')) filterSquad(); });
   
-  // NEW: Study Sessions Posts listener
+  // Study Sessions Posts listener
   window._unsubStudyPosts = window.FS.onStudySessionsPosts(data => { 
     _studySessionsPosts = data; 
-    if (document.getElementById('pg-sessions').classList.contains('on')) filterSessions(); 
+    if (document.getElementById('pg-squad').classList.contains('on')) filterSquad(); 
   });
   
-  // NEW: Focus Rooms listener
+  // Focus Rooms listener
   window._unsubFocusRooms = window.FS.onFocusRooms(data => { 
     _focusRooms = data; 
     if (document.getElementById('pg-rooms').classList.contains('on')) renderFocusRooms(); 
@@ -2564,19 +2290,25 @@ async function enterApp(u, userData) {
   const ini = CU.name[0].toUpperCase();
   ['sbAv', 'topAv', 'profAv'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ini; });
   document.getElementById('sbUname').textContent = CU.name.split(' ')[0];
+  
+  // Update profile displays
+  document.getElementById('pdName').textContent = CU.name || '—';
+  document.getElementById('pdUser').textContent = CU.studentId || '—';
+  document.getElementById('pdWA').textContent = CU.wa || '—';
+  document.getElementById('pdEmail').textContent = CU.email || '—';
+  document.getElementById('pdYear').textContent = CU.year || '—';
+  document.getElementById('pdFaculty').textContent = CU.faculty || '—';
+  document.getElementById('pdProgramme').textContent = CU.programme || '—';
+  document.getElementById('profName').textContent = CU.name || '—';
+  document.getElementById('profMeta').textContent = `${CU.year || 'Student'} · ${CU.faculty || 'University of Botswana'}`;
+  
   const pwaEl = document.getElementById('pWA'); if (pwaEl) pwaEl.value = CU.wa || '';
-  const pEmailEl = document.getElementById('pdEmail'); if (pEmailEl) pEmailEl.textContent = CU.email || '—';
-  const pFacultyEl = document.getElementById('pdFaculty'); if (pFacultyEl) pFacultyEl.textContent = CU.faculty || '—';
   
   updateRole();
   document.getElementById('authScreen').classList.add('hidden');
-  document.getElementById('appScreen').classList.remove('on');
   document.getElementById('appScreen').classList.remove('hidden');
-  document.getElementById('appScreen').classList.add('on');
   
   setGreeting();
-  renderTips();
-  renderSMods();
   renderTutors();
   renderProfile();
   populateModDropdowns();
@@ -2585,34 +2317,27 @@ async function enterApp(u, userData) {
   populateStreakModules();
   renderSessionHistory();
   updateStreakStats();
-  renderGroups();
   updateHomeStats();
   initCalendar();
   
   go('home');
-  setTimeout(loadCareerVideos, 400);
   
+  // Show setup modal if no programme set
   if (!CU.programme || CU.programme === '') {
     setTimeout(() => {
-      const m = document.getElementById('setupMod');
-      if (m) m.classList.add('on');
+      document.getElementById('setupMod').classList.add('on');
     }, 800);
   }
   
   applySettings();
   
-  // Set up quote rotation every 3 hours
+  // Set up quote rotation
   setInterval(rotateQuote, 3 * 60 * 60 * 1000);
 }
 
 function doLogout() {
   CU = null; CUK = null; mods = []; selMod = null;
-  if (window._quoteTimer) clearInterval(window._quoteTimer);
-  if (window._careerTimer) clearInterval(window._careerTimer);
   if (window._unsubReqs) window._unsubReqs();
-  if (window._unsubSess) window._unsubSess();
-  if (window._unsubConts) window._unsubConts();
-  if (window._unsubScores) window._unsubScores();
   if (window._unsubPoints) window._unsubPoints();
   if (window._unsubGroups) window._unsubGroups();
   if (window._unsubStudyPosts) window._unsubStudyPosts();
@@ -2646,7 +2371,7 @@ function updateRole() {
   }
 }
 
-// ── SETTINGS ────────────────────────────────────────────────────
+// Settings
 function loadSettings() {
   const settings = loadFromLocal('settings', { darkMode: false, compact: false, emailNotif: true, pushNotif: true, showProfile: true });
   document.getElementById('darkModeToggle').checked = settings.darkMode;
@@ -2700,14 +2425,6 @@ function applySettings() {
     document.documentElement.style.setProperty('--muted', '#64748b');
     document.documentElement.style.setProperty('--border', '#e2e8f0');
   }
-  
-  if (settings.compact) {
-    document.documentElement.style.setProperty('--sidebar', '220px');
-    document.querySelectorAll('.card').forEach(c => c.style.padding = '16px');
-  } else {
-    document.documentElement.style.setProperty('--sidebar', '280px');
-    document.querySelectorAll('.card').forEach(c => c.style.padding = '');
-  }
 }
 
 function exportData() {
@@ -2715,7 +2432,6 @@ function exportData() {
     user: CU,
     modules: mods,
     points: _points.filter(p => p.by === CUK),
-    scores: _scores.filter(s => s.by === CUK),
     studySessions: _studySessions
   };
   
@@ -2738,7 +2454,7 @@ function clearData() {
   }
 }
 
-// ── NAVIGATION ──────────────────────────────────────────────────
+// Navigation
 function flashTransition() {
   const pt = document.getElementById('pt');
   if (!pt) return;
@@ -2765,15 +2481,14 @@ function go(pg) {
     closeSB();
     
     if (pg === 'tutors') renderTutors();
-    if (pg === 'profile') { renderProfile(); loadProfileEditor(); }
+    if (pg === 'profile') { renderProfile(); }
     if (pg === 'become') updateRole();
-    if (pg === 'squad') { renderGroups(); }
+    if (pg === 'squad') { filterSquad(); }
     if (pg === 'home') { setGreeting(); updateHomeStats(); }
-    if (pg === 'contest') { renderContests(); renderLeaderboard(); populateContestDropdowns(); }
     if (pg === 'points') { renderPointsLeaderboard(); }
     if (pg === 'streak') { populateStreakModules(); renderSessionHistory(); updateStreakStats(); }
-    if (pg === 'sessions') { filterSessions(); }
     if (pg === 'rooms') { renderFocusRooms(); }
+    if (pg === 'peer') { renderReqs(); renderMyReqs(); }
   }, 150);
 }
 
@@ -2817,7 +2532,7 @@ function toggleSB() {
   }
 }
 
-// ── HOME ────────────────────────────────────────────────────────
+// Home
 function setGreeting() {
   const h = new Date().getHours();
   const g = h < 12 ? 'Good morning ☀️' : h < 17 ? 'Good afternoon 👋' : 'Good evening 🌙';
@@ -2841,7 +2556,7 @@ function rotateQuote() {
 function updateHomeStats() {
   const pointsEl = document.getElementById('homePoints');
   if (pointsEl) {
-    const month = currentMonth();
+    const month = new Date().toISOString().slice(0, 7);
     const total = _points.filter(p => p.by === CUK && p.month === month).reduce((s, p) => s + (p.points || 0), 0);
     pointsEl.textContent = total;
   }
@@ -2852,8 +2567,124 @@ function updateHomeStats() {
   }
 }
 
-// ── STUDY STREAK (Dual Timer + Calendar) ───────────────────────────
-// Pomodoro Timer
+// Setup Profile Functions
+function addSetupMod() {
+  const code = document.getElementById('setupCode').value.trim();
+  const name = document.getElementById('setupName').value.trim();
+  if (!code || !name) { alert('Enter both module code and name.'); return; }
+  
+  const list = document.getElementById('setupModList');
+  const chip = document.createElement('div');
+  chip.className = 'mod-chip sel';
+  chip.setAttribute('data-code', code);
+  chip.setAttribute('data-name', name);
+  chip.innerHTML = `<span><strong>${code}</strong> – ${name}</span> <span class="rmv" onclick="this.parentElement.remove()">✕</span>`;
+  list.appendChild(chip);
+  
+  document.getElementById('setupCode').value = '';
+  document.getElementById('setupName').value = '';
+}
+
+async function saveSetup() {
+  const programme = document.getElementById('setupProg').value.trim();
+  const semester = document.getElementById('setupSem').value;
+  const modChips = document.querySelectorAll('#setupModList .mod-chip');
+  const modules = [];
+  
+  modChips.forEach(chip => {
+    const code = chip.getAttribute('data-code');
+    const name = chip.getAttribute('data-name');
+    if (code && name) {
+      modules.push({ code, name, credits: 3 }); // Default credits = 3
+    }
+  });
+  
+  await window.FS.setUser(CUK, { programme, semester, modules });
+  mods = modules;
+  
+  document.getElementById('setupMod').classList.remove('on');
+  showToast('Profile Updated', 'Your academic profile has been saved!', 'success');
+  
+  // Refresh all module-dependent views
+  populateModDropdowns();
+  populateGPARows();
+  populateForeRows();
+  populateStreakModules();
+  renderProfile();
+}
+
+function closeSetup() {
+  document.getElementById('setupMod').classList.remove('on');
+}
+
+// Profile Functions
+function renderProfile() {
+  if (!CU) return;
+  
+  document.getElementById('profName').textContent = CU.name || '—';
+  document.getElementById('profMeta').textContent = `${CU.year || 'Student'} · ${CU.faculty || 'University of Botswana'}`;
+  document.getElementById('pdName').textContent = CU.name || '—';
+  document.getElementById('pdUser').textContent = CU.studentId || '—';
+  document.getElementById('pdWA').textContent = CU.wa || '—';
+  document.getElementById('pdEmail').textContent = CU.email || '—';
+  document.getElementById('pdYear').textContent = CU.year || '—';
+  document.getElementById('pdFaculty').textContent = CU.faculty || '—';
+  document.getElementById('pdProgramme').textContent = CU.programme || '—';
+  
+  document.getElementById('profProgramme').value = CU.programme || '';
+  document.getElementById('profSemester').value = CU.semester || 'Semester 1';
+  
+  renderModList();
+}
+
+function renderModList() {
+  const container = document.getElementById('modList');
+  if (!mods.length) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:.8rem;">No modules added yet.</p>';
+    return;
+  }
+  
+  container.innerHTML = mods.map((m, i) => `
+    <div style="display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;">
+      <span style="font-weight:700;font-size:.85rem;flex:1;"><span style="color:var(--blue);">${m.code}</span> – ${m.name}</span>
+      <span class="rmv" onclick="removeProfileMod(${i})" style="cursor:pointer;color:var(--red);font-size:1.1rem;padding:0 4px;">✕</span>
+    </div>
+  `).join('');
+}
+
+function addProfileMod() {
+  const code = document.getElementById('newModCode').value.trim();
+  const name = document.getElementById('newModName').value.trim();
+  if (!code || !name) { alert('Enter both module code and name.'); return; }
+  
+  mods.push({ code, name, credits: 3 });
+  renderModList();
+  
+  document.getElementById('newModCode').value = '';
+  document.getElementById('newModName').value = '';
+}
+
+function removeProfileMod(index) {
+  mods.splice(index, 1);
+  renderModList();
+}
+
+async function saveProfile() {
+  const programme = document.getElementById('profProgramme').value.trim();
+  const semester = document.getElementById('profSemester').value;
+  
+  await window.FS.setUser(CUK, { programme, semester, modules: mods });
+  
+  showToast('Profile Saved', 'Your profile has been updated!', 'success');
+  
+  // Refresh module-dependent views
+  populateModDropdowns();
+  populateGPARows();
+  populateForeRows();
+  populateStreakModules();
+}
+
+// Study Streak Functions
 let pomodoroInterval = null;
 let pomodoroSeconds = 25 * 60;
 let pomodoroRunning = false;
@@ -2883,18 +2714,15 @@ function startPomodoro() {
   
   pomodoroInterval = setInterval(() => {
     if (pomodoroSeconds <= 0) {
-      // Timer finished
       clearInterval(pomodoroInterval);
       pomodoroRunning = false;
       document.getElementById('pomodoroStartBtn').style.display = 'inline-flex';
       document.getElementById('pomodoroPauseBtn').style.display = 'none';
       document.getElementById('pomodoroStatus').textContent = '✅ Session complete!';
       
-      // Log the session
       logStudySessionFromTimer(pomodoroModule, pomodoroPreset);
       showToast('Focus Complete!', `Great job! You focused for ${pomodoroPreset} minutes.`, 'success');
       
-      // Auto-reset
       resetPomodoro();
     } else {
       pomodoroSeconds--;
@@ -2947,7 +2775,6 @@ function startStopwatch() {
   stopwatchRunning = true;
   document.getElementById('stopwatchStartBtn').style.display = 'none';
   document.getElementById('stopwatchPauseBtn').style.display = 'inline-flex';
-  document.getElementById('stopwatchLapBtn').disabled = false;
   
   stopwatchInterval = setInterval(() => {
     stopwatchSeconds++;
@@ -3002,17 +2829,14 @@ function renderStopwatchLaps() {
   `).join('');
 }
 
-// Log session from timer
 async function logStudySessionFromTimer(module, minutes) {
   const today = new Date().toISOString().split('T')[0];
   const hours = minutes / 60;
   
-  // Update study stats
   CU.studyStats = CU.studyStats || { totalHours: 0, streak: 0, lastStudyDate: null, points: 0 };
   CU.studyStats.totalHours += hours;
   CU.studyStats.points += Math.floor(hours);
   
-  // Update streak
   const lastDate = CU.studyStats.lastStudyDate ? new Date(CU.studyStats.lastStudyDate) : null;
   const todayDate = new Date();
   todayDate.setHours(0, 0, 0, 0);
@@ -3032,15 +2856,13 @@ async function logStudySessionFromTimer(module, minutes) {
   
   CU.studyStats.lastStudyDate = todayDate.toISOString();
   
-  // Save to Firestore
   await window.FS.addStudySession({
     userId: CUK,
     module: module,
     date: today,
     duration: minutes,
     hours: hours,
-    points: Math.floor(hours),
-    recorded: false
+    points: Math.floor(hours)
   });
   
   await window.FS.setUser(CUK, { studyStats: CU.studyStats });
@@ -3052,7 +2874,40 @@ async function logStudySessionFromTimer(module, minutes) {
   renderCalendar();
 }
 
-// Calendar
+async function logStudySession() {
+  const module = document.getElementById('sessionModule').value;
+  const duration = parseInt(document.getElementById('sessionDuration').value);
+  
+  if (!module) { alert('Select a module.'); return; }
+  if (!duration || duration < 1) { alert('Enter a valid duration.'); return; }
+  
+  await logStudySessionFromTimer(module, duration);
+  showToast('Session Logged', `Logged ${duration} minutes for ${module}.`, 'success');
+}
+
+function renderSessionHistory() {
+  const container = document.getElementById('sessionHistory');
+  if (!_studySessions.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No study sessions yet.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = _studySessions.slice(0, 10).map(s => `
+    <div class="session-item">
+      <span class="session-subject">${s.module || 'Study'}</span>
+      <span class="session-time">${new Date(s.date).toLocaleDateString()}</span>
+      <span class="session-duration">${s.duration} min</span>
+    </div>
+  `).join('');
+}
+
+function updateStreakStats() {
+  document.getElementById('streakCount').textContent = CU?.studyStats?.streak || 0;
+  document.getElementById('totalHours').textContent = Math.round(CU?.studyStats?.totalHours || 0);
+  document.getElementById('streakPoints').textContent = CU?.studyStats?.points || 0;
+}
+
+// Calendar Functions
 let currentCalendarDate = new Date();
 let selectedCalendarDate = new Date();
 
@@ -3079,20 +2934,17 @@ function renderCalendar() {
     currentCalendarDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   
   const firstDay = new Date(year, month, 1);
-  const startDay = firstDay.getDay(); // 0 = Sunday, 1 = Monday, etc.
-  // Adjust for Monday first
+  const startDay = firstDay.getDay();
   const startOffset = startDay === 0 ? 6 : startDay - 1;
   
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   
   let html = '';
   
-  // Empty cells before first day
   for (let i = 0; i < startOffset; i++) {
     html += '<div class="calendar-day empty"></div>';
   }
   
-  // Days of month
   for (let d = 1; d <= daysInMonth; d++) {
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     const isToday = isSameDay(new Date(), new Date(year, month, d));
@@ -3111,8 +2963,6 @@ function renderCalendar() {
   }
   
   document.getElementById('calendarDays').innerHTML = html;
-  
-  // Update selected day stats
   updateSelectedDayStats();
 }
 
@@ -3148,76 +2998,73 @@ function updateSelectedDayStats() {
   document.getElementById('selectedDaySessions').textContent = sessions;
 }
 
-// ── STUDY SESSIONS ──────────────────────────────────────────────
-let currentSessionsTab = 'all';
-let facultyFilter = '';
+// Study Squad Functions (Combined)
+let currentSquadTab = 'sessions';
+let squadSearch = '';
+let squadFacultyFilter = '';
 
-function sessionsTab(tab, element) {
-  currentSessionsTab = tab;
+function squadTab(tab, element) {
+  currentSquadTab = tab;
   document.querySelectorAll('.session-tab').forEach(el => el.classList.remove('active'));
   element.classList.add('active');
-  filterSessions();
+  
+  document.getElementById('sessionsContainer').classList.toggle('hidden', tab !== 'sessions');
+  document.getElementById('groupsContainer').classList.toggle('hidden', tab !== 'groups');
+  
+  filterSquad();
 }
 
-function setLocation(loc) {
-  document.getElementById('sessionLocation').value = loc;
-  document.querySelectorAll('.location-preset').forEach(el => el.classList.remove('active'));
-  event.target.classList.add('active');
+function clearSquadFilter() {
+  squadFacultyFilter = '';
+  document.getElementById('squadFacultyFilter').value = '';
+  document.getElementById('squadFilterBadge').innerHTML = '📍 Showing: All <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
+  filterSquad();
 }
 
-function clearFacultyFilter() {
-  facultyFilter = '';
-  document.getElementById('sessionFacultyFilter').value = '';
-  document.getElementById('facultyFilterBadge').innerHTML = '📍 Showing: All Faculties <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
-  filterSessions();
+function filterSquad() {
+  squadSearch = document.getElementById('squadSearch')?.value.toLowerCase() || '';
+  squadFacultyFilter = document.getElementById('squadFacultyFilter')?.value || '';
+  
+  const badge = document.getElementById('squadFilterBadge');
+  if (squadFacultyFilter) {
+    badge.innerHTML = `📍 Showing: ${squadFacultyFilter} <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>`;
+  } else {
+    badge.innerHTML = '📍 Showing: All <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
+  }
+  
+  if (currentSquadTab === 'sessions') {
+    filterSessions();
+  } else {
+    filterGroups();
+  }
 }
 
 function filterSessions() {
-  const search = document.getElementById('sessionSearch')?.value.toLowerCase() || '';
-  facultyFilter = document.getElementById('sessionFacultyFilter')?.value || '';
+  let filtered = _studySessionsPosts.filter(s => new Date(s.dateTime) > new Date()); // Only upcoming
   
-  // Update badge
-  const badge = document.getElementById('facultyFilterBadge');
-  if (facultyFilter) {
-    badge.innerHTML = `📍 Showing: ${facultyFilter} <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>`;
-  } else {
-    badge.innerHTML = '📍 Showing: All Faculties <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
+  if (squadFacultyFilter) {
+    filtered = filtered.filter(s => s.faculty === squadFacultyFilter);
   }
   
-  let filtered = [..._studySessionsPosts];
-  
-  // Filter by faculty (default to user's faculty if none selected)
-  if (facultyFilter) {
-    filtered = filtered.filter(s => s.faculty === facultyFilter);
-  } else {
-    // Show user's faculty by default, but include others too
-    // We'll just show all if no filter
-  }
-  
-  if (search) {
+  if (squadSearch) {
     filtered = filtered.filter(s => 
-      (s.module || '').toLowerCase().includes(search) ||
-      (s.topic || '').toLowerCase().includes(search) ||
-      (s.location || '').toLowerCase().includes(search)
+      (s.module || '').toLowerCase().includes(squadSearch) ||
+      (s.topic || '').toLowerCase().includes(squadSearch) ||
+      (s.location || '').toLowerCase().includes(squadSearch)
     );
-  }
-  
-  if (currentSessionsTab === 'my') {
-    filtered = filtered.filter(s => s.createdBy === CUK);
   }
   
   renderSessions(filtered);
 }
 
 function renderSessions(sessions) {
-  const container = document.getElementById('sessionsList');
+  const container = document.getElementById('sessionsContainer');
   
   if (!sessions.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">📅</div><p>No study sessions found. Create one!</p></div>';
+    container.innerHTML = '<div class="empty"><div class="ei">📅</div><p>No upcoming study sessions found.</p></div>';
     return;
   }
   
-  // Sort by date
   sessions.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
   
   container.innerHTML = sessions.map(s => {
@@ -3230,8 +3077,6 @@ function renderSessions(sessions) {
     const dateTime = new Date(s.dateTime);
     const formattedDate = dateTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     const formattedTime = dateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    
-    const isPast = dateTime < new Date();
     
     return `
       <div class="session-card">
@@ -3247,43 +3092,91 @@ function renderSessions(sessions) {
         </div>
         
         <div class="session-details">
-          <div class="session-detail-item">
-            <i>📅</i> ${formattedDate} at ${formattedTime}
-          </div>
-          <div class="session-detail-item">
-            <i>⏱️</i> ${s.duration} min
-          </div>
-          <div class="session-detail-item">
-            <i>📍</i> ${s.location || 'TBD'}
-          </div>
-          <div class="session-detail-item">
-            <i>👥</i> ${participants}/${maxParticipants} participants
-          </div>
+          <div class="session-detail-item"><i>📅</i> ${formattedDate} at ${formattedTime}</div>
+          <div class="session-detail-item"><i>⏱️</i> ${s.duration} min</div>
+          <div class="session-detail-item"><i>📍</i> ${s.location || 'TBD'}</div>
+          <div class="session-detail-item"><i>👥</i> ${participants}/${maxParticipants}</div>
         </div>
         
-        ${s.notes ? `<p style="font-size:.8rem;color:var(--muted);margin:8px 0 0 0;">📝 ${s.notes}</p>` : ''}
+        ${s.notes ? `<p style="font-size:.8rem;color:var(--muted);margin:8px 0;">📝 ${s.notes}</p>` : ''}
         
         <div class="session-footer">
-          <div class="session-creator">
-            <i>👤</i> <strong>${s.createdByName}</strong> · ${s.faculty || '—'}
-          </div>
-          ${!isPast ? (isCreator ? 
+          <div class="session-creator"><i>👤</i> <strong>${s.createdByName}</strong></div>
+          ${isCreator ? 
             `<button class="btn btn-red btn-sm" onclick="deleteSession('${s.id}')">🗑 Delete</button>` : 
             (isJoined ? 
               `<button class="btn btn-outline btn-sm" onclick="leaveSession('${s.id}')">✕ Leave</button>` : 
               (!isFull ? 
-                `<button class="session-join-btn" onclick="joinSession('${s.id}')">➕ Join Session</button>` : 
+                `<button class="session-join-btn" onclick="joinSession('${s.id}')">➕ Join</button>` : 
                 `<span class="badge badge-taken">Full</span>`
               )
             )
-          ) : '<span class="badge badge-taken">Ended</span>'}
+          }
         </div>
       </div>
     `;
   }).join('');
 }
 
+function filterGroups() {
+  let filtered = _groups;
+  
+  if (squadFacultyFilter) {
+    filtered = filtered.filter(g => g.faculty === squadFacultyFilter);
+  }
+  
+  if (squadSearch) {
+    filtered = filtered.filter(g => 
+      (g.name || '').toLowerCase().includes(squadSearch) ||
+      (g.module || '').toLowerCase().includes(squadSearch)
+    );
+  }
+  
+  renderGroups(filtered);
+}
+
+function renderGroups(groups) {
+  const container = document.getElementById('groupsContainer');
+  
+  if (!groups || !groups.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No groups found.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = groups.map(g => {
+    const isMember = g.members?.includes(CUK);
+    const isCreator = g.createdBy === CUK;
+    
+    return `
+      <div class="group-card">
+        <div class="group-header">
+          <div class="group-avatar">${g.name[0]}</div>
+          <div class="group-info">
+            <div class="group-name">${g.name}</div>
+            <div class="group-meta">📚 ${g.module} · 👥 ${g.members?.length || 1} members</div>
+          </div>
+        </div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:10px;">${g.description || ''}</p>
+        <div class="group-stats">
+          <div class="group-stat"><strong>${g.members?.length || 1}</strong> members</div>
+          <div class="group-stat"><strong>${g.faculty || '—'}</strong></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;">
+          ${isMember ? 
+            `<button class="btn btn-blue btn-sm" onclick="openGroupChat('${g.id}')">💬 Chat</button>
+             <button class="btn btn-outline btn-sm" onclick="leaveGroup('${g.id}')">Leave</button>` : 
+            `<button class="btn btn-green btn-sm" onclick="joinGroup('${g.id}')">➕ Join Group</button>`
+          }
+          ${isCreator ? `<button class="btn btn-red btn-sm" onclick="deleteGroup('${g.id}')">🗑 Delete</button>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Session CRUD
 async function createStudySession() {
+  const sessionType = document.querySelector('input[name="sessionType"]:checked')?.value;
   const module = document.getElementById('sessionModSelect').value;
   const topic = document.getElementById('sessionTopic').value.trim();
   const dateTime = document.getElementById('sessionDateTime').value;
@@ -3299,19 +3192,39 @@ async function createStudySession() {
   
   const faculty = CU.faculty || 'Unknown';
   
-  await window.FS.addStudySessionPost({
-    createdBy: CUK,
-    createdByName: CU.name,
-    module,
-    topic,
-    dateTime,
-    duration: parseInt(duration),
-    location,
-    maxParticipants: parseInt(maxParticipants),
-    notes,
-    faculty,
-    participants: [CUK]
-  });
+  if (sessionType === 'permanent') {
+    // Create permanent group instead
+    const groupName = prompt('Enter a name for your permanent group:', topic + ' Study Group');
+    if (!groupName) return;
+    
+    await window.FS.addGroup({
+      createdBy: CUK,
+      createdByName: CU.name,
+      name: groupName,
+      module,
+      description: notes || `Study group for ${topic}`,
+      faculty,
+      members: [CUK]
+    });
+    
+    showToast('Group Created', 'Your permanent study group has been created!', 'success');
+  } else {
+    await window.FS.addStudySessionPost({
+      createdBy: CUK,
+      createdByName: CU.name,
+      module,
+      topic,
+      dateTime,
+      duration: parseInt(duration),
+      location,
+      maxParticipants: parseInt(maxParticipants),
+      notes,
+      faculty,
+      participants: [CUK]
+    });
+    
+    showToast('Session Created', 'Your study session is now live!', 'success');
+  }
   
   // Reset form
   document.getElementById('sessionModSelect').value = '';
@@ -3320,8 +3233,6 @@ async function createStudySession() {
   document.getElementById('sessionLocation').value = '';
   document.getElementById('sessionNotes').value = '';
   document.getElementById('createSessionMod').classList.remove('on');
-  
-  showToast('Session Created', 'Your study session is now live!', 'success');
 }
 
 async function joinSession(sessionId) {
@@ -3363,14 +3274,123 @@ async function deleteSession(sessionId) {
   showToast('Session Deleted', 'Your session has been removed.', 'info');
 }
 
-// ── FOCUS ROOMS (Study Together) ──────────────────────────────
+// Group Functions
+async function createPermanentGroup() {
+  const name = document.getElementById('groupName').value.trim();
+  const module = document.getElementById('groupModule').value;
+  const description = document.getElementById('groupDesc').value.trim();
+  const faculty = document.getElementById('groupFaculty').value;
+  
+  if (!name) { alert('Enter a group name.'); return; }
+  if (!module) { alert('Select a module.'); return; }
+  
+  await window.FS.addGroup({
+    createdBy: CUK,
+    createdByName: CU.name,
+    name,
+    module,
+    description,
+    faculty,
+    members: [CUK]
+  });
+  
+  document.getElementById('groupName').value = '';
+  document.getElementById('groupDesc').value = '';
+  document.getElementById('createGroupMod').classList.remove('on');
+  
+  showToast('Group Created', 'Your permanent study group is ready!', 'success');
+}
+
+async function joinGroup(groupId) {
+  await window.FS.joinGroup(groupId, CUK);
+  showToast('Joined Group', 'You are now a member of this group.', 'success');
+}
+
+async function leaveGroup(groupId) {
+  if (!confirm('Leave this group?')) return;
+  await window.FS.leaveGroup(groupId, CUK);
+  showToast('Left Group', 'You have left the group.', 'info');
+}
+
+async function deleteGroup(groupId) {
+  if (!confirm('Delete this group?')) return;
+  await window.FS.deleteGroup(groupId);
+  showToast('Group Deleted', 'The group has been removed.', 'info');
+}
+
+// Chat Functions
+let currentChatId = null;
+let currentChatType = null;
+
+async function openGroupChat(groupId) {
+  const group = _groups.find(g => g.id === groupId);
+  if (!group) return;
+  
+  currentChatId = groupId;
+  currentChatType = 'group';
+  
+  document.getElementById('chatSessionTitle').textContent = group.name;
+  document.getElementById('chatSessionMeta').textContent = `Group · ${group.members?.length || 1} members`;
+  document.getElementById('squadChatMod').classList.add('on');
+  
+  // Clear previous messages
+  document.getElementById('chatMessages').innerHTML = '<div class="empty"><div class="ei">💬</div><p>No messages yet</p></div>';
+  
+  // Set up real-time listener
+  if (window._unsubGroupChat) window._unsubGroupChat();
+  window._unsubGroupChat = window.FS.onGroupMsgs(groupId, renderGroupMessages);
+}
+
+function renderGroupMessages(messages) {
+  const container = document.getElementById('chatMessages');
+  
+  if (!messages || !messages.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">💬</div><p>No messages yet</p></div>';
+    return;
+  }
+  
+  container.innerHTML = messages.map(m => `
+    <div style="display:flex;flex-direction:column;align-items:${m.userId === CUK ? 'flex-end' : 'flex-start'};">
+      <div style="background:${m.userId === CUK ? 'linear-gradient(135deg,var(--blue2),var(--purple))' : '#e2e8f0'};color:${m.userId === CUK ? '#fff' : 'var(--text)'};border-radius:12px;padding:8px 12px;max-width:80%;">
+        <div style="font-size:.7rem;font-weight:700;margin-bottom:2px;opacity:.8;">${m.userName}</div>
+        <div style="font-size:.85rem;">${m.message}</div>
+        <div style="font-size:.6rem;margin-top:3px;opacity:.6;">${m.at ? new Date(m.at.toDate()).toLocaleTimeString() : ''}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function sendChatMsg() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  
+  if (!msg) return;
+  if (!currentChatId) return;
+  
+  if (currentChatType === 'group') {
+    await window.FS.sendGroupMsg(currentChatId, {
+      userId: CUK,
+      userName: CU.name,
+      message: msg
+    });
+  }
+  
+  input.value = '';
+}
+
+function closeSquadChat() {
+  document.getElementById('squadChatMod').classList.remove('on');
+  if (window._unsubGroupChat) window._unsubGroupChat();
+}
+
+// Focus Rooms
 function renderFocusRooms() {
   const container = document.getElementById('activeRooms');
   
   const activeRooms = _focusRooms.filter(r => r.status !== 'ended');
   
   if (!activeRooms.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No active rooms. Create one to start studying together!</p></div>';
+    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No active rooms.</p></div>';
     return;
   }
   
@@ -3382,13 +3402,11 @@ function renderFocusRooms() {
     
     let timerDisplay = '';
     if (room.timerMode === 'countdown') {
-      // Calculate remaining time
       const remaining = room.timerEnd ? Math.max(0, Math.floor((new Date(room.timerEnd) - new Date()) / 1000)) : 0;
       const minutes = Math.floor(remaining / 60);
       const seconds = remaining % 60;
       timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`;
     } else {
-      // Count up - elapsed time
       const elapsed = room.timerStart ? Math.floor((new Date() - new Date(room.timerStart)) / 1000) : 0;
       timerDisplay = formatStopwatchTime(elapsed);
     }
@@ -3399,7 +3417,7 @@ function renderFocusRooms() {
           <div class="room-icon">👥</div>
           <div>
             <div class="room-name">${room.name}</div>
-            <div class="room-meta">📚 ${room.module} · ${room.timerMode === 'countdown' ? '⏱️ Countdown' : '⏲️ Stopwatch'}</div>
+            <div class="room-meta">📚 ${room.module}</div>
           </div>
         </div>
         
@@ -3409,28 +3427,17 @@ function renderFocusRooms() {
         </div>
         
         <div class="room-stats">
-          <div class="room-stat-item">
-            <div class="room-stat-value">${participants}</div>
-            <div class="room-stat-label">joined</div>
-          </div>
-          <div class="room-stat-item">
-            <div class="room-stat-value">${maxParticipants}</div>
-            <div class="room-stat-label">max</div>
-          </div>
-          <div class="room-stat-item">
-            <div class="room-stat-value">✨</div>
-            <div class="room-stat-label">2x points</div>
-          </div>
+          <div class="room-stat-item"><div class="room-stat-value">${participants}</div><div class="room-stat-label">joined</div></div>
+          <div class="room-stat-item"><div class="room-stat-value">${maxParticipants}</div><div class="room-stat-label">max</div></div>
+          <div class="room-stat-item"><div class="room-stat-value">✨</div><div class="room-stat-label">2x points</div></div>
         </div>
         
         ${room.description ? `<p style="font-size:.8rem;color:var(--muted);margin:8px 0;">${room.description}</p>` : ''}
         
         <div class="room-footer">
-          <div class="room-participants">
-            <span>👤</span> ${room.createdByName}
-          </div>
+          <div class="room-participants"><span>👤</span> ${room.createdByName}</div>
           ${isCreator ? 
-            `<button class="btn btn-red btn-sm" onclick="endFocusRoom('${room.id}')">End Room</button>` : 
+            `<button class="btn btn-red btn-sm" onclick="endFocusRoom('${room.id}')">End</button>` : 
             (isJoined ? 
               `<button class="btn btn-outline btn-sm" onclick="leaveFocusRoom('${room.id}')">Leave</button>` : 
               (participants < maxParticipants ? 
@@ -3480,7 +3487,6 @@ async function createFocusRoom() {
   
   await window.FS.addFocusRoom(roomData);
   
-  // Reset form
   document.getElementById('roomName').value = '';
   document.getElementById('roomModule').value = '';
   document.getElementById('roomDescription').value = '';
@@ -3491,7 +3497,7 @@ async function createFocusRoom() {
 
 async function joinFocusRoom(roomId) {
   await window.FS.joinFocusRoom(roomId, CUK);
-  showToast('Joined Room', 'You are now studying together! Double points active!', 'success');
+  showToast('Joined Room', 'You are now studying together!', 'success');
 }
 
 async function leaveFocusRoom(roomId) {
@@ -3506,52 +3512,751 @@ async function endFocusRoom(roomId) {
   showToast('Room Ended', 'The focus room has been closed.', 'info');
 }
 
-// ── POPULATE DROPDOWNS ──────────────────────────────────────────
+// PeerBridge Functions (Fixed)
+function peerTab(t) {
+  document.getElementById('pt-browse').classList.toggle('on', t === 'browse');
+  document.getElementById('pt-post').classList.toggle('on', t === 'post');
+  document.getElementById('pt-mine').classList.toggle('on', t === 'mine');
+  
+  document.getElementById('peer-browse').classList.toggle('hidden', t !== 'browse');
+  document.getElementById('peer-post').classList.toggle('hidden', t !== 'post');
+  document.getElementById('peer-mine').classList.toggle('hidden', t !== 'mine');
+  
+  if (t === 'browse') renderReqs();
+  if (t === 'mine') renderMyReqs();
+}
+
+function validatePrice() {
+  const price = document.getElementById('pPrice').value;
+  const min = 15;
+  if (price < min) document.getElementById('pPrice').value = min;
+}
+
+async function postReq() {
+  const mod = document.getElementById('pMod').value;
+  const top = document.getElementById('pTop').value.trim();
+  const desc = document.getElementById('pDesc').value.trim();
+  const time = document.getElementById('pTime').value;
+  const type = document.getElementById('pType').value;
+  const price = document.getElementById('pPrice').value;
+  const urg = document.getElementById('pUrg').value;
+  const wa = document.getElementById('pWA').value;
+  
+  if (!mod || !top || !desc || !price) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  
+  const reqData = {
+    by: CUK,
+    name: CU.name,
+    module: mod,
+    topic: top,
+    desc,
+    timeNeeded: parseFloat(time),
+    type,
+    price: parseFloat(price),
+    urgency: urg,
+    wa,
+    faculty: CU.faculty,
+    year: CU.year,
+    status: 'open', // open, taken, completed
+    takenBy: null,
+    takenAt: null
+  };
+  
+  await window.FS.addRequest(reqData);
+  
+  // Clear form
+  document.getElementById('pTop').value = '';
+  document.getElementById('pDesc').value = '';
+  document.getElementById('pPrice').value = '';
+  document.getElementById('pMod').value = '';
+  
+  showToast('Request Posted', 'Your help request is now live!', 'success');
+  
+  // Switch to browse tab
+  peerTab('browse');
+}
+
+function renderReqs() {
+  const search = document.getElementById('pSrch')?.value.toLowerCase() || '';
+  const filter = document.getElementById('pFilt')?.value || 'all';
+  
+  let filtered = _requests.filter(r => r.status === 'open'); // Only show open requests
+  filtered = filtered.filter(r => r.by !== CUK); // Hide user's own requests
+  
+  if (search) {
+    filtered = filtered.filter(r => 
+      (r.module || '').toLowerCase().includes(search) ||
+      (r.topic || '').toLowerCase().includes(search) ||
+      (r.desc || '').toLowerCase().includes(search)
+    );
+  }
+  
+  const container = document.getElementById('reqList');
+  
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">🔍</div><p>No open requests available.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = filtered.map(r => `
+    <div class="req-card">
+      <div class="req-top">
+        <div class="req-left">
+          <h4>${r.topic} <span class="badge badge-open">Open</span></h4>
+          <span class="mod-tag">📚 ${r.module}</span>
+        </div>
+        <div class="pula-chip">P${r.price}</div>
+      </div>
+      <p class="req-desc">${r.desc}</p>
+      <div class="req-meta">
+        <span class="meta-chip"><i>👤</i> ${r.name} · ${r.year || '?'}</span>
+        <span class="meta-chip"><i>⏱️</i> ${r.timeNeeded} hr</span>
+        <span class="meta-chip"><i>📍</i> ${r.type}</span>
+        <span class="meta-chip"><i>⚡</i> ${r.urgency}</span>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn btn-green btn-sm" onclick="offerHelp('${r.id}')">💬 Offer Help</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMyReqs() {
+  const myReqs = _requests.filter(r => r.by === CUK);
+  const container = document.getElementById('myReqList');
+  
+  if (!myReqs.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>You haven\'t posted any requests yet.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = myReqs.map(r => `
+    <div class="req-card">
+      <div class="req-top">
+        <div class="req-left">
+          <h4>${r.topic} 
+            <span class="badge ${r.status === 'open' ? 'badge-open' : r.status === 'taken' ? 'badge-warning' : 'badge-success'}">
+              ${r.status === 'open' ? 'Open' : r.status === 'taken' ? 'Taken' : 'Completed'}
+            </span>
+          </h4>
+          <span class="mod-tag">📚 ${r.module}</span>
+        </div>
+        <div class="pula-chip">P${r.price}</div>
+      </div>
+      <p class="req-desc">${r.desc}</p>
+      ${r.status === 'taken' && r.takenBy ? `
+        <div style="background:var(--blue3);border-radius:8px;padding:8px;margin:10px 0;font-size:.8rem;">
+          <strong>📞 Taken by:</strong> ${r.takenByName || 'A tutor'} · WhatsApp: ${r.takenByWA || '—'}
+        </div>
+      ` : ''}
+      <div style="display:flex;gap:8px;margin-top:14px;">
+        ${r.status === 'open' ? `<button class="btn btn-red btn-sm" onclick="delReq('${r.id}')">🗑 Delete</button>` : ''}
+        ${r.status === 'taken' ? `<button class="btn btn-blue btn-sm" onclick="markCompleted('${r.id}')">✓ Mark Completed</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+async function offerHelp(reqId) {
+  const req = _requests.find(r => r.id === reqId);
+  if (!req) return;
+  
+  // Check if user is a tutor
+  if (!CU.isTutor) {
+    if (!confirm('You need to be a registered tutor to offer help. Become a tutor now?')) return;
+    document.getElementById('btMod').classList.add('on');
+    return;
+  }
+  
+  // Update request status to 'taken'
+  await window.FS.updateRequest(reqId, {
+    status: 'taken',
+    takenBy: CUK,
+    takenByName: CU.name,
+    takenByWA: CU.wa
+  });
+  
+  // Show WhatsApp modal
+  const info = `
+    <strong>Student:</strong> ${req.name}<br>
+    <strong>Module:</strong> ${req.module}<br>
+    <strong>Topic:</strong> ${req.topic}<br>
+    <strong>Offer:</strong> P${req.price}<br>
+    <strong>WhatsApp:</strong> ${req.wa}
+  `;
+  document.getElementById('waInfo').innerHTML = info;
+  
+  // Create WhatsApp link
+  const message = encodeURIComponent(`Hi ${req.name}, I saw your help request for ${req.topic} (${req.module}). I'm a peer tutor and would like to help. Let's discuss.`);
+  document.getElementById('waLink').href = `https://wa.me/${req.wa.replace(/[^0-9]/g, '')}?text=${message}`;
+  
+  document.getElementById('waMod').classList.add('on');
+  
+  showToast('Request Taken', 'You have taken this request. Contact the student via WhatsApp.', 'success');
+}
+
+async function markCompleted(reqId) {
+  if (!confirm('Mark this request as completed?')) return;
+  await window.FS.updateRequest(reqId, { status: 'completed' });
+  showToast('Request Completed', 'Thank you for using PeerBridge!', 'success');
+}
+
+async function delReq(id) {
+  if (!confirm('Delete this request?')) return;
+  await window.FS.deleteRequest(id);
+  showToast('Request Deleted', 'Your request has been removed.', 'info');
+}
+
+function closeWA() {
+  document.getElementById('waMod').classList.remove('on');
+}
+
+// Tutors Functions (Simplified)
+async function renderTutors() {
+  const search = document.getElementById('tSrch')?.value.toLowerCase() || '';
+  const fac = document.getElementById('tFacFilter')?.value || '';
+  
+  const users = await window.FS.getAllUsers();
+  const tutors = Object.entries(users)
+    .filter(([id, u]) => u.isTutor)
+    .map(([id, u]) => ({ id, ...u }));
+  
+  let filtered = tutors;
+  if (fac) filtered = filtered.filter(t => t.faculty === fac);
+  if (search) {
+    filtered = filtered.filter(t => 
+      (t.name || '').toLowerCase().includes(search) ||
+      (t.tutorSubjects || []).join(' ').toLowerCase().includes(search)
+    );
+  }
+  
+  const container = document.getElementById('tutorList');
+  
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">⭐</div><p>No tutors found.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = filtered.map(t => {
+    const ratings = _ratings[t.id] || [];
+    const avgRating = ratings.length ? (ratings.reduce((s, r) => s + r.stars, 0) / ratings.length).toFixed(1) : 'New';
+    const tags = ratings.flatMap(r => r.tags || []).filter((v, i, a) => a.indexOf(v) === i);
+    
+    return `
+      <div class="tutor-card">
+        <div class="tutor-top">
+          <div class="tutor-av">${t.name[0]}</div>
+          <div>
+            <div class="tutor-name">${t.name} <span style="font-size:.7rem;color:var(--muted);">· ${t.year || '?'}</span></div>
+            <div class="tutor-bio">${t.tutorBio || 'No bio yet.'}</div>
+          </div>
+        </div>
+        <div class="tutor-subjects">
+          ${(t.tutorSubjects || []).map(s => `<span class="subj-tag">${s.trim()}</span>`).join('')}
+        </div>
+        <div class="stars-row">
+          ${[1,2,3,4,5].map(i => `<span class="star ${i <= avgRating ? 'on' : ''}">★</span>`).join('')}
+          <span class="star-count">${ratings.length} review${ratings.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="rating-tags">
+          ${tags.slice(0, 3).map(tag => `<span class="rtag">#${tag}</span>`).join('')}
+        </div>
+        <div style="margin-top:14px;">
+          <button class="btn btn-blue btn-sm" onclick="openRate('${t.id}', '${t.name}')">⭐ Rate</button>
+          <button class="btn btn-green btn-sm" style="margin-left:8px;" onclick="contactTutor('${t.wa}')">💬 Contact</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function contactTutor(wa) {
+  const message = encodeURIComponent(`Hi, I saw your profile on UB Academic Hub. I'd like to schedule a tutoring session.`);
+  window.open(`https://wa.me/${wa.replace(/[^0-9]/g, '')}?text=${message}`, '_blank');
+}
+
+// Rating Functions
+function openRate(tutorId, tutorName) {
+  rTarget = tutorId;
+  rStars = 0;
+  rTags = [];
+  document.getElementById('rateWho').textContent = `Rate your session with ${tutorName}`;
+  document.querySelectorAll('.rate-star').forEach(el => el.classList.remove('on'));
+  document.querySelectorAll('.rate-tag').forEach(el => el.classList.remove('on'));
+  document.getElementById('rateNote').value = '';
+  document.getElementById('rateMod').classList.add('on');
+}
+
+function setStar(n) {
+  rStars = n;
+  document.querySelectorAll('.rate-star').forEach((el, i) => {
+    el.classList.toggle('on', i < n);
+  });
+}
+
+function toggleTag(el) {
+  el.classList.toggle('on');
+  const tag = el.textContent;
+  if (el.classList.contains('on')) {
+    if (!rTags.includes(tag)) rTags.push(tag);
+  } else {
+    rTags = rTags.filter(t => t !== tag);
+  }
+}
+
+async function submitRating() {
+  if (rStars === 0) { alert('Please select a star rating.'); return; }
+  
+  const rating = {
+    by: CUK,
+    byName: CU.name,
+    stars: rStars,
+    tags: rTags,
+    note: document.getElementById('rateNote').value.trim(),
+    at: new Date().toISOString()
+  };
+  
+  await window.FS.addRating(rTarget, rating);
+  
+  closeRate();
+  showToast('Rating Submitted', 'Thank you for your feedback!', 'success');
+}
+
+function closeRate() {
+  document.getElementById('rateMod').classList.remove('on');
+}
+
+// Become Tutor Functions
+async function becomeTutor() {
+  const bio = document.getElementById('btBio').value.trim();
+  const subj = document.getElementById('btSubj').value.trim();
+  
+  if (!bio || !subj) { alert('Please fill in both fields.'); return; }
+  
+  const subjects = subj.split(',').map(s => s.trim()).filter(s => s);
+  
+  await window.FS.setUser(CUK, {
+    isTutor: true,
+    tutorBio: bio,
+    tutorSubjects: subjects
+  });
+  
+  CU.isTutor = true;
+  CU.tutorBio = bio;
+  CU.tutorSubjects = subjects;
+  
+  document.getElementById('btMod').classList.remove('on');
+  updateRole();
+  go('become');
+  
+  showToast('Tutor Registered', 'You are now a peer tutor!', 'success');
+}
+
+async function updateTutorProfile() {
+  const bio = document.getElementById('editBio').value.trim();
+  const subj = document.getElementById('editSubj').value.trim();
+  
+  if (!bio || !subj) { alert('Please fill in both fields.'); return; }
+  
+  const subjects = subj.split(',').map(s => s.trim()).filter(s => s);
+  
+  await window.FS.setUser(CUK, {
+    tutorBio: bio,
+    tutorSubjects: subjects
+  });
+  
+  CU.tutorBio = bio;
+  CU.tutorSubjects = subjects;
+  
+  showToast('Profile Updated', 'Your tutor profile has been updated.', 'success');
+}
+
+// Points Functions
+function pointsTab(t) {
+  document.getElementById('ptb-leaderboard').classList.toggle('on', t === 'leaderboard');
+  document.getElementById('ptb-submit').classList.toggle('on', t === 'submit');
+  document.getElementById('ptb-mine').classList.toggle('on', t === 'mine');
+  
+  document.getElementById('pts-leaderboard-panel').classList.toggle('hidden', t !== 'leaderboard');
+  document.getElementById('pts-submit-panel').classList.toggle('hidden', t !== 'submit');
+  document.getElementById('pts-mine-panel').classList.toggle('hidden', t !== 'mine');
+  
+  if (t === 'leaderboard') renderPointsLeaderboard();
+  if (t === 'mine') renderMyPoints();
+}
+
+function previewPoints() {
+  const mark = parseInt(document.getElementById('ptsMark').value);
+  if (!mark) { document.getElementById('ptsPreview').innerHTML = ''; return; }
+  
+  let points = 0;
+  if (mark >= 40 && mark < 50) points = 5;
+  else if (mark >= 50 && mark < 60) points = 10;
+  else if (mark >= 60 && mark < 70) points = 15;
+  else if (mark >= 70 && mark < 80) points = 20;
+  else if (mark >= 80 && mark < 90) points = 25;
+  else if (mark >= 90 && mark <= 100) points = 30;
+  
+  document.getElementById('ptsPreview').innerHTML = `⭐ You will earn <strong style="color:var(--green);">${points} points</strong> for this submission.`;
+}
+
+function handlePtsScript(e) {
+  const file = e.target.files[0];
+  if (file) {
+    document.getElementById('ptsScriptDone').classList.remove('hidden');
+  }
+}
+
+async function submitPoints() {
+  const module = document.getElementById('ptsModule').value;
+  const testName = document.getElementById('ptsTestName').value.trim();
+  const mark = parseInt(document.getElementById('ptsMark').value);
+  
+  if (!module) { alert('Select a module.'); return; }
+  if (!testName) { alert('Enter test name.'); return; }
+  if (!mark || mark < 0 || mark > 100) { alert('Enter a valid mark (0-100).'); return; }
+  
+  let points = 0;
+  if (mark >= 40 && mark < 50) points = 5;
+  else if (mark >= 50 && mark < 60) points = 10;
+  else if (mark >= 60 && mark < 70) points = 15;
+  else if (mark >= 70 && mark < 80) points = 20;
+  else if (mark >= 80 && mark < 90) points = 25;
+  else if (mark >= 90 && mark <= 100) points = 30;
+  
+  if (points === 0) {
+    alert('Marks below 40% do not earn points.');
+    return;
+  }
+  
+  const month = new Date().toISOString().slice(0, 7);
+  
+  await window.FS.addPoint({
+    by: CUK,
+    byName: CU.name,
+    faculty: CU.faculty,
+    module,
+    testName,
+    mark,
+    points,
+    month,
+    date: new Date().toISOString()
+  });
+  
+  // Reset form
+  document.getElementById('ptsModule').value = '';
+  document.getElementById('ptsTestName').value = '';
+  document.getElementById('ptsMark').value = '';
+  document.getElementById('ptsScriptDone').classList.add('hidden');
+  document.getElementById('ptsPreview').innerHTML = '';
+  
+  showToast('Points Earned!', `You earned ${points} points for this submission.`, 'success');
+  
+  // Switch to leaderboard
+  pointsTab('leaderboard');
+}
+
+function renderPointsLeaderboard() {
+  const facFilter = document.getElementById('ptsFacFilter')?.value || '';
+  const month = new Date().toISOString().slice(0, 7);
+  
+  let filtered = _points.filter(p => p.month === month);
+  if (facFilter) filtered = filtered.filter(p => p.faculty === facFilter);
+  
+  // Group by user and sum points
+  const userPoints = {};
+  filtered.forEach(p => {
+    if (!userPoints[p.by]) {
+      userPoints[p.by] = { name: p.byName, points: 0, faculty: p.faculty };
+    }
+    userPoints[p.by].points += p.points;
+  });
+  
+  const sorted = Object.entries(userPoints)
+    .map(([id, data]) => ({ id, ...data }))
+    .sort((a, b) => b.points - a.points);
+  
+  const container = document.getElementById('ptsLeaderboardList');
+  
+  if (!sorted.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">🏅</div><p>No submissions yet this month.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = sorted.map((u, i) => `
+    <div style="display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--border);">
+      <div style="width:24px;font-weight:700;color:${i === 0 ? 'var(--gold)' : i === 1 ? 'var(--muted)' : i === 2 ? 'var(--orange)' : 'var(--muted)'};">#${i+1}</div>
+      <div style="flex:1;font-weight:600;">${u.name}</div>
+      <div style="font-weight:700;color:var(--purple);">${u.points} pts</div>
+    </div>
+  `).join('');
+  
+  document.getElementById('ptsResetDate').textContent = 'End of month';
+}
+
+function renderMyPoints() {
+  const myPoints = _points.filter(p => p.by === CUK);
+  const container = document.getElementById('ptsMyList');
+  
+  if (!myPoints.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No submissions yet.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = myPoints.map(p => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid var(--border);">
+      <div><strong>${p.module}</strong> - ${p.testName}</div>
+      <div style="display:flex;gap:10px;">
+        <span>${p.mark}%</span>
+        <span style="font-weight:700;color:var(--green);">+${p.points} pts</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateMyPointsBadge() {
+  const month = new Date().toISOString().slice(0, 7);
+  const total = _points.filter(p => p.by === CUK && p.month === month).reduce((s, p) => s + p.points, 0);
+  document.getElementById('myPtsTotal').textContent = total;
+}
+
+// GPA Functions
+function populateGPARows() {
+  const tbody = document.getElementById('gBody');
+  if (!mods.length) {
+    document.getElementById('gpaNoMods').classList.remove('hidden');
+    tbody.innerHTML = '';
+    return;
+  }
+  document.getElementById('gpaNoMods').classList.add('hidden');
+  
+  tbody.innerHTML = mods.map((m, i) => `
+    <tr>
+      <td>${m.code} – ${m.name}</td>
+      <td><input type="number" id="gCred${i}" value="${m.credits || 3}" min="0" step="0.5" style="width:70px;" oninput="calcGPA()"></td>
+      <td><input type="number" id="gMark${i}" value="" min="0" max="100" step="0.1" style="width:70px;" oninput="calcGPA()"></td>
+      <td id="gGrade${i}">—</td>
+      <td id="gMGP${i}">—</td>
+    </tr>
+  `).join('');
+}
+
+function calcGPA() {
+  const gPts = parseFloat(document.getElementById('gPts').value) || 0;
+  const gCr = parseFloat(document.getElementById('gCr').value) || 0;
+  let totalGP = 0, totalCred = 0;
+  
+  for (let i = 0; i < mods.length; i++) {
+    const cred = parseFloat(document.getElementById('gCred' + i)?.value) || 0;
+    const mark = parseFloat(document.getElementById('gMark' + i)?.value);
+    
+    let gp = 0, grade = 'F';
+    if (!isNaN(mark)) {
+      if (mark >= 70) { gp = 4.0; grade = 'A'; }
+      else if (mark >= 65) { gp = 3.5; grade = 'B+'; }
+      else if (mark >= 60) { gp = 3.0; grade = 'B'; }
+      else if (mark >= 55) { gp = 2.5; grade = 'C+'; }
+      else if (mark >= 50) { gp = 2.0; grade = 'C'; }
+      else if (mark >= 45) { gp = 1.5; grade = 'D+'; }
+      else if (mark >= 40) { gp = 1.0; grade = 'D'; }
+      
+      totalGP += gp * cred;
+      totalCred += cred;
+    }
+    
+    document.getElementById('gGrade' + i).textContent = grade;
+    document.getElementById('gMGP' + i).textContent = gp.toFixed(1);
+  }
+  
+  const termGPA = totalCred > 0 ? totalGP / totalCred : 0;
+  document.getElementById('tGPA').textContent = termGPA.toFixed(3);
+  
+  const newCGPA = gCr > 0 ? (gPts + totalGP) / (gCr + totalCred) : termGPA;
+  document.getElementById('cGPA').textContent = newCGPA.toFixed(3);
+  
+  let cls = 'Pending';
+  if (newCGPA >= 3.6) cls = 'First Class Honours';
+  else if (newCGPA >= 3.0) cls = 'Upper Second Class';
+  else if (newCGPA >= 2.0) cls = 'Lower Second Class';
+  else if (newCGPA >= 1.0) cls = 'Pass';
+  else cls = 'Fail';
+  document.getElementById('cClass').textContent = cls;
+}
+
+function populateForeRows() {
+  const tbody = document.getElementById('fBody');
+  if (!mods.length) {
+    document.getElementById('foreNoMods').classList.remove('hidden');
+    tbody.innerHTML = '';
+    return;
+  }
+  document.getElementById('foreNoMods').classList.add('hidden');
+  
+  tbody.innerHTML = mods.map((m, i) => `
+    <tr>
+      <td>${m.code}</td>
+      <td><input type="number" id="caWt${i}" value="50" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
+      <td><input type="number" id="exWt${i}" value="50" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
+      <td><input type="number" id="caMark${i}" value="" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
+      <td><input type="number" id="target${i}" value="50" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
+      <td id="need${i}">—</td>
+    </tr>
+  `).join('');
+}
+
+function calcForecast() {
+  for (let i = 0; i < mods.length; i++) {
+    const caWt = parseFloat(document.getElementById('caWt' + i)?.value) || 0;
+    const exWt = parseFloat(document.getElementById('exWt' + i)?.value) || 0;
+    const caMark = parseFloat(document.getElementById('caMark' + i)?.value);
+    const target = parseFloat(document.getElementById('target' + i)?.value) || 0;
+    
+    let need = '—';
+    if (!isNaN(caMark) && caWt + exWt === 100 && exWt > 0) {
+      const caContrib = caMark * (caWt / 100);
+      const neededMark = (target - caContrib) / (exWt / 100);
+      if (neededMark > 100) need = 'Impossible';
+      else if (neededMark < 0) need = 'Already achieved';
+      else need = neededMark.toFixed(1) + '%';
+    }
+    
+    document.getElementById('need' + i).textContent = need;
+  }
+}
+
+function clearGPA() {
+  for (let i = 0; i < mods.length; i++) {
+    const markEl = document.getElementById('gMark' + i);
+    if (markEl) markEl.value = '';
+  }
+  calcGPA();
+}
+
+function saveGPAData() {
+  const data = {};
+  for (let i = 0; i < mods.length; i++) {
+    const cred = document.getElementById('gCred' + i)?.value;
+    const mark = document.getElementById('gMark' + i)?.value;
+    if (cred) data[`cred_${i}`] = cred;
+    if (mark) data[`mark_${i}`] = mark;
+  }
+  data.gPts = document.getElementById('gPts').value;
+  data.gCr = document.getElementById('gCr').value;
+  
+  saveToLocal('gpaData', data);
+  showToast('GPA Data Saved', 'Your current marks have been saved locally.', 'success');
+}
+
+function loadGPAData() {
+  const data = loadFromLocal('gpaData', {});
+  
+  for (let i = 0; i < mods.length; i++) {
+    if (data[`cred_${i}`]) document.getElementById('gCred' + i).value = data[`cred_${i}`];
+    if (data[`mark_${i}`]) document.getElementById('gMark' + i).value = data[`mark_${i}`];
+  }
+  if (data.gPts) document.getElementById('gPts').value = data.gPts;
+  if (data.gCr) document.getElementById('gCr').value = data.gCr;
+  
+  calcGPA();
+  showToast('GPA Data Loaded', 'Your saved marks have been loaded.', 'success');
+}
+
+// Study Hub Functions
+function renderSMods() {
+  const container = document.getElementById('sMods');
+  if (!mods.length) {
+    container.innerHTML = '<p style="color:var(--muted);">No modules set up.</p>';
+    return;
+  }
+  
+  container.innerHTML = mods.map(m => `
+    <div class="mod-chip" onclick="pickMod('${m.code}')">${m.code}</div>
+  `).join('');
+}
+
+function pickMod(code) {
+  selMod = code;
+  document.querySelectorAll('.mod-chip').forEach(el => el.classList.remove('sel'));
+  event.target.classList.add('sel');
+}
+
+function handleOut(e) {
+  document.getElementById('outDone').classList.remove('hidden');
+  showToast('Course Outline Uploaded', 'Your outline has been processed.', 'success');
+}
+
+function searchRes() {
+  const topic = document.getElementById('topicIn').value.trim();
+  if (!selMod || !topic) {
+    showToast('Missing Info', 'Select a module and enter a topic.', 'warning');
+    return;
+  }
+  
+  const area = document.getElementById('resArea');
+  area.innerHTML = '<div class="search-loading"><div class="spinner"></div><p>Finding resources...</p></div>';
+  
+  setTimeout(() => {
+    area.innerHTML = `
+      <div class="res-grid">
+        <a href="#" class="res-card">
+          <div class="ri youtube">🎬</div>
+          <div class="res-info"><h4>Khan Academy: ${topic}</h4><p>Video lecture covering ${topic} in depth</p></div>
+          <div class="rbadge ry">YouTube</div>
+        </a>
+        <a href="#" class="res-card">
+          <div class="ri article">📄</div>
+          <div class="res-info"><h4>Study Notes: ${topic}</h4><p>Comprehensive notes with examples</p></div>
+          <div class="rbadge ra">Article</div>
+        </a>
+        <a href="#" class="res-card">
+          <div class="ri quiz">📝</div>
+          <div class="res-info"><h4>Practice Quiz</h4><p>Test your understanding of ${topic}</p></div>
+          <div class="rbadge rq">Quiz</div>
+        </a>
+      </div>
+    `;
+  }, 800);
+}
+
+// Utility Functions
+function populateModDropdowns() {
+  const opts = mods.length
+    ? mods.map(m => `<option value="${m.code} – ${m.name}">${m.code} – ${m.name}</option>`).join('')
+    : '<option value="">No modules — set up in Profile</option>';
+  
+  ['pMod', 'groupModule', 'ptsModule', 'sessionModSelect', 'pomodoroModule', 'stopwatchModule', 'sessionModule', 'roomModule'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.innerHTML = '<option value="">— Select module —</option>' + opts; }
+  });
+}
+
 function populateStreakModules() {
-  const options = mods.length
-    ? mods.map(m => `<option value="${m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('')
+  const opts = mods.length
+    ? mods.map(m => `<option value="${m.code} – ${m.name}">${m.code} – ${m.name}</option>`).join('')
     : '<option value="">No modules — set in Profile</option>';
   
-  ['pomodoroModule', 'stopwatchModule', 'sessionModule', 'sessionModSelect', 'roomModule'].forEach(id => {
+  ['pomodoroModule', 'stopwatchModule', 'sessionModule'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
-      el.innerHTML = '<option value="">— Select module —</option>' + options;
+      el.innerHTML = '<option value="">— Select module —</option>' + opts;
     }
   });
 }
 
-function populateModDropdowns() {
-  const opts = mods.length
-    ? mods.map(m => `<option value="${m.code ? m.code + ' – ' + m.name : m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('')
-    : '<option value="">No modules — set up in Profile</option>';
-  
-  ['pMod', 'groupModule', 'ptsModule', 'ctMod'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.innerHTML = '<option value="">— Select module —</option>' + opts; }
-  });
-  
-  // Session module dropdown
-  const sessionModSelect = document.getElementById('sessionModSelect');
-  if (sessionModSelect) {
-    sessionModSelect.innerHTML = '<option value="">— Select module —</option>' + opts;
-  }
-  
-  const roomModule = document.getElementById('roomModule');
-  if (roomModule) {
-    roomModule.innerHTML = '<option value="">— Select module —</option>' + opts;
-  }
+function setLocation(loc) {
+  document.getElementById('sessionLocation').value = loc;
+  document.querySelectorAll('.location-preset').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
 }
 
-// ── Include all existing functions from original code ──────────
-// (renderTutors, becomeTutor, updateTutorProfile, openRate, setStar, toggleTag, submitRating, closeRate,
-//  renderTips, openTip, closeTipDetail, askTipQuestion, scrollCareer, loadCareerVideos,
-//  calcGPA, clearGPA, saveGPAData, loadGPAData, contestTab, createContest, handleScriptUpload, submitScore,
-//  pointsTab, previewPoints, handlePtsScript, submitPoints, updateMyPointsBadge, renderPointsLeaderboard, renderMyPoints,
-//  renderGroups, filterGroups, createPermanentGroup, joinGroup, leaveGroup, showMyGroups, openGroupChat,
-//  sendChatMsg, closeSquadChat, renderChatMessages, offerHelp, postReq, renderReqs, renderMyReqs, delReq,
-//  validatePrice, peerTab, etc.)
+function closeMod() {
+  document.getElementById('mMod').classList.remove('on');
+}
 
-// ── Make functions available globally ───────────────────────────
+// Make functions available globally
 window.authTab = authTab;
 window.doLogin = doLogin;
 window.doRegister = doRegister;
@@ -3572,7 +4277,6 @@ window.saveProfile = saveProfile;
 window.pickMod = pickMod;
 window.handleOut = handleOut;
 window.searchRes = searchRes;
-window.fRes = fRes;
 window.peerTab = peerTab;
 window.validatePrice = validatePrice;
 window.postReq = postReq;
@@ -3586,19 +4290,10 @@ window.setStar = setStar;
 window.toggleTag = toggleTag;
 window.submitRating = submitRating;
 window.closeRate = closeRate;
-window.openTip = openTip;
-window.closeTipDetail = closeTipDetail;
-window.askTipQuestion = askTipQuestion;
-window.scrollCareer = scrollCareer;
-window.loadCareerVideos = loadCareerVideos;
 window.calcGPA = calcGPA;
 window.clearGPA = clearGPA;
 window.saveGPAData = saveGPAData;
 window.loadGPAData = loadGPAData;
-window.contestTab = contestTab;
-window.createContest = createContest;
-window.handleScriptUpload = handleScriptUpload;
-window.submitScore = submitScore;
 window.pointsTab = pointsTab;
 window.previewPoints = previewPoints;
 window.handlePtsScript = handlePtsScript;
@@ -3609,14 +4304,6 @@ window.updateSettings = updateSettings;
 window.exportData = exportData;
 window.clearData = clearData;
 window.closeMod = closeMod;
-window.filterGroups = filterGroups;
-window.createPermanentGroup = createPermanentGroup;
-window.joinGroup = joinGroup;
-window.leaveGroup = leaveGroup;
-window.showMyGroups = showMyGroups;
-window.openGroupChat = openGroupChat;
-window.sendChatMsg = sendChatMsg;
-window.closeSquadChat = closeSquadChat;
 window.setPomodoroPreset = setPomodoroPreset;
 window.startPomodoro = startPomodoro;
 window.pausePomodoro = pausePomodoro;
@@ -3625,22 +4312,32 @@ window.startStopwatch = startStopwatch;
 window.pauseStopwatch = pauseStopwatch;
 window.resetStopwatch = resetStopwatch;
 window.lapStopwatch = lapStopwatch;
+window.logStudySession = logStudySession;
 window.changeMonth = changeMonth;
 window.goToToday = goToToday;
 window.selectCalendarDay = selectCalendarDay;
-window.sessionsTab = sessionsTab;
+window.squadTab = squadTab;
+window.clearSquadFilter = clearSquadFilter;
+window.filterSquad = filterSquad;
 window.setLocation = setLocation;
-window.clearFacultyFilter = clearFacultyFilter;
-window.filterSessions = filterSessions;
 window.createStudySession = createStudySession;
 window.joinSession = joinSession;
 window.leaveSession = leaveSession;
 window.deleteSession = deleteSession;
+window.createPermanentGroup = createPermanentGroup;
+window.joinGroup = joinGroup;
+window.leaveGroup = leaveGroup;
+window.deleteGroup = deleteGroup;
+window.openGroupChat = openGroupChat;
+window.sendChatMsg = sendChatMsg;
+window.closeSquadChat = closeSquadChat;
 window.renderFocusRooms = renderFocusRooms;
 window.createFocusRoom = createFocusRoom;
 window.joinFocusRoom = joinFocusRoom;
 window.leaveFocusRoom = leaveFocusRoom;
 window.endFocusRoom = endFocusRoom;
+window.contactTutor = contactTutor;
+window.markCompleted = markCompleted;
 </script>
 </body>
 </html>
