@@ -37,7 +37,6 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 @keyframes bounceIn{0%{opacity:0;transform:scale(.3)}50%{transform:scale(1.05)}70%{transform:scale(.9)}100%{opacity:1;transform:scale(1)}}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes timerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);color:var(--red)}}
-@keyframes countdown{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
 
 /* PAGE TRANSITION */
 .page-transition{position:fixed;inset:0;background:linear-gradient(135deg,var(--blue2),var(--purple),var(--pink));
@@ -62,7 +61,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 #particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .particle{position:absolute;border-radius:50%;animation:particleFloat linear infinite;opacity:.15;}
 
-/* AUTH - Using your working version */
+/* AUTH */
 #authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;
   background:linear-gradient(-45deg,#1e3a8a,#7c3aed,#ec4899,#f59e0b);
   background-size:400% 400%;animation:gradientShift 8s ease infinite;
@@ -229,7 +228,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .badge-info{background:var(--blue3);color:var(--blue);border:1px solid #b3d4ff;}
 .badge-purple{background:var(--purple2);color:var(--purple);border:1px solid #d4b8ff;}
 
-/* HOME */
+/* HOME - Fixed glitch */
 .home-top-row{margin-bottom:22px;}
 .home-greet-block h2{font-family:'Fraunces',serif;font-size:1.75rem;
   background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
@@ -251,13 +250,10 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .hsc-title{font-weight:800;font-size:.92rem;color:var(--text);}
 .hsc-sub{font-size:.76rem;color:var(--muted);line-height:1.45;}
 
-/* STUDY STREAK - Timer styles */
+/* STUDY STREAK - New timer styles */
 .timer-container{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border-radius:16px;padding:20px;margin-bottom:20px;}
-.timer-display{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:900;text-align:center;color:var(--blue);margin-bottom:15px;}
+.timer-display{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:900;text-align:center;color:var(--blue);margin-bottom:15px;animation:timerPulse 2s infinite;}
 .timer-controls{display:flex;gap:10px;justify-content:center;margin-bottom:20px;flex-wrap:wrap;}
-.timer-mode-tabs{display:flex;gap:10px;justify-content:center;margin-bottom:20px;}
-.timer-mode-tab{padding:8px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s;}
-.timer-mode-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
 .timer-presets{display:flex;gap:8px;justify-content:center;margin-bottom:15px;flex-wrap:wrap;}
 .timer-preset{background:#fff;border:2px solid var(--border);border-radius:20px;padding:6px 12px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;}
 .timer-preset:hover{border-color:var(--blue2);background:var(--blue3);}
@@ -266,24 +262,6 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .streak-fire{font-size:1.3rem;}
 .streak-count{font-size:1.1rem;}
 .streak-label{font-size:.8rem;color:var(--muted);}
-
-/* Study Calendar */
-.study-calendar{background:#fff;border-radius:16px;padding:20px;border:1px solid var(--border);margin-top:20px;}
-.calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
-.calendar-weekdays{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.75rem;color:var(--muted);margin-bottom:10px;}
-.calendar-days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
-.calendar-day{padding:10px;text-align:center;border-radius:8px;cursor:pointer;transition:all .2s;}
-.calendar-day:hover{background:var(--blue3);}
-.calendar-day.today{background:linear-gradient(135deg,var(--blue2),var(--purple));color:#fff;}
-.calendar-day.has-session{background:var(--green2);color:var(--green);font-weight:700;}
-.calendar-day.has-session.today{background:linear-gradient(135deg,var(--green),var(--teal));color:#fff;}
-.session-log{max-height:200px;overflow-y:auto;margin-top:15px;}
-.session-log-item{display:flex;align-items:center;justify-content:space-between;padding:8px;border-bottom:1px solid var(--border);}
-.session-log-item:last-child{border-bottom:none;}
-.session-log-time{font-size:.8rem;color:var(--muted);}
-.session-log-duration{font-weight:700;color:var(--purple);}
-
-/* Session Form */
 .session-form{background:#fff;border-radius:14px;padding:18px;border:1px solid var(--border);margin-bottom:15px;}
 .session-history{max-height:300px;overflow-y:auto;}
 .session-item{display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid var(--border);}
@@ -295,11 +273,13 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .forecast-title{font-size:.8rem;color:var(--muted);margin-bottom:5px;}
 .forecast-value{font-size:1.3rem;font-weight:700;color:var(--purple);}
 
-/* STUDY SQUAD - Faculty dropdown */
-.faculty-dropdown{max-width:300px;margin-bottom:20px;}
-.faculty-select{padding:10px 14px;border:2px solid var(--border);border-radius:11px;width:100%;font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;outline:none;background:#fafbff;}
+/* STUDY SQUAD - Faculty tabs */
+.faculty-tabs{display:flex;overflow-x:auto;gap:8px;padding-bottom:10px;margin-bottom:20px;-webkit-overflow-scrolling:touch;}
+.faculty-tab{padding:8px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;cursor:pointer;font-size:.8rem;font-weight:600;white-space:nowrap;transition:all .2s;}
+.faculty-tab:hover{border-color:var(--blue2);background:var(--blue3);}
+.faculty-tab.active{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-color:transparent;}
 
-/* Group card styles */
+/* Permanent group styles */
 .group-card{background:#fff;border-radius:16px;border:1px solid var(--border);padding:18px;margin-bottom:12px;transition:all .3s;}
 .group-card:hover{border-color:var(--blue2);box-shadow:0 8px 24px rgba(37,99,235,.1);}
 .group-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
@@ -310,14 +290,6 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .group-stats{display:flex;gap:15px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
 .group-stat{font-size:.8rem;}
 .group-stat strong{color:var(--purple);}
-
-/* Focus Rooms */
-.focus-room-card{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border-radius:16px;padding:20px;margin-bottom:20px;}
-.room-timer{font-size:3rem;font-weight:900;text-align:center;color:var(--purple);margin:15px 0;animation:countdown 1s infinite;}
-.room-participants{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
-.participant-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--blue2),var(--purple));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
-.room-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-.join-room-btn{background:linear-gradient(135deg,var(--green),var(--teal));color:#fff;}
 
 /* GPA */
 .setup-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px;}
@@ -571,8 +543,8 @@ input:checked + .slider:before{transform:translateX(26px);}
   .tutor-card{padding:16px;}
   .req-top{flex-wrap:wrap;gap:8px;}
   .req-top > div:last-child{width:100%;display:flex!important;flex-direction:row!important;justify-content:space-between;align-items:center;}
-  .calendar-days{grid-template-columns:repeat(7,minmax(30px,1fr));}
-  .calendar-day{padding:5px;}
+  .faculty-tabs{flex-wrap:nowrap;}
+  .timer-display{font-size:2.5rem;}
 }
 
 @media(max-width:480px){
@@ -587,9 +559,8 @@ input:checked + .slider:before{transform:translateX(26px);}
   .home-section-card{padding:16px;}
   .auth-card{padding:24px 16px;}
   .auth-brand-text strong{font-size:1.1rem;}
-  .timer-display{font-size:2.5rem;}
+  .timer-display{font-size:2rem;}
   .timer-controls{flex-direction:column;}
-  .timer-mode-tabs{flex-direction:column;}
 }
 </style>
 </head>
@@ -602,7 +573,7 @@ input:checked + .slider:before{transform:translateX(26px);}
 <!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- AUTH - Using your working version -->
+<!-- AUTH -->
 <div id="authScreen">
   <div class="auth-blob" style="width:400px;height:400px;background:rgba(124,58,237,.4);top:-100px;right:-100px;"></div>
   <div class="auth-blob" style="width:300px;height:300px;background:rgba(236,72,153,.3);bottom:-80px;left:-80px;animation-delay:-3s;"></div>
@@ -794,40 +765,27 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- CREATE FOCUS ROOM MODAL -->
-<div class="modal-bg" id="createRoomMod">
-  <div class="modal">
-    <h3>🎯 Create Focus Room</h3>
-    <div class="ff"><label>Room Name</label><input id="roomName" class="req-fi" placeholder="e.g. Thermodynamics Study Session"></div>
-    <div class="ff"><label>Module</label>
-      <select id="roomModule" class="req-fi">
-        <option value="">— Select module —</option>
-      </select>
+<!-- SESSION DETAIL MODAL -->
+<div class="modal-bg" id="sessionMod">
+  <div class="modal" style="max-width:460px;">
+    <h3 id="sesModTitle" style="font-family:'Fraunces',serif;margin-bottom:5px;"></h3>
+    <div id="sesModBody" style="font-size:.88rem;color:var(--muted);line-height:1.7;"></div>
+    <div class="modal-acts" style="margin-top:18px;">
+      <a id="sesModWA" href="#" target="_blank" class="btn btn-green">💬 Join via WhatsApp</a>
+      <button class="btn-sec" onclick="document.getElementById('sessionMod').classList.remove('on')">Close</button>
     </div>
-    <div class="ff"><label>Timer Type</label>
-      <select id="roomTimerType" class="req-fi">
-        <option value="countdown">Countdown (Pomodoro)</option>
-        <option value="countup">Count Up (Stopwatch)</option>
-      </select>
-    </div>
-    <div id="countdownFields">
-      <div class="ff"><label>Focus Duration (minutes)</label>
-        <select id="roomDuration" class="req-fi">
-          <option value="25">25 minutes</option>
-          <option value="30">30 minutes</option>
-          <option value="45">45 minutes</option>
-          <option value="60">60 minutes</option>
-          <option value="90">90 minutes</option>
-          <option value="120">120 minutes</option>
-        </select>
-      </div>
-    </div>
-    <div class="ff"><label>Description (optional)</label>
-      <textarea id="roomDesc" class="req-fi" placeholder="What will you study?" style="min-height:60px;"></textarea>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS MODAL -->
+<div class="modal-bg" id="notifMod">
+  <div class="modal" style="max-width:500px;">
+    <h3>🔔 Notifications</h3>
+    <div id="notifList" style="max-height:400px;overflow-y:auto;">
+      <div class="empty"><div class="ei">🔔</div><p>No new notifications</p></div>
     </div>
     <div class="modal-acts">
-      <button class="btn btn-purple" onclick="createFocusRoom()">🚀 Launch Room</button>
-      <button class="btn-sec" onclick="document.getElementById('createRoomMod').classList.remove('on')">Cancel</button>
+      <button class="btn-sec" onclick="closeNotif()">Close</button>
     </div>
   </div>
 </div>
@@ -908,7 +866,6 @@ input:checked + .slider:before{transform:translateX(26px);}
       <div class="nav-section">
         <div class="nav-section-label">👥 Community</div>
         <button class="nav-item" onclick="go('squad')" id="ni-squad"><span class="ni">📅</span><span>Study Squad</span></button>
-        <button class="nav-item" onclick="go('focus')" id="ni-focus"><span class="ni">🎯</span><span>Focus Rooms</span></button>
         <button class="nav-item" onclick="go('contest')" id="ni-contest"><span class="ni">🏆</span><span>Study Contest</span></button>
         <button class="nav-item" onclick="go('points')" id="ni-points"><span class="ni">⭐</span><span>Earn Points</span></button>
       </div>
@@ -938,7 +895,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       font-size:1.1rem;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);
       display:none;align-items:center;justify-content:center;transition:all .2s;">▶</button>
 
-    <!-- HOME -->
+    <!-- HOME (Fixed) -->
     <div class="page on" id="pg-home">
       <div class="home-top-row">
         <div class="home-greet-block">
@@ -948,7 +905,11 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
 
       <!-- QUICK STATS -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px;">
+        <div class="stat-card" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);padding:15px;">
+          <h3>Current GPA</h3>
+          <div class="stat-val" style="font-size:1.8rem;" id="homeGPA">0.00</div>
+        </div>
         <div class="stat-card" style="background:linear-gradient(135deg,#7c3aed,#ec4899);padding:15px;">
           <h3>Study Streak</h3>
           <div class="stat-val" style="font-size:1.8rem;" id="homeStreak">0</div>
@@ -1012,12 +973,12 @@ input:checked + .slider:before{transform:translateX(26px);}
             <div class="hsc-item" onclick="go('squad')">
               <div class="hsc-icon" style="background:linear-gradient(135deg,#ccfbf1,#d1fae5)">📅</div>
               <div class="hsc-title">Study Squad</div>
-              <div class="hsc-sub">Join study sessions & permanent groups</div>
+              <div class="hsc-sub">Join permanent study groups by faculty</div>
             </div>
-            <div class="hsc-item" onclick="go('focus')">
-              <div class="hsc-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🎯</div>
-              <div class="hsc-title">Focus Rooms</div>
-              <div class="hsc-sub">Study together in real-time rooms</div>
+            <div class="hsc-item" onclick="go('contest')">
+              <div class="hsc-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🏆</div>
+              <div class="hsc-title">Study Contest</div>
+              <div class="hsc-sub">Compete & win prizes</div>
             </div>
             <div class="hsc-item" onclick="go('points')">
               <div class="hsc-icon" style="background:linear-gradient(135deg,#fde68a,#fbbf24)">⭐</div>
@@ -1163,9 +1124,9 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- STUDY STREAK -->
+    <!-- STUDY STREAK (New - Replaces Study Calendar) -->
     <div class="page" id="pg-streak">
-      <div class="page-header"><h1>🔥 Study Streak</h1><p>Track your study time with Pomodoro timer or stopwatch</p></div>
+      <div class="page-header"><h1>🔥 Study Streak</h1><p>Track your study time with Pomodoro timer and earn rewards</p></div>
 
       <!-- Streak Stats -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:15px;">
@@ -1186,27 +1147,21 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
-      <!-- Timer Mode Selection -->
-      <div class="timer-mode-tabs">
-        <button class="timer-mode-tab active" onclick="switchTimerMode('pomodoro')" id="modePomodoro">🍅 Pomodoro</button>
-        <button class="timer-mode-tab" onclick="switchTimerMode('stopwatch')" id="modeStopwatch">⏱️ Stopwatch</button>
-      </div>
-
       <!-- Pomodoro Timer -->
-      <div id="pomodoroTimer" class="timer-container">
-        <div class="timer-display" id="pomodoroDisplay">25:00</div>
+      <div class="timer-container">
+        <div class="timer-display" id="timerDisplay">25:00</div>
         
         <div class="timer-presets">
-          <span class="timer-preset active" onclick="setPomodoroPreset(25, this)">25 min</span>
-          <span class="timer-preset" onclick="setPomodoroPreset(30, this)">30 min</span>
-          <span class="timer-preset" onclick="setPomodoroPreset(45, this)">45 min</span>
-          <span class="timer-preset" onclick="setPomodoroPreset(60, this)">60 min</span>
+          <span class="timer-preset active" onclick="setTimerPreset(25, this)">25 min</span>
+          <span class="timer-preset" onclick="setTimerPreset(30, this)">30 min</span>
+          <span class="timer-preset" onclick="setTimerPreset(45, this)">45 min</span>
+          <span class="timer-preset" onclick="setTimerPreset(60, this)">60 min</span>
         </div>
 
         <div class="timer-controls">
-          <button class="btn btn-green btn-lg" onclick="startPomodoro()" id="pomodoroStart">▶ Start Focus</button>
-          <button class="btn btn-red btn-lg" onclick="pausePomodoro()" id="pomodoroPause" style="display:none;">⏸ Pause</button>
-          <button class="btn btn-blue btn-lg" onclick="resetPomodoro()">🔄 Reset</button>
+          <button class="btn btn-green btn-lg" onclick="startTimer()" id="startBtn">▶ Start Focus</button>
+          <button class="btn btn-red btn-lg" onclick="pauseTimer()" id="pauseBtn" style="display:none;">⏸ Pause</button>
+          <button class="btn btn-blue btn-lg" onclick="resetTimer()">🔄 Reset</button>
         </div>
 
         <div style="display:flex;align-items:center;justify-content:center;gap:15px;margin-top:10px;">
@@ -1217,81 +1172,34 @@ input:checked + .slider:before{transform:translateX(26px);}
           <span style="font-size:.8rem;color:var(--muted);">Auto-repeat cycles (Pomodoro)</span>
         </div>
 
-        <div style="margin-top:15px;text-align:center;font-size:.9rem;color:var(--muted);" id="pomodoroStatus">
-          Focus time - Select subject below
+        <div style="margin-top:15px;text-align:center;font-size:.9rem;color:var(--muted);" id="timerStatus">
+          Focus time - Work until timer ends
         </div>
       </div>
 
-      <!-- Stopwatch Timer -->
-      <div id="stopwatchTimer" class="timer-container" style="display:none;">
-        <div class="timer-display" id="stopwatchDisplay">00:00:00</div>
-        
-        <div class="timer-controls">
-          <button class="btn btn-green btn-lg" onclick="startStopwatch()" id="stopwatchStart">▶ Start</button>
-          <button class="btn btn-red btn-lg" onclick="pauseStopwatch()" id="stopwatchPause" style="display:none;">⏸ Pause</button>
-          <button class="btn btn-blue btn-lg" onclick="resetStopwatch()">🔄 Reset</button>
-          <button class="btn btn-gold btn-lg" onclick="lapStopwatch()" id="stopwatchLap">⏱️ Lap</button>
-        </div>
-
-        <div id="lapTimes" style="margin-top:15px;max-height:100px;overflow-y:auto;"></div>
-      </div>
-
-      <!-- Subject Selection -->
+      <!-- Log Study Session -->
       <div class="session-form">
-        <h4 style="margin-bottom:15px;">📝 Select Subject</h4>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:10px;">
-          <select id="sessionModule" class="req-fi" required>
-            <option value="">— Select module to study —</option>
-          </select>
-          <button class="btn btn-blue" onclick="lockSubject()" id="lockSubjectBtn">🔒 Lock Subject</button>
-        </div>
-        <div id="subjectLockedMsg" class="hidden" style="margin-top:10px;color:var(--green);font-weight:600;">
-          ✓ Subject locked: <span id="lockedSubjectName"></span>
-        </div>
-      </div>
-
-      <!-- Study Calendar -->
-      <div class="study-calendar">
-        <div class="calendar-header">
-          <h4>📅 Study Calendar</h4>
-          <div>
-            <button class="btn btn-sm btn-outline" onclick="previousMonth()">←</button>
-            <span id="currentMonthYear" style="margin:0 10px;font-weight:600;"></span>
-            <button class="btn btn-sm btn-outline" onclick="nextMonth()">→</button>
-          </div>
-        </div>
-        
-        <div class="calendar-weekdays">
-          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-        </div>
-        
-        <div class="calendar-days" id="calendarDays"></div>
-
-        <!-- Daily Log -->
-        <div style="margin-top:20px;">
-          <h5 style="margin-bottom:10px;">📋 Today's Study Log</h5>
-          <div id="dailyLog" class="session-log"></div>
-        </div>
-      </div>
-
-      <!-- Quick Log Session -->
-      <div class="session-form">
-        <h4 style="margin-bottom:15px;">📝 Quick Log Session</h4>
+        <h4 style="margin-bottom:15px;">📝 Log Study Session</h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">
           <div>
             <label style="font-size:.75rem;font-weight:700;color:var(--muted);">Module</label>
-            <select id="quickSessionModule" class="req-fi">
+            <select id="sessionModule" class="req-fi">
               <option value="">Select module</option>
             </select>
           </div>
           <div>
             <label style="font-size:.75rem;font-weight:700;color:var(--muted);">Duration (mins)</label>
-            <input type="number" id="quickSessionDuration" class="req-fi" value="25" min="1" max="480">
+            <input type="number" id="sessionDuration" class="req-fi" value="25" min="1" max="480">
           </div>
           <div>
             <label style="font-size:.75rem;font-weight:700;color:var(--muted);"> </label>
-            <button class="btn btn-green btn-block" onclick="quickLogSession()">✓ Quick Log</button>
+            <button class="btn btn-green btn-block" onclick="logStudySession()">✓ Log Session</button>
           </div>
+        </div>
+        <div style="margin-top:10px;">
+          <label style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="recordAudio"> 🎤 Record audio notes (optional)
+          </label>
         </div>
       </div>
 
@@ -1324,171 +1232,49 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- FOCUS ROOMS -->
-    <div class="page" id="pg-focus">
-      <div style="background:linear-gradient(135deg,#7c3aed,#ec4899,#f59e0b);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-20px;top:-20px;font-size:6rem;opacity:.1;">🎯</div>
-        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">🎯 Focus Rooms</h2>
-        <p style="color:rgba(255,255,255,.75);font-size:.9rem;">Study together in real-time. Create or join a room and earn group points!</p>
-      </div>
-
-      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
-        <button class="btn btn-purple btn-lg" onclick="document.getElementById('createRoomMod').classList.add('on')">
-          ➕ Create Focus Room
-        </button>
-        <button class="btn btn-outline btn-lg" onclick="refreshRooms()">
-          🔄 Refresh Rooms
-        </button>
-      </div>
-
-      <div class="card">
-        <div class="card-title">🎯 Active Focus Rooms</div>
-        <div id="focusRoomsList">
-          <div class="empty"><div class="ei">🎯</div><p>No active rooms. Create one to start studying together!</p></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">📊 Group Study Stats</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;">
-          <div style="text-align:center;">
-            <div style="font-size:2rem;color:var(--purple);">👥</div>
-            <div style="font-size:1.5rem;font-weight:700;" id="totalGroupSessions">0</div>
-            <div style="font-size:.8rem;color:var(--muted);">Group Sessions</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:2rem;color:var(--green);">⭐</div>
-            <div style="font-size:1.5rem;font-weight:700;" id="totalGroupPoints">0</div>
-            <div style="font-size:.8rem;color:var(--muted);">Group Points</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:2rem;color:var(--gold);">👤</div>
-            <div style="font-size:1.5rem;font-weight:700;" id="totalStudyBuddies">0</div>
-            <div style="font-size:.8rem;color:var(--muted);">Study Buddies</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STUDY SQUAD (with faculty dropdown) -->
+    <!-- STUDY SQUAD (Updated with faculty tabs and permanent groups) -->
     <div class="page" id="pg-squad">
       <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b,#2d1b69);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
         <div style="position:absolute;right:-20px;top:-20px;font-size:6rem;opacity:.08;">👥</div>
         <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">📅 Study Squad</h2>
-        <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Join study sessions and permanent groups. Filter by faculty below.</p>
+        <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Join permanent study groups by faculty. Create or join groups and chat anytime.</p>
       </div>
 
-      <!-- Faculty Dropdown -->
-      <div class="faculty-dropdown">
-        <select class="faculty-select" id="facultyFilter" onchange="filterByFaculty()">
-          <option value="all">All Faculties</option>
-          <option value="Engineering & Technology">Engineering & Technology</option>
-          <option value="Science">Science</option>
-          <option value="Business">Business</option>
-          <option value="Social Sciences">Social Sciences</option>
-          <option value="Humanities">Humanities</option>
-          <option value="Education">Education</option>
-          <option value="Law">Law</option>
-          <option value="Medicine">Medicine</option>
-          <option value="Graduate Studies">Graduate Studies</option>
-        </select>
+      <!-- Faculty Tabs -->
+      <div class="faculty-tabs" id="facultyTabs">
+        <span class="faculty-tab active" onclick="filterGroups('all', this)">All Groups</span>
+        <span class="faculty-tab" onclick="filterGroups('Engineering & Technology', this)">Engineering</span>
+        <span class="faculty-tab" onclick="filterGroups('Science', this)">Science</span>
+        <span class="faculty-tab" onclick="filterGroups('Business', this)">Business</span>
+        <span class="faculty-tab" onclick="filterGroups('Social Sciences', this)">Social Sciences</span>
+        <span class="faculty-tab" onclick="filterGroups('Humanities', this)">Humanities</span>
+        <span class="faculty-tab" onclick="filterGroups('Education', this)">Education</span>
+        <span class="faculty-tab" onclick="filterGroups('Law', this)">Law</span>
+        <span class="faculty-tab" onclick="filterGroups('Medicine', this)">Medicine</span>
       </div>
 
-      <!-- Original Study Squad Tabs -->
-      <div class="seg-tabs">
-        <button class="seg-tab on" onclick="squadTab('browse')" id="sq-browse">📋 All Sessions</button>
-        <button class="seg-tab" onclick="squadTab('mine')" id="sq-mine">🙋 My Sessions</button>
-        <button class="seg-tab" onclick="squadTab('create')" id="sq-create">➕ Create Session</button>
+      <!-- Action Buttons -->
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <button class="btn btn-blue" onclick="document.getElementById('createGroupMod').classList.add('on')">
+          ➕ Create Permanent Group
+        </button>
+        <button class="btn btn-purple" onclick="showMyGroups()">
+          👥 My Groups
+        </button>
       </div>
 
-      <!-- Browse Sessions -->
-      <div id="squad-browse">
-        <div class="card" style="padding:13px 17px;margin-bottom:14px;">
-          <input id="sqSrch" type="text" placeholder="Search by module or programme…" oninput="renderSessions()" class="req-fi">
-        </div>
-
-        <!-- Study Sessions -->
-        <h4 style="margin:20px 0 10px;">📋 Upcoming Study Sessions</h4>
-        <div id="sessionList"></div>
-
-        <!-- Permanent Groups -->
-        <h4 style="margin:30px 0 10px;">👥 Permanent Study Groups</h4>
-        <div style="display:flex;gap:10px;margin-bottom:15px;">
-          <button class="btn btn-blue btn-sm" onclick="document.getElementById('createGroupMod').classList.add('on')">
-            ➕ Create Group
-          </button>
-          <button class="btn btn-outline btn-sm" onclick="showMyGroups()">
-            👥 My Groups
-          </button>
-        </div>
-        <div id="groupsList"></div>
+      <!-- Search -->
+      <div class="card" style="padding:13px 17px;margin-bottom:14px;">
+        <input id="groupSearch" type="text" placeholder="Search groups by name or module…" oninput="filterGroups()" class="req-fi">
       </div>
 
-      <!-- My Sessions -->
-      <div id="squad-mine" class="hidden">
-        <div id="mySessionList"><div class="empty"><div class="ei">🙋</div><p>You haven't created any sessions yet.</p></div></div>
-        <h4 style="margin:30px 0 10px;">👥 My Groups</h4>
-        <div id="myGroupsList"></div>
-      </div>
-
-      <!-- Create Session (Original) -->
-      <div id="squad-create" class="hidden">
-        <div class="card">
-          <div class="card-title">📅 Schedule a Study Session</div>
-          <div style="display:grid;gap:13px;">
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Module</label>
-              <select id="sqMod" class="req-fi"><option value="">— Select module —</option></select>
-            </div>
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Topic / What to Cover</label>
-              <input id="sqTopic" class="req-fi" placeholder="e.g. Past paper questions on heat transfer">
-            </div>
-            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📅 Date</label>
-                <input id="sqDate" type="date" class="req-fi">
-              </div>
-              <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div>
-                  <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">⏰ Start</label>
-                  <input id="sqTime" type="time" class="req-fi">
-                </div>
-                <div>
-                  <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">⏰ End</label>
-                  <input id="sqEndTime" type="time" class="req-fi">
-                </div>
-              </div>
-            </div>
-            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📍 Location / Platform</label>
-                <select id="sqLoc" class="req-fi">
-                  <option>Library</option><option>WhatsApp Group</option><option>Zoom</option>
-                  <option>Google Meet</option><option>UB Campus — Block A</option>
-                  <option>UB Campus — Block B</option><option>UB Campus — Block C</option>
-                  <option>Online (TBD)</option>
-                </select>
-              </div>
-              <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">👥 Max Students</label>
-                <select id="sqMax" class="req-fi">
-                  <option value="3">3</option><option value="5" selected>5</option>
-                  <option value="8">8</option><option value="10">10</option><option value="15">15</option><option value="0">No limit</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📝 Extra Notes (optional)</label>
-              <textarea id="sqNotes" class="req-fi" placeholder="e.g. Bring past papers from 2021-2023. Focus on question 3 types." style="min-height:70px;resize:vertical;"></textarea>
-            </div>
-            <button class="btn btn-blue" style="width:fit-content;" onclick="createSession()">📅 Schedule Session</button>
-          </div>
-        </div>
+      <!-- Groups Container -->
+      <div id="groupsList">
+        <div class="empty"><div class="ei">👥</div><p>No groups yet. Be the first to create one!</p></div>
       </div>
     </div>
 
-    <!-- PEER (unchanged) -->
+    <!-- PEER (existing) -->
     <div class="page" id="pg-peer">
       <div class="pb-banner">
         <div><h2>🤝 PeerBridge</h2><p>Post a help request and set your own price — connect with peer tutors at UB</p></div>
@@ -1572,7 +1358,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- TUTORS (unchanged) -->
+    <!-- TUTORS (existing) -->
     <div class="page" id="pg-tutors">
       <div class="page-header"><h1>⭐ Find a Tutor</h1><p>Browse rated peer tutors and connect via WhatsApp</p></div>
       <div class="card" style="padding:14px 18px;margin-bottom:14px;">
@@ -1595,7 +1381,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       <div id="tutorList"><div class="empty"><div class="ei">⭐</div><p>No tutors yet.<br>Go to <strong>Become a Tutor</strong> to be first!</p></div></div>
     </div>
 
-    <!-- BECOME (unchanged) -->
+    <!-- BECOME (existing) -->
     <div class="page" id="pg-become">
       <div class="become-hero">
         <h2>🎯 Become a Peer Tutor</h2>
@@ -1629,7 +1415,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- PROFILE (unchanged) -->
+    <!-- PROFILE (existing) -->
     <div class="page" id="pg-profile">
       <div class="profile-hero">
         <div class="profile-av-big" id="profAv">A</div>
@@ -1686,7 +1472,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- SETTINGS -->
+    <!-- SETTINGS (existing) -->
     <div class="page" id="pg-settings">
       <div class="page-header"><h1>⚙️ Settings</h1><p>Customize your experience</p></div>
 
@@ -1744,7 +1530,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- STUDY CONTEST -->
+    <!-- STUDY CONTEST (existing) -->
     <div class="page" id="pg-contest">
       <div style="background:linear-gradient(135deg,#92400e,#b45309,#d97706);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
         <div style="position:absolute;right:-10px;top:-10px;font-size:7rem;opacity:.1;">🏆</div>
@@ -1843,7 +1629,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- EARN POINTS -->
+    <!-- EARN POINTS (existing) -->
     <div class="page" id="pg-points">
       <div style="background:linear-gradient(135deg,#78350f,#b45309,#f59e0b);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
         <div style="position:absolute;right:-10px;top:-10px;font-size:7rem;opacity:.1;">⭐</div>
@@ -1981,17 +1767,14 @@ import { getFirestore, doc, getDoc, setDoc, updateDoc, collection,
          where, increment, arrayUnion, arrayRemove }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ⚠️ IMPORTANT: Replace with YOUR Firebase config from Firebase Console
 const firebaseConfig = {
   apiKey: "AIzaSyBg8om9AP7dase-Zoc8OeojfP8kQI5qtho",
   authDomain: "ub-academic-hub.firebaseapp.com",
   projectId: "ub-academic-hub",
   storageBucket: "ub-academic-hub.firebasestorage.app",
   messagingSenderId: "972839460503",
-  appId: "1:972839460503:web:34b8d9d99da370239f13d2",
-  measurementId: "G-2REX85DN3S"
+  appId: "1:972839460503:web:34b8d9d99da370239f13d2"
 };
-
 const _app = initializeApp(firebaseConfig);
 const _db  = getFirestore(_app);
 
@@ -2024,6 +1807,7 @@ const FS = {
   async getUserStudySessions(userId){ const s=await getDocs(query(collection(_db,'studySessions'),where('userId','==',userId),orderBy('date','desc'))); return s.docs.map(d=>({id:d.id,...d.data()})); },
   async addNotification(userId,data){ await addDoc(collection(_db,'notifications'),{userId,...data,at:serverTimestamp(),read:false}); },
   async getNotifications(userId){ const s=await getDocs(query(collection(_db,'notifications'),where('userId','==',userId),orderBy('at','desc'),limit(20))); return s.docs.map(d=>({id:d.id,...d.data()})); },
+  // Permanent groups
   async addGroup(data){ return await addDoc(collection(_db,'groups'),{...data,at:serverTimestamp(),members:[data.createdBy]}); },
   async getGroups(){ const s=await getDocs(query(collection(_db,'groups'),orderBy('at','desc'))); return s.docs.map(d=>({id:d.id,...d.data()})); },
   onGroups(cb){ return onSnapshot(query(collection(_db,'groups'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
@@ -2031,14 +1815,6 @@ const FS = {
   async leaveGroup(groupId,userId){ await updateDoc(doc(_db,'groups',groupId),{members:arrayRemove(userId)}); },
   async sendGroupMsg(groupId,data){ return await addDoc(collection(_db,'groupChats',groupId,'messages'),{...data,at:serverTimestamp()}); },
   onGroupMsgs(groupId,cb){ return onSnapshot(query(collection(_db,'groupChats',groupId,'messages'),orderBy('at','asc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
-  // Focus Rooms
-  async addFocusRoom(data){ return await addDoc(collection(_db,'focusRooms'),{...data,at:serverTimestamp(),participants:[data.createdBy]}); },
-  async getFocusRooms(){ const s=await getDocs(query(collection(_db,'focusRooms'),where('active','==',true))); return s.docs.map(d=>({id:d.id,...d.data()})); },
-  onFocusRooms(cb){ return onSnapshot(query(collection(_db,'focusRooms'),where('active','==',true)),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
-  async joinFocusRoom(roomId,userId){ await updateDoc(doc(_db,'focusRooms',roomId),{participants:arrayUnion(userId)}); },
-  async leaveFocusRoom(roomId,userId){ await updateDoc(doc(_db,'focusRooms',roomId),{participants:arrayRemove(userId)}); },
-  async updateFocusRoomTimer(roomId,time){ await updateDoc(doc(_db,'focusRooms',roomId),{currentTime:time}); },
-  async endFocusRoom(roomId){ await updateDoc(doc(_db,'focusRooms',roomId),{active:false}); },
 };
 
 window.FS = FS;
@@ -2047,21 +1823,2467 @@ document.dispatchEvent(new CustomEvent('fs-ready'));
 </script>
 
 <script>
-// ── Wait for Firebase, show status ──────────────────────────────
-(function(){
-  const el = document.getElementById('fsStatus');
-  if(el) el.style.display = 'block';
-  document.addEventListener('fs-ready', function(){
-    if(el) el.style.display = 'none';
+// ── Toast Notification System ───────────────────────────────────
+function showToast(title, message, type = 'info', duration = 5000) {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  
+  const icons = {
+    success: '✅',
+    error: '❌',
+    warning: '⚠️',
+    info: 'ℹ️'
+  };
+  
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type]}</div>
+    <div class="toast-content">
+      <div class="toast-title">${title}</div>
+      <div class="toast-message">${message}</div>
+    </div>
+    <button class="toast-close" onclick="this.parentElement.remove()">✕</button>
+  `;
+  
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), duration);
+}
+
+// ── Loading States ──────────────────────────────────────────────
+function showLoading(msg = 'Loading...') {
+  let el = document.getElementById('_loadOverlay');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = '_loadOverlay';
+    el.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,.7);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;';
+    el.innerHTML = `<div class="spinner" style="width:36px;height:36px;border-width:4px;border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div><p style="color:#fff;font-size:.9rem;font-weight:600;">${msg}</p>`;
+    document.body.appendChild(el);
+  } else {
+    el.querySelector('p').textContent = msg;
+    el.style.display = 'flex';
+  }
+}
+
+function hideLoading() {
+  const el = document.getElementById('_loadOverlay');
+  if (el) el.style.display = 'none';
+}
+
+// ── Local Storage Helpers ───────────────────────────────────────
+function saveToLocal(key, data) {
+  try {
+    localStorage.setItem(`ub_${key}`, JSON.stringify(data));
+  } catch (e) {
+    console.warn('Failed to save to localStorage:', e);
+  }
+}
+
+function loadFromLocal(key, defaultValue = null) {
+  try {
+    const data = localStorage.getItem(`ub_${key}`);
+    return data ? JSON.parse(data) : defaultValue;
+  } catch (e) {
+    return defaultValue;
+  }
+}
+
+// ── AUTH ────────────────────────────────────────────────────────
+let _users = {}, _requests = [], _sessions = [], _contests = [], _scores = [], _ratings = {}, _points = [], _studySessions = [], _groups = [];
+let CU = null, CUK = null, mods = [], selMod = null, rTarget = null, rStars = 0, rTags = [];
+const PTITLES = {
+  home: 'Home', gpa: 'GPA Tracker', study: 'Study Hub',
+  streak: 'Study Streak', peer: 'Get Help', tutors: 'Find a Tutor',
+  become: 'Become a Tutor', profile: 'My Profile', squad: 'Study Squad',
+  contest: 'Study Contest', points: 'Earn Points', settings: 'Settings'
+};
+
+// ── Expanded Quotes (refresh every 3 hours) ─────────────────────
+const QUOTES = [
+  '"The secret of getting ahead is getting started." — Mark Twain',
+  '"An investment in knowledge pays the best interest." — Benjamin Franklin',
+  '"Education is the most powerful weapon to change the world." — Nelson Mandela',
+  '"The beautiful thing about learning is no one can take it away from you." — B.B. King',
+  '"Success is the sum of small efforts, repeated day in and day out." — Robert Collier',
+  '"Believe you can and you\'re halfway there." — Theodore Roosevelt',
+  '"Push yourself, because no one else is going to do it for you." — Unknown',
+  '"Great things never came from comfort zones." — Unknown',
+  '"The expert in anything was once a beginner." — Helen Hayes',
+  '"Don\'t watch the clock; do what it does. Keep going." — Sam Levenson',
+  '"The future belongs to those who believe in the beauty of their dreams." — Eleanor Roosevelt',
+  '"It always seems impossible until it\'s done." — Nelson Mandela',
+  '"Success is not final, failure is not fatal: it is the courage to continue that counts." — Winston Churchill',
+  '"Your time is limited, don\'t waste it living someone else\'s life." — Steve Jobs',
+  '"The only way to do great work is to love what you do." — Steve Jobs',
+  '"Strive not to be a success, but rather to be of value." — Albert Einstein',
+  '"The mind is not a vessel to be filled, but a fire to be kindled." — Plutarch',
+  '"Learning never exhausts the mind." — Leonardo da Vinci',
+  '"The more that you read, the more things you will know. The more that you learn, the more places you\'ll go." — Dr. Seuss',
+  '"Education is the passport to the future, for tomorrow belongs to those who prepare for it today." — Malcolm X',
+  '"The roots of education are bitter, but the fruit is sweet." — Aristotle',
+  '"Intelligence plus character — that is the goal of true education." — Martin Luther King Jr.',
+  '"The capacity to learn is a gift; the ability to learn is a skill; the willingness to learn is a choice." — Brian Herbert',
+  '"Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing." — William Arthur Ward',
+  '"The difference between ordinary and extraordinary is that little extra." — Jimmy Johnson',
+  '"Excellence is not a skill. It is an attitude." — Ralph Marston',
+  '"The only place where success comes before work is in the dictionary." — Vidal Sassoon',
+  '"There are no shortcuts to any place worth going." — Beverly Sills',
+  '"The best way to predict your future is to create it." — Abraham Lincoln',
+  '"Don\'t let what you cannot do interfere with what you can do." — John Wooden',
+  '"Start where you are. Use what you have. Do what you can." — Arthur Ashe',
+  '"It does not matter how slowly you go as long as you do not stop." — Confucius',
+  '"The secret of getting ahead is getting started." — Mark Twain',
+  '"Quality is not an act, it is a habit." — Aristotle',
+  '"The journey of a thousand miles begins with one step." — Lao Tzu',
+  '"What you get by achieving your goals is not as important as what you become by achieving your goals." — Zig Ziglar',
+  '"You don\'t have to be great to start, but you have to start to be great." — Zig Ziglar',
+  '"The expert in anything was once a beginner." — Helen Hayes',
+  '"Success is walking from failure to failure with no loss of enthusiasm." — Winston Churchill',
+  '"Everything you\'ve ever wanted is on the other side of fear." — George Addair',
+  '"The harder you work for something, the greater you\'ll feel when you achieve it." — Unknown',
+  '"Dreams don\'t work unless you do." — John C. Maxwell',
+  '"The future depends on what you do today." — Mahatma Gandhi',
+  '"Little things make big days." — Unknown',
+  '"Motivation is what gets you started. Habit is what keeps you going." — Jim Ryun',
+  '"The best preparation for tomorrow is doing your best today." — H. Jackson Brown Jr.',
+  '"Your attitude, not your aptitude, will determine your altitude." — Zig Ziglar',
+  '"The way to get started is to quit talking and begin doing." — Walt Disney',
+  '"If you are working on something that you really care about, you don\'t have to be pushed. The vision pulls you." — Steve Jobs',
+  '"The only limit to our realization of tomorrow will be our doubts of today." — Franklin D. Roosevelt',
+  '"There is no substitute for hard work." — Thomas Edison',
+  '"The only person you are destined to become is the person you decide to be." — Ralph Waldo Emerson',
+  '"Successful men and women keep moving. They make mistakes, but they don\'t quit." — Conrad Hilton',
+  '"The difference between who you are and who you want to be is what you do." — Unknown',
+  '"Act as if what you do makes a difference. It does." — William James',
+  '"Keep your eyes on the stars, and your feet on the ground." — Theodore Roosevelt',
+  '"The only way to achieve the impossible is to believe it is possible." — Charles Kingsleigh',
+  '"It always seems impossible until it is done." — Nelson Mandela'
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const savedUser = loadFromLocal('rememberedUser');
+  if (savedUser && savedUser.id) {
+    document.getElementById('lU').value = savedUser.id;
+    document.getElementById('rememberMe').checked = true;
+  }
+  loadSettings();
+});
+
+function authTab(t) {
+  document.querySelectorAll('.auth-tab').forEach((el, i) => el.classList.toggle('on', (i === 0 && t === 'login') || (i === 1 && t === 'register')));
+  document.getElementById('loginF').classList.toggle('hidden', t !== 'login');
+  document.getElementById('regF').classList.toggle('hidden', t !== 'register');
+  setMsg('');
+}
+
+function setMsg(m, ok) {
+  const el = document.getElementById('aMsg');
+  el.textContent = m;
+  el.style.color = ok ? 'var(--green)' : 'var(--red)';
+}
+
+async function doLogin() {
+  if (!window.FS) { setMsg('Still connecting... please wait.'); return; }
+  
+  const u = document.getElementById('lU').value.trim();
+  const p = document.getElementById('lP').value;
+  const remember = document.getElementById('rememberMe').checked;
+  
+  if (!u || !p) { setMsg('Fill in all fields.'); return; }
+  if (!/^\d{9}$/.test(u)) { setMsg('Student ID must be exactly 9 digits.'); return; }
+  
+  setMsg('Signing in...');
+  showLoading('Signing in...');
+  
+  try {
+    const user = await window.FS.getUser(u);
+    if (!user || user.password !== p) {
+      hideLoading();
+      setMsg('Incorrect Student ID or password.');
+      return;
+    }
+    
+    if (remember) {
+      saveToLocal('rememberedUser', { id: u });
+    } else {
+      localStorage.removeItem('ub_rememberedUser');
+    }
+    
+    await enterApp(u, user);
+    hideLoading();
+    showToast('Welcome back!', `Good to see you, ${user.name.split(' ')[0]}!`, 'success');
+  } catch (e) {
+    hideLoading();
+    setMsg('Connection error. Check your internet.');
+    showToast('Login Failed', 'Please check your connection and try again.', 'error');
+  }
+}
+
+async function doRegister() {
+  if (!window.FS) { setMsg('Still connecting... please wait.'); return; }
+  
+  const n = document.getElementById('rN').value.trim();
+  const u = document.getElementById('rU').value.trim();
+  const w = document.getElementById('rW').value.trim();
+  const e = document.getElementById('rE').value.trim();
+  const y = document.getElementById('rY').value;
+  const p = document.getElementById('rP').value;
+  const pc = document.getElementById('rPC').value;
+  
+  if (!n || !u || !w || !p) { setMsg('Fill in all required fields.'); return; }
+  if (!/^\d{9}$/.test(u)) { setMsg('Student ID must be exactly 9 digits.'); return; }
+  if (p !== pc) { setMsg('Passwords do not match.'); return; }
+  if (p.length < 6) { setMsg('Password must be at least 6 characters.'); return; }
+  
+  setMsg('Creating account...');
+  showLoading('Creating your account...');
+  
+  try {
+    const existing = await window.FS.getUser(u);
+    if (existing) {
+      hideLoading();
+      setMsg('This Student ID is already registered.');
+      return;
+    }
+    
+    const fac = document.getElementById('rFac').value;
+    const userData = {
+      name: n, password: p, wa: w, email: e || '', year: y, faculty: fac,
+      studentId: u, modules: [], isTutor: false, tutorBio: '', tutorSubjects: [],
+      programme: '', semester: 'Semester 1', createdAt: new Date().toISOString(),
+      settings: { darkMode: false, compact: false, emailNotif: true, pushNotif: true, showProfile: true },
+      studyStats: { totalHours: 0, streak: 0, lastStudyDate: null, points: 0 }
+    };
+    
+    await window.FS.setUser(u, userData);
+    hideLoading();
+    setMsg('✓ Account created!', true);
+    showToast('Registration Successful', 'Welcome to UB Academic Hub!', 'success');
+    setTimeout(() => enterApp(u, userData), 700);
+  } catch (e) {
+    hideLoading();
+    console.error(e);
+    setMsg('Connection error. Check your internet.');
+    showToast('Registration Failed', 'Please try again later.', 'error');
+  }
+}
+
+function showForgotPassword() {
+  document.getElementById('forgotMod').classList.add('on');
+}
+
+function closeForgot() {
+  document.getElementById('forgotMod').classList.remove('on');
+  document.getElementById('fU').value = '';
+  document.getElementById('fW').value = '';
+}
+
+async function resetPassword() {
+  const u = document.getElementById('fU').value.trim();
+  const w = document.getElementById('fW').value.trim();
+  
+  if (!u || !w) { alert('Please fill in both fields.'); return; }
+  
+  showLoading('Processing...');
+  try {
+    const user = await window.FS.getUser(u);
+    if (!user || user.wa !== w) {
+      hideLoading();
+      alert('Student ID and WhatsApp number do not match our records.');
+      return;
+    }
+    
+    const tempPass = Math.random().toString(36).slice(-8);
+    await window.FS.setUser(u, { password: tempPass });
+    
+    hideLoading();
+    alert(`Your temporary password is: ${tempPass}\n\nPlease change it after logging in.`);
+    closeForgot();
+    showToast('Password Reset', 'Temporary password sent. Check your WhatsApp.', 'info');
+  } catch (e) {
+    hideLoading();
+    alert('An error occurred. Please try again.');
+  }
+}
+
+// ── App Entry ───────────────────────────────────────────────────
+async function enterApp(u, userData) {
+  if (!window.FS) {
+    await new Promise(resolve => {
+      if (window._fsReady) { resolve(); return; }
+      document.addEventListener('fs-ready', resolve, { once: true });
+      setTimeout(resolve, 8000);
+    });
+  }
+  
+  CUK = u;
+  CU = userData;
+  mods = CU.modules || [];
+  
+  // Set up real-time listeners
+  window._unsubReqs = window.FS.onRequests(data => { _requests = data; renderReqs(); renderMyReqs(); });
+  window._unsubSess = window.FS.onSessions(data => { _sessions = data; });
+  window._unsubConts = window.FS.onContests(data => { _contests = data; if (document.getElementById('pg-contest').classList.contains('on')) { renderContests(); populateContestDropdowns(); } });
+  window._unsubScores = window.FS.onScores(data => { _scores = data; if (document.getElementById('pg-contest').classList.contains('on')) renderLeaderboard(); });
+  window._unsubPoints = window.FS.onPoints(data => { _points = data; if (document.getElementById('pg-points').classList.contains('on')) { renderPointsLeaderboard(); renderMyPoints(); } updateMyPointsBadge(); updateHomeStats(); });
+  window._unsubGroups = window.FS.onGroups(data => { _groups = data; if (document.getElementById('pg-squad').classList.contains('on')) renderGroups(); });
+  
+  // Load ratings
+  _ratings = await window.FS.getRatings();
+  
+  // Load study sessions
+  try {
+    _studySessions = await window.FS.getUserStudySessions(CUK);
+  } catch (e) {
+    console.warn('Could not load study sessions:', e);
+  }
+  
+  const ini = CU.name[0].toUpperCase();
+  ['sbAv', 'topAv', 'profAv'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ini; });
+  document.getElementById('sbUname').textContent = CU.name.split(' ')[0];
+  const pwaEl = document.getElementById('pWA'); if (pwaEl) pwaEl.value = CU.wa || '';
+  const pEmailEl = document.getElementById('pdEmail'); if (pEmailEl) pEmailEl.textContent = CU.email || '—';
+  const pFacultyEl = document.getElementById('pdFaculty'); if (pFacultyEl) pFacultyEl.textContent = CU.faculty || '—';
+  
+  updateRole();
+  document.getElementById('authScreen').classList.add('hidden');
+  document.getElementById('appScreen').classList.remove('on');
+  document.getElementById('appScreen').classList.remove('hidden');
+  document.getElementById('appScreen').classList.add('on');
+  
+  setGreeting();
+  renderTips();
+  renderSMods();
+  renderTutors();
+  renderProfile();
+  populateModDropdowns();
+  populateGPARows();
+  populateForeRows();
+  populateStreakModules();
+  renderSessionHistory();
+  updateStreakStats();
+  renderGroups();
+  updateHomeStats();
+  
+  go('home');
+  setTimeout(loadCareerVideos, 400);
+  
+  if (!CU.programme || CU.programme === '') {
+    setTimeout(() => {
+      const m = document.getElementById('setupMod');
+      if (m) m.classList.add('on');
+    }, 800);
+  }
+  
+  applySettings();
+  
+  // Set up quote rotation every 3 hours
+  setInterval(rotateQuote, 3 * 60 * 60 * 1000);
+}
+
+function doLogout() {
+  CU = null; CUK = null; mods = []; selMod = null;
+  if (window._quoteTimer) clearInterval(window._quoteTimer);
+  if (window._careerTimer) clearInterval(window._careerTimer);
+  if (window._unsubReqs) window._unsubReqs();
+  if (window._unsubSess) window._unsubSess();
+  if (window._unsubConts) window._unsubConts();
+  if (window._unsubScores) window._unsubScores();
+  if (window._unsubPoints) window._unsubPoints();
+  if (window._unsubGroups) window._unsubGroups();
+  if (window._timerInterval) clearInterval(window._timerInterval);
+  
+  document.getElementById('appScreen').classList.add('hidden');
+  document.getElementById('authScreen').classList.remove('hidden');
+  document.getElementById('lU').value = '';
+  document.getElementById('lP').value = '';
+  showToast('Logged Out', 'You have been successfully logged out.', 'info');
+}
+
+function updateRole() {
+  const iT = CU && CU.isTutor;
+  ['sbRole', 'profRole'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = iT ? 'Tutor' : 'Student';
+    el.className = 'sb-role ' + (iT ? 'tutor' : 'student');
   });
-  setTimeout(()=>{ if(el) el.style.display='none'; }, 8000);
+  
+  if (CU) {
+    document.getElementById('alreadyTutor').classList.toggle('hidden', !iT);
+    document.getElementById('notTutor').classList.toggle('hidden', iT);
+    if (iT) {
+      document.getElementById('editBio').value = CU.tutorBio || '';
+      document.getElementById('editSubj').value = (CU.tutorSubjects || []).join(', ');
+    }
+  }
+}
+
+// ── SETTINGS ────────────────────────────────────────────────────
+function loadSettings() {
+  const settings = loadFromLocal('settings', { darkMode: false, compact: false, emailNotif: true, pushNotif: true, showProfile: true });
+  document.getElementById('darkModeToggle').checked = settings.darkMode;
+  document.getElementById('compactView').checked = settings.compact;
+  document.getElementById('emailNotif').checked = settings.emailNotif;
+  document.getElementById('pushNotif').checked = settings.pushNotif;
+  document.getElementById('showProfile').checked = settings.showProfile;
+  applySettings();
+}
+
+function toggleDarkMode() {
+  updateSettings();
+}
+
+function toggleCompact() {
+  updateSettings();
+}
+
+async function updateSettings() {
+  const settings = {
+    darkMode: document.getElementById('darkModeToggle').checked,
+    compact: document.getElementById('compactView').checked,
+    emailNotif: document.getElementById('emailNotif').checked,
+    pushNotif: document.getElementById('pushNotif').checked,
+    showProfile: document.getElementById('showProfile').checked
+  };
+  
+  saveToLocal('settings', settings);
+  applySettings();
+  
+  if (CUK) {
+    await window.FS.setUser(CUK, { settings });
+  }
+  
+  showToast('Settings Updated', 'Your preferences have been saved.', 'success');
+}
+
+function applySettings() {
+  const settings = loadFromLocal('settings', { darkMode: false, compact: false });
+  
+  if (settings.darkMode) {
+    document.documentElement.style.setProperty('--bg', '#0f172a');
+    document.documentElement.style.setProperty('--card', '#1e293b');
+    document.documentElement.style.setProperty('--text', '#f1f5f9');
+    document.documentElement.style.setProperty('--muted', '#94a3b8');
+    document.documentElement.style.setProperty('--border', '#334155');
+  } else {
+    document.documentElement.style.setProperty('--bg', '#f8faff');
+    document.documentElement.style.setProperty('--card', '#fff');
+    document.documentElement.style.setProperty('--text', '#0f172a');
+    document.documentElement.style.setProperty('--muted', '#64748b');
+    document.documentElement.style.setProperty('--border', '#e2e8f0');
+  }
+  
+  if (settings.compact) {
+    document.documentElement.style.setProperty('--sidebar', '220px');
+    document.querySelectorAll('.card').forEach(c => c.style.padding = '16px');
+  } else {
+    document.documentElement.style.setProperty('--sidebar', '280px');
+    document.querySelectorAll('.card').forEach(c => c.style.padding = '');
+  }
+}
+
+function exportData() {
+  const data = {
+    user: CU,
+    modules: mods,
+    points: _points.filter(p => p.by === CUK),
+    scores: _scores.filter(s => s.by === CUK),
+    studySessions: _studySessions
+  };
+  
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ub_academic_data_${CUK}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  showToast('Data Exported', 'Your data has been downloaded.', 'success');
+}
+
+function clearData() {
+  if (confirm('Are you sure you want to clear all local data? This will not affect your account on the server.')) {
+    localStorage.clear();
+    showToast('Data Cleared', 'Local data has been cleared.', 'info');
+    location.reload();
+  }
+}
+
+// ── NAVIGATION ──────────────────────────────────────────────────
+function flashTransition() {
+  const pt = document.getElementById('pt');
+  if (!pt) return;
+  pt.classList.add('flash');
+  setTimeout(() => pt.classList.remove('flash'), 400);
+}
+
+function go(pg) {
+  flashTransition();
+  setTimeout(() => {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('on'));
+    
+    const pgEl = document.getElementById('pg-' + pg);
+    if (!pgEl) { console.warn('Page not found:', pg); return; }
+    
+    pgEl.classList.add('on');
+    const ni = document.getElementById('ni-' + pg);
+    if (ni) ni.classList.add('on');
+    
+    const tt = document.getElementById('topTitle');
+    if (tt) tt.textContent = PTITLES[pg] || '';
+    
+    closeSB();
+    
+    if (pg === 'tutors') renderTutors();
+    if (pg === 'profile') { renderProfile(); loadProfileEditor(); }
+    if (pg === 'become') updateRole();
+    if (pg === 'squad') { renderGroups(); }
+    if (pg === 'home') { setGreeting(); updateHomeStats(); }
+    if (pg === 'contest') { renderContests(); renderLeaderboard(); populateContestDropdowns(); }
+    if (pg === 'points') { renderPointsLeaderboard(); }
+    if (pg === 'streak') { populateStreakModules(); renderSessionHistory(); updateStreakStats(); }
+  }, 150);
+}
+
+function openSB() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar').classList.remove('collapsed');
+  document.getElementById('sbOverlay').classList.add('on');
+  document.getElementById('sidebarOpenBtn').style.display = 'none';
+}
+
+function closeSB() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sbOverlay').classList.remove('on');
+}
+
+function toggleSB() {
+  const sb = document.getElementById('sidebar');
+  const main = document.querySelector('.main');
+  const openBtn = document.getElementById('sidebarOpenBtn');
+  const toggleBtn = document.getElementById('sbToggleBtn');
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    closeSB();
+    return;
+  }
+  
+  const isCollapsed = sb.classList.contains('collapsed');
+  
+  if (isCollapsed) {
+    sb.classList.remove('collapsed');
+    main.style.marginLeft = 'var(--sidebar)';
+    if (openBtn) openBtn.style.display = 'none';
+    if (toggleBtn) toggleBtn.textContent = '◀';
+  } else {
+    sb.classList.add('collapsed');
+    main.style.marginLeft = '0';
+    if (openBtn) { openBtn.style.display = 'flex'; }
+    if (toggleBtn) toggleBtn.textContent = '▶';
+    document.getElementById('sbOverlay').classList.remove('on');
+  }
+}
+
+// ── HOME ────────────────────────────────────────────────────────
+function setGreeting() {
+  const h = new Date().getHours();
+  const g = h < 12 ? 'Good morning ☀️' : h < 17 ? 'Good afternoon 👋' : 'Good evening 🌙';
+  const name = CU ? CU.name.split(' ')[0] : 'Student';
+  document.getElementById('heroGreet').textContent = g + `, ${name}!`;
+  rotateQuote();
+}
+
+function rotateQuote() {
+  const el = document.getElementById('heroQuote');
+  if (!el) return;
+  el.style.transition = 'opacity .6s';
+  el.style.opacity = '0';
+  setTimeout(() => {
+    const randomIndex = Math.floor(Math.random() * QUOTES.length);
+    el.textContent = QUOTES[randomIndex];
+    el.style.opacity = '1';
+  }, 600);
+}
+
+function updateHomeStats() {
+  const gpaEl = document.getElementById('homeGPA');
+  if (gpaEl) {
+    const tgpa = parseFloat(document.getElementById('tGPA')?.textContent) || 0;
+    gpaEl.textContent = tgpa.toFixed(2);
+  }
+  
+  const pointsEl = document.getElementById('homePoints');
+  if (pointsEl) {
+    const month = currentMonth();
+    const total = _points.filter(p => p.by === CUK && p.month === month).reduce((s, p) => s + (p.points || 0), 0);
+    pointsEl.textContent = total;
+  }
+  
+  const streakEl = document.getElementById('homeStreak');
+  if (streakEl && CU && CU.studyStats) {
+    streakEl.textContent = CU.studyStats.streak || 0;
+  }
+}
+
+// ── STUDY STREAK (New Pomodoro Timer) ───────────────────────────
+let timerInterval = null;
+let timerSeconds = 25 * 60;
+let timerRunning = false;
+let currentPreset = 25;
+let isFocusTime = true;
+
+function setTimerPreset(minutes, element) {
+  document.querySelectorAll('.timer-preset').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+  currentPreset = minutes;
+  resetTimer();
+}
+
+function startTimer() {
+  if (timerRunning) return;
+  timerRunning = true;
+  document.getElementById('startBtn').style.display = 'none';
+  document.getElementById('pauseBtn').style.display = 'inline-flex';
+  document.getElementById('timerStatus').textContent = isFocusTime ? '🔴 Focus time - Stay focused!' : '🟢 Break time - Rest a bit';
+  
+  timerInterval = setInterval(() => {
+    if (timerSeconds <= 0) {
+      // Timer finished
+      if (isFocusTime) {
+        // Focus session completed
+        const duration = currentPreset;
+        logStudySession(duration, true);
+        showToast('Focus Complete!', `Great job! You focused for ${duration} minutes.`, 'success');
+        
+        if (document.getElementById('autoCycles').checked) {
+          // Switch to break
+          isFocusTime = false;
+          timerSeconds = 5 * 60; // 5 min break default
+          document.getElementById('timerStatus').textContent = '🟢 Break time - Take a short break';
+          updateTimerDisplay();
+        } else {
+          resetTimer();
+        }
+      } else {
+        // Break finished
+        showToast('Break Over', 'Ready to focus again?', 'info');
+        isFocusTime = true;
+        timerSeconds = currentPreset * 60;
+        updateTimerDisplay();
+        document.getElementById('timerStatus').textContent = '🔴 Focus time - Stay focused!';
+      }
+    } else {
+      timerSeconds--;
+      updateTimerDisplay();
+    }
+  }, 1000);
+}
+
+function pauseTimer() {
+  if (!timerRunning) return;
+  timerRunning = false;
+  clearInterval(timerInterval);
+  document.getElementById('startBtn').style.display = 'inline-flex';
+  document.getElementById('pauseBtn').style.display = 'none';
+  document.getElementById('timerStatus').textContent = '⏸ Paused';
+}
+
+function resetTimer() {
+  timerRunning = false;
+  clearInterval(timerInterval);
+  isFocusTime = true;
+  timerSeconds = currentPreset * 60;
+  updateTimerDisplay();
+  document.getElementById('startBtn').style.display = 'inline-flex';
+  document.getElementById('pauseBtn').style.display = 'none';
+  document.getElementById('timerStatus').textContent = 'Focus time - Work until timer ends';
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(timerSeconds / 60);
+  const seconds = timerSeconds % 60;
+  document.getElementById('timerDisplay').textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function populateStreakModules() {
+  const select = document.getElementById('sessionModule');
+  if (!select) return;
+  
+  if (!mods.length) {
+    select.innerHTML = '<option value="">No modules — set in Profile</option>';
+    return;
+  }
+  
+  select.innerHTML = '<option value="">Select module</option>' + 
+    mods.map(m => `<option value="${m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('');
+}
+
+async function logStudySession(autoDuration = null, fromTimer = false) {
+  let module, duration;
+  
+  if (fromTimer && autoDuration) {
+    module = document.getElementById('sessionModule').value;
+    duration = autoDuration;
+    if (!module) {
+      showToast('Select Module', 'Please select a module to log this session.', 'warning');
+      return;
+    }
+  } else {
+    module = document.getElementById('sessionModule').value;
+    duration = parseInt(document.getElementById('sessionDuration').value) || 25;
+    
+    if (!module) {
+      showToast('Select Module', 'Please select a module.', 'warning');
+      return;
+    }
+  }
+  
+  const recordAudio = document.getElementById('recordAudio')?.checked || false;
+  
+  const today = new Date().toISOString().split('T')[0];
+  const hours = duration / 60;
+  
+  // Calculate points (1 point per hour)
+  const points = Math.floor(hours);
+  
+  // Update study stats
+  CU.studyStats = CU.studyStats || { totalHours: 0, streak: 0, lastStudyDate: null, points: 0 };
+  CU.studyStats.totalHours += hours;
+  CU.studyStats.points += points;
+  
+  // Update streak
+  const lastDate = CU.studyStats.lastStudyDate ? new Date(CU.studyStats.lastStudyDate) : null;
+  const todayDate = new Date();
+  todayDate.setHours(0, 0, 0, 0);
+  
+  if (lastDate) {
+    const yesterday = new Date(todayDate);
+    yesterday.setDate(yesterday.getDate() - 1);
+    
+    if (lastDate.toDateString() === yesterday.toDateString()) {
+      CU.studyStats.streak++;
+    } else if (lastDate.toDateString() !== todayDate.toDateString()) {
+      CU.studyStats.streak = 1;
+    }
+  } else {
+    CU.studyStats.streak = 1;
+  }
+  
+  CU.studyStats.lastStudyDate = todayDate.toISOString();
+  
+  // Save to Firestore
+  await window.FS.addStudySession({
+    userId: CUK,
+    module,
+    date: today,
+    duration: duration,
+    hours: hours,
+    points: points,
+    recorded: recordAudio
+  });
+  
+  await window.FS.setUser(CUK, { studyStats: CU.studyStats });
+  
+  _studySessions = await window.FS.getUserStudySessions(CUK);
+  
+  renderSessionHistory();
+  updateStreakStats();
+  
+  showToast('Session Logged', `+${points} points earned! Streak: ${CU.studyStats.streak} days 🔥`, 'success');
+  
+  if (!fromTimer) {
+    document.getElementById('sessionDuration').value = 25;
+  }
+}
+
+function renderSessionHistory() {
+  const container = document.getElementById('sessionHistory');
+  if (!container) return;
+  
+  const sessions = _studySessions.slice(0, 10);
+  
+  if (!sessions.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No study sessions yet. Start your first session!</p></div>';
+    return;
+  }
+  
+  container.innerHTML = sessions.map(s => `
+    <div class="session-item">
+      <div>
+        <div class="session-subject">📘 ${s.module}</div>
+        <div class="session-time">${new Date(s.date).toLocaleDateString()}</div>
+      </div>
+      <div class="session-duration">${s.duration} min ⭐ +${s.points}</div>
+    </div>
+  `).join('');
+}
+
+function updateStreakStats() {
+  if (!CU || !CU.studyStats) return;
+  
+  document.getElementById('streakCount').textContent = CU.studyStats.streak || 0;
+  document.getElementById('totalHours').textContent = (CU.studyStats.totalHours || 0).toFixed(1);
+  document.getElementById('streakPoints').textContent = CU.studyStats.points || 0;
+  
+  // Update forecast
+  const month = new Date().getMonth();
+  const monthSessions = _studySessions.filter(s => new Date(s.date).getMonth() === month);
+  const totalMonthHours = monthSessions.reduce((sum, s) => sum + (s.hours || 0), 0);
+  const goal = 50; // 50 hours per month goal
+  const percent = Math.min(100, (totalMonthHours / goal) * 100);
+  
+  document.getElementById('monthlyProgress').style.width = percent + '%';
+  document.getElementById('monthlyGoal').textContent = `${totalMonthHours.toFixed(1)}/${goal} hours this month`;
+  
+  if (totalMonthHours >= goal) {
+    document.getElementById('forecastText').textContent = '🏆 Goal achieved! Amazing work!';
+  } else {
+    const remaining = goal - totalMonthHours;
+    document.getElementById('forecastText').textContent = `${remaining.toFixed(1)} hours to reach monthly goal`;
+  }
+  
+  // Update achievements
+  updateAchievements();
+}
+
+function updateAchievements() {
+  const achievements = document.getElementById('achievementsList');
+  if (!achievements) return;
+  
+  const totalHours = CU.studyStats?.totalHours || 0;
+  const streak = CU.studyStats?.streak || 0;
+  
+  let html = '';
+  
+  // Beginner badge
+  if (totalHours >= 10) {
+    html += '<div class="badge badge-success">🌱 Beginner (10+ hrs)</div>';
+  } else {
+    html += '<div class="badge badge-info" style="opacity:0.5;">🌱 Beginner (0-10 hrs)</div>';
+  }
+  
+  // Streak badge
+  if (streak >= 7) {
+    html += '<div class="badge badge-success">🔥 7-Day Streak</div>';
+  } else {
+    html += '<div class="badge badge-info" style="opacity:0.5;">🔥 7-Day Streak</div>';
+  }
+  
+  // 20 hours badge
+  if (totalHours >= 20) {
+    html += '<div class="badge badge-purple">⚡ 20 Hours</div>';
+  } else {
+    html += '<div class="badge badge-info" style="opacity:0.5;">⚡ 20 Hours</div>';
+  }
+  
+  // 50 hours badge
+  if (totalHours >= 50) {
+    html += '<div class="badge badge-gold">🌟 50 Hours</div>';
+  }
+  
+  // 30 day streak
+  if (streak >= 30) {
+    html += '<div class="badge badge-danger">🔥🔥 Legendary Streak</div>';
+  }
+  
+  achievements.innerHTML = html;
+}
+
+// ── STUDY SQUAD (Permanent Groups) ──────────────────────────────
+let currentGroupFilter = 'all';
+
+function filterGroups(faculty, element = null) {
+  if (element) {
+    document.querySelectorAll('.faculty-tab').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+    currentGroupFilter = faculty;
+  }
+  
+  const search = document.getElementById('groupSearch')?.value.toLowerCase() || '';
+  
+  let filtered = _groups;
+  
+  if (currentGroupFilter !== 'all') {
+    filtered = filtered.filter(g => g.faculty === currentGroupFilter);
+  }
+  
+  if (search) {
+    filtered = filtered.filter(g => 
+      g.name.toLowerCase().includes(search) || 
+      (g.module || '').toLowerCase().includes(search) ||
+      (g.description || '').toLowerCase().includes(search)
+    );
+  }
+  
+  renderGroupsList(filtered);
+}
+
+function renderGroups() {
+  filterGroups(currentGroupFilter);
+}
+
+function renderGroupsList(groups) {
+  const container = document.getElementById('groupsList');
+  if (!container) return;
+  
+  if (!groups.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No groups found. Be the first to create one!</p></div>';
+    return;
+  }
+  
+  container.innerHTML = groups.map(g => {
+    const isMember = g.members?.includes(CUK);
+    const memberCount = g.members?.length || 1;
+    
+    return `
+      <div class="group-card">
+        <div class="group-header">
+          <div class="group-avatar">${g.name.charAt(0)}</div>
+          <div class="group-info">
+            <div class="group-name">${g.name}</div>
+            <div class="group-meta">${g.module || 'General'} · ${g.faculty}</div>
+          </div>
+          ${isMember ? 
+            `<button class="btn btn-outline btn-sm" onclick="openGroupChat('${g.id}')">💬 Chat</button>` :
+            `<button class="btn btn-blue btn-sm" onclick="joinGroup('${g.id}')">+ Join</button>`
+          }
+        </div>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:10px;">${g.description || 'No description'}</p>
+        <div class="group-stats">
+          <div class="group-stat"><strong>${memberCount}</strong> members</div>
+          <div class="group-stat"><strong>📘</strong> ${g.module || 'Various'}</div>
+          <div class="group-stat">👤 by ${g.createdByName || 'Someone'}</div>
+        </div>
+        ${isMember ? 
+          `<div style="margin-top:10px;display:flex;gap:10px;">
+            <button class="btn btn-red btn-sm" onclick="leaveGroup('${g.id}')">Leave Group</button>
+          </div>` : ''
+        }
+      </div>
+    `;
+  }).join('');
+}
+
+async function createPermanentGroup() {
+  const name = document.getElementById('groupName').value.trim();
+  const module = document.getElementById('groupModule').value;
+  const desc = document.getElementById('groupDesc').value.trim();
+  const faculty = document.getElementById('groupFaculty').value;
+  
+  if (!name || !module) {
+    showToast('Missing Fields', 'Please fill in group name and module.', 'warning');
+    return;
+  }
+  
+  await window.FS.addGroup({
+    name,
+    module,
+    description: desc,
+    faculty,
+    createdBy: CUK,
+    createdByName: CU.name,
+    members: [CUK]
+  });
+  
+  document.getElementById('createGroupMod').classList.remove('on');
+  document.getElementById('groupName').value = '';
+  document.getElementById('groupDesc').value = '';
+  
+  showToast('Group Created', 'Your permanent study group is now live!', 'success');
+}
+
+async function joinGroup(groupId) {
+  await window.FS.joinGroup(groupId, CUK);
+  showToast('Joined Group', 'You are now a member of this group.', 'success');
+}
+
+async function leaveGroup(groupId) {
+  if (!confirm('Leave this group?')) return;
+  await window.FS.leaveGroup(groupId, CUK);
+  showToast('Left Group', 'You have left the group.', 'info');
+}
+
+function showMyGroups() {
+  const myGroups = _groups.filter(g => g.members?.includes(CUK));
+  renderGroupsList(myGroups);
+}
+
+function openGroupChat(groupId) {
+  // Similar to squad chat but for permanent groups
+  const group = _groups.find(g => g.id === groupId);
+  if (!group) return;
+  
+  _activeChatSession = groupId;
+  
+  document.getElementById('chatSessionTitle').textContent = `👥 ${group.name}`;
+  document.getElementById('chatSessionMeta').textContent = `${group.module} · ${group.faculty}`;
+  document.getElementById('chatMessages').innerHTML = '<div style="text-align:center;color:var(--muted);font-size:.8rem;padding:12px;">Loading messages…</div>';
+  document.getElementById('squadChatMod').classList.add('on');
+  
+  if (_unsubChat) _unsubChat();
+  _unsubChat = window.FS.onGroupMsgs(groupId, msgs => {
+    renderChatMessages(msgs);
+  });
+}
+
+// ── STUDY METHODS ───────────────────────────────────────────────
+const TIPS = [
+  {
+    i: '🕐', t: 'Pomodoro Technique',
+    d: 'Study 25 min, break 5 min. Repeat 4 times, then a longer break.',
+    c1: '#f0f4ff', c2: '#f5f0ff', cc: '#a5b4fc',
+    full: `<p style="margin-bottom:10px;">The <strong>Pomodoro Technique</strong> breaks your study time into focused 25-minute sprints (called "Pomodoros"), each followed by a 5-minute break. After 4 Pomodoros, take a longer 15–30 minute break.</p>
+    <p style="margin-bottom:10px;"><strong>How to use it:</strong></p>
+    <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+      <li>Choose ONE task to work on</li>
+      <li>Set a timer for 25 minutes — no distractions</li>
+      <li>Work until the timer rings, then tick off one Pomodoro</li>
+      <li>Take a 5-minute break (walk, stretch, water)</li>
+      <li>After 4 Pomodoros → take a 15–30 min break</li>
+    </ol>
+    <p style="margin-top:10px;background:#f0f4ff;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#4338ca;">💡 <strong>Pro tip:</strong> Use a physical timer or a free app like "Forest" to stay accountable and avoid checking your phone.</p>`
+  },
+  {
+    i: '📝', t: 'Active Recall',
+    d: 'Close your notes and try to recall what you studied. Far more effective than re-reading.',
+    c1: '#f0fdf4', c2: '#ccfbf1', cc: '#6ee7b7',
+    full: `<p style="margin-bottom:10px;"><strong>Active Recall</strong> forces your brain to retrieve information rather than passively re-read it. Studies show it can be up to <strong>2–3× more effective</strong> than highlighting or re-reading notes.</p>
+    <p style="margin-bottom:10px;"><strong>How to use it:</strong></p>
+    <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+      <li>Study a section of your notes normally</li>
+      <li>Close the notes completely</li>
+      <li>On a blank page, write everything you can remember</li>
+      <li>Check your notes — what did you miss?</li>
+      <li>Repeat for the gaps until you can recall everything</li>
+    </ol>
+    <p style="margin-top:10px;background:#f0fdf4;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#065f46;">💡 <strong>Pro tip:</strong> Turn headings in your notes into questions. e.g. "First Law of Thermodynamics" → "What does the First Law of Thermodynamics state?"</p>`
+  },
+  {
+    i: '🗂️', t: 'Spaced Repetition',
+    d: 'Review at intervals: 1 day, 3 days, 1 week. Material sticks far longer.',
+    c1: '#fff7ed', c2: '#fef3c7', cc: '#fcd34d',
+    full: `<p style="margin-bottom:10px;"><strong>Spaced Repetition</strong> uses the science of the "forgetting curve" — you review material just before you're about to forget it. This dramatically strengthens long-term memory.</p>
+    <p style="margin-bottom:10px;"><strong>The schedule:</strong></p>
+    <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+      <li>Day 0 — Learn the material</li>
+      <li>Day 1 — First review (quick recap)</li>
+      <li>Day 3 — Second review</li>
+      <li>Day 7 — Third review</li>
+      <li>Day 14 → Day 30 → long-term memory ✓</li>
+    </ol>
+    <p style="margin-top:10px;background:#fff7ed;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#92400e;">💡 <strong>Pro tip:</strong> Use flashcard apps like Anki — they automatically schedule your reviews using spaced repetition algorithms. Great for definitions, formulae and diagrams.</p>`
+  },
+  {
+    i: '👥', t: 'Teach to Learn',
+    d: 'Explain a concept to someone else. If you can teach it, you truly understand it.',
+    c1: '#fdf2f8', c2: '#ede9fe', cc: '#d8b4fe',
+    full: `<p style="margin-bottom:10px;">The <strong>Feynman Technique</strong> (Teach to Learn) is based on the idea that if you can explain something simply, you truly understand it. It's also the fastest way to find your blind spots.</p>
+    <p style="margin-bottom:10px;"><strong>How to use it:</strong></p>
+    <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+      <li>Pick a concept you're studying</li>
+      <li>Explain it out loud as if teaching a 10-year-old</li>
+      <li>When you get stuck — that's your knowledge gap</li>
+      <li>Go back to your notes, fill the gap</li>
+      <li>Repeat until your explanation is smooth and simple</li>
+    </ol>
+    <p style="margin-top:10px;background:#fdf2f8;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#6d28d9;">💡 <strong>Pro tip:</strong> Use the <strong>Study Squad</strong> feature to schedule a group session — teaching your peers is the fastest way to apply this technique and everyone benefits.</p>`
+  },
+  {
+    i: '🎯', t: 'Mind Mapping',
+    d: 'Visual diagrams linking ideas together — great for understanding complex systems.',
+    c1: '#f0fdfa', c2: '#d1fae5', cc: '#5eead4',
+    full: `<p style="margin-bottom:10px;"><strong>Mind Mapping</strong> is a visual brainstorming tool that connects ideas around a central concept. It's especially powerful in engineering and sciences where systems have many interrelated parts.</p>
+    <p style="margin-bottom:10px;"><strong>How to build one:</strong></p>
+    <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+      <li>Write the main topic in the centre of a page</li>
+      <li>Draw branches for each major sub-topic</li>
+      <li>Add smaller branches for details, examples, and connections</li>
+      <li>Use colours, symbols and short keywords (not full sentences)</li>
+      <li>Review and add to it as you learn more</li>
+    </ol>
+    <p style="margin-top:10px;background:#f0fdfa;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#0f766e;">💡 <strong>Pro tip:</strong> Free tools like <strong>Miro</strong> or <strong>XMind</strong> let you build digital mind maps you can share with your study group.</p>`
+  },
+  {
+    i: '⏰', t: 'Time Blocking',
+    d: 'Schedule specific subjects into your calendar like meetings — no more "I\'ll study later".',
+    c1: '#fff1f2', c2: '#ffe4e6', cc: '#fda4af',
+    full: `<p style="margin-bottom:10px;"><strong>Time Blocking</strong> turns your intentions into appointments. Instead of a vague "study today", you block "Thermodynamics — 2pm to 4pm". This reduces decision fatigue and eliminates procrastination.</p>
+    <p style="margin-bottom:10px;"><strong>How to set it up:</strong></p>
+    <ol style="padding-left:18px;line-height:2;font-size:.87rem;">
+      <li>Each Sunday, review your week ahead</li>
+      <li>List all subjects/assignments that need attention</li>
+      <li>Assign specific time slots in your calendar for each</li>
+      <li>Treat these blocks like a class — don't skip</li>
+      <li>Leave buffer blocks for unexpected tasks</li>
+    </ol>
+    <p style="margin-top:10px;background:#fff1f2;border-radius:10px;padding:10px 13px;font-size:.82rem;color:#be123c;">💡 <strong>Pro tip:</strong> Schedule your hardest subjects during your peak energy time — for most people that's in the morning. Leave lighter tasks for lower-energy afternoon slots.</p>`
+  },
+];
+
+function renderTips() {
+  document.getElementById('tipsGrid').innerHTML = TIPS.map((t, i) => `
+    <div class="tip-card" style="--tc1:${t.c1};--tc2:${t.c2};--tc3:${t.cc || 'var(--border)'}" onclick="openTip(${i})">
+      <div class="tip-icon">${t.i}</div>
+      <h4>${t.t}</h4>
+      <p>${t.d}</p>
+    </div>`).join('');
+}
+
+let activeTipIdx = null, tipContext = '', tipQAHistory = [];
+
+function openTip(i) {
+  const t = TIPS[i];
+  activeTipIdx = i;
+  tipQAHistory = [];
+  tipContext = `The study method is: "${t.t}". Full description: ${t.full || t.d}`;
+  
+  document.querySelectorAll('.tip-card').forEach((el, j) => el.classList.toggle('active', j === i));
+  document.getElementById('tipDetailIcon').textContent = t.i;
+  document.getElementById('tipDetailTitle').textContent = t.t;
+  document.getElementById('tipDetailBody').innerHTML = t.full || `<p>${t.d}</p>`;
+  document.getElementById('tipQAHistory').innerHTML = '';
+  document.getElementById('tipQuestion').value = '';
+  
+  const det = document.getElementById('tipDetail');
+  det.classList.remove('hidden');
+  det.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeTipDetail() {
+  document.getElementById('tipDetail').classList.add('hidden');
+  document.querySelectorAll('.tip-card').forEach(el => el.classList.remove('active'));
+  activeTipIdx = null;
+}
+
+async function askTipQuestion() {
+  const q = document.getElementById('tipQuestion').value.trim();
+  if (!q) return;
+  
+  const btn = document.getElementById('tipAskBtn');
+  btn.disabled = true;
+  btn.textContent = '…';
+  document.getElementById('tipQuestion').value = '';
+  
+  const hist = document.getElementById('tipQAHistory');
+  
+  const userDiv = document.createElement('div');
+  userDiv.innerHTML = `<div class="qa-user">${q}</div>`;
+  hist.appendChild(userDiv);
+  
+  const loadDiv = document.createElement('div');
+  loadDiv.innerHTML = `<div class="qa-loading"><div class="qa-dot"></div><div class="qa-dot"></div><div class="qa-dot"></div></div>`;
+  hist.appendChild(loadDiv);
+  hist.scrollTop = hist.scrollHeight;
+  
+  tipQAHistory.push({ role: 'user', content: q });
+  
+  try {
+    const sysPrompt = `You are a friendly academic coach helping a UB (University of Botswana) student understand study methods. ${tipContext}. Keep answers concise (2-4 sentences), practical, and encouraging. Use simple language.`;
+    
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: sysPrompt,
+        messages: tipQAHistory
+      })
+    });
+    
+    const data = await res.json();
+    const ans = data.content.map(b => b.text || '').join('');
+    tipQAHistory.push({ role: 'assistant', content: ans });
+    loadDiv.innerHTML = `<div class="qa-ai">${ans.replace(/\n/g, '<br>')}</div>`;
+  } catch (e) {
+    loadDiv.innerHTML = `<div class="qa-ai" style="color:var(--red);">Couldn't connect right now. Try again.</div>`;
+  }
+  
+  btn.disabled = false;
+  btn.textContent = 'Ask';
+  hist.scrollTop = hist.scrollHeight;
+}
+
+// ── CAREER SPOTLIGHT ────────────────────────────────────────────
+const CAREER_VIDEOS = {
+  default: [
+    { videoId: 'Wpmk4YNmF3s', title: 'How to Learn Anything Faster', channel: 'Thomas Frank' },
+    { videoId: 'IlU-zDU6aQ0', title: 'Studying & Working as an Engineer', channel: 'Zach Star' },
+    { videoId: 'rfscVS0vtbw', title: 'Learn Python in 4 Hours', channel: 'freeCodeCamp' },
+    { videoId: '_uQrJ0TkZlc', title: 'Python Tutorial for Beginners', channel: 'Programming with Mosh' },
+    { videoId: 'aircAruvnKk', title: 'But what is a Neural Network?', channel: '3Blue1Brown' },
+    { videoId: 'HAnw168huqA', title: 'The Future of Careers in Tech', channel: 'TED' },
+  ],
+  engineering: [
+    { videoId: '1FQ8Oi0OGRY', title: 'What do Mechanical Engineers Actually Do?', channel: 'Zach Star' },
+    { videoId: 'SFbjqVOgVqA', title: 'How Engines Work', channel: 'Lesics' },
+    { videoId: '6m9QHVkAN1c', title: 'How do Wind Turbines Work?', channel: 'Lesics' },
+    { videoId: 'MiIsI7kzE2g', title: 'First Law of Thermodynamics', channel: 'Engineering Mindset' },
+    { videoId: 'KAqUy6oKKHk', title: 'Fluid Mechanics Overview', channel: 'The Efficient Engineer' },
+    { videoId: 'C3bTFn9cL8U', title: 'Engineering Mechanics — Statics', channel: 'The Organic Chemistry Tutor' },
+  ],
+  civil: [
+    { videoId: 'gzCn_5MIoJ4', title: 'What do Civil Engineers Do?', channel: 'Zach Star' },
+    { videoId: 'dEP-qpHJEkk', title: 'How Bridges are Built', channel: 'Practical Engineering' },
+    { videoId: 'AwHqanyMJRQ', title: 'Structural Engineering Basics', channel: 'The Efficient Engineer' },
+    { videoId: 'FIlNBpW-MfI', title: 'How Dams Work', channel: 'Practical Engineering' },
+    { videoId: 'EGT_-3WvLZ4', title: 'Soil Mechanics Introduction', channel: 'NPTEL' },
+    { videoId: 'YD5S1ZgDN04', title: 'How Skyscrapers are Built', channel: 'Lesics' },
+  ],
+  electrical: [
+    { videoId: 'mc979OhitAg', title: 'How does Electricity Work?', channel: 'Lesics' },
+    { videoId: 'LFW1saNOp20', title: 'Basics of Electrical Engineering', channel: 'The Engineering Mindset' },
+    { videoId: 'Nfiew7gL-mU', title: 'How Transformers Work', channel: 'Lesics' },
+    { videoId: 'qMwmnFNzNb8', title: 'Introduction to Circuit Analysis', channel: 'The Organic Chemistry Tutor' },
+    { videoId: 'J4IOsByNeHI', title: 'Power Systems Engineering', channel: 'NPTEL' },
+    { videoId: '6j0GS_bxFAQ', title: 'Renewable Energy Technologies', channel: 'Lesics' },
+  ],
+  computer: [
+    { videoId: 'aircAruvnKk', title: 'But what is a Neural Network?', channel: '3Blue1Brown' },
+    { videoId: 'rfscVS0vtbw', title: 'Learn Python — Full Course', channel: 'freeCodeCamp' },
+    { videoId: 'zOjov-2OZ0E', title: 'How the Internet Works', channel: 'Lesics' },
+    { videoId: 'SFbjqVOgVqA', title: 'How Computers Work — CPU Explained', channel: 'Lesics' },
+    { videoId: 'I1f45REi3k4', title: 'Data Structures & Algorithms', channel: 'CS Dojo' },
+    { videoId: '8hly31xKli0', title: 'Software Engineering Career Guide', channel: 'Traversy Media' },
+  ],
+  accounting: [
+    { videoId: 'yYX4bvQSqbo', title: 'Accounting Basics Explained', channel: 'Accounting Stuff' },
+    { videoId: '7EBWnVHY6pU', title: 'Financial Statements Explained', channel: 'Accounting Stuff' },
+    { videoId: 'bCDJe9gSMBk', title: 'How to Read a Balance Sheet', channel: 'Accounting Stuff' },
+    { videoId: '3m3tKGNiMTs', title: 'Career in Finance & Accounting', channel: 'TED-Ed' },
+    { videoId: 'HSnFkPNZ8Kk', title: 'Introduction to Auditing', channel: 'ACCA Learning' },
+    { videoId: 'AJl77Nt8pGg', title: 'Tax Basics for Beginners', channel: 'Accounting Stuff' },
+  ],
+  business: [
+    { videoId: 'Wpmk4YNmF3s', title: 'How to Learn Any Skill Fast', channel: 'Thomas Frank' },
+    { videoId: 't_Mx9ZsAFaM', title: 'How to Build a Business', channel: 'Simon Sinek' },
+    { videoId: 'IRVdiHu1pAI', title: 'Marketing Fundamentals', channel: 'TED-Ed' },
+    { videoId: 'f4J9EmcchpY', title: 'Economics of Entrepreneurship', channel: 'Marginal Revolution University' },
+    { videoId: 'iuwUUlDfHcw', title: 'Leadership Skills at University', channel: 'TED' },
+    { videoId: 'fW8amMCVAJQ', title: 'Strategic Management Overview', channel: 'Harvard Business Review' },
+  ],
+  medicine: [
+    { videoId: 'ezoO2t0B_1Y', title: 'How the Human Body Works', channel: 'TED-Ed' },
+    { videoId: 'H0K2dvB-7WY', title: 'Medical School vs Reality', channel: 'Jubilee' },
+    { videoId: 'Ow_BO5uHJYg', title: 'How the Heart Works', channel: 'TED-Ed' },
+    { videoId: 'z0ZFTRhFbW0', title: 'Pharmacology Basics', channel: 'Osmosis' },
+    { videoId: 'qPix_X-9t7E', title: 'How Vaccines Work', channel: 'Kurzgesagt' },
+    { videoId: '2NKZGG7VMZY', title: 'Anatomy of the Human Brain', channel: 'Osmosis' },
+  ],
+  law: [
+    { videoId: '3bK9nzkGwmQ', title: 'How Does the Legal System Work?', channel: 'TED-Ed' },
+    { videoId: 'OFC9JVn4oqE', title: 'Criminal Law vs Civil Law', channel: 'TED-Ed' },
+    { videoId: 'RBFhyVFXGIg', title: 'Introduction to Contract Law', channel: 'CrashCourse' },
+    { videoId: 'Hzgzim5m7oU', title: 'What Lawyers Actually Do All Day', channel: 'Law School Toolbox' },
+    { videoId: 'nPmHBj_5JOM', title: 'International Law Explained', channel: 'TED-Ed' },
+    { videoId: 'fcC7VBZOWSI', title: 'Human Rights Law Overview', channel: 'Amnesty International' },
+  ],
+};
+
+function getCareerKey(prog) {
+  const p = (prog || '').toLowerCase();
+  if (p.includes('mechanic') || p.includes('mec') || p.includes('thermo')) return 'engineering';
+  if (p.includes('civil') || p.includes('struct')) return 'civil';
+  if (p.includes('electr')) return 'electrical';
+  if (p.includes('computer') || p.includes('software') || p.includes('cs ') || p.includes('ict')) return 'computer';
+  if (p.includes('account') || p.includes('finance') || p.includes('bcom')) return 'accounting';
+  if (p.includes('business') || p.includes('management') || p.includes('bba')) return 'business';
+  if (p.includes('medic') || p.includes('nurs') || p.includes('health')) return 'medicine';
+  if (p.includes('law') || p.includes('legal')) return 'law';
+  return 'default';
+}
+
+async function loadCareerVideos() {
+  const prog = CU.programme || '';
+  const el = document.getElementById('careerVideos');
+  
+  document.getElementById('careerSubtitle').textContent = prog ? `Curated for: ${prog}` : 'Curated videos for your field';
+  
+  el.innerHTML = `<div class="career-loading"><div class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div><p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:12px;">Loading your career content…</p></div>`;
+  
+  const key = getCareerKey(prog);
+  const pool = [...(CAREER_VIDEOS[key] || []), ...(key !== 'default' ? CAREER_VIDEOS.default : [])];
+  
+  const seen = new Set();
+  const unique = pool.filter(v => { if (seen.has(v.videoId)) return false; seen.add(v.videoId); return true; });
+  const videos = unique.sort(() => Math.random() - 0.5).slice(0, 10);
+  
+  el.innerHTML = videos.map(v => `
+    <a class="career-card" href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" rel="noopener">
+      <div class="career-thumb-wrap">
+        <img class="career-thumb" src="https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg" alt="${v.title}">
+      </div>
+      <div class="career-card-body">
+        <div class="career-card-title">${v.title}</div>
+        <div class="career-card-ch">📺 ${v.channel}</div>
+      </div>
+    </a>`).join('');
+  
+  if (window._careerTimer) clearInterval(window._careerTimer);
+  window._careerTimer = setInterval(loadCareerVideos, 3 * 60 * 60 * 1000);
+}
+
+function scrollCareer(dir) {
+  const el = document.getElementById('careerVideos');
+  el.scrollBy({ left: dir * 240, behavior: 'smooth' });
+}
+
+// ── GPA (existing) ──────────────────────────────────────────────
+function gradeInfo(m) {
+  if (m >= 80) return { l: 'A', g: 5 };
+  if (m >= 75) return { l: 'B+', g: 4.5 };
+  if (m >= 70) return { l: 'B', g: 4 };
+  if (m >= 65) return { l: 'B-', g: 3.5 };
+  if (m >= 60) return { l: 'C+', g: 3 };
+  if (m >= 55) return { l: 'C', g: 2.5 };
+  if (m >= 50) return { l: 'C-', g: 2 };
+  if (m >= 45) return { l: 'D+', g: 1.5 };
+  if (m >= 40) return { l: 'D', g: 1 };
+  if (m >= 35) return { l: 'D-', g: 0.5 };
+  return { l: 'E', g: 0 };
+}
+
+function classify(c) {
+  if (c >= 4.4) return '🏆 First Class';
+  if (c >= 3.6) return '🥇 Second Class Upper';
+  if (c >= 2.8) return '🥈 Second Class Lower';
+  if (c >= 2) return '✅ Pass';
+  return '⚠️ Fail / Probation';
+}
+
+function populateGPARows() {
+  const tbody = document.getElementById('gBody');
+  const noEl = document.getElementById('gpaNoMods');
+  
+  if (!mods.length) {
+    if (tbody) tbody.innerHTML = '';
+    if (noEl) noEl.classList.remove('hidden');
+    return;
+  }
+  
+  if (noEl) noEl.classList.add('hidden');
+  
+  tbody.innerHTML = mods.map(m => `<tr>
+    <td style="font-weight:600;">${m.code ? '<span style="color:var(--blue2);font-size:.8rem;">' + m.code + '</span><br>' : ''}${m.name}</td>
+    <td><input type="number" class="gc" placeholder="e.g. 3" oninput="calcGPA()" style="width:60px;"></td>
+    <td><input type="number" class="gm" placeholder="%" oninput="calcGPA()" style="width:60px;"></td>
+    <td class="gg" style="font-weight:700;">-</td>
+    <td class="gp" style="color:var(--purple);font-weight:700;">0.000</td>
+  </tr>`).join('');
+  
+  const saved = loadFromLocal(`gpa_${CUK}`);
+  if (saved) {
+    const rows = tbody.rows;
+    for (let i = 0; i < rows.length && i < saved.marks.length; i++) {
+      const gc = rows[i].querySelector('.gc');
+      const gm = rows[i].querySelector('.gm');
+      if (gc) gc.value = saved.credits[i] || '';
+      if (gm) gm.value = saved.marks[i] || '';
+    }
+    calcGPA();
+  }
+}
+
+function populateForeRows() {
+  const tbody = document.getElementById('fBody');
+  const noEl = document.getElementById('foreNoMods');
+  
+  if (!mods.length) {
+    if (tbody) tbody.innerHTML = '';
+    if (noEl) noEl.classList.remove('hidden');
+    return;
+  }
+  
+  if (noEl) noEl.classList.add('hidden');
+  
+  tbody.innerHTML = mods.map(m => `<tr class="fr">
+    <td style="font-weight:600;">${m.code ? '<span style="color:var(--blue2);font-size:.8rem;">' + m.code + '</span><br>' : ''}${m.name}</td>
+    <td><input type="number" class="cw" value="50" oninput="calcGPA()" style="width:55px;"></td>
+    <td><input type="number" class="ew" value="50" oninput="calcGPA()" style="width:55px;"></td>
+    <td><input type="number" class="cv" placeholder="0" oninput="calcGPA()" style="width:55px;"></td>
+    <td><input type="number" class="tv" placeholder="70" oninput="calcGPA()" style="width:55px;"></td>
+    <td class="fn" style="font-weight:700;">-</td>
+  </tr>`).join('');
+}
+
+function calcGPA() {
+  let tp = 0, tc = 0;
+  
+  for (const r of document.getElementById('gBody').rows) {
+    const c = parseFloat(r.querySelector('.gc').value) || 0;
+    const m = parseFloat(r.querySelector('.gm').value) || 0;
+    const { l, g } = gradeInfo(m);
+    const mgp = Math.round(g * c * 1000) / 1000;
+    
+    r.querySelector('.gg').textContent = l;
+    r.querySelector('.gp').textContent = mgp.toFixed(3);
+    
+    if (c > 0) { tp += mgp; tc += c; }
+  }
+  
+  const tgpa = tc > 0 ? tp / tc : 0;
+  document.getElementById('tGPA').textContent = tgpa.toFixed(3);
+  
+  const pp = parseFloat(document.getElementById('gPts').value) || 0;
+  const pc = parseFloat(document.getElementById('gCr').value) || 0;
+  const cgpa = (pc + tc) > 0 ? (pp + tp) / (pc + tc) : 0;
+  
+  document.getElementById('cGPA').textContent = cgpa.toFixed(3);
+  document.getElementById('cClass').textContent = (pc + tc) > 0 ? classify(cgpa) : 'Pending';
+  document.getElementById('displayCGPA').textContent = cgpa.toFixed(2);
+  
+  calcFore();
+  updateHomeStats();
+}
+
+function calcFore() {
+  document.querySelectorAll('.fr').forEach(r => {
+    const cw = (parseFloat(r.querySelector('.cw').value) || 0) / 100;
+    const ew = (parseFloat(r.querySelector('.ew').value) || 0) / 100;
+    const cv = parseFloat(r.querySelector('.cv').value) || 0;
+    const tv = parseFloat(r.querySelector('.tv').value) || 0;
+    const out = r.querySelector('.fn');
+    
+    if (ew > 0) {
+      const n = (tv - cv * cw) / ew;
+      out.textContent = n > 100 ? n.toFixed(1) + '% ⚠️' : n <= 0 ? '✓ Goal Met!' : n.toFixed(1) + '%';
+      out.style.color = n > 100 ? 'var(--red)' : n <= 0 ? 'var(--green)' : 'var(--orange)';
+    }
+  });
+}
+
+function saveGPAData() {
+  const rows = document.getElementById('gBody').rows;
+  const credits = [], marks = [];
+  
+  for (const r of rows) {
+    credits.push(r.querySelector('.gc').value || '');
+    marks.push(r.querySelector('.gm').value || '');
+  }
+  
+  saveToLocal(`gpa_${CUK}`, { credits, marks });
+  showToast('GPA Saved', 'Your current marks have been saved locally.', 'success');
+}
+
+function loadGPAData() {
+  const saved = loadFromLocal(`gpa_${CUK}`);
+  if (!saved) {
+    showToast('No Data', 'No saved GPA data found.', 'info');
+    return;
+  }
+  
+  const rows = document.getElementById('gBody').rows;
+  for (let i = 0; i < rows.length && i < saved.marks.length; i++) {
+    const gc = rows[i].querySelector('.gc');
+    const gm = rows[i].querySelector('.gm');
+    if (gc) gc.value = saved.credits[i] || '';
+    if (gm) gm.value = saved.marks[i] || '';
+  }
+  
+  calcGPA();
+  showToast('GPA Loaded', 'Saved marks have been loaded.', 'success');
+}
+
+function clearGPA() {
+  populateGPARows();
+  populateForeRows();
+  document.getElementById('tGPA').textContent = '0.000';
+  document.getElementById('cGPA').textContent = '0.000';
+  document.getElementById('cClass').textContent = 'Pending';
+  document.getElementById('gPts').value = '';
+  document.getElementById('gCr').value = '';
+  showToast('Cleared', 'All GPA fields have been cleared.', 'info');
+}
+
+// ── STUDY ───────────────────────────────────────────────────────
+function renderSMods() {
+  const g = document.getElementById('sMods');
+  if (!mods.length) {
+    g.innerHTML = '<div style="color:var(--muted);font-size:.83rem;">No modules set up. Go to Profile to add your semester modules.</div>';
+    return;
+  }
+  
+  g.innerHTML = mods.map((m, i) => `<div class="mod-chip${selMod === i ? ' sel' : ''}" onclick="pickMod(${i})">${m.code ? m.code + ' · ' : ''}${m.name}</div>`).join('');
+}
+
+function pickMod(i) {
+  selMod = i;
+  renderSMods();
+}
+
+function handleOut(e) {
+  if (!e.target.files[0]) return;
+  document.getElementById('outDone').classList.remove('hidden');
+  showToast('File Uploaded', 'Course outline has been uploaded.', 'success');
+}
+
+async function searchRes() {
+  const topic = document.getElementById('topicIn').value.trim();
+  if (!topic) { alert('Enter a topic.'); return; }
+  
+  if (selMod === null && mods.length) { alert('Select a module first.'); return; }
+  
+  const mod = selMod !== null ? mods[selMod].name : 'Engineering';
+  const area = document.getElementById('resArea');
+  
+  area.innerHTML = `<div class="search-loading"><div class="spinner"></div><p>Finding resources for <strong>${topic}</strong>…</p></div>`;
+  
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: `Generate a JSON array of 8 study resources for topic: "${topic}" in module: "${mod}" for a university engineering student. Return ONLY valid JSON array, no markdown. Each item: {"type":"youtube"|"article"|"pdf"|"quiz","title":"...","description":"1-2 sentences","url":"...","source":"..."}. 2 of each type.`
+        }]
+      })
+    });
+    
+    const data = await res.json();
+    const txt = data.content.map(b => b.text || '').join('').replace(/```json|```/g, '').trim();
+    renderResources(JSON.parse(txt), topic, mod);
+  } catch {
+    area.innerHTML = `<div class="empty"><div class="ei">🔍</div><p>Quick links for <strong>${topic}</strong>:</p>
+      <div style="margin-top:14px;display:grid;gap:10px;">
+        <a class="res-card" href="https://www.youtube.com/results?search_query=${encodeURIComponent(mod + ' ' + topic)}" target="_blank"><div class="ri youtube">▶️</div><div class="res-info"><h4>YouTube</h4><p>${mod} – ${topic}</p></div><span class="rbadge ry">YouTube</span></a>
+        <a class="res-card" href="https://scholar.google.com/scholar?q=${encodeURIComponent(mod + ' ' + topic)}" target="_blank"><div class="ri pdf">📄</div><div class="res-info"><h4>Google Scholar</h4><p>Academic papers on ${topic}</p></div><span class="rbadge rp">Paper</span></a>
+        <a class="res-card" href="https://quizlet.com/search?query=${encodeURIComponent(topic)}" target="_blank"><div class="ri quiz">✏️</div><div class="res-info"><h4>Quizlet</h4><p>Flashcards and practice quizzes</p></div><span class="rbadge rq">Quiz</span></a>
+      </div></div>`;
+  }
+}
+
+function renderResources(rs, topic, mod) {
+  const ic = { youtube: '▶️', article: '📰', pdf: '📄', quiz: '✏️' };
+  const bc = { youtube: 'ry', article: 'ra', pdf: 'rp', quiz: 'rq' };
+  const lb = { youtube: 'YouTube', article: 'Article', pdf: 'Paper', quiz: 'Quiz' };
+  const byT = {};
+  
+  rs.forEach(r => { (byT[r.type] = byT[r.type] || []).push(r); });
+  
+  document.getElementById('resArea').innerHTML = `
+    <p style="font-size:.8rem;color:var(--muted);margin-bottom:11px;">Results: <strong>${topic}</strong> in <strong>${mod}</strong></p>
+    <div class="res-filter-tabs">
+      <button class="res-ftab on" onclick="fRes('all',this)">All (${rs.length})</button>
+      ${['youtube', 'article', 'pdf', 'quiz'].filter(t => byT[t]).map(t => `<button class="res-ftab" onclick="fRes('${t}',this)">${ic[t]} ${lb[t]}</button>`).join('')}
+    </div>
+    <div class="res-grid">${rs.map(r => `<a class="res-card" href="${r.url}" target="_blank" data-type="${r.type}">
+      <div class="ri ${r.type}">${ic[r.type] || '📚'}</div>
+      <div class="res-info"><h4>${r.title}</h4><p>${r.description}</p></div>
+      <span class="rbadge ${bc[r.type]}">${r.source || lb[r.type]}</span></a>`).join('')}</div>`;
+}
+
+function fRes(type, btn) {
+  document.querySelectorAll('.res-ftab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.res-card').forEach(c => c.style.display = (type === 'all' || c.dataset.type === type) ? 'flex' : 'none');
+}
+
+// ── PEERBRIDGE (existing) ───────────────────────────────────────
+function peerTab(t) {
+  ['browse', 'post', 'mine'].forEach(x => {
+    document.getElementById('peer-' + x).classList.toggle('hidden', x !== t);
+    document.getElementById('pt-' + x).classList.toggle('on', x === t);
+  });
+  
+  if (t === 'mine') renderMyReqs();
+  if (t === 'browse') renderReqs();
+}
+
+function validatePrice() {
+  const el = document.getElementById('pPrice');
+  const v = parseFloat(el.value);
+  if (v && v < 15) {
+    el.style.borderColor = 'var(--red)';
+    el.title = 'Minimum is P15';
+  } else {
+    el.style.borderColor = '';
+  }
+}
+
+async function postReq() {
+  const modEl = document.getElementById('pMod');
+  const mod = modEl.value;
+  const top = document.getElementById('pTop').value.trim();
+  const desc = document.getElementById('pDesc').value.trim();
+  const urg = document.getElementById('pUrg').value;
+  const wa = document.getElementById('pWA').value.trim();
+  const price = parseFloat(document.getElementById('pPrice').value) || 0;
+  const time = document.getElementById('pTime').value;
+  const type = document.getElementById('pType').value;
+  
+  if (!mod) { alert('Please select a module. Add modules in your Profile first.'); return; }
+  if (!top || !desc) { alert('Fill in topic and description.'); return; }
+  if (price < 15) { alert('Please set a price of at least P15.'); document.getElementById('pPrice').focus(); return; }
+  
+  await window.FS.addRequest({ by: CUK, name: CU.name, mod, top, desc, urg, wa, price, time, type, status: 'open' });
+  
+  modEl.value = '';
+  ['pTop', 'pDesc', 'pPrice'].forEach(id => document.getElementById(id).value = '');
+  
+  showToast('Request Posted', 'Your help request is now visible to tutors.', 'success');
+  peerTab('browse');
+}
+
+function renderReqs() {
+  const q = (document.getElementById('pSrch')?.value || '').toLowerCase();
+  const f = document.getElementById('pFilt')?.value || 'all';
+  
+  const list = _requests.filter(r => r.by !== undefined && (f === 'all' || r.status === 'open') && (q === '' || String(r.mod || '').toLowerCase().includes(q) || String(r.top || '').toLowerCase().includes(q)));
+  
+  document.getElementById('reqList').innerHTML = list.length ? list.map(r => reqHTML(r)).join('') : '<div class="empty"><div class="ei">🔍</div><p>No requests found.</p></div>';
+}
+
+function renderMyReqs() {
+  const list = _requests.filter(r => r.by === CUK);
+  document.getElementById('myReqList').innerHTML = list.length ? list.map(r => reqHTML(r, true)).join('') : '<div class="empty"><div class="ei">📋</div><p>No requests posted yet.</p></div>';
+}
+
+function fmtTime(val) {
+  if (!val) return '';
+  const h = Math.floor(val);
+  const m = Math.round((val - h) * 60);
+  if (h && m) return h + 'h ' + m + 'm';
+  if (h) return h + 'h';
+  return m + 'm';
+}
+
+function reqHTML(r, mine) {
+  const urg = { flexible: '🟢 Flexible', today: '🟡 Today', asap: '🔴 ASAP' };
+  const own = r.by === CUK;
+  const rid = String(r.id);
+  
+  const action = own
+    ? `<button class="btn btn-red btn-sm" onclick="delReq('${rid}')">🗑 Delete</button>`
+    : r.status === 'open'
+      ? `<button class="btn btn-gold btn-sm" onclick="offerHelp('${rid}')">💬 Offer Help</button>`
+      : `<span style="color:var(--muted);font-size:.77rem;">Taken</span>`;
+  
+  const priceChip = own && r.price ? `<span class="pula-chip">💰 P${r.price}</span>` : '';
+  const typeChip = r.type ? `<span class="meta-chip">📍 ${r.type}</span>` : '';
+  const timeChip = r.time ? `<span class="meta-chip">⏱ ${fmtTime(parseFloat(r.time))}</span>` : '';
+  
+  return `<div class="req-card">
+    <div class="req-top"><div class="req-left"><span class="mod-tag">📘 ${r.mod}</span><h4>${r.top}</h4></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;"><span class="badge badge-${r.status === 'open' ? 'open' : 'taken'}">${r.status === 'open' ? 'Open' : 'Taken'}</span>${action}</div></div>
+    <p class="req-desc">${r.desc}</p>
+    <div class="req-meta"><span class="meta-chip">👤 ${r.name}</span><span class="meta-chip">🕐 ${ago(r.at)}</span><span class="meta-chip">${urg[r.urg] || r.urg}</span>${timeChip}${typeChip}${priceChip}</div>
+  </div>`;
+}
+
+function offerHelp(id) {
+  const sid = String(id);
+  const r = _requests.find(x => String(x.id) === sid);
+  if (!r) { alert('Request not found. Please refresh the page.'); return; }
+  
+  const num = (r.wa || '').replace(/\D/g, '');
+  const priceInfo = r.price ? ` The student is offering *P${r.price}*${r.time ? ' for a ' + r.time + 'hr session' : ''}.` : '';
+  const msg = encodeURIComponent(`Hi ${r.name}! I saw your request on UB Academic Hub. I can help with *${r.mod} – ${r.top}*.${priceInfo} Still looking for a tutor?`);
+  
+  document.getElementById('waInfo').innerHTML = `
+    <p style="font-size:.82rem;color:var(--green);font-weight:600;margin-bottom:4px;">Connecting with</p>
+    <strong style="color:#065f46;font-size:1.05rem;">${r.name} · ${r.wa}</strong>
+    ${r.price ? `<div style="margin-top:8px;background:rgba(5,150,105,.15);border-radius:8px;padding:8px 12px;font-size:.85rem;"><span style="color:var(--green);font-weight:700;">💰 Student's offer: P${r.price}${r.time ? ' / ' + r.time + 'hr' : ''}</span></div>` : ''}`;
+  
+  document.getElementById('waLink').href = `https://wa.me/${num}?text=${msg}`;
+  document.getElementById('waMod').classList.add('on');
+}
+
+function closeWA() {
+  document.getElementById('waMod').classList.remove('on');
+}
+
+async function delReq(id) {
+  if (!confirm('Delete this request?')) return;
+  try {
+    await window.FS.deleteRequest(String(id));
+    renderReqs();
+    renderMyReqs();
+    showToast('Request Deleted', 'Your request has been removed.', 'info');
+  } catch (e) {
+    alert('Error deleting. Try again.');
+  }
+}
+
+function ago(val) {
+  if (!val) return 'Just now';
+  
+  let d;
+  if (val && typeof val === 'object' && val.toDate) d = val.toDate();
+  else if (val && typeof val === 'object' && val.seconds) d = new Date(val.seconds * 1000);
+  else d = new Date(val);
+  
+  if (isNaN(d)) return 'Just now';
+  
+  const m = Math.floor((Date.now() - d) / 60000);
+  return m < 1 ? 'Just now' : m < 60 ? m + 'm ago' : m < 1440 ? Math.floor(m / 60) + 'h ago' : Math.floor(m / 1440) + 'd ago';
+}
+
+// ── TUTORS (existing) ───────────────────────────────────────────
+async function becomeTutor() {
+  const bio = document.getElementById('btBio').value.trim();
+  const subj = document.getElementById('btSubj').value.trim();
+  
+  if (!bio || !subj) { alert('Fill in bio and subjects.'); return; }
+  
+  await window.FS.setUser(CUK, { isTutor: true, tutorBio: bio, tutorSubjects: subj.split(',').map(s => s.trim()).filter(Boolean) });
+  
+  CU.isTutor = true;
+  CU.tutorBio = bio;
+  CU.tutorSubjects = subj.split(',').map(s => s.trim()).filter(Boolean);
+  
+  document.getElementById('btMod').classList.remove('on');
+  updateRole();
+  renderTutors();
+  
+  showToast('Tutor Registered', 'You are now a tutor! Your profile is live.', 'success');
+}
+
+async function updateTutorProfile() {
+  const bio = document.getElementById('editBio').value.trim();
+  const subj = document.getElementById('editSubj').value.trim();
+  
+  if (!bio || !subj) { alert('Fill in all fields.'); return; }
+  
+  await window.FS.setUser(CUK, { tutorBio: bio, tutorSubjects: subj.split(',').map(s => s.trim()).filter(Boolean) });
+  
+  CU.tutorBio = bio;
+  CU.tutorSubjects = subj.split(',').map(s => s.trim()).filter(Boolean);
+  
+  renderTutors();
+  showToast('Profile Updated', 'Your tutor profile has been updated.', 'success');
+}
+
+async function renderTutors() {
+  const q = (document.getElementById('tSrch')?.value || '').toLowerCase();
+  const facFilter = (document.getElementById('tFacFilter')?.value || '');
+  
+  if (CUK && CU) _users[CUK] = CU;
+  
+  try {
+    if (!window._tutorsFetched) {
+      const snap = await window.FS.getAllUsers();
+      Object.assign(_users, snap);
+      window._tutorsFetched = true;
+    }
+  } catch (e) {
+    console.warn('Could not load tutors:', e);
+  }
+  
+  let tutors = Object.entries(_users).filter(([k, u]) => {
+    if (!u || !u.isTutor) return false;
+    if (facFilter && u.faculty !== facFilter) return false;
+    if (q && !u.name.toLowerCase().includes(q) && !(u.tutorSubjects || []).some(s => s.toLowerCase().includes(q))) return false;
+    return true;
+  });
+  
+  const cont = document.getElementById('tutorList');
+  
+  if (!tutors.length) {
+    cont.innerHTML = '<div class="empty"><div class="ei">⭐</div><p>No tutors found' + (facFilter ? ' in this faculty' : '') + '. <br>' + (facFilter ? 'Try another faculty or ' : '') + 'Go to <strong>Become a Tutor</strong> to be first!</p></div>';
+    return;
+  }
+  
+  const ratings = _ratings;
+  
+  cont.innerHTML = tutors.map(([k, u]) => {
+    const rs = ratings[k] || [];
+    const avg = rs.length ? rs.reduce((a, r) => a + r.stars, 0) / rs.length : 0;
+    const allTags = [...new Set(rs.flatMap(r => r.tags || []))];
+    const stars = Array(5).fill(0).map((_, i) => `<span class="star ${i < Math.round(avg) ? 'on' : ''}">★</span>`).join('');
+    const isMe = k === CUK;
+    const waNum = (u.wa || '').replace(/\D/g, '');
+    const waMsg = encodeURIComponent(`Hi ${u.name}! I found you on UB Academic Hub. Are you available for tutoring?`);
+    
+    return `<div class="tutor-card">
+      <div class="tutor-top">
+        <div class="tutor-av">${u.name[0].toUpperCase()}</div>
+        <div style="flex:1;min-width:0;">
+          <div class="tutor-name">${u.name}${isMe ? ' (You)' : ''}</div>
+          <div style="color:var(--muted);font-size:.76rem;">${u.faculty || ''} · ${u.year || 'Student'}</div>
+          <div class="stars-row">${stars}<span class="star-count">${avg > 0 ? avg.toFixed(1) + ' · ' + rs.length + ' rating(s)' : 'No ratings yet'}</span></div>
+        </div>
+      </div>
+      <p class="tutor-bio">${u.tutorBio || 'No bio yet.'}</p>
+      <div class="tutor-subjects">${(u.tutorSubjects || []).map(s => `<span class="subj-tag">${s}</span>`).join('')}</div>
+      ${allTags.length ? `<div class="rating-tags">${allTags.slice(0, 5).map(t => `<span class="rtag">${t}</span>`).join('')}</div>` : ''}
+      ${!isMe ? `<div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap;">
+        ${waNum ? `<a class="wa-btn" href="https://wa.me/${waNum}?text=${waMsg}" target="_blank" rel="noopener">💬 Talk to Tutor</a>` : '<span style="color:var(--muted);font-size:.8rem;">No WhatsApp set</span>'}
+        <button class="btn btn-outline btn-sm" onclick="openRate('${k}','${u.name}')">⭐ Rate</button>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── RATINGS ─────────────────────────────────────────────────────
+function openRate(key, name) {
+  rTarget = key;
+  rStars = 0;
+  rTags = [];
+  
+  document.getElementById('rateWho').textContent = 'Rating your session with ' + name;
+  document.querySelectorAll('.rate-star').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.rate-tag').forEach(t => t.classList.remove('on'));
+  document.getElementById('rateNote').value = '';
+  
+  document.getElementById('rateMod').classList.add('on');
+}
+
+function setStar(n) {
+  rStars = n;
+  document.querySelectorAll('.rate-star').forEach((s, i) => s.classList.toggle('on', i < n));
+}
+
+function toggleTag(el) {
+  el.classList.toggle('on');
+  const t = el.textContent;
+  rTags = rTags.includes(t) ? rTags.filter(x => x !== t) : [...rTags, t];
+}
+
+async function submitRating() {
+  if (!rStars) { alert('Please select a star rating.'); return; }
+  
+  await window.FS.addRating(rTarget, {
+    stars: rStars,
+    tags: rTags,
+    note: document.getElementById('rateNote').value,
+    by: CUK,
+    at: new Date().toISOString()
+  });
+  
+  _ratings = await window.FS.getRatings();
+  closeRate();
+  renderTutors();
+  
+  showToast('Rating Submitted', 'Thank you for your feedback!', 'success');
+}
+
+function closeRate() {
+  document.getElementById('rateMod').classList.remove('on');
+}
+
+// ── PROFILE (existing) ──────────────────────────────────────────
+let profileMods = [];
+
+function addProfileMod() {
+  const code = document.getElementById('newModCode').value.trim();
+  const name = document.getElementById('newModName').value.trim();
+  if (!name) { alert('Enter a module name.'); return; }
+  
+  profileMods.push({ code, name, creds: '' });
+  document.getElementById('newModCode').value = '';
+  document.getElementById('newModName').value = '';
+  renderProfileMods();
+}
+
+function removeProfileMod(i) {
+  profileMods.splice(i, 1);
+  renderProfileMods();
+}
+
+function renderProfileMods() {
+  const el = document.getElementById('modList');
+  if (!el) return;
+  
+  el.innerHTML = profileMods.length ? profileMods.map((m, i) => `
+    <div style="display:flex;align-items:center;gap:9px;background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:9px 13px;">
+      <span>📘</span>
+      <span style="flex:1;font-size:.87rem;font-weight:600;">${m.code ? '<strong>' + m.code + '</strong> · ' : ''}${m.name}</span>
+      <button onclick="removeProfileMod(${i})" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:1rem;">✕</button>
+    </div>`).join('')
+    : '<div style="color:var(--muted);font-size:.83rem;padding:4px;">No modules added yet.</div>';
+}
+
+async function saveProfile() {
+  const prog = document.getElementById('profProgramme').value.trim();
+  const sem = document.getElementById('profSemester').value;
+  
+  if (!prog) { alert('Please enter your programme.'); return; }
+  
+  CU.programme = prog;
+  CU.semester = sem;
+  CU.modules = profileMods.map(m => ({ ...m }));
+  mods = CU.modules;
+  
+  await window.FS.setUser(CUK, { programme: prog, semester: sem, modules: CU.modules });
+  
+  renderSMods();
+  populateModDropdowns();
+  populateGPARows();
+  populateForeRows();
+  populateStreakModules();
+  
+  showToast('Profile Saved', 'Your profile has been updated.', 'success');
+}
+
+function renderProfile() {
+  if (!CU) return;
+  
+  const ini = CU.name[0].toUpperCase();
+  document.getElementById('profAv').textContent = ini;
+  document.getElementById('profName').textContent = CU.name;
+  document.getElementById('profMeta').textContent = (CU.programme || CU.year || 'Student') + ' · University of Botswana';
+  document.getElementById('pdName').textContent = CU.name;
+  document.getElementById('pdUser').textContent = CUK;
+  document.getElementById('pdWA').textContent = CU.wa || '—';
+  document.getElementById('pdEmail').textContent = CU.email || '—';
+  document.getElementById('pdYear').textContent = CU.year || '—';
+  document.getElementById('pdFaculty').textContent = CU.faculty || '—';
+  
+  const tc = document.getElementById('tutorProfileCard');
+  if (CU.isTutor) {
+    tc.classList.remove('hidden');
+    const rs = (_ratings[CUK] || []);
+    const avg = rs.length ? rs.reduce((a, r) => a + r.stars, 0) / rs.length : 0;
+    document.getElementById('tutorProfileInfo').innerHTML = `
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:9px;">${CU.tutorBio || ''}</p>
+      <div class="tutor-subjects">${(CU.tutorSubjects || []).map(s => `<span class="subj-tag">${s}</span>`).join('')}</div>
+      <div class="stars-row" style="margin-top:11px;">${Array(5).fill(0).map((_, i) => `<span class="star ${i < Math.round(avg) ? 'on' : ''}">★</span>`).join('')}
+        <span class="star-count">${avg > 0 ? avg.toFixed(1) + ' avg · ' + rs.length + ' rating(s)' : 'No ratings yet'}</span></div>`;
+  } else {
+    tc.classList.add('hidden');
+  }
+}
+
+function loadProfileEditor() {
+  if (!CU) return;
+  
+  const pe = document.getElementById('profProgramme');
+  const se = document.getElementById('profSemester');
+  if (pe) pe.value = CU.programme || '';
+  if (se) se.value = CU.semester || 'Semester 1';
+  
+  profileMods = (CU.modules || []).map(m => ({ ...m }));
+  renderProfileMods();
+}
+
+// ── MODAL HELPERS ───────────────────────────────────────────────
+function closeMod() {
+  document.getElementById('mMod').classList.remove('on');
+}
+
+// ── POPULATE DROPDOWNS ──────────────────────────────────────────
+function populateModDropdowns() {
+  const opts = mods.length
+    ? mods.map(m => `<option value="${m.code ? m.code + ' – ' + m.name : m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('')
+    : '<option value="">No modules — set up in Profile</option>';
+  
+  ['pMod', 'sqMod', 'groupModule'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.innerHTML = '<option value="">— Select module —</option>' + opts; }
+  });
+}
+
+// ── STUDY CONTEST (existing) ────────────────────────────────────
+let scriptFileData = null;
+
+function contestTab(t) {
+  ['leaderboard', 'submit', 'active', 'create'].forEach(x => {
+    document.getElementById('ct-' + x + '-panel').classList.toggle('hidden', x !== t);
+    document.getElementById('ct-' + x).classList.toggle('on', x === t);
+  });
+  
+  if (t === 'leaderboard') renderLeaderboard();
+  if (t === 'active') renderContests();
+  if (t === 'submit' || t === 'create') populateContestDropdowns();
+}
+
+function populateContestDropdowns() {
+  const contests = _contests.filter(c => new Date(c.deadline) >= new Date() || !c.deadline);
+  const opts = contests.length
+    ? contests.map(c => `<option value="${c.id}">${c.name}</option>`).join('')
+    : '<option value="">No active contests</option>';
+  
+  ['submitContestId', 'ctFilter'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (id === 'ctFilter') {
+      el.innerHTML = '<option value="">— All Contests —</option>' + _contests.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+    } else {
+      el.innerHTML = '<option value="">— Select contest —</option>' + opts;
+    }
+  });
+  
+  const ctModEl = document.getElementById('ctMod');
+  if (ctModEl) {
+    ctModEl.innerHTML = '<option value="">— Select module —</option>' +
+      (mods.length ? mods.map(m => `<option value="${m.code ? m.code + ' – ' + m.name : m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('')
+      : '<option value="">No modules — set in Profile</option>');
+  }
+}
+
+async function createContest() {
+  const name = document.getElementById('ctName').value.trim();
+  const mod = document.getElementById('ctMod').value;
+  const deadline = document.getElementById('ctDeadline').value;
+  const prize = document.getElementById('ctPrize').value.trim();
+  const desc = document.getElementById('ctDesc').value.trim();
+  
+  if (!name) { alert('Enter a contest name.'); return; }
+  if (!deadline) { alert('Set a deadline.'); return; }
+  
+  await window.FS.addContest({
+    by: CUK,
+    byName: CU.name,
+    name,
+    mod,
+    deadline,
+    prize,
+    desc
+  });
+  
+  ['ctName', 'ctDeadline', 'ctPrize', 'ctDesc'].forEach(id => document.getElementById(id).value = '');
+  
+  showToast('Contest Created', 'Your contest is now live!', 'success');
+  contestTab('active');
+}
+
+function renderContests() {
+  const all = _contests;
+  
+  document.getElementById('contestList').innerHTML = all.length
+    ? all.map(c => {
+      const closed = c.deadline && new Date(c.deadline) < new Date();
+      const myEntry = getMyEntry(c.id);
+      
+      return `<div class="req-card">
+        <div class="req-top">
+          <div class="req-left"><span class="mod-tag">🏆 ${c.mod || 'Open'}</span><h4>${c.name}</h4></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">
+            <span class="badge ${closed ? 'badge-taken' : 'badge-open'}">${closed ? 'Closed' : 'Open'}</span>
+            ${!closed && !myEntry ? `<button class="btn btn-gold btn-sm" onclick="contestTab('submit')">📤 Enter</button>` : myEntry ? `<span style="color:var(--green);font-size:.78rem;font-weight:700;">✓ Submitted ${myEntry.score}%</span>` : ''}
+          </div>
+        </div>
+        ${c.desc ? `<p class="req-desc">${c.desc}</p>` : ''}
+        <div class="req-meta">
+          <span class="meta-chip">📅 Deadline: ${c.deadline || 'Open-ended'}</span>
+          ${c.prize ? `<span class="meta-chip">🎁 ${c.prize}</span>` : ''}
+          <span class="meta-chip">👤 By ${c.byName}</span>
+        </div>
+      </div>`;
+    }).join('')
+    : '<div class="empty"><div class="ei">📋</div><p>No contests yet. Create one!</p></div>';
+}
+
+function getMyEntry(contestId) {
+  return (_scores.find(s => s.contestId == contestId && s.by === CUK)) || null;
+}
+
+function handleScriptUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = ev => {
+    scriptFileData = ev.target.result;
+    document.getElementById('scriptDone').classList.remove('hidden');
+    showToast('File Uploaded', 'Test script ready for submission.', 'success');
+  };
+  reader.readAsDataURL(file);
+}
+
+async function submitScore() {
+  const contestId = document.getElementById('submitContestId').value;
+  const score = parseFloat(document.getElementById('submitScore').value);
+  const module = document.getElementById('submitModule').value.trim();
+  
+  if (!contestId) { alert('Select a contest.'); return; }
+  if (isNaN(score) || score < 0 || score > 100) { alert('Enter a valid score (0–100).'); return; }
+  if (!module) { alert('Enter the module/test name.'); return; }
+  if (!scriptFileData) { alert('Please upload your test script photo.'); return; }
+  
+  const existing = _scores.find(s => s.contestId == contestId && s.by === CUK);
+  if (existing) { alert('You have already submitted for this contest.'); return; }
+  
+  await window.FS.addScore({
+    by: CUK,
+    name: CU.name,
+    studentId: CUK,
+    contestId,
+    module,
+    score,
+    hasScript: true
+  });
+  
+  scriptFileData = null;
+  document.getElementById('scriptDone').classList.add('hidden');
+  document.getElementById('scriptUpload').value = '';
+  ['submitContestId', 'submitScore', 'submitModule'].forEach(id => document.getElementById(id).value = '');
+  
+  showToast('Score Submitted', 'Your entry has been recorded.', 'success');
+  contestTab('leaderboard');
+}
+
+function renderLeaderboard() {
+  const filterContest = document.getElementById('ctFilter')?.value;
+  let entries = [..._scores];
+  
+  if (filterContest) entries = entries.filter(e => e.contestId == filterContest);
+  entries.sort((a, b) => b.score - a.score);
+  
+  const medals = ['🥇', '🥈', '🥉'];
+  
+  document.getElementById('leaderboardList').innerHTML = entries.length
+    ? `<div style="display:grid;gap:10px;">
+      ${entries.map((e, i) => `
+        <div style="background:${i === 0 ? 'linear-gradient(135deg,#fef3c7,#fde68a)' : i === 1 ? 'linear-gradient(135deg,#f1f5f9,#e2e8f0)' : i === 2 ? 'linear-gradient(135deg,#fff7ed,#fed7aa)' : 'var(--card)'};
+          border-radius:14px;padding:14px 18px;border:1px solid ${i === 0 ? '#fbbf24' : i === 1 ? '#cbd5e1' : i === 2 ? '#fdba74' : 'var(--border)'};
+          display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);">
+          <div style="font-size:${i < 3 ? '1.8rem' : '1.2rem'};flex-shrink:0;">${i < 3 ? medals[i] : '#' + (i + 1)}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:800;font-size:.95rem;">${e.name}</div>
+            <div style="font-size:.78rem;color:var(--muted);">ID: ${e.studentId} · ${e.module}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:${i === 0 ? '#92400e' : i === 1 ? '#475569' : i === 2 ? '#c2410c' : 'var(--text)'};">${e.score}%</div>
+            <div style="font-size:.7rem;color:var(--muted);">${e.hasScript ? '✓ Verified' : 'Unverified'}</div>
+          </div>
+        </div>`).join('')}
+    </div>`
+    : '<div class="empty"><div class="ei">🏅</div><p>No entries yet. Be the first to submit!</p></div>';
+}
+
+// ── EARN POINTS (existing) ──────────────────────────────────────
+let ptsScriptData = null;
+
+function calcPoints(mark) {
+  if (mark < 40) return 0;
+  if (mark < 50) return 5;
+  if (mark < 60) return 10;
+  if (mark < 70) return 15;
+  if (mark < 80) return 20;
+  if (mark < 90) return 25;
+  return 30;
+}
+
+function currentMonth() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function pointsResetDate() {
+  const d = new Date();
+  const last = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+  return last.toLocaleDateString('en-BW', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function pointsTab(t) {
+  ['leaderboard', 'submit', 'mine'].forEach(x => {
+    document.getElementById('pts-' + x + '-panel').classList.toggle('hidden', x !== t);
+    document.getElementById('ptb-' + x).classList.toggle('on', x === t);
+  });
+  
+  if (t === 'leaderboard') renderPointsLeaderboard();
+  if (t === 'submit') populatePtsModuleDropdown();
+  if (t === 'mine') renderMyPoints();
+  
+  const rd = document.getElementById('ptsResetDate');
+  if (rd) rd.textContent = pointsResetDate();
+}
+
+function populatePtsModuleDropdown() {
+  const el = document.getElementById('ptsModule');
+  if (!el) return;
+  
+  el.innerHTML = '<option value="">— Select module —</option>' +
+    (mods.length ? mods.map(m => `<option value="${m.code ? m.code + ' – ' + m.name : m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('') : '<option value="">No modules — set in Profile</option>');
+}
+
+function previewPoints() {
+  const mark = parseFloat(document.getElementById('ptsMark').value);
+  const el = document.getElementById('ptsPreview');
+  
+  if (isNaN(mark) || mark < 0 || mark > 100) { el.textContent = ''; return; }
+  
+  const pts = calcPoints(mark);
+  
+  if (pts === 0) {
+    el.innerHTML = `<span style="color:var(--red);">😔 Sorry, keep working hard! You need 40%+ to earn points.</span>`;
+  } else {
+    el.innerHTML = `<span style="color:var(--green);">✓ You'll earn <strong>${pts} points</strong> for this mark!</span>`;
+  }
+}
+
+function handlePtsScript(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = ev => {
+    ptsScriptData = ev.target.result;
+    document.getElementById('ptsScriptDone').classList.remove('hidden');
+    showToast('File Uploaded', 'Test script ready for verification.', 'success');
+  };
+  reader.readAsDataURL(file);
+}
+
+async function submitPoints() {
+  const mod = document.getElementById('ptsModule').value;
+  const testName = document.getElementById('ptsTestName').value.trim();
+  const mark = parseFloat(document.getElementById('ptsMark').value);
+  
+  if (!mod) { alert('Please select a module.'); return; }
+  if (!testName) { alert('Enter the test/assessment name.'); return; }
+  if (isNaN(mark) || mark < 0 || mark > 100) { alert('Enter a valid mark (0–100).'); return; }
+  if (!ptsScriptData) { alert('Please upload your test script.'); return; }
+  
+  const month = currentMonth();
+  const pts = calcPoints(mark);
+  
+  const existing = _points.find(p => p.by === CUK && p.module === mod && p.testName === testName && p.month === month);
+  if (existing) { alert('You already submitted this test this month.'); return; }
+  
+  let bonus = 0;
+  const prev = _points.filter(p => p.by === CUK && p.module === mod).sort((a, b) => new Date(b.at || 0) - new Date(a.at || 0));
+  if (prev.length && mark - prev[0].mark >= 10) bonus = 5;
+  
+  if (pts === 0) {
+    alert('😔 Sorry, keep working hard! You scored below 40% so no points this time. Try again next test!');
+    return;
+  }
+  
+  await window.FS.addPoint({
+    by: CUK,
+    name: CU.name,
+    studentId: CUK,
+    faculty: CU.faculty || 'Unknown',
+    programme: CU.programme || '',
+    module: mod,
+    testName,
+    mark,
+    points: pts + bonus,
+    basePoints: pts,
+    bonus,
+    month,
+    hasScript: true
+  });
+  
+  ptsScriptData = null;
+  document.getElementById('ptsScriptDone').classList.add('hidden');
+  document.getElementById('ptsScript').value = '';
+  ['ptsModule', 'ptsTestName', 'ptsMark'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('ptsPreview').textContent = '';
+  
+  showToast(`${pts + bonus} Points Earned!`, bonus ? `Includes +5 Most Improved bonus!` : `Great job!`, 'success');
+  pointsTab('leaderboard');
+}
+
+function updateMyPointsBadge() {
+  const month = currentMonth();
+  const total = _points.filter(p => p.by === CUK && p.month === month).reduce((s, p) => s + (p.points || 0), 0);
+  const el = document.getElementById('myPtsTotal');
+  if (el) el.textContent = total;
+}
+
+function renderPointsLeaderboard() {
+  const month = currentMonth();
+  const facFilter = (document.getElementById('ptsFacFilter')?.value) || '';
+  const rd = document.getElementById('ptsResetDate');
+  if (rd) rd.textContent = pointsResetDate();
+  
+  let entries = _points.filter(p => p.month === month && (p.points || 0) > 0);
+  if (facFilter) entries = entries.filter(p => p.faculty === facFilter);
+  
+  const byStudent = {};
+  entries.forEach(p => {
+    if (!byStudent[p.by]) byStudent[p.by] = { name: p.name, studentId: p.studentId, faculty: p.faculty, total: 0, count: 0 };
+    byStudent[p.by].total += p.points || 0;
+    byStudent[p.by].count++;
+  });
+  
+  const sorted = Object.values(byStudent).sort((a, b) => b.total - a.total);
+  const medals = ['🥇', '🥈', '🥉'];
+  
+  document.getElementById('ptsLeaderboardList').innerHTML = sorted.length
+    ? `<div style="display:grid;gap:10px;">${sorted.map((e, i) => `
+        <div style="background:${i === 0 ? 'linear-gradient(135deg,#fef3c7,#fde68a)' : i === 1 ? 'linear-gradient(135deg,#f1f5f9,#e2e8f0)' : i === 2 ? 'linear-gradient(135deg,#fff7ed,#fed7aa)' : 'var(--card)'};
+          border-radius:14px;padding:14px 18px;border:1px solid ${i === 0 ? '#fbbf24' : i === 1 ? '#cbd5e1' : i === 2 ? '#fdba74' : 'var(--border)'};
+          display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);${e.studentId === CUK ? 'outline:2px solid var(--blue2);' : ''}">
+          <div style="font-size:${i < 3 ? '1.8rem' : '1.1rem'};flex-shrink:0;min-width:32px;text-align:center;">${i < 3 ? medals[i] : `#${i + 1}`}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-weight:800;font-size:.93rem;">${e.name}${e.studentId === CUK ? ' (You)' : ''}</div>
+            <div style="font-size:.75rem;color:var(--muted);">${e.faculty || '—'} · ${e.count} submission${e.count !== 1 ? 's' : ''}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:${i === 0 ? '#92400e' : i === 1 ? '#475569' : i === 2 ? '#c2410c' : 'var(--blue2)'};">${e.total}</div>
+            <div style="font-size:.7rem;color:var(--muted);">pts</div>
+          </div>
+        </div>`).join('')}</div>`
+    : '<div class="empty"><div class="ei">🏅</div><p>No entries yet this month.<br>Be the first to submit!</p></div>';
+}
+
+function renderMyPoints() {
+  const month = currentMonth();
+  const mine = _points.filter(p => p.by === CUK && p.month === month).sort((a, b) => new Date(b.at || 0) - new Date(a.at || 0));
+  const total = mine.reduce((s, p) => s + (p.points || 0), 0);
+  
+  document.getElementById('ptsMyList').innerHTML = mine.length
+    ? `<div class="card" style="padding:13px 17px;margin-bottom:14px;background:linear-gradient(135deg,#fef3c7,#fffbeb);">
+        <span style="font-weight:800;font-size:1rem;">Total this month: <span style="color:#92400e;">${total} pts</span></span>
+      </div>` + mine.map(p => `
+        <div class="req-card">
+          <div class="req-top">
+            <div class="req-left"><span class="mod-tag">📘 ${p.module}</span><h4>${p.testName}</h4></div>
+            <div style="text-align:right;">
+              <div style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--gold);">${p.points} pts</div>
+              ${p.bonus ? `<div style="font-size:.72rem;color:var(--green);font-weight:700;">+${p.bonus} improved bonus!</div>` : ''}
+            </div>
+          </div>
+          <div class="req-meta">
+            <span class="meta-chip">📊 ${p.mark}%</span>
+            <span class="meta-chip">🏫 ${p.faculty || '—'}</span>
+            <span class="meta-chip">${p.hasScript ? '✓ Verified' : 'Pending'}</span>
+          </div>
+        </div>`).join('')
+    : '<div class="empty"><div class="ei">📋</div><p>No submissions this month yet.</p></div>';
+}
+
+// ── SQUAD CHAT ──────────────────────────────────────────────────
+let _activeChatSession = null, _unsubChat = null;
+
+function renderChatMessages(msgs) {
+  const el = document.getElementById('chatMessages');
+  if (!el) return;
+  
+  if (!msgs.length) {
+    el.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:.82rem;padding:20px;">No messages yet. Start the discussion! 👋</div>';
+    return;
+  }
+  
+  el.innerHTML = msgs.map(m => {
+    const isMe = m.by === CUK;
+    const t = m.at ? ago(m.at) : 'just now';
+    
+    return `<div style="display:flex;flex-direction:column;align-items:${isMe ? 'flex-end' : 'flex-start'};gap:3px;">
+      <div style="font-size:.7rem;color:var(--muted);padding:0 4px;">${isMe ? 'You' : m.name} · ${t}</div>
+      <div style="max-width:80%;padding:10px 14px;border-radius:${isMe ? '16px 16px 4px 16px' : '16px 16px 16px 4px'};
+        background:${isMe ? 'linear-gradient(135deg,var(--blue),var(--purple))' : '#fff'};
+        color:${isMe ? '#fff' : 'var(--text)'};font-size:.87rem;line-height:1.5;
+        border:${isMe ? 'none' : '1px solid var(--border)'};
+        box-shadow:0 2px 8px rgba(0,0,0,.07);">${m.text}</div>
+    </div>`;
+  }).join('');
+  
+  el.scrollTop = el.scrollHeight;
+}
+
+async function sendChatMsg() {
+  const inp = document.getElementById('chatInput');
+  const text = inp.value.trim();
+  
+  if (!text || !_activeChatSession) return;
+  
+  inp.value = '';
+  
+  if (_activeChatSession.startsWith('group-')) {
+    // Group chat
+    await window.FS.sendGroupMsg(_activeChatSession.replace('group-', ''), { by: CUK, name: CU.name, text });
+  } else {
+    // Session chat
+    await window.FS.sendMsg(_activeChatSession, { by: CUK, name: CU.name, text });
+  }
+}
+
+function closeSquadChat() {
+  document.getElementById('squadChatMod').classList.remove('on');
+  if (_unsubChat) { _unsubChat(); _unsubChat = null; }
+  _activeChatSession = null;
+}
+
+// ── PARTICLES ───────────────────────────────────────────────────
+(function() {
+  const cont = document.getElementById('particles');
+  if (!cont) return;
+  
+  const colors = ['#2563eb', '#7c3aed', '#ec4899', '#f59e0b', '#059669', '#0d9488'];
+  
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const s = Math.random() * 12 + 4;
+    p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random() * 100}%;bottom:-${s}px;` +
+      `background:${colors[Math.floor(Math.random() * colors.length)]};` +
+      `animation-duration:${Math.random() * 15 + 10}s;animation-delay:${Math.random() * 10}s;`;
+    cont.appendChild(p);
+  }
 })();
 
-// ── PARTICLES ────────────────────────────────────────────────────
-(function(){
-  const cont=document.getElementById('particles');
-  if(!cont)return;
-  const colors=['#2563eb','#7c3aed','#ec4899','#f59e0b','#059669','#0d9488'];
-  for(let i=0;i<18;i++){
-    const p=document.createElement('div');
-    p.className='p
+// Make functions available globally
+window.authTab = authTab;
+window.doLogin = doLogin;
+window.doRegister = doRegister;
+window.showForgotPassword = showForgotPassword;
+window.closeForgot = closeForgot;
+window.resetPassword = resetPassword;
+window.go = go;
+window.toggleSB = toggleSB;
+window.openSB = openSB;
+window.closeSB = closeSB;
+window.doLogout = doLogout;
+window.addSetupMod = addSetupMod;
+window.saveSetup = saveSetup;
+window.closeSetup = closeSetup;
+window.addProfileMod = addProfileMod;
+window.removeProfileMod = removeProfileMod;
+window.saveProfile = saveProfile;
+window.pickMod = pickMod;
+window.handleOut = handleOut;
+window.searchRes = searchRes;
+window.fRes = fRes;
+window.peerTab = peerTab;
+window.validatePrice = validatePrice;
+window.postReq = postReq;
+window.offerHelp = offerHelp;
+window.closeWA = closeWA;
+window.delReq = delReq;
+window.becomeTutor = becomeTutor;
+window.updateTutorProfile = updateTutorProfile;
+window.openRate = openRate;
+window.setStar = setStar;
+window.toggleTag = toggleTag;
+window.submitRating = submitRating;
+window.closeRate = closeRate;
+window.openTip = openTip;
+window.closeTipDetail = closeTipDetail;
+window.askTipQuestion = askTipQuestion;
+window.scrollCareer = scrollCareer;
+window.loadCareerVideos = loadCareerVideos;
+window.calcGPA = calcGPA;
+window.clearGPA = clearGPA;
+window.saveGPAData = saveGPAData;
+window.loadGPAData = loadGPAData;
+window.contestTab = contestTab;
+window.createContest = createContest;
+window.handleScriptUpload = handleScriptUpload;
+window.submitScore = submitScore;
+window.pointsTab = pointsTab;
+window.previewPoints = previewPoints;
+window.handlePtsScript = handlePtsScript;
+window.submitPoints = submitPoints;
+window.toggleDarkMode = toggleDarkMode;
+window.toggleCompact = toggleCompact;
+window.updateSettings = updateSettings;
+window.exportData = exportData;
+window.clearData = clearData;
+window.closeMod = closeMod;
+window.setTimerPreset = setTimerPreset;
+window.startTimer = startTimer;
+window.pauseTimer = pauseTimer;
+window.resetTimer = resetTimer;
+window.logStudySession = logStudySession;
+window.filterGroups = filterGroups;
+window.createPermanentGroup = createPermanentGroup;
+window.joinGroup = joinGroup;
+window.leaveGroup = leaveGroup;
+window.showMyGroups = showMyGroups;
+window.openGroupChat = openGroupChat;
+window.sendChatMsg = sendChatMsg;
+window.closeSquadChat = closeSquadChat;
+</script>
+</body>
+</html>
