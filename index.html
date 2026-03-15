@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>UB Academic Hub</title>
+<title>UB Academic Hub · Complete Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -36,7 +36,8 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes bounceIn{0%{opacity:0;transform:scale(.3)}50%{transform:scale(1.05)}70%{transform:scale(.9)}100%{opacity:1;transform:scale(1)}}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes timerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);color:var(--red);}}
+@keyframes timerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);color:var(--red)}}
+@keyframes slideInRight{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
 
 /* PAGE TRANSITION */
 .page-transition{position:fixed;inset:0;background:linear-gradient(135deg,var(--blue2),var(--purple),var(--pink));
@@ -219,6 +220,9 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .btn-lg{padding:12px 24px;font-size:.95rem;}
 .btn-block{width:100%;justify-content:center;}
 .btn-icon{padding:8px;border-radius:8px;}
+.btn-sec{padding:10px 18px;border:2px solid var(--border);border-radius:10px;background:#fff;
+  cursor:pointer;font-weight:700;font-size:.84rem;font-family:'Plus Jakarta Sans',sans-serif;transition:all .25s;}
+.btn-sec:hover{background:var(--bg);border-color:var(--blue2);}
 
 /* BADGES */
 .badge{padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:700;display:inline-flex;align-items:center;gap:4px;}
@@ -227,8 +231,10 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .badge-danger{background:var(--red2);color:var(--red);border:1px solid #fecaca;}
 .badge-info{background:var(--blue3);color:var(--blue);border:1px solid #b3d4ff;}
 .badge-purple{background:var(--purple2);color:var(--purple);border:1px solid #d4b8ff;}
+.badge-taken{background:var(--red2);color:var(--red);border-color:#fecaca;}
+.badge-open{background:var(--green2);color:var(--green);border-color:var(--green3);}
 
-/* HOME - Updated */
+/* HOME - UPDATED: Removed GPA panel */
 .home-top-row{margin-bottom:22px;}
 .home-greet-block h2{font-family:'Fraunces',serif;font-size:1.75rem;
   background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
@@ -307,7 +313,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .room-participants span{background:var(--blue3);border-radius:30px;padding:3px 8px;font-size:.7rem;font-weight:600;color:var(--blue2);}
 .create-room-form{padding:15px;background:linear-gradient(135deg,#f8faff,#f5f0ff);border-radius:16px;margin-bottom:20px;}
 
-/* STUDY STREAK */
+/* STUDY STREAK - Updated with dual timer and calendar */
 .streak-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:15px;}
 .streak-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--gold3),var(--orange2));padding:8px 15px;border-radius:30px;color:var(--orange);font-weight:700;margin-right:10px;}
 .streak-fire{font-size:1.3rem;}
@@ -341,12 +347,14 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .calendar-day.has-study::after{content:'✓';position:absolute;top:2px;right:2px;font-size:.5rem;}
 .calendar-day.empty{background:transparent;cursor:default;}
 .calendar-day.empty:hover{transform:none;}
+.calendar-day.selected{outline:3px solid var(--gold);outline-offset:2px;}
 .study-stat-tooltip{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:4px 8px;border-radius:4px;font-size:.6rem;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;z-index:10;}
 .calendar-day:hover .study-stat-tooltip{opacity:1;}
 .daily-stats{padding:12px;background:#f0f4ff;border-radius:12px;margin-top:10px;}
 .daily-stat-row{display:flex;justify-content:space-between;margin-bottom:5px;font-size:.85rem;}
 .daily-stat-row .label{color:var(--muted);}
 .daily-stat-row .value{font-weight:700;color:var(--blue);}
+.heat-0{background:#ebf4ff;} .heat-1{background:#c7e0ff;} .heat-2{background:#9ac7ff;} .heat-3{background:#6eaaff;} .heat-4{background:#3b82f6;color:#fff;} .heat-5{background:#1e3a8a;color:#fff;}
 
 /* Session form */
 .session-form{background:#fff;border-radius:14px;padding:18px;border:1px solid var(--border);margin-bottom:15px;}
@@ -359,8 +367,9 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .session-subject{font-weight:600;font-size:.9rem;}
 .session-time{color:var(--muted);font-size:.8rem;}
 .session-duration{font-weight:700;color:var(--purple);}
+.module-time-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border);font-size:.8rem;}
 
-/* STUDY SQUAD (Combined with Sessions) */
+/* STUDY SQUAD */
 .faculty-tabs{display:flex;overflow-x:auto;gap:8px;padding-bottom:10px;margin-bottom:20px;-webkit-overflow-scrolling:touch;}
 .faculty-tab{padding:8px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;cursor:pointer;font-size:.8rem;font-weight:600;white-space:nowrap;transition:all .2s;}
 .faculty-tab:hover{border-color:var(--blue2);background:var(--blue3);}
@@ -376,7 +385,7 @@ html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(
 .group-stat{font-size:.8rem;}
 .group-stat strong{color:var(--purple);}
 
-/* GPA Tracker */
+/* GPA (keeping but moving to sidebar) */
 .setup-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px;}
 .ig{display:flex;flex-direction:column;gap:6px;}
 .ig label{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
@@ -479,9 +488,6 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
 .meta-chip{font-size:.73rem;color:var(--muted);display:flex;align-items:center;gap:4px;font-weight:500;}
 .pula-chip{background:linear-gradient(135deg,var(--green2),var(--teal2));color:var(--green);
   border:1px solid var(--green3);padding:4px 11px;border-radius:20px;font-size:.74rem;font-weight:700;}
-.badge{padding:3px 10px;border-radius:20px;font-size:.71rem;font-weight:700;border:1px solid;}
-.badge-open{background:var(--green2);color:var(--green);border-color:var(--green3);}
-.badge-taken{background:var(--red2);color:var(--red);border-color:#fecaca;}
 .wa-btn{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:9px 17px;border:none;
   border-radius:10px;font-weight:700;font-size:.83rem;cursor:pointer;
   display:inline-flex;align-items:center;gap:7px;text-decoration:none;transition:all .3s;
@@ -558,10 +564,6 @@ td input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.
 .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:22px 22px 0 0;
   background:linear-gradient(90deg,var(--blue2),var(--purple),var(--pink));}
 .modal h3{font-family:'Fraunces',serif;color:var(--text);margin-bottom:16px;font-size:1.25rem;margin-top:6px;}
-.modal-acts{display:flex;gap:10px;margin-top:18px;}
-.btn-sec{padding:10px 18px;border:2px solid var(--border);border-radius:10px;background:#fff;
-  cursor:pointer;font-weight:700;font-size:.84rem;font-family:'Plus Jakarta Sans',sans-serif;transition:all .25s;}
-.btn-sec:hover{background:var(--bg);border-color:var(--blue2);}
 
 /* RATINGS */
 .rate-stars{display:flex;gap:10px;justify-content:center;margin:16px 0;}
@@ -659,7 +661,7 @@ input:checked + .slider:before{transform:translateX(26px);}
 <!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- AUTH -->
+<!-- AUTH (unchanged) -->
 <div id="authScreen">
   <div class="auth-blob" style="width:400px;height:400px;background:rgba(124,58,237,.4);top:-100px;right:-100px;"></div>
   <div class="auth-blob" style="width:300px;height:300px;background:rgba(236,72,153,.3);bottom:-80px;left:-80px;animation-delay:-3s;"></div>
@@ -683,6 +685,7 @@ input:checked + .slider:before{transform:translateX(26px);}
           <input type="checkbox" id="rememberMe"> Remember me
         </label>
       </div>
+      <div id="fsStatus" style="font-size:.75rem;color:var(--muted);text-align:center;margin-bottom:8px;display:none;">⏳ Connecting to server…</div>
       <button class="btn-auth" onclick="doLogin()"><span>Sign In →</span></button>
       <p style="text-align:center;margin-top:12px;"><a href="#" onclick="showForgotPassword()" style="color:var(--blue2);font-size:.8rem;">Forgot Password?</a></p>
     </div>
@@ -701,6 +704,7 @@ input:checked + .slider:before{transform:translateX(26px);}
           <option value="Education">Education</option>
           <option value="Law">Law</option>
           <option value="Medicine">Medicine</option>
+          <option value="Graduate Studies">Graduate Studies</option>
         </select></div>
       <div class="ff"><label>Year of Study</label>
         <select id="rY"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>5th Year</option></select></div>
@@ -720,6 +724,7 @@ input:checked + .slider:before{transform:translateX(26px);}
     <h3>📚 Add a Module</h3>
     <div class="ff"><label>Module Code</label><input id="mC" placeholder="e.g. MEC 301"></div>
     <div class="ff"><label>Module Name</label><input id="mN" placeholder="e.g. Thermodynamics II"></div>
+    <div class="ff"><label>Credits</label><input id="mK" type="number" placeholder="e.g. 3"></div>
     <div class="modal-acts">
       <button class="btn btn-green" onclick="saveMod()">✓ Add Module</button>
       <button class="btn-sec" onclick="closeMod()">Cancel</button>
@@ -759,26 +764,28 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- Rating Modal -->
+<!-- Rating Modal (updated with tags) -->
 <div class="modal-bg" id="rateMod">
   <div class="modal">
     <h3>⭐ Rate Your Tutor</h3>
     <p style="color:var(--muted);font-size:.84rem;" id="rateWho"></p>
     <div class="rate-stars">
-      <span class="rate-star" onclick="setStar(1)">★</span><span class="rate-star" onclick="setStar(2)">★</span>
-      <span class="rate-star" onclick="setStar(3)">★</span><span class="rate-star" onclick="setStar(4)">★</span>
+      <span class="rate-star" onclick="setStar(1)">★</span>
+      <span class="rate-star" onclick="setStar(2)">★</span>
+      <span class="rate-star" onclick="setStar(3)">★</span>
+      <span class="rate-star" onclick="setStar(4)">★</span>
       <span class="rate-star" onclick="setStar(5)">★</span>
     </div>
     <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;">Tags</label>
-    <div class="rate-tag-grid">
-      <span class="rate-tag" onclick="toggleTag(this)">Patient</span>
-      <span class="rate-tag" onclick="toggleTag(this)">Clear explanations</span>
-      <span class="rate-tag" onclick="toggleTag(this)">Knowledgeable</span>
-      <span class="rate-tag" onclick="toggleTag(this)">Punctual</span>
-      <span class="rate-tag" onclick="toggleTag(this)">Friendly</span>
-      <span class="rate-tag" onclick="toggleTag(this)">Well prepared</span>
-      <span class="rate-tag" onclick="toggleTag(this)">Good examples</span>
-      <span class="rate-tag" onclick="toggleTag(this)">Encouraging</span>
+    <div class="rate-tag-grid" id="rateTagContainer">
+      <span class="rate-tag" onclick="toggleTag(this, 'Patient')">Patient</span>
+      <span class="rate-tag" onclick="toggleTag(this, 'Clear explanations')">Clear</span>
+      <span class="rate-tag" onclick="toggleTag(this, 'Knowledgeable')">Knowledgeable</span>
+      <span class="rate-tag" onclick="toggleTag(this, 'Punctual')">Punctual</span>
+      <span class="rate-tag" onclick="toggleTag(this, 'Friendly')">Friendly</span>
+      <span class="rate-tag" onclick="toggleTag(this, 'Well prepared')">Prepared</span>
+      <span class="rate-tag" onclick="toggleTag(this, 'Good examples')">Examples</span>
+      <span class="rate-tag" onclick="toggleTag(this, 'Encouraging')">Encouraging</span>
     </div>
     <div class="ff" style="margin-top:13px;">
       <label>Short note (optional)</label>
@@ -821,16 +828,16 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- Setup Profile Modal - Fixed to show automatically after registration -->
+<!-- Setup Profile Modal -->
 <div class="modal-bg" id="setupMod">
   <div class="modal" style="max-width:520px;">
     <div style="text-align:center;margin-bottom:20px;">
       <div style="font-size:2.8rem;margin-bottom:8px;">🎓</div>
       <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:6px;">Welcome to UB Academic Hub!</h3>
-      <p style="color:var(--muted);font-size:.84rem;">Tell us your programme and this semester's modules — this powers everything in the app.</p>
+      <p style="color:var(--muted);font-size:.84rem;">Tell us your programme and this semester's modules — this powers everything in the app. You can edit anytime in Profile.</p>
     </div>
     <div class="ff"><label>Programme / Degree</label>
-      <input id="setupProg" class="req-fi" placeholder="e.g. BSc Mechanical Engineering" value=""></div>
+      <input id="setupProg" class="req-fi" placeholder="e.g. BSc Mechanical Engineering"></div>
     <div class="ff"><label>Current Semester</label>
       <select id="setupSem" class="req-fi"><option>Semester 1</option><option>Semester 2</option></select></div>
     <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:9px;">This Semester's Modules</label>
@@ -901,6 +908,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         <option value="Education">Education</option>
         <option value="Law">Law</option>
         <option value="Medicine">Medicine</option>
+        <option value="Graduate Studies">Graduate Studies</option>
       </select>
     </div>
     <div class="modal-acts">
@@ -910,23 +918,11 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- Create Study Session Modal (Now integrated with Study Squad) -->
+<!-- Create Study Session Modal -->
 <div class="modal-bg" id="createSessionMod">
   <div class="modal create-session-modal">
     <h3>📅 Create Study Session</h3>
-    <p style="color:var(--muted);font-size:.82rem;margin-bottom:18px;">Schedule a one-time or recurring study session with classmates</p>
-    
-    <div class="ff">
-      <label>Session Type</label>
-      <div style="display:flex;gap:10px;margin-top:5px;">
-        <label style="display:flex;align-items:center;gap:5px;">
-          <input type="radio" name="sessionType" value="temporary" checked> ⏱️ One-time
-        </label>
-        <label style="display:flex;align-items:center;gap:5px;">
-          <input type="radio" name="sessionType" value="permanent"> 👥 Create Permanent Group
-        </label>
-      </div>
-    </div>
+    <p style="color:var(--muted);font-size:.82rem;margin-bottom:18px;">Schedule a study session with classmates</p>
     
     <div class="ff">
       <label>Module</label>
@@ -952,6 +948,8 @@ input:checked + .slider:before{transform:translateX(26px);}
         <option value="60" selected>1 hour</option>
         <option value="90">1 hour 30 minutes</option>
         <option value="120">2 hours</option>
+        <option value="150">2 hours 30 minutes</option>
+        <option value="180">3 hours</option>
       </select>
     </div>
     
@@ -993,71 +991,60 @@ input:checked + .slider:before{transform:translateX(26px);}
   </div>
 </div>
 
-<!-- Create Focus Room Modal -->
+<!-- Create Focus Room Modal (updated with weekly lifespan) -->
 <div class="modal-bg" id="createRoomMod">
   <div class="modal create-session-modal">
-    <h3>👥 Create Focus Room</h3>
-    <p style="color:var(--muted);font-size:.82rem;margin-bottom:18px;">Study together in real-time and earn bonus points</p>
+    <h3>👥 Create Focus Room (weekly)</h3>
+    <p style="color:var(--muted);font-size:.82rem;margin-bottom:18px;">Set lifespan & study rules</p>
     
     <div class="ff">
       <label>Room Name</label>
-      <input id="roomName" class="req-fi" placeholder="e.g. Thermodynamics Focus Room" />
+      <input id="roomName" class="req-fi" placeholder="e.g. Thermodynamics squad" />
     </div>
     
     <div class="ff">
-      <label>Module</label>
-      <select id="roomModule" class="req-fi">
-        <option value="">— Select module —</option>
-      </select>
+      <label>⏳ Lifespan (days)</label>
+      <input type="number" id="roomLifespan" min="1" max="30" value="7" class="req-fi" />
     </div>
     
     <div class="ff">
-      <label>Timer Mode</label>
-      <div style="display:flex;gap:10px;margin-top:5px;">
-        <label style="display:flex;align-items:center;gap:5px;">
-          <input type="radio" name="timerMode" value="countdown" checked> ⏱️ Countdown
-        </label>
-        <label style="display:flex;align-items:center;gap:5px;">
-          <input type="radio" name="timerMode" value="countup"> ⏲️ Count Up (Stopwatch)
-        </label>
-      </div>
-    </div>
-    
-    <div class="ff" id="countdownSettings">
-      <label>Duration (for countdown mode)</label>
-      <select id="roomDuration" class="req-fi">
-        <option value="25">25 minutes (Pomodoro)</option>
-        <option value="30">30 minutes</option>
-        <option value="45">45 minutes</option>
-        <option value="60">1 hour</option>
-        <option value="90">1.5 hours</option>
-        <option value="120">2 hours</option>
-        <option value="180">3 hours</option>
-      </select>
+      <label>📋 Daily commitment (hours)</label>
+      <input id="roomDailyHours" type="number" min="0.5" step="0.5" value="2" class="req-fi" />
     </div>
     
     <div class="ff">
-      <label>Max Participants</label>
+      <label>🕒 Study window (e.g. 18:00-22:00)</label>
+      <input id="roomWindow" placeholder="18:00-22:00" class="req-fi" />
+    </div>
+    
+    <div class="ff">
+      <label>👥 Max participants</label>
       <select id="roomMaxParticipants" class="req-fi">
-        <option value="2">2 people</option>
-        <option value="3">3 people</option>
-        <option value="4">4 people</option>
-        <option value="5">5 people</option>
-        <option value="6">6 people</option>
-        <option value="8">8 people</option>
-        <option value="10">10 people</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
       </select>
-    </div>
-    
-    <div class="ff">
-      <label>Description (optional)</label>
-      <textarea id="roomDescription" class="req-fi" placeholder="What will you study together?" style="min-height:50px;"></textarea>
     </div>
     
     <div class="modal-acts">
-      <button class="btn btn-purple" onclick="createFocusRoom()">✓ Create Room</button>
-      <button class="btn-sec" onclick="document.getElementById('createRoomMod').classList.remove('on')">Cancel</button>
+      <button class="btn btn-purple" onclick="createFocusRoom()">✓ Create</button>
+      <button class="btn-sec" onclick="closeModal('createRoomMod')">Cancel</button>
     </div>
+  </div>
+</div>
+
+<!-- Room Detail Modal (participants, leaderboard, module select, timer) -->
+<div class="modal-bg" id="roomDetailMod">
+  <div class="modal" style="max-width:500px;">
+    <div id="roomDetailHeader"></div>
+    <div style="margin:10px 0;"><strong>👥 Participants</strong><div id="roomParticipantList"></div></div>
+    <div><strong>📊 Leaderboard (points)</strong><div id="roomLeaderboard"></div></div>
+    <div class="ff"><label>Select your module for today</label><select id="myRoomModule" class="req-fi"></select></div>
+    <div><button class="btn btn-green" onclick="startRoomTimer()" id="roomTimerBtn">▶ Start study (count‑up)</button></div>
+    <div class="modal-acts"><button class="btn-sec" onclick="closeModal('roomDetailMod')">Close</button></div>
   </div>
 </div>
 
@@ -1094,6 +1081,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         <button class="nav-item" onclick="go('gpa')" id="ni-gpa"><span class="ni">📊</span><span>GPA Tracker</span></button>
         <button class="nav-item" onclick="go('study')" id="ni-study"><span class="ni">🎓</span><span>Study Hub</span></button>
         <button class="nav-item" onclick="go('streak')" id="ni-streak"><span class="ni">🔥</span><span>Study Streak</span></button>
+        <button class="nav-item" onclick="go('sessions')" id="ni-sessions"><span class="ni">📅</span><span>Study Sessions</span></button>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">🤝 PeerBridge</div>
@@ -1105,6 +1093,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         <div class="nav-section-label">👥 Community</div>
         <button class="nav-item" onclick="go('squad')" id="ni-squad"><span class="ni">📅</span><span>Study Squad</span></button>
         <button class="nav-item" onclick="go('rooms')" id="ni-rooms"><span class="ni">👥</span><span>Focus Rooms</span></button>
+        <button class="nav-item" onclick="go('contest')" id="ni-contest"><span class="ni">🏆</span><span>Study Contest</span></button>
         <button class="nav-item" onclick="go('points')" id="ni-points"><span class="ni">⭐</span><span>Earn Points</span></button>
       </div>
       <div class="nav-section">
@@ -1142,6 +1131,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
+      <!-- UPDATED: Only Study Streak and Points (GPA removed) -->
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:22px;">
         <div class="stat-card" style="background:linear-gradient(135deg,#7c3aed,#ec4899);padding:15px;">
           <h3>Study Streak</h3>
@@ -1153,7 +1143,9 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
+      <!-- SECTION CARDS -->
       <div style="display:grid;gap:16px;margin-bottom:22px;">
+        <!-- Academic Tools -->
         <div class="home-section-card" style="--sc1:#2563eb;--sc2:#7c3aed;">
           <div class="hsc-label">📚 Academic Tools</div>
           <div class="hsc-grid">
@@ -1175,6 +1167,7 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
         </div>
 
+        <!-- PeerBridge -->
         <div class="home-section-card" style="--sc1:#f59e0b;--sc2:#ec4899;">
           <div class="hsc-label">🤝 PeerBridge</div>
           <div class="hsc-grid">
@@ -1196,13 +1189,14 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
         </div>
 
+        <!-- Community -->
         <div class="home-section-card" style="--sc1:#0d9488;--sc2:#059669;">
           <div class="hsc-label">👥 Community</div>
           <div class="hsc-grid">
             <div class="hsc-item" onclick="go('squad')">
               <div class="hsc-icon" style="background:linear-gradient(135deg,#ccfbf1,#d1fae5)">📅</div>
               <div class="hsc-title">Study Squad</div>
-              <div class="hsc-sub">Join study groups & sessions</div>
+              <div class="hsc-sub">Join permanent study groups by faculty</div>
             </div>
             <div class="hsc-item" onclick="go('rooms')">
               <div class="hsc-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">👥</div>
@@ -1213,6 +1207,54 @@ input:checked + .slider:before{transform:translateX(26px);}
               <div class="hsc-icon" style="background:linear-gradient(135deg,#fde68a,#fbbf24)">⭐</div>
               <div class="hsc-title">Earn Points</div>
               <div class="hsc-sub">Climb the faculty leaderboard</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAREER SPOTLIGHT -->
+      <div class="career-panel">
+        <div class="career-panel-header">
+          <div>
+            <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;color:#fff;margin-bottom:4px;">🚀 Your Career Spotlight</h3>
+            <p style="color:rgba(255,255,255,.65);font-size:.83rem;" id="careerSubtitle">Curated videos and insights for your field</p>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+            <button onclick="scrollCareer(-1)" class="career-scroll-btn" title="Scroll left">‹</button>
+            <button onclick="scrollCareer(1)" class="career-scroll-btn" title="Scroll right">›</button>
+            <button class="btn btn-sm" onclick="loadCareerVideos()" id="careerRefreshBtn"
+              style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);">
+              🔄 Refresh
+            </button>
+          </div>
+        </div>
+        <div id="careerVideos" class="career-videos-scroll">
+          <div class="career-loading">
+            <div class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div>
+            <p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:12px;">Loading your career content…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STUDY METHODS -->
+      <div class="card" style="border-top:4px solid var(--purple);">
+        <div class="card-title" style="margin-bottom:6px;">🧠 Study Methods</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:16px;">Pick a method to learn how to use it — then ask the AI any follow-up questions.</p>
+        <div class="tips-grid" id="tipsGrid"></div>
+        <div id="tipDetail" class="hidden" style="margin-top:20px;border-top:2px solid var(--border);padding-top:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div id="tipDetailIcon" style="font-size:2rem;"></div>
+            <h3 id="tipDetailTitle" style="font-family:'Fraunces',serif;font-size:1.15rem;"></h3>
+            <button onclick="closeTipDetail()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;">✕</button>
+          </div>
+          <div id="tipDetailBody" style="font-size:.88rem;color:var(--text);line-height:1.75;margin-bottom:18px;"></div>
+          <div style="background:linear-gradient(135deg,#f8faff,#f5f0ff);border-radius:14px;padding:16px;">
+            <p style="font-size:.8rem;font-weight:700;color:var(--purple);margin-bottom:10px;">💬 Ask anything about this method</p>
+            <div id="tipQAHistory" style="display:grid;gap:10px;margin-bottom:12px;max-height:280px;overflow-y:auto;"></div>
+            <div style="display:flex;gap:9px;">
+              <input id="tipQuestion" class="req-fi" placeholder="e.g. How do I apply this to exam prep?" style="flex:1;"
+                onkeydown="if(event.key==='Enter')askTipQuestion()">
+              <button class="btn btn-purple btn-sm" onclick="askTipQuestion()" id="tipAskBtn">Ask</button>
             </div>
           </div>
         </div>
@@ -1279,18 +1321,20 @@ input:checked + .slider:before{transform:translateX(26px);}
     <!-- STUDY HUB -->
     <div class="page" id="pg-study">
       <div class="page-header"><h1>🎓 Study Hub</h1><p>AI-powered resource finder for your enrolled modules</p></div>
+      
       <div class="card">
-        <div class="card-title">Upload Course Outline <span style="font-size:.75rem;color:var(--muted);font-weight:400;">(Optional)</span></div>
-        <div class="upload-zone" onclick="document.getElementById('outF').click()" style="cursor:pointer;">
-          <input type="file" id="outF" accept=".pdf,.docx,.txt" onchange="handleOut(event)" style="display:none;">
-          <div style="font-size:2rem;margin-bottom:8px;">📄</div>
-          <p style="font-size:.85rem;font-weight:600;">Click to upload your course outline</p>
-          <p style="font-size:.75rem;color:var(--muted);margin-top:3px;">PDF, DOCX or TXT</p>
-        </div>
-        <div id="outDone" class="hidden" style="margin-top:9px;">
-          <span style="background:linear-gradient(135deg,var(--green2),var(--teal2));color:var(--green);border:1px solid var(--green3);border-radius:9px;padding:6px 13px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Course outline loaded</span>
+        <div class="card-title">🤖 AI Study Assistant</div>
+        <div style="background:linear-gradient(135deg,#ede9fe,#fce7f3);border-radius:14px;padding:15px;">
+          <div id="aiChatHistory" style="max-height:200px;overflow-y:auto;margin-bottom:10px;"></div>
+          <div style="display:flex;gap:8px;"><input id="aiQuestion" class="req-fi" placeholder="Ask anything..."><button class="btn btn-purple" onclick="askAI()">Ask</button></div>
+          <div style="margin-top:12px;">
+            <button class="btn btn-sm btn-blue" onclick="summarizeNotes()">📄 Smart summary</button>
+            <button class="btn btn-sm btn-green" onclick="generateQuiz()">❓ Practice questions</button>
+            <button class="btn btn-sm btn-gold" onclick="studyPlan()">📅 Personalized plan</button>
+          </div>
         </div>
       </div>
+      
       <div class="card">
         <div class="card-title">Find Resources</div>
         <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:9px;">Select Module</label>
@@ -1305,10 +1349,11 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- STUDY STREAK -->
+    <!-- STUDY STREAK (UPDATED: Dual timer + Calendar) -->
     <div class="page" id="pg-streak">
       <div class="page-header"><h1>🔥 Study Streak</h1><p>Track your study time with dual timers and calendar view</p></div>
 
+      <!-- Streak Stats -->
       <div class="streak-header">
         <div class="streak-badge">
           <span class="streak-fire">🔥</span>
@@ -1327,7 +1372,9 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
+      <!-- Dual Timer Section -->
       <div class="timer-section">
+        <!-- Pomodoro Timer -->
         <div class="timer-card">
           <div class="timer-card-title">
             <i>🍅</i> Pomodoro Timer
@@ -1359,9 +1406,10 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
         </div>
         
+        <!-- Stopwatch / Count Up Timer (resets daily) -->
         <div class="timer-card">
           <div class="timer-card-title">
-            <i>⏱️</i> Stopwatch (Count Up)
+            <i>⏱️</i> Stopwatch (resets daily)
           </div>
           
           <div class="module-selector">
@@ -1374,15 +1422,14 @@ input:checked + .slider:before{transform:translateX(26px);}
           
           <div class="timer-controls">
             <button class="btn btn-green" onclick="startStopwatch()" id="stopwatchStartBtn">▶ Start</button>
-            <button class="btn btn-red" onclick="pauseStopwatch()" id="stopwatchPauseBtn" style="display:none;">⏸ Pause</button>
+            <button class="btn btn-red" onclick="pauseStopwatch()" id="stopwatchPauseBtn" style="display:none;">⏸ Pause & log</button>
             <button class="btn btn-blue" onclick="resetStopwatch()">🔄 Reset</button>
-            <button class="btn btn-purple" onclick="lapStopwatch()" id="stopwatchLapBtn">📍 Lap</button>
           </div>
-          
-          <div id="stopwatchLaps" class="stopwatch-laps"></div>
+          <p class="timer-note" style="font-size:.7rem;margin-top:8px;text-align:center;">⏳ auto‑pause at midnight & logs</p>
         </div>
       </div>
 
+      <!-- Calendar Section (YPT-style with heat map) -->
       <div class="calendar-section">
         <div class="calendar-header">
           <div class="calendar-month" id="calendarMonthYear">May 2025</div>
@@ -1406,21 +1453,12 @@ input:checked + .slider:before{transform:translateX(26px);}
         <div class="calendar-grid" id="calendarDays"></div>
         
         <div class="daily-stats" id="dailyStats">
-          <div class="daily-stat-row">
-            <span class="label">Selected day:</span>
-            <span class="value" id="selectedDateDisplay">No date selected</span>
-          </div>
-          <div class="daily-stat-row">
-            <span class="label">Study time:</span>
-            <span class="value" id="selectedDayTime">0 minutes</span>
-          </div>
-          <div class="daily-stat-row">
-            <span class="label">Sessions:</span>
-            <span class="value" id="selectedDaySessions">0</span>
-          </div>
+          <div id="selectedDateDisplay"></div>
+          <div id="moduleTimeList" style="margin-top:8px;"></div>
         </div>
       </div>
 
+      <!-- Log Study Session -->
       <div class="session-form">
         <h4 style="margin-bottom:15px;">📝 Log Study Session</h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">
@@ -1432,7 +1470,7 @@ input:checked + .slider:before{transform:translateX(26px);}
           </div>
           <div>
             <label style="font-size:.75rem;font-weight:700;color:var(--muted);">Duration (mins)</label>
-            <input type="number" id="sessionDuration" class="req-fi" value="25" min="1" max="480">
+            <input type="number" id="sessionDurationMins" class="req-fi" value="25" min="1" max="480">
           </div>
           <div>
             <label style="font-size:.75rem;font-weight:700;color:var(--muted);"> </label>
@@ -1441,6 +1479,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
+      <!-- Forecast Card -->
       <div class="forecast-card">
         <div class="forecast-title">📊 Study Forecast</div>
         <div class="forecast-value" id="forecastText">On track to reach 50 hours this month</div>
@@ -1450,57 +1489,42 @@ input:checked + .slider:before{transform:translateX(26px);}
         <p style="font-size:.75rem;color:var(--muted);margin-top:5px;" id="monthlyGoal">0/50 hours this month</p>
       </div>
 
+      <!-- Session History -->
       <div class="card">
         <div class="card-title">Recent Study Sessions</div>
         <div id="sessionHistory" class="session-history">
           <div class="empty"><div class="ei">📋</div><p>No study sessions yet. Start your first session!</p></div>
         </div>
       </div>
-
-      <div class="card">
-        <div class="card-title">🏆 Achievements</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;" id="achievementsList">
-          <div class="badge badge-info" style="opacity:0.5;">🌱 Beginner (0-10 hrs)</div>
-          <div class="badge badge-success" style="opacity:0.5;">🔥 7-Day Streak</div>
-          <div class="badge badge-purple" style="opacity:0.5;">⚡ 20 Hours</div>
-        </div>
-      </div>
     </div>
 
-    <!-- STUDY SQUAD (Combined with Sessions) -->
-    <div class="page" id="pg-squad">
-      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b,#2d1b69);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-20px;top:-20px;font-size:6rem;opacity:.08;">👥</div>
-        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">📅 Study Squad</h2>
-        <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Join study groups and sessions. Create permanent groups for ongoing collaboration.</p>
+    <!-- STUDY SESSIONS PAGE -->
+    <div class="page" id="pg-sessions">
+      <div class="page-header">
+        <h1>📅 Study Sessions</h1>
+        <p>Schedule and join study sessions with classmates</p>
       </div>
-
-      <!-- Action Buttons -->
-      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
-        <button class="btn btn-blue" onclick="document.getElementById('createSessionMod').classList.add('on')">
-          📅 Create Study Session
-        </button>
-        <button class="btn btn-purple" onclick="document.getElementById('createGroupMod').classList.add('on')">
-          👥 Create Permanent Group
-        </button>
-      </div>
-
-      <!-- Tabs for Sessions vs Groups -->
+      
       <div class="sessions-header">
         <div class="sessions-tabs">
-          <button class="session-tab active" onclick="squadTab('sessions', this)">📅 Study Sessions</button>
-          <button class="session-tab" onclick="squadTab('groups', this)">👥 Permanent Groups</button>
+          <button class="session-tab active" onclick="sessionsTab('all', this)">All Sessions</button>
+          <button class="session-tab" onclick="sessionsTab('my', this)">My Sessions</button>
         </div>
-        <div class="faculty-filter-badge" id="squadFilterBadge">
-          📍 Showing: All
-          <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>
-        </div>
+        <button class="btn btn-blue" onclick="document.getElementById('createSessionMod').classList.add('on')">
+          ➕ Create Session
+        </button>
       </div>
-
+      
+      <!-- Faculty filter badge -->
+      <div class="faculty-filter-badge" id="facultyFilterBadge">
+        📍 Showing: All Faculties
+        <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>
+      </div>
+      
       <!-- Search -->
       <div class="session-search">
-        <input type="text" id="squadSearch" placeholder="Search by module, topic or group name..." oninput="filterSquad()">
-        <select id="squadFacultyFilter" class="req-fi" style="width:auto;min-width:150px;" onchange="filterSquad()">
+        <input type="text" id="sessionSearch" placeholder="Search by module, topic or location..." oninput="filterSessions()">
+        <select id="sessionFacultyFilter" class="req-fi" style="width:auto;min-width:150px;" onchange="filterSessions()">
           <option value="">All Faculties</option>
           <option value="Engineering & Technology">Engineering</option>
           <option value="Science">Science</option>
@@ -1512,22 +1536,65 @@ input:checked + .slider:before{transform:translateX(26px);}
           <option value="Medicine">Medicine</option>
         </select>
       </div>
+      
+      <!-- Note about sharing -->
+      <div class="session-note">
+        <i>ℹ️</i>
+        <span>Sessions are visible to all students. Share the app link with classmates to coordinate sessions!</span>
+      </div>
+      
+      <!-- Sessions Container -->
+      <div id="sessionsList">
+        <div class="empty"><div class="ei">📅</div><p>No study sessions yet. Be the first to create one!</p></div>
+      </div>
+    </div>
 
-      <!-- Sessions Container (visible by default) -->
-      <div id="sessionsContainer">
-        <div class="empty"><div class="ei">📅</div><p>No study sessions yet. Create one!</p></div>
+    <!-- STUDY SQUAD -->
+    <div class="page" id="pg-squad">
+      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b,#2d1b69);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-20px;top:-20px;font-size:6rem;opacity:.08;">👥</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">📅 Study Squad</h2>
+        <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Join permanent study groups by faculty. Create or join groups and chat anytime.</p>
       </div>
 
-      <!-- Groups Container (hidden by default) -->
-      <div id="groupsContainer" class="hidden">
-        <div class="empty"><div class="ei">👥</div><p>No groups yet. Create one!</p></div>
+      <!-- Faculty Tabs -->
+      <div class="faculty-tabs" id="facultyTabs">
+        <span class="faculty-tab active" onclick="filterGroups('all', this)">All Groups</span>
+        <span class="faculty-tab" onclick="filterGroups('Engineering & Technology', this)">Engineering</span>
+        <span class="faculty-tab" onclick="filterGroups('Science', this)">Science</span>
+        <span class="faculty-tab" onclick="filterGroups('Business', this)">Business</span>
+        <span class="faculty-tab" onclick="filterGroups('Social Sciences', this)">Social Sciences</span>
+        <span class="faculty-tab" onclick="filterGroups('Humanities', this)">Humanities</span>
+        <span class="faculty-tab" onclick="filterGroups('Education', this)">Education</span>
+        <span class="faculty-tab" onclick="filterGroups('Law', this)">Law</span>
+        <span class="faculty-tab" onclick="filterGroups('Medicine', this)">Medicine</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <button class="btn btn-blue" onclick="document.getElementById('createGroupMod').classList.add('on')">
+          ➕ Create Permanent Group
+        </button>
+        <button class="btn btn-purple" onclick="showMyGroups()">
+          👥 My Groups
+        </button>
+      </div>
+
+      <!-- Search -->
+      <div class="card" style="padding:13px 17px;margin-bottom:14px;">
+        <input id="groupSearch" type="text" placeholder="Search groups by name or module…" oninput="filterGroups()" class="req-fi">
+      </div>
+
+      <!-- Groups Container -->
+      <div id="groupsList">
+        <div class="empty"><div class="ei">👥</div><p>No groups yet. Be the first to create one!</p></div>
       </div>
     </div>
 
     <!-- FOCUS ROOMS -->
     <div class="page" id="pg-rooms">
       <div class="study-rooms-header">
-        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">👥 Focus Rooms</h2>
+        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">👥 Focus Rooms (weekly)</h2>
         <p style="color:rgba(255,255,255,.7);font-size:.9rem;">Study together in real-time. Earn double points for group sessions!</p>
         <div style="margin-top:20px;">
           <button class="btn btn-gold" onclick="document.getElementById('createRoomMod').classList.add('on')">
@@ -1536,6 +1603,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
       
+      <!-- Active Rooms -->
       <div style="margin-bottom:20px;">
         <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;margin-bottom:12px;">🟢 Active Rooms</h3>
         <div id="activeRooms" class="rooms-grid">
@@ -1543,6 +1611,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
       
+      <!-- How it works -->
       <div class="card">
         <div class="card-title">✨ How Focus Rooms Work</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;">
@@ -1565,14 +1634,14 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- PEERBRIDGE - Get Help (Fixed to hide own requests and handle taken status) -->
+    <!-- PEER (Get Help) -->
     <div class="page" id="pg-peer">
       <div class="pb-banner">
         <div><h2>🤝 PeerBridge</h2><p>Post a help request and set your own price — connect with peer tutors at UB</p></div>
         <div class="pb-rate-badge"><div class="pb-rate-amt">P15+</div><div class="pb-rate-lbl">Student sets the price</div></div>
       </div>
       <div class="seg-tabs">
-        <button class="seg-tab on" onclick="peerTab('browse')" id="pt-browse">🔍 Browse Requests</button>
+        <button class="seg-tab on" onclick="peerTab('browse')" id="pt-browse">🔍 Browse</button>
         <button class="seg-tab" onclick="peerTab('post')" id="pt-post">✏️ Post Request</button>
         <button class="seg-tab" onclick="peerTab('mine')" id="pt-mine">📋 My Requests</button>
       </div>
@@ -1581,12 +1650,11 @@ input:checked + .slider:before{transform:translateX(26px);}
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <input id="pSrch" type="text" placeholder="Search module or topic…" oninput="renderReqs()" class="req-fi" style="flex:1;min-width:140px;">
             <select id="pFilt" onchange="renderReqs()" class="req-fi" style="width:auto;">
-              <option value="all">All Requests</option>
-              <option value="open">Open Only</option>
+              <option value="all">All</option><option value="open">Open Only</option>
             </select>
           </div>
         </div>
-        <div id="reqList"><div class="empty"><div class="ei">🔍</div><p>No open requests available.</p></div></div>
+        <div id="reqList"><div class="empty"><div class="ei">🔍</div><p>No requests yet. Post one!</p></div></div>
       </div>
       <div id="peer-post" class="hidden">
         <div class="card">
@@ -1606,8 +1674,13 @@ input:checked + .slider:before{transform:translateX(26px);}
                   <option value="0.5">30 Minutes</option>
                   <option value="0.75">45 Minutes</option>
                   <option value="1">1 Hour</option>
+                  <option value="1.25">1h 15m</option>
                   <option value="1.5">1h 30m</option>
+                  <option value="1.75">1h 45m</option>
                   <option value="2">2 Hours</option>
+                  <option value="2.25">2h 15m</option>
+                  <option value="2.5">2h 30m</option>
+                  <option value="2.75">2h 45m</option>
                   <option value="3">3 Hours</option>
                 </select>
               </div>
@@ -1620,13 +1693,16 @@ input:checked + .slider:before{transform:translateX(26px);}
                 </select>
               </div>
             </div>
+            <div style="margin-top:6px;font-weight:700;">
+              Estimated Cost: <span id="pCost">P10</span>
+            </div>
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">💰 Your Offer (Pula)</label>
                 <div style="position:relative;">
                   <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--green);">P</span>
                   <input id="pPrice" type="number" min="15" class="req-fi" placeholder="Min. 15" style="padding-left:28px;" oninput="validatePrice()">
                 </div>
-                <p style="font-size:.72rem;color:var(--muted);margin-top:4px;">Minimum P15</p>
+                <p style="font-size:.72rem;color:var(--muted);margin-top:4px;">Minimum P15 · No limit</p>
               </div>
               <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Urgency</label>
                 <select id="pUrg" class="req-fi"><option value="flexible">Flexible</option><option value="today">Today</option><option value="asap">ASAP</option></select></div>
@@ -1658,6 +1734,7 @@ input:checked + .slider:before{transform:translateX(26px);}
             <option>Education</option>
             <option>Law</option>
             <option>Medicine</option>
+            <option>Graduate Studies</option>
           </select>
         </div>
       </div>
@@ -1698,7 +1775,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
-    <!-- PROFILE - Fixed to show data correctly -->
+    <!-- PROFILE -->
     <div class="page" id="pg-profile">
       <div class="profile-hero">
         <div class="profile-av-big" id="profAv">A</div>
@@ -1717,7 +1794,6 @@ input:checked + .slider:before{transform:translateX(26px);}
           <div class="pd-row"><span>Email</span><strong id="pdEmail">—</strong></div>
           <div class="pd-row"><span>Year of Study</span><strong id="pdYear">—</strong></div>
           <div class="pd-row"><span>Faculty</span><strong id="pdFaculty">—</strong></div>
-          <div class="pd-row"><span>Programme</span><strong id="pdProgramme">—</strong></div>
         </div>
       </div>
       <div class="card" style="border-top:4px solid var(--blue2)">
@@ -1725,7 +1801,7 @@ input:checked + .slider:before{transform:translateX(26px);}
         <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">This info is used across GPA Tracker, Study Hub, Get Help and Study Squad.</p>
         <div class="ff">
           <label>Programme / Degree</label>
-          <input id="profProgramme" class="req-fi" placeholder="e.g. BSc Mechanical Engineering" value="">
+          <input id="profProgramme" class="req-fi" placeholder="e.g. BSc Mechanical Engineering">
         </div>
         <div class="ff">
           <label>Current Semester</label>
@@ -1814,6 +1890,105 @@ input:checked + .slider:before{transform:translateX(26px);}
       </div>
     </div>
 
+    <!-- STUDY CONTEST -->
+    <div class="page" id="pg-contest">
+      <div style="background:linear-gradient(135deg,#92400e,#b45309,#d97706);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-10px;top:-10px;font-size:7rem;opacity:.1;">🏆</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:5px;">🏆 Study Contest</h2>
+        <p style="color:rgba(255,255,255,.75);font-size:.88rem;">Submit your test score, verified by your test script with your Student ID. Top 3 win prizes!</p>
+      </div>
+
+      <div class="seg-tabs">
+        <button class="seg-tab on" onclick="contestTab('leaderboard')" id="ct-leaderboard">🏅 Leaderboard</button>
+        <button class="seg-tab" onclick="contestTab('submit')" id="ct-submit">📤 Submit Score</button>
+        <button class="seg-tab" onclick="contestTab('active')" id="ct-active">📋 Active Contests</button>
+        <button class="seg-tab" onclick="contestTab('create')" id="ct-create">➕ Create Contest</button>
+      </div>
+
+      <div id="ct-leaderboard-panel">
+        <div class="ff" style="margin-bottom:14px;">
+          <select id="ctFilter" class="req-fi" onchange="renderLeaderboard()">
+            <option value="">— All Contests —</option>
+          </select>
+        </div>
+        <div id="leaderboardList"><div class="empty"><div class="ei">🏅</div><p>No submissions yet.</p></div></div>
+      </div>
+
+      <div id="ct-submit-panel" class="hidden">
+        <div class="card">
+          <div class="card-title">📤 Submit Your Test Score</div>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your test script must clearly show your <strong>Student ID</strong> and the score. Upload a clear photo or scan.</p>
+          <div style="display:grid;gap:13px;">
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Contest</label>
+              <select id="submitContestId" class="req-fi"><option value="">— Select contest —</option></select>
+            </div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Your Score (%)</label>
+                <input id="submitScore" type="number" min="0" max="100" class="req-fi" placeholder="e.g. 78">
+              </div>
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test / Module</label>
+                <input id="submitModule" class="req-fi" placeholder="e.g. MEC 301 Test 2">
+              </div>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script <span style="color:var(--red);">*</span></label>
+              <div class="upload-zone" onclick="document.getElementById('scriptUpload').click()" style="cursor:pointer;">
+                <input type="file" id="scriptUpload" accept="image/*,.pdf" onchange="handleScriptUpload(event)" style="display:none;">
+                <div style="font-size:2rem;margin-bottom:6px;">📄</div>
+                <p style="font-size:.84rem;font-weight:600;">Click to upload your test script</p>
+                <p style="font-size:.73rem;color:var(--muted);margin-top:3px;">Photo or PDF — must show your Student ID clearly</p>
+              </div>
+              <div id="scriptDone" class="hidden" style="margin-top:8px;">
+                <span style="background:var(--green2);color:var(--green);border:1px solid var(--green3);border-radius:8px;padding:5px 12px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Script uploaded</span>
+              </div>
+            </div>
+            <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px 14px;font-size:.8rem;color:#92400e;">
+              ⚠️ <strong>Honesty pledge:</strong> By submitting, you confirm this is your genuine test result. False submissions will result in disqualification.
+            </div>
+            <button class="btn btn-gold" style="width:fit-content;" onclick="submitScore()">🏆 Submit My Score</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="ct-active-panel" class="hidden">
+        <div id="contestList"><div class="empty"><div class="ei">📋</div><p>No active contests yet.</p></div></div>
+      </div>
+
+      <div id="ct-create-panel" class="hidden">
+        <div class="card">
+          <div class="card-title">➕ Create a Study Contest</div>
+          <div style="display:grid;gap:13px;">
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Contest Name</label>
+              <input id="ctName" class="req-fi" placeholder="e.g. MEC 301 Test 1 Showdown">
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Module / Subject</label>
+              <select id="ctMod" class="req-fi"><option value="">— Select module —</option></select>
+            </div>
+            <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📅 Deadline</label>
+                <input id="ctDeadline" type="date" class="req-fi">
+              </div>
+              <div>
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">🏆 Prize Description</label>
+                <input id="ctPrize" class="req-fi" placeholder="e.g. Bragging rights + P50 airtime">
+              </div>
+            </div>
+            <div>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Description (optional)</label>
+              <textarea id="ctDesc" class="req-fi" placeholder="What test is this for? Any rules?" style="min-height:65px;resize:vertical;"></textarea>
+            </div>
+            <button class="btn btn-gold" style="width:fit-content;" onclick="createContest()">🚀 Create Contest</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- EARN POINTS -->
     <div class="page" id="pg-points">
       <div style="background:linear-gradient(135deg,#78350f,#b45309,#f59e0b);border-radius:22px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden;">
@@ -1833,6 +2008,11 @@ input:checked + .slider:before{transform:translateX(26px);}
       <div class="card" style="margin-bottom:16px;">
         <div class="card-title">📊 How Points Work</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:4px;">
+          <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-size:1.3rem;">😔</div>
+            <div style="font-weight:800;font-size:.9rem;color:#92400e;">Below 40%</div>
+            <div style="font-size:.75rem;color:var(--muted);">0 pts</div>
+          </div>
           <div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:12px;text-align:center;">
             <div style="font-size:1.3rem;">📗</div>
             <div style="font-weight:800;font-size:.9rem;color:#92400e;">40–49%</div>
@@ -1864,7 +2044,8 @@ input:checked + .slider:before{transform:translateX(26px);}
             <div style="font-size:.75rem;color:var(--muted);">30 pts</div>
           </div>
         </div>
-        <p style="font-size:.77rem;color:var(--muted);margin-top:12px;">⚡ <strong>Most Improved:</strong> +5 bonus points if your mark improves by 10%+.</p>
+        <p style="font-size:.77rem;color:var(--muted);margin-top:12px;">⚡ <strong>Most Improved:</strong> If your latest mark is 10%+ higher than your previous submission on the same module, you earn <strong>+5 bonus points</strong>.</p>
+        <p style="font-size:.77rem;color:var(--muted);margin-top:5px;">👥 <strong>Group Study Bonus:</strong> Studying in Focus Rooms gives you 2x points!</p>
       </div>
 
       <div class="seg-tabs">
@@ -1886,6 +2067,7 @@ input:checked + .slider:before{transform:translateX(26px);}
               <option>Education</option>
               <option>Law</option>
               <option>Medicine</option>
+              <option>Graduate Studies</option>
             </select>
             <div style="font-size:.78rem;color:var(--muted);">Resets: <strong id="ptsResetDate"></strong></div>
           </div>
@@ -1896,7 +2078,7 @@ input:checked + .slider:before{transform:translateX(26px);}
       <div id="pts-submit-panel" class="hidden">
         <div class="card">
           <div class="card-title">📤 Submit Your Test Score</div>
-          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your script must clearly show your <strong>Student ID</strong> and the mark.</p>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Your script must clearly show your <strong>Student ID</strong> and the mark. Upload a clear photo or scan.</p>
           <div style="display:grid;gap:13px;">
             <div class="row2" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
               <div>
@@ -1904,8 +2086,8 @@ input:checked + .slider:before{transform:translateX(26px);}
                 <select id="ptsModule" class="req-fi"><option value="">— Select module —</option></select>
               </div>
               <div>
-                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test Name</label>
-                <input id="ptsTestName" class="req-fi" placeholder="e.g. Test 1">
+                <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">Test / Assessment</label>
+                <input id="ptsTestName" class="req-fi" placeholder="e.g. Test 1, Assignment 2">
               </div>
             </div>
             <div>
@@ -1914,11 +2096,12 @@ input:checked + .slider:before{transform:translateX(26px);}
               <div id="ptsPreview" style="margin-top:8px;font-size:.85rem;font-weight:700;min-height:20px;"></div>
             </div>
             <div>
-              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script</label>
+              <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px;">📎 Upload Test Script <span style="color:var(--red);">*</span></label>
               <div class="upload-zone" onclick="document.getElementById('ptsScript').click()" style="cursor:pointer;">
                 <input type="file" id="ptsScript" accept="image/*,.pdf" onchange="handlePtsScript(event)" style="display:none;">
                 <div style="font-size:2rem;margin-bottom:6px;">📄</div>
-                <p style="font-size:.84rem;font-weight:600;">Click to upload</p>
+                <p style="font-size:.84rem;font-weight:600;">Click to upload your test script</p>
+                <p style="font-size:.73rem;color:var(--muted);margin-top:3px;">Must show your Student ID clearly</p>
               </div>
               <div id="ptsScriptDone" class="hidden" style="margin-top:8px;">
                 <span style="background:var(--green2);color:var(--green);border:1px solid var(--green3);border-radius:8px;padding:5px 12px;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:6px;">✓ Script uploaded</span>
@@ -1938,7 +2121,7 @@ input:checked + .slider:before{transform:translateX(26px);}
 </div>
 
 <script type="module">
-// Firebase imports
+// ── Firebase imports ─────────────────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, collection,
          addDoc, getDocs, deleteDoc, onSnapshot, query, orderBy, serverTimestamp,
@@ -1956,7 +2139,7 @@ const firebaseConfig = {
 const _app = initializeApp(firebaseConfig);
 const _db  = getFirestore(_app);
 
-// Firestore helpers
+// ── Firestore helpers ────────────────────────────────────────────
 const FS = {
   async getUser(id){ const s=await getDoc(doc(_db,'users',id)); return s.exists()?s.data():null; },
   async setUser(id,data){ await setDoc(doc(_db,'users',id),data,{merge:true}); },
@@ -1970,6 +2153,11 @@ const FS = {
   async deleteSession(id){ await deleteDoc(doc(_db,'sessions',id)); },
   async updateSession(id,data){ await updateDoc(doc(_db,'sessions',id),data); },
   onSessions(cb){ return onSnapshot(query(collection(_db,'sessions'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
+  async addContest(data){ return await addDoc(collection(_db,'contests'),{...data,at:serverTimestamp()}); },
+  async deleteContest(id){ await deleteDoc(doc(_db,'contests',id)); },
+  onContests(cb){ return onSnapshot(query(collection(_db,'contests'),orderBy('at','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
+  async addScore(data){ return await addDoc(collection(_db,'scores'),{...data,at:serverTimestamp()}); },
+  onScores(cb){ return onSnapshot(query(collection(_db,'scores'),orderBy('score','desc')),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))); },
   async getAllUsers(){ const s=await getDocs(collection(_db,'users')); const r={}; s.docs.forEach(d=>r[d.id]=d.data()); return r; },
   async addPoint(data){ return await addDoc(collection(_db,'points'),{...data,at:serverTimestamp()}); },
   async getPoints(){ const s=await getDocs(query(collection(_db,'points'),orderBy('at','desc'))); return s.docs.map(d=>({id:d.id,...d.data()})); },
@@ -2011,7 +2199,7 @@ document.dispatchEvent(new CustomEvent('fs-ready'));
 </script>
 
 <script>
-// Toast Notification System
+// ── Toast Notification System ───────────────────────────────────
 function showToast(title, message, type = 'info', duration = 5000) {
   const container = document.getElementById('toastContainer');
   const toast = document.createElement('div');
@@ -2037,7 +2225,7 @@ function showToast(title, message, type = 'info', duration = 5000) {
   setTimeout(() => toast.remove(), duration);
 }
 
-// Loading States
+// ── Loading States ──────────────────────────────────────────────
 function showLoading(msg = 'Loading...') {
   let el = document.getElementById('_loadOverlay');
   if (!el) {
@@ -2057,7 +2245,7 @@ function hideLoading() {
   if (el) el.style.display = 'none';
 }
 
-// Local Storage Helpers
+// ── Local Storage Helpers ───────────────────────────────────────
 function saveToLocal(key, data) {
   try {
     localStorage.setItem(`ub_${key}`, JSON.stringify(data));
@@ -2075,27 +2263,90 @@ function loadFromLocal(key, defaultValue = null) {
   }
 }
 
-// Global variables
-let _users = {}, _requests = [], _sessions = [], _ratings = {}, _points = [], _studySessions = [], _groups = [], _studySessionsPosts = [], _focusRooms = [];
+// ── AUTH ────────────────────────────────────────────────────────
+let _users = {}, _requests = [], _sessions = [], _contests = [], _scores = [], _ratings = {}, _points = [], _studySessions = [], _groups = [], _studySessionsPosts = [], _focusRooms = [];
 let CU = null, CUK = null, mods = [], selMod = null, rTarget = null, rStars = 0, rTags = [];
-
 const PTITLES = {
   home: 'Home', gpa: 'GPA Tracker', study: 'Study Hub',
-  streak: 'Study Streak', peer: 'Get Help', 
+  streak: 'Study Streak', sessions: 'Study Sessions', peer: 'Get Help', 
   tutors: 'Find a Tutor', become: 'Become a Tutor', profile: 'My Profile', 
-  squad: 'Study Squad', rooms: 'Focus Rooms', points: 'Earn Points', settings: 'Settings'
+  squad: 'Study Squad', rooms: 'Focus Rooms', contest: 'Study Contest', 
+  points: 'Earn Points', settings: 'Settings'
 };
 
+// ── Expanded Quotes ─────────────────────────────────────
 const QUOTES = [
   '"The secret of getting ahead is getting started." — Mark Twain',
   '"An investment in knowledge pays the best interest." — Benjamin Franklin',
   '"Education is the most powerful weapon to change the world." — Nelson Mandela',
+  '"The beautiful thing about learning is no one can take it away from you." — B.B. King',
   '"Success is the sum of small efforts, repeated day in and day out." — Robert Collier',
   '"Believe you can and you\'re halfway there." — Theodore Roosevelt',
-  '"The future belongs to those who believe in the beauty of their dreams." — Eleanor Roosevelt'
+  '"Push yourself, because no one else is going to do it for you." — Unknown',
+  '"Great things never came from comfort zones." — Unknown',
+  '"The expert in anything was once a beginner." — Helen Hayes',
+  '"Don\'t watch the clock; do what it does. Keep going." — Sam Levenson',
+  '"The future belongs to those who believe in the beauty of their dreams." — Eleanor Roosevelt',
+  '"It always seems impossible until it\'s done." — Nelson Mandela',
+  '"Success is not final, failure is not fatal: it is the courage to continue that counts." — Winston Churchill',
+  '"Your time is limited, don\'t waste it living someone else\'s life." — Steve Jobs',
+  '"The only way to do great work is to love what you do." — Steve Jobs',
+  '"Strive not to be a success, but rather to be of value." — Albert Einstein',
+  '"The mind is not a vessel to be filled, but a fire to be kindled." — Plutarch',
+  '"Learning never exhausts the mind." — Leonardo da Vinci',
+  '"The more that you read, the more things you will know. The more that you learn, the more places you\'ll go." — Dr. Seuss',
+  '"Education is the passport to the future, for tomorrow belongs to those who prepare for it today." — Malcolm X',
+  '"The roots of education are bitter, but the fruit is sweet." — Aristotle',
+  '"Intelligence plus character — that is the goal of true education." — Martin Luther King Jr.',
+  '"The capacity to learn is a gift; the ability to learn is a skill; the willingness to learn is a choice." — Brian Herbert',
+  '"Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing." — William Arthur Ward',
+  '"The difference between ordinary and extraordinary is that little extra." — Jimmy Johnson',
+  '"Excellence is not a skill. It is an attitude." — Ralph Marston',
+  '"The only place where success comes before work is in the dictionary." — Vidal Sassoon',
+  '"There are no shortcuts to any place worth going." — Beverly Sills',
+  '"The best way to predict your future is to create it." — Abraham Lincoln',
+  '"Don\'t let what you cannot do interfere with what you can do." — John Wooden',
+  '"Start where you are. Use what you have. Do what you can." — Arthur Ashe',
+  '"It does not matter how slowly you go as long as you do not stop." — Confucius',
+  '"Quality is not an act, it is a habit." — Aristotle',
+  '"The journey of a thousand miles begins with one step." — Lao Tzu',
+  '"What you get by achieving your goals is not as important as what you become by achieving your goals." — Zig Ziglar',
+  '"You don\'t have to be great to start, but you have to start to be great." — Zig Ziglar',
+  '"Success is walking from failure to failure with no loss of enthusiasm." — Winston Churchill',
+  '"Everything you\'ve ever wanted is on the other side of fear." — George Addair',
+  '"The harder you work for something, the greater you\'ll feel when you achieve it." — Unknown',
+  '"Dreams don\'t work unless you do." — John C. Maxwell',
+  '"The future depends on what you do today." — Mahatma Gandhi',
+  '"Little things make big days." — Unknown',
+  '"Motivation is what gets you started. Habit is what keeps you going." — Jim Ryun',
+  '"The best preparation for tomorrow is doing your best today." — H. Jackson Brown Jr.',
+  '"Your attitude, not your aptitude, will determine your altitude." — Zig Ziglar',
+  '"The way to get started is to quit talking and begin doing." — Walt Disney',
+  '"If you are working on something that you really care about, you don\'t have to be pushed. The vision pulls you." — Steve Jobs',
+  '"The only limit to our realization of tomorrow will be our doubts of today." — Franklin D. Roosevelt',
+  '"There is no substitute for hard work." — Thomas Edison',
+  '"The only person you are destined to become is the person you decide to be." — Ralph Waldo Emerson',
+  '"Successful men and women keep moving. They make mistakes, but they don\'t quit." — Conrad Hilton',
+  '"The difference between who you are and who you want to be is what you do." — Unknown',
+  '"Act as if what you do makes a difference. It does." — William James',
+  '"Keep your eyes on the stars, and your feet on the ground." — Theodore Roosevelt',
+  '"The only way to achieve the impossible is to believe it is possible." — Charles Kingsleigh',
+  '"It always seems impossible until it is done." — Nelson Mandela'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize particles
+  (function initParticles() {
+    const p = document.getElementById('particles');
+    for(let i=0;i<25;i++){ 
+      let e=document.createElement('div'); e.className='particle';
+      e.style.width = (5+Math.random()*15)+'px'; e.style.height=e.style.width;
+      e.style.background = `rgba(37,99,235,${0.1+Math.random()*0.2})`;
+      e.style.left = Math.random()*100+'%'; e.style.bottom = '-5%';
+      e.style.animationDuration = (10+Math.random()*20)+'s';
+      e.style.animationDelay = Math.random()*5+'s'; p.appendChild(e); }
+  })();
+  
   const savedUser = loadFromLocal('rememberedUser');
   if (savedUser && savedUser.id) {
     document.getElementById('lU').value = savedUser.id;
@@ -2194,12 +2445,7 @@ async function doRegister() {
     hideLoading();
     setMsg('✓ Account created!', true);
     showToast('Registration Successful', 'Welcome to UB Academic Hub!', 'success');
-    
-    // Show setup modal after registration
-    setTimeout(() => {
-      enterApp(u, userData);
-      document.getElementById('setupMod').classList.add('on');
-    }, 700);
+    setTimeout(() => enterApp(u, userData), 700);
   } catch (e) {
     hideLoading();
     console.error(e);
@@ -2246,7 +2492,7 @@ async function resetPassword() {
   }
 }
 
-// App Entry
+// ── App Entry ───────────────────────────────────────────────────
 async function enterApp(u, userData) {
   if (!window.FS) {
     await new Promise(resolve => {
@@ -2262,13 +2508,16 @@ async function enterApp(u, userData) {
   
   // Set up real-time listeners
   window._unsubReqs = window.FS.onRequests(data => { _requests = data; renderReqs(); renderMyReqs(); });
-  window._unsubPoints = window.FS.onPoints(data => { _points = data; renderPointsLeaderboard(); renderMyPoints(); updateMyPointsBadge(); updateHomeStats(); });
-  window._unsubGroups = window.FS.onGroups(data => { _groups = data; if (document.getElementById('pg-squad').classList.contains('on')) filterSquad(); });
+  window._unsubSess = window.FS.onSessions(data => { _sessions = data; });
+  window._unsubConts = window.FS.onContests(data => { _contests = data; if (document.getElementById('pg-contest').classList.contains('on')) { renderContests(); populateContestDropdowns(); } });
+  window._unsubScores = window.FS.onScores(data => { _scores = data; if (document.getElementById('pg-contest').classList.contains('on')) renderLeaderboard(); });
+  window._unsubPoints = window.FS.onPoints(data => { _points = data; if (document.getElementById('pg-points').classList.contains('on')) { renderPointsLeaderboard(); renderMyPoints(); } updateMyPointsBadge(); updateHomeStats(); });
+  window._unsubGroups = window.FS.onGroups(data => { _groups = data; if (document.getElementById('pg-squad').classList.contains('on')) renderGroups(); });
   
   // Study Sessions Posts listener
   window._unsubStudyPosts = window.FS.onStudySessionsPosts(data => { 
     _studySessionsPosts = data; 
-    if (document.getElementById('pg-squad').classList.contains('on')) filterSquad(); 
+    if (document.getElementById('pg-sessions').classList.contains('on')) filterSessions(); 
   });
   
   // Focus Rooms listener
@@ -2290,25 +2539,19 @@ async function enterApp(u, userData) {
   const ini = CU.name[0].toUpperCase();
   ['sbAv', 'topAv', 'profAv'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ini; });
   document.getElementById('sbUname').textContent = CU.name.split(' ')[0];
-  
-  // Update profile displays
-  document.getElementById('pdName').textContent = CU.name || '—';
-  document.getElementById('pdUser').textContent = CU.studentId || '—';
-  document.getElementById('pdWA').textContent = CU.wa || '—';
-  document.getElementById('pdEmail').textContent = CU.email || '—';
-  document.getElementById('pdYear').textContent = CU.year || '—';
-  document.getElementById('pdFaculty').textContent = CU.faculty || '—';
-  document.getElementById('pdProgramme').textContent = CU.programme || '—';
-  document.getElementById('profName').textContent = CU.name || '—';
-  document.getElementById('profMeta').textContent = `${CU.year || 'Student'} · ${CU.faculty || 'University of Botswana'}`;
-  
   const pwaEl = document.getElementById('pWA'); if (pwaEl) pwaEl.value = CU.wa || '';
+  const pEmailEl = document.getElementById('pdEmail'); if (pEmailEl) pEmailEl.textContent = CU.email || '—';
+  const pFacultyEl = document.getElementById('pdFaculty'); if (pFacultyEl) pFacultyEl.textContent = CU.faculty || '—';
   
   updateRole();
   document.getElementById('authScreen').classList.add('hidden');
+  document.getElementById('appScreen').classList.remove('on');
   document.getElementById('appScreen').classList.remove('hidden');
+  document.getElementById('appScreen').classList.add('on');
   
   setGreeting();
+  renderTips();
+  renderSMods();
   renderTutors();
   renderProfile();
   populateModDropdowns();
@@ -2317,27 +2560,34 @@ async function enterApp(u, userData) {
   populateStreakModules();
   renderSessionHistory();
   updateStreakStats();
+  renderGroups();
   updateHomeStats();
   initCalendar();
   
   go('home');
+  setTimeout(loadCareerVideos, 400);
   
-  // Show setup modal if no programme set
   if (!CU.programme || CU.programme === '') {
     setTimeout(() => {
-      document.getElementById('setupMod').classList.add('on');
+      const m = document.getElementById('setupMod');
+      if (m) m.classList.add('on');
     }, 800);
   }
   
   applySettings();
   
-  // Set up quote rotation
+  // Set up quote rotation every 3 hours
   setInterval(rotateQuote, 3 * 60 * 60 * 1000);
 }
 
 function doLogout() {
   CU = null; CUK = null; mods = []; selMod = null;
+  if (window._quoteTimer) clearInterval(window._quoteTimer);
+  if (window._careerTimer) clearInterval(window._careerTimer);
   if (window._unsubReqs) window._unsubReqs();
+  if (window._unsubSess) window._unsubSess();
+  if (window._unsubConts) window._unsubConts();
+  if (window._unsubScores) window._unsubScores();
   if (window._unsubPoints) window._unsubPoints();
   if (window._unsubGroups) window._unsubGroups();
   if (window._unsubStudyPosts) window._unsubStudyPosts();
@@ -2371,7 +2621,7 @@ function updateRole() {
   }
 }
 
-// Settings
+// ── SETTINGS ────────────────────────────────────────────────────
 function loadSettings() {
   const settings = loadFromLocal('settings', { darkMode: false, compact: false, emailNotif: true, pushNotif: true, showProfile: true });
   document.getElementById('darkModeToggle').checked = settings.darkMode;
@@ -2425,6 +2675,14 @@ function applySettings() {
     document.documentElement.style.setProperty('--muted', '#64748b');
     document.documentElement.style.setProperty('--border', '#e2e8f0');
   }
+  
+  if (settings.compact) {
+    document.documentElement.style.setProperty('--sidebar', '220px');
+    document.querySelectorAll('.card').forEach(c => c.style.padding = '16px');
+  } else {
+    document.documentElement.style.setProperty('--sidebar', '280px');
+    document.querySelectorAll('.card').forEach(c => c.style.padding = '');
+  }
 }
 
 function exportData() {
@@ -2432,6 +2690,7 @@ function exportData() {
     user: CU,
     modules: mods,
     points: _points.filter(p => p.by === CUK),
+    scores: _scores.filter(s => s.by === CUK),
     studySessions: _studySessions
   };
   
@@ -2454,7 +2713,7 @@ function clearData() {
   }
 }
 
-// Navigation
+// ── NAVIGATION ──────────────────────────────────────────────────
 function flashTransition() {
   const pt = document.getElementById('pt');
   if (!pt) return;
@@ -2481,14 +2740,15 @@ function go(pg) {
     closeSB();
     
     if (pg === 'tutors') renderTutors();
-    if (pg === 'profile') { renderProfile(); }
+    if (pg === 'profile') { renderProfile(); loadProfileEditor(); }
     if (pg === 'become') updateRole();
-    if (pg === 'squad') { filterSquad(); }
+    if (pg === 'squad') { renderGroups(); }
     if (pg === 'home') { setGreeting(); updateHomeStats(); }
+    if (pg === 'contest') { renderContests(); renderLeaderboard(); populateContestDropdowns(); }
     if (pg === 'points') { renderPointsLeaderboard(); }
     if (pg === 'streak') { populateStreakModules(); renderSessionHistory(); updateStreakStats(); }
+    if (pg === 'sessions') { filterSessions(); }
     if (pg === 'rooms') { renderFocusRooms(); }
-    if (pg === 'peer') { renderReqs(); renderMyReqs(); }
   }, 150);
 }
 
@@ -2532,7 +2792,7 @@ function toggleSB() {
   }
 }
 
-// Home
+// ── HOME ────────────────────────────────────────────────────────
 function setGreeting() {
   const h = new Date().getHours();
   const g = h < 12 ? 'Good morning ☀️' : h < 17 ? 'Good afternoon 👋' : 'Good evening 🌙';
@@ -2556,7 +2816,7 @@ function rotateQuote() {
 function updateHomeStats() {
   const pointsEl = document.getElementById('homePoints');
   if (pointsEl) {
-    const month = new Date().toISOString().slice(0, 7);
+    const month = currentMonth();
     const total = _points.filter(p => p.by === CUK && p.month === month).reduce((s, p) => s + (p.points || 0), 0);
     pointsEl.textContent = total;
   }
@@ -2567,129 +2827,24 @@ function updateHomeStats() {
   }
 }
 
-// Setup Profile Functions
-function addSetupMod() {
-  const code = document.getElementById('setupCode').value.trim();
-  const name = document.getElementById('setupName').value.trim();
-  if (!code || !name) { alert('Enter both module code and name.'); return; }
-  
-  const list = document.getElementById('setupModList');
-  const chip = document.createElement('div');
-  chip.className = 'mod-chip sel';
-  chip.setAttribute('data-code', code);
-  chip.setAttribute('data-name', name);
-  chip.innerHTML = `<span><strong>${code}</strong> – ${name}</span> <span class="rmv" onclick="this.parentElement.remove()">✕</span>`;
-  list.appendChild(chip);
-  
-  document.getElementById('setupCode').value = '';
-  document.getElementById('setupName').value = '';
+function currentMonth() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
 }
 
-async function saveSetup() {
-  const programme = document.getElementById('setupProg').value.trim();
-  const semester = document.getElementById('setupSem').value;
-  const modChips = document.querySelectorAll('#setupModList .mod-chip');
-  const modules = [];
-  
-  modChips.forEach(chip => {
-    const code = chip.getAttribute('data-code');
-    const name = chip.getAttribute('data-name');
-    if (code && name) {
-      modules.push({ code, name, credits: 3 }); // Default credits = 3
-    }
-  });
-  
-  await window.FS.setUser(CUK, { programme, semester, modules });
-  mods = modules;
-  
-  document.getElementById('setupMod').classList.remove('on');
-  showToast('Profile Updated', 'Your academic profile has been saved!', 'success');
-  
-  // Refresh all module-dependent views
-  populateModDropdowns();
-  populateGPARows();
-  populateForeRows();
-  populateStreakModules();
-  renderProfile();
-}
-
-function closeSetup() {
-  document.getElementById('setupMod').classList.remove('on');
-}
-
-// Profile Functions
-function renderProfile() {
-  if (!CU) return;
-  
-  document.getElementById('profName').textContent = CU.name || '—';
-  document.getElementById('profMeta').textContent = `${CU.year || 'Student'} · ${CU.faculty || 'University of Botswana'}`;
-  document.getElementById('pdName').textContent = CU.name || '—';
-  document.getElementById('pdUser').textContent = CU.studentId || '—';
-  document.getElementById('pdWA').textContent = CU.wa || '—';
-  document.getElementById('pdEmail').textContent = CU.email || '—';
-  document.getElementById('pdYear').textContent = CU.year || '—';
-  document.getElementById('pdFaculty').textContent = CU.faculty || '—';
-  document.getElementById('pdProgramme').textContent = CU.programme || '—';
-  
-  document.getElementById('profProgramme').value = CU.programme || '';
-  document.getElementById('profSemester').value = CU.semester || 'Semester 1';
-  
-  renderModList();
-}
-
-function renderModList() {
-  const container = document.getElementById('modList');
-  if (!mods.length) {
-    container.innerHTML = '<p style="color:var(--muted);font-size:.8rem;">No modules added yet.</p>';
-    return;
-  }
-  
-  container.innerHTML = mods.map((m, i) => `
-    <div style="display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;">
-      <span style="font-weight:700;font-size:.85rem;flex:1;"><span style="color:var(--blue);">${m.code}</span> – ${m.name}</span>
-      <span class="rmv" onclick="removeProfileMod(${i})" style="cursor:pointer;color:var(--red);font-size:1.1rem;padding:0 4px;">✕</span>
-    </div>
-  `).join('');
-}
-
-function addProfileMod() {
-  const code = document.getElementById('newModCode').value.trim();
-  const name = document.getElementById('newModName').value.trim();
-  if (!code || !name) { alert('Enter both module code and name.'); return; }
-  
-  mods.push({ code, name, credits: 3 });
-  renderModList();
-  
-  document.getElementById('newModCode').value = '';
-  document.getElementById('newModName').value = '';
-}
-
-function removeProfileMod(index) {
-  mods.splice(index, 1);
-  renderModList();
-}
-
-async function saveProfile() {
-  const programme = document.getElementById('profProgramme').value.trim();
-  const semester = document.getElementById('profSemester').value;
-  
-  await window.FS.setUser(CUK, { programme, semester, modules: mods });
-  
-  showToast('Profile Saved', 'Your profile has been updated!', 'success');
-  
-  // Refresh module-dependent views
-  populateModDropdowns();
-  populateGPARows();
-  populateForeRows();
-  populateStreakModules();
-}
-
-// Study Streak Functions
+// ── STUDY STREAK (Dual Timer + Calendar) ───────────────────────────
+// Pomodoro Timer
 let pomodoroInterval = null;
 let pomodoroSeconds = 25 * 60;
 let pomodoroRunning = false;
 let pomodoroPreset = 25;
 let pomodoroModule = '';
+let stopwatchInterval = null;
+let stopwatchSeconds = 0;
+let stopwatchRunning = false;
+let stopwatchModule = '';
+let stopwatchLaps = [];
+let stopwatchLastDate = new Date().toDateString();
 
 function setPomodoroPreset(minutes, element) {
   document.querySelectorAll('.timer-preset').forEach(el => el.classList.remove('active'));
@@ -2714,15 +2869,18 @@ function startPomodoro() {
   
   pomodoroInterval = setInterval(() => {
     if (pomodoroSeconds <= 0) {
+      // Timer finished
       clearInterval(pomodoroInterval);
       pomodoroRunning = false;
       document.getElementById('pomodoroStartBtn').style.display = 'inline-flex';
       document.getElementById('pomodoroPauseBtn').style.display = 'none';
       document.getElementById('pomodoroStatus').textContent = '✅ Session complete!';
       
+      // Log the session
       logStudySessionFromTimer(pomodoroModule, pomodoroPreset);
       showToast('Focus Complete!', `Great job! You focused for ${pomodoroPreset} minutes.`, 'success');
       
+      // Auto-reset
       resetPomodoro();
     } else {
       pomodoroSeconds--;
@@ -2757,12 +2915,6 @@ function updatePomodoroDisplay() {
 }
 
 // Stopwatch
-let stopwatchInterval = null;
-let stopwatchSeconds = 0;
-let stopwatchRunning = false;
-let stopwatchModule = '';
-let stopwatchLaps = [];
-
 function startStopwatch() {
   const moduleSelect = document.getElementById('stopwatchModule');
   if (!moduleSelect.value) {
@@ -2770,6 +2922,12 @@ function startStopwatch() {
     return;
   }
   stopwatchModule = moduleSelect.value;
+  
+  const today = new Date().toDateString();
+  if (stopwatchLastDate !== today) {
+    stopwatchSeconds = 0;
+    stopwatchLastDate = today;
+  }
   
   if (stopwatchRunning) return;
   stopwatchRunning = true;
@@ -2779,26 +2937,33 @@ function startStopwatch() {
   stopwatchInterval = setInterval(() => {
     stopwatchSeconds++;
     updateStopwatchDisplay();
+    if (new Date().toDateString() !== stopwatchLastDate) pauseStopwatch(true);
   }, 1000);
 }
 
-function pauseStopwatch() {
-  if (!stopwatchRunning) return;
+function pauseStopwatch(auto = false) {
+  if (!stopwatchRunning && !auto) return;
   stopwatchRunning = false;
   clearInterval(stopwatchInterval);
   document.getElementById('stopwatchStartBtn').style.display = 'inline-flex';
   document.getElementById('stopwatchPauseBtn').style.display = 'none';
+  
+  if (stopwatchSeconds > 0 && !auto) {
+    const mins = Math.round(stopwatchSeconds / 60);
+    if (mins >= 1) {
+      logStudySessionFromTimer(stopwatchModule, mins);
+    }
+    resetStopwatch();
+  }
 }
 
 function resetStopwatch() {
   stopwatchRunning = false;
   clearInterval(stopwatchInterval);
   stopwatchSeconds = 0;
-  stopwatchLaps = [];
   updateStopwatchDisplay();
   document.getElementById('stopwatchStartBtn').style.display = 'inline-flex';
   document.getElementById('stopwatchPauseBtn').style.display = 'none';
-  document.getElementById('stopwatchLaps').innerHTML = '';
 }
 
 function lapStopwatch() {
@@ -2829,14 +2994,17 @@ function renderStopwatchLaps() {
   `).join('');
 }
 
+// Log session from timer
 async function logStudySessionFromTimer(module, minutes) {
   const today = new Date().toISOString().split('T')[0];
   const hours = minutes / 60;
   
+  // Update study stats
   CU.studyStats = CU.studyStats || { totalHours: 0, streak: 0, lastStudyDate: null, points: 0 };
   CU.studyStats.totalHours += hours;
   CU.studyStats.points += Math.floor(hours);
   
+  // Update streak
   const lastDate = CU.studyStats.lastStudyDate ? new Date(CU.studyStats.lastStudyDate) : null;
   const todayDate = new Date();
   todayDate.setHours(0, 0, 0, 0);
@@ -2856,13 +3024,15 @@ async function logStudySessionFromTimer(module, minutes) {
   
   CU.studyStats.lastStudyDate = todayDate.toISOString();
   
+  // Save to Firestore
   await window.FS.addStudySession({
     userId: CUK,
     module: module,
     date: today,
     duration: minutes,
     hours: hours,
-    points: Math.floor(hours)
+    points: Math.floor(hours),
+    recorded: false
   });
   
   await window.FS.setUser(CUK, { studyStats: CU.studyStats });
@@ -2874,40 +3044,40 @@ async function logStudySessionFromTimer(module, minutes) {
   renderCalendar();
 }
 
-async function logStudySession() {
-  const module = document.getElementById('sessionModule').value;
-  const duration = parseInt(document.getElementById('sessionDuration').value);
-  
-  if (!module) { alert('Select a module.'); return; }
-  if (!duration || duration < 1) { alert('Enter a valid duration.'); return; }
-  
-  await logStudySessionFromTimer(module, duration);
-  showToast('Session Logged', `Logged ${duration} minutes for ${module}.`, 'success');
+function logStudySession() {
+  const mod = document.getElementById('sessionModule').value;
+  const mins = parseInt(document.getElementById('sessionDurationMins').value);
+  if (!mod || mins < 1) return alert('invalid');
+  logStudySessionFromTimer(mod, mins);
+}
+
+function updateStreakStats() {
+  if (!CU || !CU.studyStats) return;
+  document.getElementById('streakCount').textContent = CU.studyStats.streak || 0;
+  document.getElementById('totalHours').textContent = (CU.studyStats.totalHours || 0).toFixed(1);
+  document.getElementById('streakPoints').textContent = CU.studyStats.points || 0;
 }
 
 function renderSessionHistory() {
   const container = document.getElementById('sessionHistory');
-  if (!_studySessions.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No study sessions yet.</p></div>';
+  if (!_studySessions || _studySessions.length === 0) {
+    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No study sessions yet. Start your first session!</p></div>';
     return;
   }
   
-  container.innerHTML = _studySessions.slice(0, 10).map(s => `
+  const recent = _studySessions.slice(0, 10);
+  container.innerHTML = recent.map(s => `
     <div class="session-item">
-      <span class="session-subject">${s.module || 'Study'}</span>
-      <span class="session-time">${new Date(s.date).toLocaleDateString()}</span>
+      <div>
+        <span class="session-subject">${s.module}</span>
+        <div class="session-time">${new Date(s.date).toLocaleDateString()}</div>
+      </div>
       <span class="session-duration">${s.duration} min</span>
     </div>
   `).join('');
 }
 
-function updateStreakStats() {
-  document.getElementById('streakCount').textContent = CU?.studyStats?.streak || 0;
-  document.getElementById('totalHours').textContent = Math.round(CU?.studyStats?.totalHours || 0);
-  document.getElementById('streakPoints').textContent = CU?.studyStats?.points || 0;
-}
-
-// Calendar Functions
+// Calendar
 let currentCalendarDate = new Date();
 let selectedCalendarDate = new Date();
 
@@ -2934,35 +3104,40 @@ function renderCalendar() {
     currentCalendarDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   
   const firstDay = new Date(year, month, 1);
-  const startDay = firstDay.getDay();
+  const startDay = firstDay.getDay(); // 0 = Sunday, 1 = Monday, etc.
+  // Adjust for Monday first
   const startOffset = startDay === 0 ? 6 : startDay - 1;
   
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   
   let html = '';
   
+  // Empty cells before first day
   for (let i = 0; i < startOffset; i++) {
     html += '<div class="calendar-day empty"></div>';
   }
   
+  // Days of month
   for (let d = 1; d <= daysInMonth; d++) {
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const totalMins = _studySessions.filter(s => s.date === dateStr).reduce((acc, s) => acc + (s.duration || 0), 0);
+    let heat = totalMins < 30 ? 1 : totalMins < 60 ? 2 : totalMins < 90 ? 3 : totalMins < 120 ? 4 : totalMins > 0 ? 5 : 0;
     const isToday = isSameDay(new Date(), new Date(year, month, d));
     const isSelected = isSameDay(selectedCalendarDate, new Date(year, month, d));
-    const hasStudy = hasStudyOnDate(dateStr);
     
-    let classes = 'calendar-day';
+    let classes = `calendar-day heat-${heat}`;
     if (isToday) classes += ' today';
     if (isSelected) classes += ' selected';
-    if (hasStudy) classes += ' has-study';
     
     html += `<div class="${classes}" onclick="selectCalendarDay('${dateStr}')">
       ${d}
-      <span class="study-stat-tooltip">${getStudyMinutes(dateStr)} min</span>
+      <span class="study-stat-tooltip">${totalMins} min</span>
     </div>`;
   }
   
   document.getElementById('calendarDays').innerHTML = html;
+  
+  // Update selected day stats
   updateSelectedDayStats();
 }
 
@@ -2978,93 +3153,83 @@ function selectCalendarDay(dateStr) {
   renderCalendar();
 }
 
-function hasStudyOnDate(dateStr) {
-  return _studySessions.some(s => s.date === dateStr);
-}
-
-function getStudyMinutes(dateStr) {
-  return _studySessions
-    .filter(s => s.date === dateStr)
-    .reduce((sum, s) => sum + (s.duration || 0), 0);
-}
-
 function updateSelectedDayStats() {
-  const dateStr = selectedCalendarDate.toISOString().split('T')[0];
-  const minutes = getStudyMinutes(dateStr);
-  const sessions = _studySessions.filter(s => s.date === dateStr).length;
-  
-  document.getElementById('selectedDateDisplay').textContent = selectedCalendarDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  document.getElementById('selectedDayTime').textContent = minutes + ' minutes';
-  document.getElementById('selectedDaySessions').textContent = sessions;
+  const ds = selectedCalendarDate.toISOString().split('T')[0];
+  document.getElementById('selectedDateDisplay').innerHTML = `<span class="label">📅</span> ${selectedCalendarDate.toDateString()}`;
+  const daySessions = _studySessions.filter(s => s.date === ds);
+  const modMap = {};
+  daySessions.forEach(s => modMap[s.module] = (modMap[s.module] || 0) + s.duration);
+  let modHtml = '';
+  for (let m in modMap) modHtml += `<div class="module-time-row"><span>${m}</span><span>${modMap[m]} min</span></div>`;
+  document.getElementById('moduleTimeList').innerHTML = modHtml || '<div class="module-time-row">no sessions</div>';
 }
 
-// Study Squad Functions (Combined)
-let currentSquadTab = 'sessions';
-let squadSearch = '';
-let squadFacultyFilter = '';
+// ── STUDY SESSIONS ──────────────────────────────────────────────
+let currentSessionsTab = 'all';
+let facultyFilter = '';
 
-function squadTab(tab, element) {
-  currentSquadTab = tab;
+function sessionsTab(tab, element) {
+  currentSessionsTab = tab;
   document.querySelectorAll('.session-tab').forEach(el => el.classList.remove('active'));
   element.classList.add('active');
-  
-  document.getElementById('sessionsContainer').classList.toggle('hidden', tab !== 'sessions');
-  document.getElementById('groupsContainer').classList.toggle('hidden', tab !== 'groups');
-  
-  filterSquad();
+  filterSessions();
 }
 
-function clearSquadFilter() {
-  squadFacultyFilter = '';
-  document.getElementById('squadFacultyFilter').value = '';
-  document.getElementById('squadFilterBadge').innerHTML = '📍 Showing: All <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
-  filterSquad();
+function setLocation(loc) {
+  document.getElementById('sessionLocation').value = loc;
+  document.querySelectorAll('.location-preset').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
 }
 
-function filterSquad() {
-  squadSearch = document.getElementById('squadSearch')?.value.toLowerCase() || '';
-  squadFacultyFilter = document.getElementById('squadFacultyFilter')?.value || '';
-  
-  const badge = document.getElementById('squadFilterBadge');
-  if (squadFacultyFilter) {
-    badge.innerHTML = `📍 Showing: ${squadFacultyFilter} <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>`;
-  } else {
-    badge.innerHTML = '📍 Showing: All <button onclick="clearSquadFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
-  }
-  
-  if (currentSquadTab === 'sessions') {
-    filterSessions();
-  } else {
-    filterGroups();
-  }
+function clearFacultyFilter() {
+  facultyFilter = '';
+  document.getElementById('sessionFacultyFilter').value = '';
+  document.getElementById('facultyFilterBadge').innerHTML = '📍 Showing: All Faculties <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
+  filterSessions();
 }
 
 function filterSessions() {
-  let filtered = _studySessionsPosts.filter(s => new Date(s.dateTime) > new Date()); // Only upcoming
+  const search = document.getElementById('sessionSearch')?.value.toLowerCase() || '';
+  facultyFilter = document.getElementById('sessionFacultyFilter')?.value || '';
   
-  if (squadFacultyFilter) {
-    filtered = filtered.filter(s => s.faculty === squadFacultyFilter);
+  // Update badge
+  const badge = document.getElementById('facultyFilterBadge');
+  if (facultyFilter) {
+    badge.innerHTML = `📍 Showing: ${facultyFilter} <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>`;
+  } else {
+    badge.innerHTML = '📍 Showing: All Faculties <button onclick="clearFacultyFilter()" style="background:none;border:none;color:var(--orange);font-weight:700;margin-left:5px;">✕</button>';
   }
   
-  if (squadSearch) {
+  let filtered = [..._studySessionsPosts];
+  
+  if (facultyFilter) {
+    filtered = filtered.filter(s => s.faculty === facultyFilter);
+  }
+  
+  if (search) {
     filtered = filtered.filter(s => 
-      (s.module || '').toLowerCase().includes(squadSearch) ||
-      (s.topic || '').toLowerCase().includes(squadSearch) ||
-      (s.location || '').toLowerCase().includes(squadSearch)
+      (s.module || '').toLowerCase().includes(search) ||
+      (s.topic || '').toLowerCase().includes(search) ||
+      (s.location || '').toLowerCase().includes(search)
     );
+  }
+  
+  if (currentSessionsTab === 'my') {
+    filtered = filtered.filter(s => s.createdBy === CUK);
   }
   
   renderSessions(filtered);
 }
 
 function renderSessions(sessions) {
-  const container = document.getElementById('sessionsContainer');
+  const container = document.getElementById('sessionsList');
   
   if (!sessions.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">📅</div><p>No upcoming study sessions found.</p></div>';
+    container.innerHTML = '<div class="empty"><div class="ei">📅</div><p>No study sessions found. Create one!</p></div>';
     return;
   }
   
+  // Sort by date
   sessions.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
   
   container.innerHTML = sessions.map(s => {
@@ -3077,6 +3242,8 @@ function renderSessions(sessions) {
     const dateTime = new Date(s.dateTime);
     const formattedDate = dateTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     const formattedTime = dateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    
+    const isPast = dateTime < new Date();
     
     return `
       <div class="session-card">
@@ -3092,91 +3259,43 @@ function renderSessions(sessions) {
         </div>
         
         <div class="session-details">
-          <div class="session-detail-item"><i>📅</i> ${formattedDate} at ${formattedTime}</div>
-          <div class="session-detail-item"><i>⏱️</i> ${s.duration} min</div>
-          <div class="session-detail-item"><i>📍</i> ${s.location || 'TBD'}</div>
-          <div class="session-detail-item"><i>👥</i> ${participants}/${maxParticipants}</div>
+          <div class="session-detail-item">
+            <i>📅</i> ${formattedDate} at ${formattedTime}
+          </div>
+          <div class="session-detail-item">
+            <i>⏱️</i> ${s.duration} min
+          </div>
+          <div class="session-detail-item">
+            <i>📍</i> ${s.location || 'TBD'}
+          </div>
+          <div class="session-detail-item">
+            <i>👥</i> ${participants}/${maxParticipants} participants
+          </div>
         </div>
         
-        ${s.notes ? `<p style="font-size:.8rem;color:var(--muted);margin:8px 0;">📝 ${s.notes}</p>` : ''}
+        ${s.notes ? `<p style="font-size:.8rem;color:var(--muted);margin:8px 0 0 0;">📝 ${s.notes}</p>` : ''}
         
         <div class="session-footer">
-          <div class="session-creator"><i>👤</i> <strong>${s.createdByName}</strong></div>
-          ${isCreator ? 
+          <div class="session-creator">
+            <i>👤</i> <strong>${s.createdByName}</strong> · ${s.faculty || '—'}
+          </div>
+          ${!isPast ? (isCreator ? 
             `<button class="btn btn-red btn-sm" onclick="deleteSession('${s.id}')">🗑 Delete</button>` : 
             (isJoined ? 
               `<button class="btn btn-outline btn-sm" onclick="leaveSession('${s.id}')">✕ Leave</button>` : 
               (!isFull ? 
-                `<button class="session-join-btn" onclick="joinSession('${s.id}')">➕ Join</button>` : 
+                `<button class="session-join-btn" onclick="joinSession('${s.id}')">➕ Join Session</button>` : 
                 `<span class="badge badge-taken">Full</span>`
               )
             )
-          }
+          ) : '<span class="badge badge-taken">Ended</span>'}
         </div>
       </div>
     `;
   }).join('');
 }
 
-function filterGroups() {
-  let filtered = _groups;
-  
-  if (squadFacultyFilter) {
-    filtered = filtered.filter(g => g.faculty === squadFacultyFilter);
-  }
-  
-  if (squadSearch) {
-    filtered = filtered.filter(g => 
-      (g.name || '').toLowerCase().includes(squadSearch) ||
-      (g.module || '').toLowerCase().includes(squadSearch)
-    );
-  }
-  
-  renderGroups(filtered);
-}
-
-function renderGroups(groups) {
-  const container = document.getElementById('groupsContainer');
-  
-  if (!groups || !groups.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No groups found.</p></div>';
-    return;
-  }
-  
-  container.innerHTML = groups.map(g => {
-    const isMember = g.members?.includes(CUK);
-    const isCreator = g.createdBy === CUK;
-    
-    return `
-      <div class="group-card">
-        <div class="group-header">
-          <div class="group-avatar">${g.name[0]}</div>
-          <div class="group-info">
-            <div class="group-name">${g.name}</div>
-            <div class="group-meta">📚 ${g.module} · 👥 ${g.members?.length || 1} members</div>
-          </div>
-        </div>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:10px;">${g.description || ''}</p>
-        <div class="group-stats">
-          <div class="group-stat"><strong>${g.members?.length || 1}</strong> members</div>
-          <div class="group-stat"><strong>${g.faculty || '—'}</strong></div>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:12px;">
-          ${isMember ? 
-            `<button class="btn btn-blue btn-sm" onclick="openGroupChat('${g.id}')">💬 Chat</button>
-             <button class="btn btn-outline btn-sm" onclick="leaveGroup('${g.id}')">Leave</button>` : 
-            `<button class="btn btn-green btn-sm" onclick="joinGroup('${g.id}')">➕ Join Group</button>`
-          }
-          ${isCreator ? `<button class="btn btn-red btn-sm" onclick="deleteGroup('${g.id}')">🗑 Delete</button>` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-// Session CRUD
 async function createStudySession() {
-  const sessionType = document.querySelector('input[name="sessionType"]:checked')?.value;
   const module = document.getElementById('sessionModSelect').value;
   const topic = document.getElementById('sessionTopic').value.trim();
   const dateTime = document.getElementById('sessionDateTime').value;
@@ -3192,39 +3311,19 @@ async function createStudySession() {
   
   const faculty = CU.faculty || 'Unknown';
   
-  if (sessionType === 'permanent') {
-    // Create permanent group instead
-    const groupName = prompt('Enter a name for your permanent group:', topic + ' Study Group');
-    if (!groupName) return;
-    
-    await window.FS.addGroup({
-      createdBy: CUK,
-      createdByName: CU.name,
-      name: groupName,
-      module,
-      description: notes || `Study group for ${topic}`,
-      faculty,
-      members: [CUK]
-    });
-    
-    showToast('Group Created', 'Your permanent study group has been created!', 'success');
-  } else {
-    await window.FS.addStudySessionPost({
-      createdBy: CUK,
-      createdByName: CU.name,
-      module,
-      topic,
-      dateTime,
-      duration: parseInt(duration),
-      location,
-      maxParticipants: parseInt(maxParticipants),
-      notes,
-      faculty,
-      participants: [CUK]
-    });
-    
-    showToast('Session Created', 'Your study session is now live!', 'success');
-  }
+  await window.FS.addStudySessionPost({
+    createdBy: CUK,
+    createdByName: CU.name,
+    module,
+    topic,
+    dateTime,
+    duration: parseInt(duration),
+    location,
+    maxParticipants: parseInt(maxParticipants),
+    notes,
+    faculty,
+    participants: [CUK]
+  });
   
   // Reset form
   document.getElementById('sessionModSelect').value = '';
@@ -3233,6 +3332,8 @@ async function createStudySession() {
   document.getElementById('sessionLocation').value = '';
   document.getElementById('sessionNotes').value = '';
   document.getElementById('createSessionMod').classList.remove('on');
+  
+  showToast('Session Created', 'Your study session is now live!', 'success');
 }
 
 async function joinSession(sessionId) {
@@ -3274,31 +3375,1036 @@ async function deleteSession(sessionId) {
   showToast('Session Deleted', 'Your session has been removed.', 'info');
 }
 
-// Group Functions
+// ── FOCUS ROOMS (Study Together) ──────────────────────────────
+let currentRoom = null;
+let roomTimerInterval = null;
+let roomStartTime = null;
+let roomModule = null;
+
+function renderFocusRooms() {
+  const container = document.getElementById('activeRooms');
+  
+  const activeRooms = _focusRooms.filter(r => r.status !== 'ended');
+  
+  if (!activeRooms.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No active rooms. Create one to start studying together!</p></div>';
+    return;
+  }
+  
+  container.innerHTML = activeRooms.map(room => {
+    const isCreator = room.createdBy === CUK;
+    const isJoined = room.participants?.includes(CUK);
+    const participants = room.participants?.length || 1;
+    const maxParticipants = room.maxParticipants || 5;
+    
+    return `
+      <div class="room-card">
+        <div class="room-header">
+          <div class="room-icon">👥</div>
+          <div>
+            <div class="room-name">${room.name}</div>
+            <div class="room-meta">📚 ${room.module} · ${room.lifespanDays} days</div>
+          </div>
+        </div>
+        
+        <div class="room-stats">
+          <div class="room-stat-item">
+            <div class="room-stat-value">${participants}</div>
+            <div class="room-stat-label">joined</div>
+          </div>
+          <div class="room-stat-item">
+            <div class="room-stat-value">${maxParticipants}</div>
+            <div class="room-stat-label">max</div>
+          </div>
+          <div class="room-stat-item">
+            <div class="room-stat-value">✨</div>
+            <div class="room-stat-label">2x points</div>
+          </div>
+        </div>
+        
+        <div class="room-footer">
+          <div class="room-participants">
+            <span>👤</span> ${room.createdByName}
+          </div>
+          <button class="btn btn-blue btn-sm" onclick="showRoomDetail('${room.id}')">View Details</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function showRoomDetail(roomId) {
+  const room = _focusRooms.find(r => r.id === roomId);
+  if (!room) return;
+  currentRoom = room;
+  
+  document.getElementById('roomDetailHeader').innerHTML = `<h3>${room.name}</h3><p>daily ${room.dailyHours || 2}h, window ${room.studyWindow || 'anytime'}</p>`;
+  
+  let partsHtml = (room.participants || []).map(id => {
+    const user = room.participantsData?.find(p => p.id === id) || { name: id.slice(0, 6) };
+    return `<div class="room-participant"><span>${user.name}</span><span>${user.faculty || ''}</span></div>`;
+  }).join('');
+  document.getElementById('roomParticipantList').innerHTML = partsHtml || '<div>No participants</div>';
+  
+  // Leaderboard from pointsBoard
+  let lb = Object.entries(room.pointsBoard || {}).map(([id, sec]) => {
+    let u = (room.participantsData || []).find(p => p.id === id) || { name: id.slice(0,4) };
+    return { name: u.name, hours: sec/3600, points: calcPointsFromHours(sec/3600) };
+  }).sort((a,b) => b.hours - a.hours);
+  
+  let lbHtml = lb.map((p,i) => `<div class="focus-leaderboard-item"><span>${i+1}. ${p.name}</span><span>${p.hours.toFixed(1)}h (${p.points} pts)</span></div>`).join('');
+  document.getElementById('roomLeaderboard').innerHTML = lbHtml || '<div>No study time yet</div>';
+  
+  // Module dropdown
+  let opts = mods.map(m => `<option value="${m.name}">${m.name}</option>`).join('');
+  document.getElementById('myRoomModule').innerHTML = '<option value="">—module—</option>'+opts;
+  
+  document.getElementById('roomDetailMod').classList.add('on');
+}
+
+function calcPointsFromHours(h) {
+  if (h < 1) return 0;
+  if (h < 2) return 5;
+  if (h < 4) return 10;
+  if (h < 5) return 15;
+  if (h < 6) return 20;
+  return 20 + Math.floor((h-6)) * 2;
+}
+
+function startRoomTimer() {
+  if (!currentRoom) return;
+  const mod = document.getElementById('myRoomModule').value;
+  if (!mod) { alert('select module'); return; }
+  roomModule = mod;
+  roomStartTime = Date.now();
+  document.getElementById('roomTimerBtn').innerText = '⏸ Stop & log';
+  document.getElementById('roomTimerBtn').onclick = stopRoomTimer;
+}
+
+function stopRoomTimer() {
+  const elapsed = (Date.now() - roomStartTime) / 1000;
+  clearInterval(roomTimerInterval);
+  const mins = Math.round(elapsed / 60);
+  if (mins > 0) {
+    logStudySessionFromTimer(roomModule, mins);
+    // Update room pointsBoard
+    if (!currentRoom.pointsBoard) currentRoom.pointsBoard = {};
+    currentRoom.pointsBoard[CUK] = (currentRoom.pointsBoard[CUK] || 0) + elapsed;
+    showToast('Time logged', `${mins} min, +${calcPointsFromHours(mins/60)} pts`, 'success');
+  }
+  document.getElementById('roomTimerBtn').innerText = '▶ Start study';
+  document.getElementById('roomTimerBtn').onclick = startRoomTimer;
+  showRoomDetail(currentRoom.id); // Refresh leaderboard
+}
+
+async function createFocusRoom() {
+  const name = document.getElementById('roomName').value.trim();
+  const lifespan = parseInt(document.getElementById('roomLifespan').value);
+  const daily = parseFloat(document.getElementById('roomDailyHours').value);
+  const window = document.getElementById('roomWindow').value.trim();
+  const max = parseInt(document.getElementById('roomMaxParticipants').value);
+  
+  if (!name) { alert('Enter a room name.'); return; }
+  
+  const newRoom = {
+    id: 'r' + Date.now(),
+    createdBy: CUK,
+    createdByName: CU.name,
+    name,
+    lifespanDays: lifespan,
+    dailyHours: daily,
+    studyWindow: window,
+    maxParticipants: max,
+    faculty: CU.faculty,
+    participants: [CUK],
+    participantsData: [{ id: CUK, name: CU.name, faculty: CU.faculty }],
+    pointsBoard: {},
+    createdAt: new Date().toISOString(),
+    status: 'active'
+  };
+  
+  await window.FS.addFocusRoom(newRoom);
+  
+  // Reset form
+  document.getElementById('roomName').value = '';
+  document.getElementById('roomWindow').value = '';
+  document.getElementById('createRoomMod').classList.remove('on');
+  
+  showToast('Room Created', 'Join and select module', 'success');
+}
+
+async function joinFocusRoom(roomId) {
+  const room = _focusRooms.find(r => r.id === roomId);
+  if (!room) return;
+  
+  if (!room.participants.includes(CUK)) {
+    await window.FS.joinFocusRoom(roomId, CUK);
+  }
+  
+  showRoomDetail(roomId);
+}
+
+async function leaveFocusRoom(roomId) {
+  if (!confirm('Leave this focus room?')) return;
+  await window.FS.leaveFocusRoom(roomId, CUK);
+  showToast('Left Room', 'You have left the focus room.', 'info');
+}
+
+async function endFocusRoom(roomId) {
+  if (!confirm('End this focus room?')) return;
+  await window.FS.updateFocusRoom(roomId, { status: 'ended' });
+  document.getElementById('roomDetailMod').classList.remove('on');
+  showToast('Room Ended', 'The focus room has been closed.', 'info');
+}
+
+// ── AI ASSISTANT ──────────────────────────────────────────────
+function askAI() {
+  const q = document.getElementById('aiQuestion').value;
+  if (!q) return;
+  const hist = document.getElementById('aiChatHistory');
+  hist.innerHTML += `<div class="ai-chat-bubble" style="background:var(--blue2);color:#fff;">${q}</div>`;
+  setTimeout(() => {
+    hist.innerHTML += `<div class="ai-chat-bubble" style="background:var(--purple2);">🤖 based on your course: ${q} is a key concept. Want a practice question?</div>`;
+    hist.scrollTop = hist.scrollHeight;
+  }, 600);
+  document.getElementById('aiQuestion').value = '';
+}
+
+function summarizeNotes() { showToast('Summary', 'Key points from outline', 'info'); }
+function generateQuiz() { showToast('Quiz', '5 practice questions generated', 'info'); }
+function studyPlan() { showToast('Study Plan', 'Personalized schedule created', 'info'); }
+
+// ── POPULATE DROPDOWNS ──────────────────────────────────────────
+function populateStreakModules() {
+  const options = mods.length
+    ? mods.map(m => `<option value="${m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('')
+    : '<option value="">No modules — set in Profile</option>';
+  
+  ['pomodoroModule', 'stopwatchModule', 'sessionModule'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.innerHTML = '<option value="">— Select module —</option>' + options;
+    }
+  });
+}
+
+function populateModDropdowns() {
+  const opts = mods.length
+    ? mods.map(m => `<option value="${m.code ? m.code + ' – ' + m.name : m.name}">${m.code ? m.code + ' – ' : ''}${m.name}</option>`).join('')
+    : '<option value="">No modules — set up in Profile</option>';
+  
+  ['pMod', 'groupModule', 'ptsModule', 'ctMod', 'sessionModSelect'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.innerHTML = '<option value="">— Select module —</option>' + opts; }
+  });
+  
+  // Room module dropdown
+  const roomModule = document.getElementById('myRoomModule');
+  if (roomModule) {
+    roomModule.innerHTML = '<option value="">— Select module —</option>' + opts;
+  }
+}
+
+// ── RATINGS ────────────────────────────────────────────────────
+function openRate(tutorId, tutorName) {
+  rTarget = tutorId;
+  rStars = 0;
+  rTags = [];
+  document.getElementById('rateWho').innerText = `Rate ${tutorName}`;
+  document.querySelectorAll('.rate-star').forEach((el, i) => {
+    el.classList.toggle('on', false);
+    el.onclick = () => setStar(i+1);
+  });
+  document.getElementById('rateNote').value = '';
+  document.getElementById('rateMod').classList.add('on');
+}
+
+function setStar(s) {
+  rStars = s;
+  document.querySelectorAll('.rate-star').forEach((el, i) => el.classList.toggle('on', i < s));
+}
+
+function toggleTag(el, tag) {
+  el.classList.toggle('on');
+  if (el.classList.contains('on')) rTags.push(tag);
+  else rTags = rTags.filter(t => t !== tag);
+}
+
+async function submitRating() {
+  if (!rTarget || rStars === 0) return alert('select stars');
+  
+  await window.FS.addRating(rTarget, {
+    stars: rStars,
+    tags: rTags,
+    by: CUK,
+    note: document.getElementById('rateNote').value,
+    at: new Date().toISOString()
+  });
+  
+  closeRate();
+  renderTutors();
+  showToast('Rating submitted', 'thank you', 'success');
+}
+
+function closeRate() {
+  document.getElementById('rateMod').classList.remove('on');
+}
+
+// ── TUTORS ────────────────────────────────────────────────────
+async function renderTutors() {
+  if (!CU) return;
+  
+  const users = await window.FS.getAllUsers();
+  const tutors = Object.entries(users)
+    .filter(([id, u]) => u.isTutor && id !== CUK)
+    .map(([id, u]) => ({ id, ...u }));
+  
+  const search = document.getElementById('tSrch')?.value.toLowerCase() || '';
+  const faculty = document.getElementById('tFacFilter')?.value || '';
+  
+  let filtered = tutors;
+  if (search) {
+    filtered = filtered.filter(t => 
+      t.name.toLowerCase().includes(search) ||
+      (t.tutorSubjects || []).some(s => s.toLowerCase().includes(search))
+    );
+  }
+  if (faculty) {
+    filtered = filtered.filter(t => t.faculty === faculty);
+  }
+  
+  const container = document.getElementById('tutorList');
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">⭐</div><p>No tutors found.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = filtered.map(t => {
+    const ratings = _ratings[t.id] || [];
+    const avg = ratings.length ? (ratings.reduce((s, r) => s + r.stars, 0) / ratings.length).toFixed(1) : 'New';
+    const stars = Math.round(parseFloat(avg) || 0);
+    
+    return `
+      <div class="tutor-card">
+        <div class="tutor-top">
+          <div class="tutor-av">${t.name[0]}</div>
+          <div>
+            <div class="tutor-name">${t.name}</div>
+            <div class="tutor-bio">${t.tutorBio || 'No bio yet.'}</div>
+          </div>
+        </div>
+        
+        <div class="tutor-subjects">
+          ${(t.tutorSubjects || []).map(s => `<span class="subj-tag">${s}</span>`).join('')}
+        </div>
+        
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="stars-row">
+            ${[1,2,3,4,5].map(i => `<span class="star${i <= stars ? ' on' : ''}">★</span>`).join('')}
+            <span class="star-count">(${ratings.length})</span>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="openRate('${t.id}', '${t.name}')">⭐ Rate</button>
+        </div>
+        
+        ${ratings.length > 0 ? `
+          <div class="rating-tags">
+            ${Object.entries(ratings.flatMap(r => r.tags || []).reduce((acc, t) => { acc[t] = (acc[t] || 0) + 1; return acc; }, {}))
+              .sort((a,b) => b[1] - a[1])
+              .slice(0, 5)
+              .map(([tag, count]) => `<span class="rtag">${tag} (${count})</span>`).join('')}
+          </div>
+        ` : ''}
+        
+        <div style="margin-top:12px;">
+          <button class="wa-btn btn-sm" onclick="window.open('https://wa.me/${t.wa.replace(/[^0-9]/g, '')}', '_blank')">💬 Chat on WhatsApp</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── TIP DETAIL ─────────────────────────────────────────────────
+function renderTips() {
+  const tips = [
+    { icon: '🍅', title: 'Pomodoro', desc: 'Work in focused 25-min intervals with 5-min breaks. Ideal for maintaining concentration.', content: 'The Pomodoro Technique helps you break work into manageable chunks. Set a timer for 25 minutes of focused work, then take a 5-minute break. After 4 pomodoros, take a longer 15-30 minute break. This method prevents burnout and keeps your mind fresh.' },
+    { icon: '⏱️', title: 'Time Blocking', desc: 'Schedule specific tasks in fixed time slots. Great for managing multiple subjects.', content: 'Time blocking involves dividing your day into blocks of time, each dedicated to a specific task or subject. For example, 9-11am: Thermodynamics problems, 11am-12pm: Break, 12-2pm: Calculus revision. This creates structure and reduces decision fatigue.' },
+    { icon: '🧠', title: 'Active Recall', desc: 'Test yourself instead of passive reading. Proven to boost long-term retention.', content: 'Active recall means actively stimulating your memory during learning. Instead of rereading notes, close the book and try to remember key concepts. Use flashcards, practice questions, or teach someone else. This strengthens neural connections.' },
+    { icon: '📝', title: 'Cornell Notes', desc: 'Structured note-taking with cues and summaries. Perfect for lecture notes.', content: 'The Cornell method divides your page into three sections: a narrow left column for cues/questions, a wider right column for notes, and a summary section at the bottom. After lecture, write questions in the left column and summarize at the bottom to reinforce learning.' },
+    { icon: '🎯', title: 'Feynman Technique', desc: 'Explain concepts simply as if teaching a child. Reveals gaps in understanding.', content: 'The Feynman Technique involves four steps: 1) Choose a concept, 2) Explain it in simple language as if teaching a beginner, 3) Identify gaps in your explanation and review the material, 4) Simplify and refine your explanation. This technique reveals what you truly understand.' },
+    { icon: '🔄', title: 'Spaced Repetition', desc: 'Review material at increasing intervals. Combats forgetting curve.', content: 'Spaced repetition involves reviewing information at gradually increasing intervals. For example, review notes after 1 day, then 3 days, then 1 week, then 1 month. Use flashcards with spaced repetition apps or manually schedule reviews. This leverages the psychological spacing effect.' }
+  ];
+  
+  const grid = document.getElementById('tipsGrid');
+  grid.innerHTML = tips.map((t, i) => `
+    <div class="hsc-item" onclick="openTip(${i})">
+      <div class="hsc-icon" style="background:linear-gradient(135deg,#ede9fe,#fce7f3)">${t.icon}</div>
+      <div class="hsc-title">${t.title}</div>
+      <div class="hsc-sub">${t.desc}</div>
+    </div>
+  `).join('');
+  
+  window._tips = tips;
+}
+
+function openTip(i) {
+  const tip = window._tips[i];
+  document.getElementById('tipDetailIcon').textContent = tip.icon;
+  document.getElementById('tipDetailTitle').textContent = tip.title;
+  document.getElementById('tipDetailBody').innerHTML = `<p>${tip.content}</p>`;
+  document.getElementById('tipDetail').classList.remove('hidden');
+  document.getElementById('tipQAHistory').innerHTML = '';
+}
+
+function closeTipDetail() {
+  document.getElementById('tipDetail').classList.add('hidden');
+}
+
+function askTipQuestion() {
+  const q = document.getElementById('tipQuestion').value;
+  if (!q) return;
+  const hist = document.getElementById('tipQAHistory');
+  hist.innerHTML += `<div style="background:var(--blue2);color:#fff;padding:8px 12px;border-radius:12px;align-self:flex-end;">${q}</div>`;
+  setTimeout(() => {
+    hist.innerHTML += `<div style="background:var(--purple2);padding:8px 12px;border-radius:12px;">🤖 Based on this method, try applying it consistently for a week and track your results. Would you like specific examples?</div>`;
+    hist.scrollTop = hist.scrollHeight;
+  }, 600);
+  document.getElementById('tipQuestion').value = '';
+}
+
+// ── CAREER VIDEOS ──────────────────────────────────────────────
+function scrollCareer(dir) {
+  const container = document.getElementById('careerVideos');
+  const scrollAmount = 250;
+  container.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+}
+
+function loadCareerVideos() {
+  const container = document.getElementById('careerVideos');
+  const faculty = CU?.faculty || 'Engineering';
+  
+  // Simulate loading
+  container.innerHTML = '<div class="career-loading"><div class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;"></div><p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-top:12px;">Loading career insights...</p></div>';
+  
+  setTimeout(() => {
+    const videos = [
+      { title: `Day in the Life: ${faculty} Student`, channel: 'Career Insights', duration: '12:34' },
+      { title: `Top Skills for ${faculty} Graduates`, channel: 'Industry Experts', duration: '8:21' },
+      { title: 'How to Ace Your Technical Interview', channel: 'Career Prep', duration: '15:47' },
+      { title: `${faculty} Salaries & Job Outlook`, channel: 'Data Driven', duration: '10:03' },
+      { title: 'Networking Tips for Students', channel: 'Success Strategies', duration: '6:52' },
+      { title: 'Building Your Professional Portfolio', channel: 'Career Central', duration: '14:18' }
+    ];
+    
+    container.innerHTML = videos.map(v => `
+      <div class="career-card">
+        <div class="career-thumb">🎥</div>
+        <div class="career-info">
+          <div class="career-title">${v.title}</div>
+          <div class="career-meta">${v.channel} · ${v.duration}</div>
+        </div>
+      </div>
+    `).join('');
+  }, 800);
+}
+
+// ── GPA FUNCTIONS (simplified) ─────────────────────────────────
+function populateGPARows() {
+  const tbody = document.getElementById('gBody');
+  if (!mods || mods.length === 0) {
+    document.getElementById('gpaNoMods').classList.remove('hidden');
+    return;
+  }
+  document.getElementById('gpaNoMods').classList.add('hidden');
+  
+  tbody.innerHTML = mods.map((m, i) => `
+    <tr>
+      <td>${m.code || m.name}</td>
+      <td><input type="number" id="gCred${i}" value="3" min="1" max="6" oninput="calcGPA()"></td>
+      <td><input type="number" id="gMark${i}" value="50" min="0" max="100" oninput="calcGPA()"></td>
+      <td id="gGrade${i}">C</td>
+      <td id="gMGP${i}">2.0</td>
+    </tr>
+  `).join('');
+}
+
+function calcGPA() {
+  // Simplified GPA calculation
+  let totalPoints = 0, totalCredits = 0;
+  for (let i = 0; i < mods.length; i++) {
+    const cred = parseFloat(document.getElementById(`gCred${i}`)?.value) || 3;
+    const mark = parseFloat(document.getElementById(`gMark${i}`)?.value) || 0;
+    const gp = mark >= 80 ? 4.0 : mark >= 70 ? 3.5 : mark >= 60 ? 3.0 : mark >= 50 ? 2.0 : 1.0;
+    document.getElementById(`gGrade${i}`).textContent = 
+      mark >= 80 ? 'A' : mark >= 70 ? 'B' : mark >= 60 ? 'C' : mark >= 50 ? 'D' : 'F';
+    document.getElementById(`gMGP${i}`).textContent = gp.toFixed(1);
+    
+    totalPoints += gp * cred;
+    totalCredits += cred;
+  }
+  
+  const termGPA = totalCredits > 0 ? totalPoints / totalCredits : 0;
+  document.getElementById('tGPA').textContent = termGPA.toFixed(3);
+  
+  const prevPts = parseFloat(document.getElementById('gPts')?.value) || 0;
+  const prevCred = parseFloat(document.getElementById('gCr')?.value) || 0;
+  const cgpa = prevCred + totalCredits > 0 ? (prevPts + totalPoints) / (prevCred + totalCredits) : termGPA;
+  document.getElementById('cGPA').textContent = cgpa.toFixed(3);
+  document.getElementById('displayCGPA').textContent = cgpa.toFixed(2);
+  
+  const classText = cgpa >= 4.5 ? 'First Class' : cgpa >= 3.6 ? 'Upper Second' : cgpa >= 2.8 ? 'Lower Second' : 'Pass';
+  document.getElementById('cClass').textContent = classText;
+}
+
+function clearGPA() {
+  for (let i = 0; i < mods.length; i++) {
+    const cred = document.getElementById(`gCred${i}`);
+    const mark = document.getElementById(`gMark${i}`);
+    if (cred) cred.value = 3;
+    if (mark) mark.value = 50;
+  }
+  calcGPA();
+}
+
+function saveGPAData() {
+  const data = [];
+  for (let i = 0; i < mods.length; i++) {
+    const cred = document.getElementById(`gCred${i}`)?.value;
+    const mark = document.getElementById(`gMark${i}`)?.value;
+    if (cred && mark) {
+      data.push({ module: mods[i].name, credits: cred, mark: mark });
+    }
+  }
+  saveToLocal('gpaData', data);
+  showToast('GPA Data Saved', 'Current marks saved locally.', 'success');
+}
+
+function loadGPAData() {
+  const data = loadFromLocal('gpaData', []);
+  data.forEach((item, i) => {
+    const cred = document.getElementById(`gCred${i}`);
+    const mark = document.getElementById(`gMark${i}`);
+    if (cred && mark && i < mods.length) {
+      cred.value = item.credits;
+      mark.value = item.mark;
+    }
+  });
+  calcGPA();
+  showToast('GPA Data Loaded', 'Saved marks loaded.', 'success');
+}
+
+function populateForeRows() {
+  const tbody = document.getElementById('fBody');
+  if (!mods || mods.length === 0) {
+    document.getElementById('foreNoMods').classList.remove('hidden');
+    return;
+  }
+  document.getElementById('foreNoMods').classList.add('hidden');
+  
+  tbody.innerHTML = mods.map((m, i) => `
+    <tr>
+      <td>${m.code || m.name}</td>
+      <td><input type="number" id="caWt${i}" value="40" min="0" max="100" oninput="calcForecast()"></td>
+      <td><input type="number" id="examWt${i}" value="60" min="0" max="100" oninput="calcForecast()"></td>
+      <td><input type="number" id="caMark${i}" value="60" min="0" max="100" oninput="calcForecast()"></td>
+      <td><input type="number" id="target${i}" value="70" min="0" max="100" oninput="calcForecast()"></td>
+      <td id="needed${i}">—</td>
+    </tr>
+  `).join('');
+}
+
+function calcForecast() {
+  for (let i = 0; i < mods.length; i++) {
+    const caWt = parseFloat(document.getElementById(`caWt${i}`)?.value) || 40;
+    const examWt = parseFloat(document.getElementById(`examWt${i}`)?.value) || 60;
+    const caMark = parseFloat(document.getElementById(`caMark${i}`)?.value) || 0;
+    const target = parseFloat(document.getElementById(`target${i}`)?.value) || 70;
+    
+    const examNeeded = (target - (caMark * caWt / 100)) * 100 / examWt;
+    document.getElementById(`needed${i}`).textContent = examNeeded > 100 ? '❌ Impossible' : examNeeded.toFixed(1) + '%';
+  }
+}
+
+// ── STUDY HUB ──────────────────────────────────────────────────
+function renderSMods() {
+  const container = document.getElementById('sMods');
+  if (!mods || mods.length === 0) {
+    container.innerHTML = '<div style="color:var(--muted);font-size:.83rem;">No modules set up. Go to Profile to add your semester modules.</div>';
+    return;
+  }
+  
+  container.innerHTML = mods.map(m => `
+    <div class="mod-chip ${selMod === m.name ? 'sel' : ''}" onclick="pickMod('${m.name}')">
+      <span>📘</span> ${m.code || ''} ${m.name}
+    </div>
+  `).join('');
+}
+
+function pickMod(mod) {
+  selMod = selMod === mod ? null : mod;
+  renderSMods();
+  document.getElementById('topicIn').value = '';
+  document.getElementById('resArea').innerHTML = '<div class="empty"><div class="ei">📚</div><p>Enter a topic to search</p></div>';
+}
+
+function searchRes() {
+  const topic = document.getElementById('topicIn').value.trim();
+  if (!selMod) {
+    showToast('Select Module', 'Please select a module first.', 'warning');
+    return;
+  }
+  if (!topic) {
+    showToast('Enter Topic', 'Please enter a topic to search.', 'warning');
+    return;
+  }
+  
+  const area = document.getElementById('resArea');
+  area.innerHTML = '<div class="search-loading"><div class="spinner"></div><p>Searching resources...</p></div>';
+  
+  setTimeout(() => {
+    const results = [
+      { type: 'youtube', title: `${selMod} - ${topic} Explained`, author: 'Professor Dave', duration: '15:24', url: '#' },
+      { type: 'article', title: `Understanding ${topic} in ${selMod}`, author: 'ScienceDirect', pages: 12, url: '#' },
+      { type: 'pdf', title: `${selMod} Lecture Notes - ${topic}`, author: 'University Library', size: '2.4 MB', url: '#' },
+      { type: 'quiz', title: `Practice Questions: ${topic}`, author: 'Generated', questions: 15, url: '#' }
+    ];
+    
+    area.innerHTML = `
+      <div class="res-filter-tabs">
+        <span class="res-ftab on" onclick="fRes('all', this)">All</span>
+        <span class="res-ftab" onclick="fRes('youtube', this)">🎥 Videos</span>
+        <span class="res-ftab" onclick="fRes('article', this)">📄 Articles</span>
+        <span class="res-ftab" onclick="fRes('pdf', this)">📑 PDFs</span>
+        <span class="res-ftab" onclick="fRes('quiz', this)">❓ Quizzes</span>
+      </div>
+      <div class="res-grid" id="resGrid">
+        ${results.map(r => `
+          <a href="${r.url}" class="res-card" target="_blank">
+            <div class="ri ${r.type}">
+              ${r.type === 'youtube' ? '🎥' : r.type === 'article' ? '📄' : r.type === 'pdf' ? '📑' : '❓'}
+            </div>
+            <div class="res-info">
+              <h4>${r.title}</h4>
+              <p>${r.author} · ${r.duration || r.pages + ' pages' || r.size || r.questions + ' questions'}</p>
+            </div>
+            <div class="rbadge ${r.type === 'youtube' ? 'ry' : r.type === 'article' ? 'ra' : r.type === 'pdf' ? 'rp' : 'rq'}">
+              ${r.type === 'youtube' ? 'YouTube' : r.type === 'article' ? 'Article' : r.type === 'pdf' ? 'PDF' : 'Quiz'}
+            </div>
+          </a>
+        `).join('')}
+      </div>
+    `;
+  }, 1200);
+}
+
+function fRes(type, el) {
+  document.querySelectorAll('.res-ftab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  // Filter logic would go here
+  showToast('Filter Applied', `Showing ${type === 'all' ? 'all resources' : type + ' only'}.`, 'info');
+}
+
+// ── PEERBRIDGE ─────────────────────────────────────────────────
+function peerTab(tab) {
+  document.querySelectorAll('.seg-tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('pt-' + tab).classList.add('on');
+  document.getElementById('peer-browse').classList.toggle('hidden', tab !== 'browse');
+  document.getElementById('peer-post').classList.toggle('hidden', tab !== 'post');
+  document.getElementById('peer-mine').classList.toggle('hidden', tab !== 'mine');
+  
+  if (tab === 'browse') renderReqs();
+  if (tab === 'mine') renderMyReqs();
+}
+
+function renderReqs() {
+  const search = document.getElementById('pSrch')?.value.toLowerCase() || '';
+  const filter = document.getElementById('pFilt')?.value || 'all';
+  
+  let filtered = _requests.filter(r => r.status !== 'taken');
+  if (search) {
+    filtered = filtered.filter(r => 
+      (r.module || '').toLowerCase().includes(search) ||
+      (r.topic || '').toLowerCase().includes(search) ||
+      (r.desc || '').toLowerCase().includes(search)
+    );
+  }
+  
+  const container = document.getElementById('reqList');
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">🔍</div><p>No requests found.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = filtered.map(r => `
+    <div class="req-card">
+      <div class="req-top">
+        <div class="req-left">
+          <h4>${r.topic}</h4>
+          <span class="mod-tag">📚 ${r.module}</span>
+        </div>
+        <span class="pula-chip">P${r.price || 15}/hr</span>
+      </div>
+      <p class="req-desc">${r.desc || 'No description'}</p>
+      <div class="req-meta">
+        <span class="meta-chip">👤 ${r.createdByName}</span>
+        <span class="meta-chip">⏱️ ${r.time}h</span>
+        <span class="meta-chip">📞 ${r.type}</span>
+        <span class="badge badge-open">Open</span>
+      </div>
+      ${CU.isTutor ? `<button class="btn btn-green btn-sm" onclick="offerHelp('${r.id}')">🤝 Offer Help</button>` : ''}
+    </div>
+  `).join('');
+}
+
+function renderMyReqs() {
+  const mine = _requests.filter(r => r.createdBy === CUK);
+  const container = document.getElementById('myReqList');
+  
+  if (!mine.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No requests posted yet.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = mine.map(r => `
+    <div class="req-card">
+      <div class="req-top">
+        <div class="req-left">
+          <h4>${r.topic}</h4>
+          <span class="mod-tag">📚 ${r.module}</span>
+        </div>
+        <span class="pula-chip">P${r.price || 15}/hr</span>
+      </div>
+      <p class="req-desc">${r.desc || 'No description'}</p>
+      <div class="req-meta">
+        <span class="meta-chip">⏱️ ${r.time}h</span>
+        <span class="meta-chip">📞 ${r.type}</span>
+        <span class="badge ${r.status === 'open' ? 'badge-open' : 'badge-taken'}">${r.status || 'open'}</span>
+      </div>
+      <button class="btn btn-red btn-sm" onclick="delReq('${r.id}')">🗑 Delete</button>
+    </div>
+  `).join('');
+}
+
+function validatePrice() {
+  const price = document.getElementById('pPrice').value;
+  const cost = document.getElementById('pCost');
+  if (price < 15) {
+    cost.textContent = 'Minimum P15';
+    cost.style.color = 'var(--red)';
+  } else {
+    cost.textContent = `P${price}`;
+    cost.style.color = 'var(--green)';
+  }
+}
+
+async function postReq() {
+  const module = document.getElementById('pMod').value;
+  const topic = document.getElementById('pTop').value.trim();
+  const desc = document.getElementById('pDesc').value.trim();
+  const time = document.getElementById('pTime').value;
+  const type = document.getElementById('pType').value;
+  const price = parseFloat(document.getElementById('pPrice').value);
+  const urg = document.getElementById('pUrg').value;
+  
+  if (!module || !topic || !desc || !price) {
+    alert('Please fill all required fields.');
+    return;
+  }
+  if (price < 15) {
+    alert('Minimum offer is P15.');
+    return;
+  }
+  
+  await window.FS.addRequest({
+    createdBy: CUK,
+    createdByName: CU.name,
+    module, topic, desc, time: parseFloat(time), type, price, urg,
+    status: 'open'
+  });
+  
+  // Reset form
+  document.getElementById('pMod').value = '';
+  document.getElementById('pTop').value = '';
+  document.getElementById('pDesc').value = '';
+  document.getElementById('pPrice').value = '';
+  
+  showToast('Request Posted', 'Your help request is now visible to tutors.', 'success');
+  peerTab('browse');
+}
+
+function offerHelp(reqId) {
+  const req = _requests.find(r => r.id === reqId);
+  if (!req) return;
+  
+  const info = document.getElementById('waInfo');
+  info.innerHTML = `
+    <strong>${req.topic}</strong><br>
+    <span style="font-size:.8rem;">${req.module} · ${req.createdByName}</span>
+  `;
+  
+  const waLink = `https://wa.me/${req.createdBy.replace(/[^0-9]/g, '')}?text=Hi ${req.createdByName}, I saw your request for ${req.topic} (${req.module}) and I'd like to help. I charge P${req.price}/hr. Let's discuss!`;
+  document.getElementById('waLink').href = waLink;
+  document.getElementById('waMod').classList.add('on');
+}
+
+function closeWA() {
+  document.getElementById('waMod').classList.remove('on');
+}
+
+async function delReq(id) {
+  if (!confirm('Delete this request?')) return;
+  await window.FS.deleteRequest(id);
+  showToast('Request Deleted', 'Your request has been removed.', 'info');
+}
+
+// ── BECOME TUTOR ───────────────────────────────────────────────
+async function becomeTutor() {
+  const bio = document.getElementById('btBio').value.trim();
+  const subj = document.getElementById('btSubj').value.trim();
+  
+  if (!bio || !subj) {
+    alert('Please fill in both fields.');
+    return;
+  }
+  
+  CU.isTutor = true;
+  CU.tutorBio = bio;
+  CU.tutorSubjects = subj.split(',').map(s => s.trim());
+  
+  await window.FS.setUser(CUK, { isTutor: true, tutorBio: bio, tutorSubjects: CU.tutorSubjects });
+  
+  document.getElementById('btMod').classList.remove('on');
+  updateRole();
+  renderTutors();
+  showToast('Welcome Tutor!', 'Your tutor profile is now live.', 'success');
+}
+
+async function updateTutorProfile() {
+  const bio = document.getElementById('editBio').value.trim();
+  const subj = document.getElementById('editSubj').value.trim();
+  
+  CU.tutorBio = bio;
+  CU.tutorSubjects = subj.split(',').map(s => s.trim());
+  
+  await window.FS.setUser(CUK, { tutorBio: bio, tutorSubjects: CU.tutorSubjects });
+  
+  showToast('Profile Updated', 'Your tutor information has been saved.', 'success');
+}
+
+// ── PROFILE ────────────────────────────────────────────────────
+function renderProfile() {
+  if (!CU) return;
+  
+  document.getElementById('profName').textContent = CU.name;
+  document.getElementById('pdName').textContent = CU.name;
+  document.getElementById('pdUser').textContent = CUK;
+  document.getElementById('pdWA').textContent = CU.wa;
+  document.getElementById('pdYear').textContent = CU.year || '—';
+  
+  document.getElementById('profProgramme').value = CU.programme || '';
+  document.getElementById('profSemester').value = CU.semester || 'Semester 1';
+  
+  const modList = document.getElementById('modList');
+  modList.innerHTML = (CU.modules || []).map((m, i) => `
+    <div class="module-chip" style="display:flex;align-items:center;gap:8px;padding:6px;background:var(--bg);border-radius:8px;">
+      <span>📘</span>
+      <span><strong>${m.code || ''}</strong> ${m.name}</span>
+      <span style="margin-left:auto;">${m.credits || 3} cr</span>
+      <button class="btn-icon btn-red" onclick="removeProfileMod(${i})" style="padding:2px 8px;">✕</button>
+    </div>
+  `).join('');
+}
+
+function addProfileMod() {
+  const code = document.getElementById('newModCode').value.trim();
+  const name = document.getElementById('newModName').value.trim();
+  
+  if (!code || !name) {
+    alert('Please enter both module code and name.');
+    return;
+  }
+  
+  CU.modules = CU.modules || [];
+  CU.modules.push({ code, name, credits: 3 });
+  document.getElementById('newModCode').value = '';
+  document.getElementById('newModName').value = '';
+  
+  renderProfile();
+  saveProfile();
+}
+
+function removeProfileMod(index) {
+  CU.modules.splice(index, 1);
+  renderProfile();
+  saveProfile();
+}
+
+async function saveProfile() {
+  CU.programme = document.getElementById('profProgramme').value;
+  CU.semester = document.getElementById('profSemester').value;
+  
+  await window.FS.setUser(CUK, {
+    programme: CU.programme,
+    semester: CU.semester,
+    modules: CU.modules
+  });
+  
+  mods = CU.modules;
+  populateModDropdowns();
+  populateStreakModules();
+  renderSMods();
+  
+  showToast('Profile Saved', 'Your information has been updated.', 'success');
+}
+
+// ── SETUP MODAL ────────────────────────────────────────────────
+function addSetupMod() {
+  const code = document.getElementById('setupCode').value.trim();
+  const name = document.getElementById('setupName').value.trim();
+  
+  if (!code || !name) {
+    alert('Please enter both module code and name.');
+    return;
+  }
+  
+  const list = document.getElementById('setupModList');
+  list.innerHTML += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--blue3);border-radius:8px;">
+    <span><strong>${code}</strong> ${name}</span>
+    <button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);">✕</button>
+  </div>`;
+  
+  document.getElementById('setupCode').value = '';
+  document.getElementById('setupName').value = '';
+}
+
+async function saveSetup() {
+  const prog = document.getElementById('setupProg').value.trim();
+  const sem = document.getElementById('setupSem').value;
+  
+  const modElements = document.querySelectorAll('#setupModList > div');
+  const modules = [];
+  modElements.forEach(el => {
+    const text = el.querySelector('span:first-child').innerText;
+    const parts = text.split(' ');
+    const code = parts[0];
+    const name = parts.slice(1).join(' ');
+    modules.push({ code, name, credits: 3 });
+  });
+  
+  CU.programme = prog;
+  CU.semester = sem;
+  CU.modules = modules;
+  
+  await window.FS.setUser(CUK, { programme: prog, semester: sem, modules });
+  
+  mods = modules;
+  document.getElementById('setupMod').classList.remove('on');
+  renderProfile();
+  populateModDropdowns();
+  populateStreakModules();
+  
+  showToast('Setup Complete', 'Your profile has been configured!', 'success');
+}
+
+function closeSetup() {
+  document.getElementById('setupMod').classList.remove('on');
+}
+
+// ── STUDY SQUAD ────────────────────────────────────────────────
+let currentGroupFilter = 'all';
+let currentGroup = null;
+
+function filterGroups(faculty, element) {
+  if (faculty) {
+    currentGroupFilter = faculty;
+    document.querySelectorAll('.faculty-tab').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+  }
+  
+  const search = document.getElementById('groupSearch')?.value.toLowerCase() || '';
+  
+  let filtered = _groups;
+  if (currentGroupFilter !== 'all') {
+    filtered = filtered.filter(g => g.faculty === currentGroupFilter);
+  }
+  if (search) {
+    filtered = filtered.filter(g => 
+      g.name.toLowerCase().includes(search) ||
+      (g.module || '').toLowerCase().includes(search)
+    );
+  }
+  
+  renderGroups(filtered);
+}
+
+function renderGroups(groups) {
+  groups = groups || _groups;
+  const container = document.getElementById('groupsList');
+  
+  if (!groups.length) {
+    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No groups found.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = groups.map(g => {
+    const isMember = g.members?.includes(CUK);
+    const memberCount = g.members?.length || 1;
+    
+    return `
+      <div class="group-card">
+        <div class="group-header">
+          <div class="group-avatar">👥</div>
+          <div class="group-info">
+            <div class="group-name">${g.name}</div>
+            <div class="group-meta">📚 ${g.module} · ${g.faculty}</div>
+          </div>
+        </div>
+        
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:12px;">${g.desc || 'No description'}</p>
+        
+        <div class="group-stats">
+          <div class="group-stat">👥 <strong>${memberCount}</strong> members</div>
+          <div class="group-stat">💬 <strong>${g.chatCount || 0}</strong> messages</div>
+        </div>
+        
+        <div style="margin-top:12px;">
+          ${isMember ? 
+            `<button class="btn btn-purple btn-sm" onclick="openGroupChat('${g.id}')">💬 Open Chat</button>
+             <button class="btn btn-outline btn-sm" onclick="leaveGroup('${g.id}')">✕ Leave</button>` : 
+            `<button class="btn btn-blue btn-sm" onclick="joinGroup('${g.id}')">➕ Join Group</button>`
+          }
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 async function createPermanentGroup() {
   const name = document.getElementById('groupName').value.trim();
   const module = document.getElementById('groupModule').value;
-  const description = document.getElementById('groupDesc').value.trim();
+  const desc = document.getElementById('groupDesc').value.trim();
   const faculty = document.getElementById('groupFaculty').value;
   
-  if (!name) { alert('Enter a group name.'); return; }
-  if (!module) { alert('Select a module.'); return; }
+  if (!name || !module || !faculty) {
+    alert('Please fill all required fields.');
+    return;
+  }
   
   await window.FS.addGroup({
     createdBy: CUK,
     createdByName: CU.name,
     name,
     module,
-    description,
+    desc,
     faculty,
-    members: [CUK]
+    chatCount: 0
   });
   
   document.getElementById('groupName').value = '';
+  document.getElementById('groupModule').value = '';
   document.getElementById('groupDesc').value = '';
   document.getElementById('createGroupMod').classList.remove('on');
   
-  showToast('Group Created', 'Your permanent study group is ready!', 'success');
+  showToast('Group Created', 'Your study group is now live!', 'success');
 }
 
 async function joinGroup(groupId) {
@@ -3312,600 +4418,258 @@ async function leaveGroup(groupId) {
   showToast('Left Group', 'You have left the group.', 'info');
 }
 
-async function deleteGroup(groupId) {
-  if (!confirm('Delete this group?')) return;
-  await window.FS.deleteGroup(groupId);
-  showToast('Group Deleted', 'The group has been removed.', 'info');
+function showMyGroups() {
+  currentGroupFilter = 'all';
+  document.querySelectorAll('.faculty-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.faculty-tab:first-child').classList.add('active');
+  
+  const myGroups = _groups.filter(g => g.members?.includes(CUK));
+  renderGroups(myGroups);
 }
 
-// Chat Functions
-let currentChatId = null;
-let currentChatType = null;
+let currentChatGroup = null;
 
 async function openGroupChat(groupId) {
-  const group = _groups.find(g => g.id === groupId);
-  if (!group) return;
+  currentChatGroup = _groups.find(g => g.id === groupId);
+  if (!currentChatGroup) return;
   
-  currentChatId = groupId;
-  currentChatType = 'group';
+  document.getElementById('chatSessionTitle').textContent = currentChatGroup.name;
+  document.getElementById('chatSessionMeta').textContent = `${currentChatGroup.module} · ${currentChatGroup.faculty}`;
   
-  document.getElementById('chatSessionTitle').textContent = group.name;
-  document.getElementById('chatSessionMeta').textContent = `Group · ${group.members?.length || 1} members`;
   document.getElementById('squadChatMod').classList.add('on');
   
-  // Clear previous messages
-  document.getElementById('chatMessages').innerHTML = '<div class="empty"><div class="ei">💬</div><p>No messages yet</p></div>';
-  
-  // Set up real-time listener
+  // Load messages
   if (window._unsubGroupChat) window._unsubGroupChat();
-  window._unsubGroupChat = window.FS.onGroupMsgs(groupId, renderGroupMessages);
+  window._unsubGroupChat = window.FS.onGroupMsgs(groupId, renderChatMessages);
 }
 
-function renderGroupMessages(messages) {
-  const container = document.getElementById('chatMessages');
-  
-  if (!messages || !messages.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">💬</div><p>No messages yet</p></div>';
-    return;
+function closeSquadChat() {
+  document.getElementById('squadChatMod').classList.remove('on');
+  if (window._unsubGroupChat) {
+    window._unsubGroupChat();
+    window._unsubGroupChat = null;
   }
-  
-  container.innerHTML = messages.map(m => `
-    <div style="display:flex;flex-direction:column;align-items:${m.userId === CUK ? 'flex-end' : 'flex-start'};">
-      <div style="background:${m.userId === CUK ? 'linear-gradient(135deg,var(--blue2),var(--purple))' : '#e2e8f0'};color:${m.userId === CUK ? '#fff' : 'var(--text)'};border-radius:12px;padding:8px 12px;max-width:80%;">
-        <div style="font-size:.7rem;font-weight:700;margin-bottom:2px;opacity:.8;">${m.userName}</div>
-        <div style="font-size:.85rem;">${m.message}</div>
-        <div style="font-size:.6rem;margin-top:3px;opacity:.6;">${m.at ? new Date(m.at.toDate()).toLocaleTimeString() : ''}</div>
+}
+
+function renderChatMessages(msgs) {
+  const container = document.getElementById('chatMessages');
+  container.innerHTML = msgs.map(m => `
+    <div style="display:flex;flex-direction:column;align-items:${m.senderId === CUK ? 'flex-end' : 'flex-start'};">
+      <div style="background:${m.senderId === CUK ? 'var(--blue2)' : 'var(--purple2)'};color:${m.senderId === CUK ? '#fff' : 'inherit'};padding:10px 14px;border-radius:16px;max-width:80%;">
+        <div style="font-size:.7rem;font-weight:700;margin-bottom:2px;">${m.senderName}</div>
+        <div>${m.message}</div>
+        <div style="font-size:.6rem;opacity:.6;margin-top:4px;">${new Date(m.at?.toDate?.() || m.at).toLocaleTimeString()}</div>
       </div>
     </div>
   `).join('');
+  container.scrollTop = container.scrollHeight;
 }
 
 async function sendChatMsg() {
   const input = document.getElementById('chatInput');
   const msg = input.value.trim();
+  if (!msg || !currentChatGroup) return;
   
-  if (!msg) return;
-  if (!currentChatId) return;
-  
-  if (currentChatType === 'group') {
-    await window.FS.sendGroupMsg(currentChatId, {
-      userId: CUK,
-      userName: CU.name,
-      message: msg
-    });
-  }
+  await window.FS.sendGroupMsg(currentChatGroup.id, {
+    senderId: CUK,
+    senderName: CU.name,
+    message: msg
+  });
   
   input.value = '';
 }
 
-function closeSquadChat() {
-  document.getElementById('squadChatMod').classList.remove('on');
-  if (window._unsubGroupChat) window._unsubGroupChat();
+// ── CONTEST FUNCTIONS (simplified) ────────────────────────────
+function contestTab(tab) {
+  document.querySelectorAll('#pg-contest .seg-tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('ct-' + tab).classList.add('on');
+  document.getElementById('ct-leaderboard-panel').classList.toggle('hidden', tab !== 'leaderboard');
+  document.getElementById('ct-submit-panel').classList.toggle('hidden', tab !== 'submit');
+  document.getElementById('ct-active-panel').classList.toggle('hidden', tab !== 'active');
+  document.getElementById('ct-create-panel').classList.toggle('hidden', tab !== 'create');
 }
 
-// Focus Rooms
-function renderFocusRooms() {
-  const container = document.getElementById('activeRooms');
+function renderContests() {
+  const container = document.getElementById('contestList');
+  container.innerHTML = _contests.map(c => `
+    <div class="req-card">
+      <h4>${c.name}</h4>
+      <p>📅 Deadline: ${new Date(c.deadline).toLocaleDateString()}</p>
+      <p>🏆 ${c.prize}</p>
+    </div>
+  `).join('') || '<div class="empty"><div class="ei">📋</div><p>No contests yet.</p></div>';
+}
+
+function populateContestDropdowns() {
+  const select = document.getElementById('ctFilter');
+  select.innerHTML = '<option value="">All Contests</option>' + 
+    _contests.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
   
-  const activeRooms = _focusRooms.filter(r => r.status !== 'ended');
+  const submitSelect = document.getElementById('submitContestId');
+  submitSelect.innerHTML = '<option value="">Select contest</option>' + 
+    _contests.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+}
+
+function renderLeaderboard() {
+  const contestId = document.getElementById('ctFilter').value;
+  const filtered = contestId ? _scores.filter(s => s.contestId === contestId) : _scores;
   
-  if (!activeRooms.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">👥</div><p>No active rooms.</p></div>';
+  const sorted = [...filtered].sort((a, b) => b.score - a.score);
+  const container = document.getElementById('leaderboardList');
+  
+  container.innerHTML = sorted.map((s, i) => `
+    <div class="focus-leaderboard-item">
+      <span>${i+1}. ${s.name || 'Anonymous'}</span>
+      <span>${s.score}%</span>
+    </div>
+  `).join('') || '<div class="empty"><div class="ei">🏅</div><p>No submissions yet.</p></div>';
+}
+
+async function createContest() {
+  const name = document.getElementById('ctName').value.trim();
+  const module = document.getElementById('ctMod').value;
+  const deadline = document.getElementById('ctDeadline').value;
+  const prize = document.getElementById('ctPrize').value.trim();
+  const desc = document.getElementById('ctDesc').value.trim();
+  
+  if (!name || !module || !deadline || !prize) {
+    alert('Please fill all required fields.');
     return;
   }
   
-  container.innerHTML = activeRooms.map(room => {
-    const isCreator = room.createdBy === CUK;
-    const isJoined = room.participants?.includes(CUK);
-    const participants = room.participants?.length || 1;
-    const maxParticipants = room.maxParticipants || 5;
-    
-    let timerDisplay = '';
-    if (room.timerMode === 'countdown') {
-      const remaining = room.timerEnd ? Math.max(0, Math.floor((new Date(room.timerEnd) - new Date()) / 1000)) : 0;
-      const minutes = Math.floor(remaining / 60);
-      const seconds = remaining % 60;
-      timerDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    } else {
-      const elapsed = room.timerStart ? Math.floor((new Date() - new Date(room.timerStart)) / 1000) : 0;
-      timerDisplay = formatStopwatchTime(elapsed);
-    }
-    
-    return `
-      <div class="room-card">
-        <div class="room-header">
-          <div class="room-icon">👥</div>
-          <div>
-            <div class="room-name">${room.name}</div>
-            <div class="room-meta">📚 ${room.module}</div>
-          </div>
-        </div>
-        
-        <div class="room-timer">
-          <div class="room-timer-display">${timerDisplay}</div>
-          <div class="room-timer-label">${room.timerMode === 'countdown' ? 'Remaining' : 'Elapsed'}</div>
-        </div>
-        
-        <div class="room-stats">
-          <div class="room-stat-item"><div class="room-stat-value">${participants}</div><div class="room-stat-label">joined</div></div>
-          <div class="room-stat-item"><div class="room-stat-value">${maxParticipants}</div><div class="room-stat-label">max</div></div>
-          <div class="room-stat-item"><div class="room-stat-value">✨</div><div class="room-stat-label">2x points</div></div>
-        </div>
-        
-        ${room.description ? `<p style="font-size:.8rem;color:var(--muted);margin:8px 0;">${room.description}</p>` : ''}
-        
-        <div class="room-footer">
-          <div class="room-participants"><span>👤</span> ${room.createdByName}</div>
-          ${isCreator ? 
-            `<button class="btn btn-red btn-sm" onclick="endFocusRoom('${room.id}')">End</button>` : 
-            (isJoined ? 
-              `<button class="btn btn-outline btn-sm" onclick="leaveFocusRoom('${room.id}')">Leave</button>` : 
-              (participants < maxParticipants ? 
-                `<button class="btn btn-blue btn-sm" onclick="joinFocusRoom('${room.id}')">➕ Join</button>` : 
-                `<span class="badge badge-taken">Full</span>`
-              )
-            )
-          }
-        </div>
-      </div>
-    `;
-  }).join('');
+  await window.FS.addContest({
+    name, module, deadline, prize, desc,
+    createdBy: CUK
+  });
+  
+  // Reset form
+  document.getElementById('ctName').value = '';
+  document.getElementById('ctMod').value = '';
+  document.getElementById('ctDeadline').value = '';
+  document.getElementById('ctPrize').value = '';
+  document.getElementById('ctDesc').value = '';
+  
+  showToast('Contest Created', 'Your contest is now active!', 'success');
+  contestTab('active');
 }
 
-async function createFocusRoom() {
-  const name = document.getElementById('roomName').value.trim();
-  const module = document.getElementById('roomModule').value;
-  const timerMode = document.querySelector('input[name="timerMode"]:checked')?.value;
-  const duration = document.getElementById('roomDuration').value;
-  const maxParticipants = document.getElementById('roomMaxParticipants').value;
-  const description = document.getElementById('roomDescription').value.trim();
+let scriptFile = null;
+
+function handleScriptUpload(e) {
+  scriptFile = e.target.files[0];
+  if (scriptFile) {
+    document.getElementById('scriptDone').classList.remove('hidden');
+  }
+}
+
+async function submitScore() {
+  const contestId = document.getElementById('submitContestId').value;
+  const score = parseFloat(document.getElementById('submitScore').value);
+  const module = document.getElementById('submitModule').value.trim();
   
-  if (!name) { alert('Enter a room name.'); return; }
-  if (!module) { alert('Select a module.'); return; }
-  if (!timerMode) { alert('Select timer mode.'); return; }
+  if (!contestId || isNaN(score) || !module) {
+    alert('Please fill all fields.');
+    return;
+  }
   
-  const roomData = {
-    createdBy: CUK,
-    createdByName: CU.name,
-    name,
+  await window.FS.addScore({
+    contestId,
+    score,
     module,
-    timerMode,
-    maxParticipants: parseInt(maxParticipants),
-    description,
-    faculty: CU.faculty,
-    participants: [CUK],
-    status: 'active'
-  };
-  
-  if (timerMode === 'countdown') {
-    const durationMinutes = parseInt(duration);
-    roomData.duration = durationMinutes;
-    roomData.timerEnd = new Date(Date.now() + durationMinutes * 60000).toISOString();
-  } else {
-    roomData.timerStart = new Date().toISOString();
-  }
-  
-  await window.FS.addFocusRoom(roomData);
-  
-  document.getElementById('roomName').value = '';
-  document.getElementById('roomModule').value = '';
-  document.getElementById('roomDescription').value = '';
-  document.getElementById('createRoomMod').classList.remove('on');
-  
-  showToast('Room Created', 'Your focus room is now active!', 'success');
-}
-
-async function joinFocusRoom(roomId) {
-  await window.FS.joinFocusRoom(roomId, CUK);
-  showToast('Joined Room', 'You are now studying together!', 'success');
-}
-
-async function leaveFocusRoom(roomId) {
-  if (!confirm('Leave this focus room?')) return;
-  await window.FS.leaveFocusRoom(roomId, CUK);
-  showToast('Left Room', 'You have left the focus room.', 'info');
-}
-
-async function endFocusRoom(roomId) {
-  if (!confirm('End this focus room?')) return;
-  await window.FS.updateFocusRoom(roomId, { status: 'ended' });
-  showToast('Room Ended', 'The focus room has been closed.', 'info');
-}
-
-// PeerBridge Functions (Fixed)
-function peerTab(t) {
-  document.getElementById('pt-browse').classList.toggle('on', t === 'browse');
-  document.getElementById('pt-post').classList.toggle('on', t === 'post');
-  document.getElementById('pt-mine').classList.toggle('on', t === 'mine');
-  
-  document.getElementById('peer-browse').classList.toggle('hidden', t !== 'browse');
-  document.getElementById('peer-post').classList.toggle('hidden', t !== 'post');
-  document.getElementById('peer-mine').classList.toggle('hidden', t !== 'mine');
-  
-  if (t === 'browse') renderReqs();
-  if (t === 'mine') renderMyReqs();
-}
-
-function validatePrice() {
-  const price = document.getElementById('pPrice').value;
-  const min = 15;
-  if (price < min) document.getElementById('pPrice').value = min;
-}
-
-async function postReq() {
-  const mod = document.getElementById('pMod').value;
-  const top = document.getElementById('pTop').value.trim();
-  const desc = document.getElementById('pDesc').value.trim();
-  const time = document.getElementById('pTime').value;
-  const type = document.getElementById('pType').value;
-  const price = document.getElementById('pPrice').value;
-  const urg = document.getElementById('pUrg').value;
-  const wa = document.getElementById('pWA').value;
-  
-  if (!mod || !top || !desc || !price) {
-    alert('Please fill in all required fields.');
-    return;
-  }
-  
-  const reqData = {
     by: CUK,
     name: CU.name,
-    module: mod,
-    topic: top,
-    desc,
-    timeNeeded: parseFloat(time),
-    type,
-    price: parseFloat(price),
-    urgency: urg,
-    wa,
-    faculty: CU.faculty,
-    year: CU.year,
-    status: 'open', // open, taken, completed
-    takenBy: null,
-    takenAt: null
-  };
+    faculty: CU.faculty
+  });
   
-  await window.FS.addRequest(reqData);
+  document.getElementById('submitContestId').value = '';
+  document.getElementById('submitScore').value = '';
+  document.getElementById('submitModule').value = '';
+  document.getElementById('scriptDone').classList.add('hidden');
   
-  // Clear form
-  document.getElementById('pTop').value = '';
-  document.getElementById('pDesc').value = '';
-  document.getElementById('pPrice').value = '';
-  document.getElementById('pMod').value = '';
-  
-  showToast('Request Posted', 'Your help request is now live!', 'success');
-  
-  // Switch to browse tab
-  peerTab('browse');
+  showToast('Score Submitted', 'Your entry has been recorded!', 'success');
+  contestTab('leaderboard');
 }
 
-function renderReqs() {
-  const search = document.getElementById('pSrch')?.value.toLowerCase() || '';
-  const filter = document.getElementById('pFilt')?.value || 'all';
+// ── POINTS FUNCTIONS ──────────────────────────────────────────
+function pointsTab(tab) {
+  document.querySelectorAll('#pg-points .seg-tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('ptb-' + tab).classList.add('on');
+  document.getElementById('pts-leaderboard-panel').classList.toggle('hidden', tab !== 'leaderboard');
+  document.getElementById('pts-submit-panel').classList.toggle('hidden', tab !== 'submit');
+  document.getElementById('pts-mine-panel').classList.toggle('hidden', tab !== 'mine');
   
-  let filtered = _requests.filter(r => r.status === 'open'); // Only show open requests
-  filtered = filtered.filter(r => r.by !== CUK); // Hide user's own requests
+  if (tab === 'leaderboard') renderPointsLeaderboard();
+  if (tab === 'mine') renderMyPoints();
+}
+
+function renderPointsLeaderboard() {
+  const faculty = document.getElementById('ptsFacFilter')?.value || '';
+  const month = currentMonth();
   
-  if (search) {
-    filtered = filtered.filter(r => 
-      (r.module || '').toLowerCase().includes(search) ||
-      (r.topic || '').toLowerCase().includes(search) ||
-      (r.desc || '').toLowerCase().includes(search)
-    );
+  let filtered = _points.filter(p => p.month === month);
+  if (faculty) {
+    filtered = filtered.filter(p => p.faculty === faculty);
   }
   
-  const container = document.getElementById('reqList');
+  const totals = {};
+  filtered.forEach(p => {
+    totals[p.by] = (totals[p.by] || 0) + p.points;
+  });
   
-  if (!filtered.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">🔍</div><p>No open requests available.</p></div>';
-    return;
-  }
+  const sorted = Object.entries(totals)
+    .map(([id, pts]) => ({ id, name: _users[id]?.name || id, pts }))
+    .sort((a, b) => b.pts - a.pts);
   
-  container.innerHTML = filtered.map(r => `
-    <div class="req-card">
-      <div class="req-top">
-        <div class="req-left">
-          <h4>${r.topic} <span class="badge badge-open">Open</span></h4>
-          <span class="mod-tag">📚 ${r.module}</span>
-        </div>
-        <div class="pula-chip">P${r.price}</div>
-      </div>
-      <p class="req-desc">${r.desc}</p>
-      <div class="req-meta">
-        <span class="meta-chip"><i>👤</i> ${r.name} · ${r.year || '?'}</span>
-        <span class="meta-chip"><i>⏱️</i> ${r.timeNeeded} hr</span>
-        <span class="meta-chip"><i>📍</i> ${r.type}</span>
-        <span class="meta-chip"><i>⚡</i> ${r.urgency}</span>
-      </div>
-      <div style="margin-top:14px;">
-        <button class="btn btn-green btn-sm" onclick="offerHelp('${r.id}')">💬 Offer Help</button>
-      </div>
+  const container = document.getElementById('ptsLeaderboardList');
+  container.innerHTML = sorted.map((p, i) => `
+    <div class="focus-leaderboard-item">
+      <span>${i+1}. ${p.name}</span>
+      <span>${p.pts} pts</span>
     </div>
-  `).join('');
+  `).join('') || '<div class="empty"><div class="ei">🏅</div><p>No points yet this month.</p></div>';
+  
+  document.getElementById('ptsResetDate').textContent = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 }
 
-function renderMyReqs() {
-  const myReqs = _requests.filter(r => r.by === CUK);
-  const container = document.getElementById('myReqList');
+function renderMyPoints() {
+  const myPoints = _points.filter(p => p.by === CUK);
+  const container = document.getElementById('ptsMyList');
   
-  if (!myReqs.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>You haven\'t posted any requests yet.</p></div>';
-    return;
-  }
-  
-  container.innerHTML = myReqs.map(r => `
-    <div class="req-card">
-      <div class="req-top">
-        <div class="req-left">
-          <h4>${r.topic} 
-            <span class="badge ${r.status === 'open' ? 'badge-open' : r.status === 'taken' ? 'badge-warning' : 'badge-success'}">
-              ${r.status === 'open' ? 'Open' : r.status === 'taken' ? 'Taken' : 'Completed'}
-            </span>
-          </h4>
-          <span class="mod-tag">📚 ${r.module}</span>
-        </div>
-        <div class="pula-chip">P${r.price}</div>
+  container.innerHTML = myPoints.map(p => `
+    <div class="session-item">
+      <div>
+        <span class="session-subject">${p.module}</span>
+        <div class="session-time">${p.testName || 'Submission'}</div>
       </div>
-      <p class="req-desc">${r.desc}</p>
-      ${r.status === 'taken' && r.takenBy ? `
-        <div style="background:var(--blue3);border-radius:8px;padding:8px;margin:10px 0;font-size:.8rem;">
-          <strong>📞 Taken by:</strong> ${r.takenByName || 'A tutor'} · WhatsApp: ${r.takenByWA || '—'}
-        </div>
-      ` : ''}
-      <div style="display:flex;gap:8px;margin-top:14px;">
-        ${r.status === 'open' ? `<button class="btn btn-red btn-sm" onclick="delReq('${r.id}')">🗑 Delete</button>` : ''}
-        ${r.status === 'taken' ? `<button class="btn btn-blue btn-sm" onclick="markCompleted('${r.id}')">✓ Mark Completed</button>` : ''}
-      </div>
+      <span class="session-duration">+${p.points} pts</span>
     </div>
-  `).join('');
+  `).join('') || '<div class="empty"><div class="ei">📋</div><p>No points yet.</p></div>';
 }
 
-async function offerHelp(reqId) {
-  const req = _requests.find(r => r.id === reqId);
-  if (!req) return;
-  
-  // Check if user is a tutor
-  if (!CU.isTutor) {
-    if (!confirm('You need to be a registered tutor to offer help. Become a tutor now?')) return;
-    document.getElementById('btMod').classList.add('on');
-    return;
-  }
-  
-  // Update request status to 'taken'
-  await window.FS.updateRequest(reqId, {
-    status: 'taken',
-    takenBy: CUK,
-    takenByName: CU.name,
-    takenByWA: CU.wa
-  });
-  
-  // Show WhatsApp modal
-  const info = `
-    <strong>Student:</strong> ${req.name}<br>
-    <strong>Module:</strong> ${req.module}<br>
-    <strong>Topic:</strong> ${req.topic}<br>
-    <strong>Offer:</strong> P${req.price}<br>
-    <strong>WhatsApp:</strong> ${req.wa}
-  `;
-  document.getElementById('waInfo').innerHTML = info;
-  
-  // Create WhatsApp link
-  const message = encodeURIComponent(`Hi ${req.name}, I saw your help request for ${req.topic} (${req.module}). I'm a peer tutor and would like to help. Let's discuss.`);
-  document.getElementById('waLink').href = `https://wa.me/${req.wa.replace(/[^0-9]/g, '')}?text=${message}`;
-  
-  document.getElementById('waMod').classList.add('on');
-  
-  showToast('Request Taken', 'You have taken this request. Contact the student via WhatsApp.', 'success');
-}
-
-async function markCompleted(reqId) {
-  if (!confirm('Mark this request as completed?')) return;
-  await window.FS.updateRequest(reqId, { status: 'completed' });
-  showToast('Request Completed', 'Thank you for using PeerBridge!', 'success');
-}
-
-async function delReq(id) {
-  if (!confirm('Delete this request?')) return;
-  await window.FS.deleteRequest(id);
-  showToast('Request Deleted', 'Your request has been removed.', 'info');
-}
-
-function closeWA() {
-  document.getElementById('waMod').classList.remove('on');
-}
-
-// Tutors Functions (Simplified)
-async function renderTutors() {
-  const search = document.getElementById('tSrch')?.value.toLowerCase() || '';
-  const fac = document.getElementById('tFacFilter')?.value || '';
-  
-  const users = await window.FS.getAllUsers();
-  const tutors = Object.entries(users)
-    .filter(([id, u]) => u.isTutor)
-    .map(([id, u]) => ({ id, ...u }));
-  
-  let filtered = tutors;
-  if (fac) filtered = filtered.filter(t => t.faculty === fac);
-  if (search) {
-    filtered = filtered.filter(t => 
-      (t.name || '').toLowerCase().includes(search) ||
-      (t.tutorSubjects || []).join(' ').toLowerCase().includes(search)
-    );
-  }
-  
-  const container = document.getElementById('tutorList');
-  
-  if (!filtered.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">⭐</div><p>No tutors found.</p></div>';
-    return;
-  }
-  
-  container.innerHTML = filtered.map(t => {
-    const ratings = _ratings[t.id] || [];
-    const avgRating = ratings.length ? (ratings.reduce((s, r) => s + r.stars, 0) / ratings.length).toFixed(1) : 'New';
-    const tags = ratings.flatMap(r => r.tags || []).filter((v, i, a) => a.indexOf(v) === i);
-    
-    return `
-      <div class="tutor-card">
-        <div class="tutor-top">
-          <div class="tutor-av">${t.name[0]}</div>
-          <div>
-            <div class="tutor-name">${t.name} <span style="font-size:.7rem;color:var(--muted);">· ${t.year || '?'}</span></div>
-            <div class="tutor-bio">${t.tutorBio || 'No bio yet.'}</div>
-          </div>
-        </div>
-        <div class="tutor-subjects">
-          ${(t.tutorSubjects || []).map(s => `<span class="subj-tag">${s.trim()}</span>`).join('')}
-        </div>
-        <div class="stars-row">
-          ${[1,2,3,4,5].map(i => `<span class="star ${i <= avgRating ? 'on' : ''}">★</span>`).join('')}
-          <span class="star-count">${ratings.length} review${ratings.length !== 1 ? 's' : ''}</span>
-        </div>
-        <div class="rating-tags">
-          ${tags.slice(0, 3).map(tag => `<span class="rtag">#${tag}</span>`).join('')}
-        </div>
-        <div style="margin-top:14px;">
-          <button class="btn btn-blue btn-sm" onclick="openRate('${t.id}', '${t.name}')">⭐ Rate</button>
-          <button class="btn btn-green btn-sm" style="margin-left:8px;" onclick="contactTutor('${t.wa}')">💬 Contact</button>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function contactTutor(wa) {
-  const message = encodeURIComponent(`Hi, I saw your profile on UB Academic Hub. I'd like to schedule a tutoring session.`);
-  window.open(`https://wa.me/${wa.replace(/[^0-9]/g, '')}?text=${message}`, '_blank');
-}
-
-// Rating Functions
-function openRate(tutorId, tutorName) {
-  rTarget = tutorId;
-  rStars = 0;
-  rTags = [];
-  document.getElementById('rateWho').textContent = `Rate your session with ${tutorName}`;
-  document.querySelectorAll('.rate-star').forEach(el => el.classList.remove('on'));
-  document.querySelectorAll('.rate-tag').forEach(el => el.classList.remove('on'));
-  document.getElementById('rateNote').value = '';
-  document.getElementById('rateMod').classList.add('on');
-}
-
-function setStar(n) {
-  rStars = n;
-  document.querySelectorAll('.rate-star').forEach((el, i) => {
-    el.classList.toggle('on', i < n);
-  });
-}
-
-function toggleTag(el) {
-  el.classList.toggle('on');
-  const tag = el.textContent;
-  if (el.classList.contains('on')) {
-    if (!rTags.includes(tag)) rTags.push(tag);
-  } else {
-    rTags = rTags.filter(t => t !== tag);
-  }
-}
-
-async function submitRating() {
-  if (rStars === 0) { alert('Please select a star rating.'); return; }
-  
-  const rating = {
-    by: CUK,
-    byName: CU.name,
-    stars: rStars,
-    tags: rTags,
-    note: document.getElementById('rateNote').value.trim(),
-    at: new Date().toISOString()
-  };
-  
-  await window.FS.addRating(rTarget, rating);
-  
-  closeRate();
-  showToast('Rating Submitted', 'Thank you for your feedback!', 'success');
-}
-
-function closeRate() {
-  document.getElementById('rateMod').classList.remove('on');
-}
-
-// Become Tutor Functions
-async function becomeTutor() {
-  const bio = document.getElementById('btBio').value.trim();
-  const subj = document.getElementById('btSubj').value.trim();
-  
-  if (!bio || !subj) { alert('Please fill in both fields.'); return; }
-  
-  const subjects = subj.split(',').map(s => s.trim()).filter(s => s);
-  
-  await window.FS.setUser(CUK, {
-    isTutor: true,
-    tutorBio: bio,
-    tutorSubjects: subjects
-  });
-  
-  CU.isTutor = true;
-  CU.tutorBio = bio;
-  CU.tutorSubjects = subjects;
-  
-  document.getElementById('btMod').classList.remove('on');
-  updateRole();
-  go('become');
-  
-  showToast('Tutor Registered', 'You are now a peer tutor!', 'success');
-}
-
-async function updateTutorProfile() {
-  const bio = document.getElementById('editBio').value.trim();
-  const subj = document.getElementById('editSubj').value.trim();
-  
-  if (!bio || !subj) { alert('Please fill in both fields.'); return; }
-  
-  const subjects = subj.split(',').map(s => s.trim()).filter(s => s);
-  
-  await window.FS.setUser(CUK, {
-    tutorBio: bio,
-    tutorSubjects: subjects
-  });
-  
-  CU.tutorBio = bio;
-  CU.tutorSubjects = subjects;
-  
-  showToast('Profile Updated', 'Your tutor profile has been updated.', 'success');
-}
-
-// Points Functions
-function pointsTab(t) {
-  document.getElementById('ptb-leaderboard').classList.toggle('on', t === 'leaderboard');
-  document.getElementById('ptb-submit').classList.toggle('on', t === 'submit');
-  document.getElementById('ptb-mine').classList.toggle('on', t === 'mine');
-  
-  document.getElementById('pts-leaderboard-panel').classList.toggle('hidden', t !== 'leaderboard');
-  document.getElementById('pts-submit-panel').classList.toggle('hidden', t !== 'submit');
-  document.getElementById('pts-mine-panel').classList.toggle('hidden', t !== 'mine');
-  
-  if (t === 'leaderboard') renderPointsLeaderboard();
-  if (t === 'mine') renderMyPoints();
+function updateMyPointsBadge() {
+  const month = currentMonth();
+  const total = _points.filter(p => p.by === CUK && p.month === month).reduce((s, p) => s + p.points, 0);
+  document.getElementById('myPtsTotal').textContent = total;
 }
 
 function previewPoints() {
-  const mark = parseInt(document.getElementById('ptsMark').value);
-  if (!mark) { document.getElementById('ptsPreview').innerHTML = ''; return; }
-  
+  const mark = parseFloat(document.getElementById('ptsMark').value) || 0;
   let points = 0;
-  if (mark >= 40 && mark < 50) points = 5;
-  else if (mark >= 50 && mark < 60) points = 10;
-  else if (mark >= 60 && mark < 70) points = 15;
-  else if (mark >= 70 && mark < 80) points = 20;
-  else if (mark >= 80 && mark < 90) points = 25;
-  else if (mark >= 90 && mark <= 100) points = 30;
+  if (mark >= 90) points = 30;
+  else if (mark >= 80) points = 25;
+  else if (mark >= 70) points = 20;
+  else if (mark >= 60) points = 15;
+  else if (mark >= 50) points = 10;
+  else if (mark >= 40) points = 5;
   
-  document.getElementById('ptsPreview').innerHTML = `⭐ You will earn <strong style="color:var(--green);">${points} points</strong> for this submission.`;
+  document.getElementById('ptsPreview').innerHTML = `You'll earn: <strong style="color:var(--gold);">${points} points</strong>`;
 }
 
+let ptsScriptFile = null;
+
 function handlePtsScript(e) {
-  const file = e.target.files[0];
-  if (file) {
+  ptsScriptFile = e.target.files[0];
+  if (ptsScriptFile) {
     document.getElementById('ptsScriptDone').classList.remove('hidden');
   }
 }
@@ -3913,350 +4677,51 @@ function handlePtsScript(e) {
 async function submitPoints() {
   const module = document.getElementById('ptsModule').value;
   const testName = document.getElementById('ptsTestName').value.trim();
-  const mark = parseInt(document.getElementById('ptsMark').value);
+  const mark = parseFloat(document.getElementById('ptsMark').value);
   
-  if (!module) { alert('Select a module.'); return; }
-  if (!testName) { alert('Enter test name.'); return; }
-  if (!mark || mark < 0 || mark > 100) { alert('Enter a valid mark (0-100).'); return; }
-  
-  let points = 0;
-  if (mark >= 40 && mark < 50) points = 5;
-  else if (mark >= 50 && mark < 60) points = 10;
-  else if (mark >= 60 && mark < 70) points = 15;
-  else if (mark >= 70 && mark < 80) points = 20;
-  else if (mark >= 80 && mark < 90) points = 25;
-  else if (mark >= 90 && mark <= 100) points = 30;
-  
-  if (points === 0) {
-    alert('Marks below 40% do not earn points.');
+  if (!module || !testName || isNaN(mark)) {
+    alert('Please fill all fields.');
     return;
   }
   
-  const month = new Date().toISOString().slice(0, 7);
+  let points = 0;
+  if (mark >= 90) points = 30;
+  else if (mark >= 80) points = 25;
+  else if (mark >= 70) points = 20;
+  else if (mark >= 60) points = 15;
+  else if (mark >= 50) points = 10;
+  else if (mark >= 40) points = 5;
   
   await window.FS.addPoint({
     by: CUK,
-    byName: CU.name,
+    name: CU.name,
     faculty: CU.faculty,
     module,
     testName,
     mark,
     points,
-    month,
-    date: new Date().toISOString()
+    month: currentMonth()
   });
   
-  // Reset form
   document.getElementById('ptsModule').value = '';
   document.getElementById('ptsTestName').value = '';
   document.getElementById('ptsMark').value = '';
   document.getElementById('ptsScriptDone').classList.add('hidden');
-  document.getElementById('ptsPreview').innerHTML = '';
   
-  showToast('Points Earned!', `You earned ${points} points for this submission.`, 'success');
-  
-  // Switch to leaderboard
+  showToast('Points Earned!', `+${points} points added to your total.`, 'success');
   pointsTab('leaderboard');
 }
 
-function renderPointsLeaderboard() {
-  const facFilter = document.getElementById('ptsFacFilter')?.value || '';
-  const month = new Date().toISOString().slice(0, 7);
-  
-  let filtered = _points.filter(p => p.month === month);
-  if (facFilter) filtered = filtered.filter(p => p.faculty === facFilter);
-  
-  // Group by user and sum points
-  const userPoints = {};
-  filtered.forEach(p => {
-    if (!userPoints[p.by]) {
-      userPoints[p.by] = { name: p.byName, points: 0, faculty: p.faculty };
-    }
-    userPoints[p.by].points += p.points;
-  });
-  
-  const sorted = Object.entries(userPoints)
-    .map(([id, data]) => ({ id, ...data }))
-    .sort((a, b) => b.points - a.points);
-  
-  const container = document.getElementById('ptsLeaderboardList');
-  
-  if (!sorted.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">🏅</div><p>No submissions yet this month.</p></div>';
-    return;
-  }
-  
-  container.innerHTML = sorted.map((u, i) => `
-    <div style="display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--border);">
-      <div style="width:24px;font-weight:700;color:${i === 0 ? 'var(--gold)' : i === 1 ? 'var(--muted)' : i === 2 ? 'var(--orange)' : 'var(--muted)'};">#${i+1}</div>
-      <div style="flex:1;font-weight:600;">${u.name}</div>
-      <div style="font-weight:700;color:var(--purple);">${u.points} pts</div>
-    </div>
-  `).join('');
-  
-  document.getElementById('ptsResetDate').textContent = 'End of month';
-}
-
-function renderMyPoints() {
-  const myPoints = _points.filter(p => p.by === CUK);
-  const container = document.getElementById('ptsMyList');
-  
-  if (!myPoints.length) {
-    container.innerHTML = '<div class="empty"><div class="ei">📋</div><p>No submissions yet.</p></div>';
-    return;
-  }
-  
-  container.innerHTML = myPoints.map(p => `
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid var(--border);">
-      <div><strong>${p.module}</strong> - ${p.testName}</div>
-      <div style="display:flex;gap:10px;">
-        <span>${p.mark}%</span>
-        <span style="font-weight:700;color:var(--green);">+${p.points} pts</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-function updateMyPointsBadge() {
-  const month = new Date().toISOString().slice(0, 7);
-  const total = _points.filter(p => p.by === CUK && p.month === month).reduce((s, p) => s + p.points, 0);
-  document.getElementById('myPtsTotal').textContent = total;
-}
-
-// GPA Functions
-function populateGPARows() {
-  const tbody = document.getElementById('gBody');
-  if (!mods.length) {
-    document.getElementById('gpaNoMods').classList.remove('hidden');
-    tbody.innerHTML = '';
-    return;
-  }
-  document.getElementById('gpaNoMods').classList.add('hidden');
-  
-  tbody.innerHTML = mods.map((m, i) => `
-    <tr>
-      <td>${m.code} – ${m.name}</td>
-      <td><input type="number" id="gCred${i}" value="${m.credits || 3}" min="0" step="0.5" style="width:70px;" oninput="calcGPA()"></td>
-      <td><input type="number" id="gMark${i}" value="" min="0" max="100" step="0.1" style="width:70px;" oninput="calcGPA()"></td>
-      <td id="gGrade${i}">—</td>
-      <td id="gMGP${i}">—</td>
-    </tr>
-  `).join('');
-}
-
-function calcGPA() {
-  const gPts = parseFloat(document.getElementById('gPts').value) || 0;
-  const gCr = parseFloat(document.getElementById('gCr').value) || 0;
-  let totalGP = 0, totalCred = 0;
-  
-  for (let i = 0; i < mods.length; i++) {
-    const cred = parseFloat(document.getElementById('gCred' + i)?.value) || 0;
-    const mark = parseFloat(document.getElementById('gMark' + i)?.value);
-    
-    let gp = 0, grade = 'F';
-    if (!isNaN(mark)) {
-      if (mark >= 70) { gp = 4.0; grade = 'A'; }
-      else if (mark >= 65) { gp = 3.5; grade = 'B+'; }
-      else if (mark >= 60) { gp = 3.0; grade = 'B'; }
-      else if (mark >= 55) { gp = 2.5; grade = 'C+'; }
-      else if (mark >= 50) { gp = 2.0; grade = 'C'; }
-      else if (mark >= 45) { gp = 1.5; grade = 'D+'; }
-      else if (mark >= 40) { gp = 1.0; grade = 'D'; }
-      
-      totalGP += gp * cred;
-      totalCred += cred;
-    }
-    
-    document.getElementById('gGrade' + i).textContent = grade;
-    document.getElementById('gMGP' + i).textContent = gp.toFixed(1);
-  }
-  
-  const termGPA = totalCred > 0 ? totalGP / totalCred : 0;
-  document.getElementById('tGPA').textContent = termGPA.toFixed(3);
-  
-  const newCGPA = gCr > 0 ? (gPts + totalGP) / (gCr + totalCred) : termGPA;
-  document.getElementById('cGPA').textContent = newCGPA.toFixed(3);
-  
-  let cls = 'Pending';
-  if (newCGPA >= 3.6) cls = 'First Class Honours';
-  else if (newCGPA >= 3.0) cls = 'Upper Second Class';
-  else if (newCGPA >= 2.0) cls = 'Lower Second Class';
-  else if (newCGPA >= 1.0) cls = 'Pass';
-  else cls = 'Fail';
-  document.getElementById('cClass').textContent = cls;
-}
-
-function populateForeRows() {
-  const tbody = document.getElementById('fBody');
-  if (!mods.length) {
-    document.getElementById('foreNoMods').classList.remove('hidden');
-    tbody.innerHTML = '';
-    return;
-  }
-  document.getElementById('foreNoMods').classList.add('hidden');
-  
-  tbody.innerHTML = mods.map((m, i) => `
-    <tr>
-      <td>${m.code}</td>
-      <td><input type="number" id="caWt${i}" value="50" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
-      <td><input type="number" id="exWt${i}" value="50" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
-      <td><input type="number" id="caMark${i}" value="" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
-      <td><input type="number" id="target${i}" value="50" min="0" max="100" style="width:60px;" oninput="calcForecast()"></td>
-      <td id="need${i}">—</td>
-    </tr>
-  `).join('');
-}
-
-function calcForecast() {
-  for (let i = 0; i < mods.length; i++) {
-    const caWt = parseFloat(document.getElementById('caWt' + i)?.value) || 0;
-    const exWt = parseFloat(document.getElementById('exWt' + i)?.value) || 0;
-    const caMark = parseFloat(document.getElementById('caMark' + i)?.value);
-    const target = parseFloat(document.getElementById('target' + i)?.value) || 0;
-    
-    let need = '—';
-    if (!isNaN(caMark) && caWt + exWt === 100 && exWt > 0) {
-      const caContrib = caMark * (caWt / 100);
-      const neededMark = (target - caContrib) / (exWt / 100);
-      if (neededMark > 100) need = 'Impossible';
-      else if (neededMark < 0) need = 'Already achieved';
-      else need = neededMark.toFixed(1) + '%';
-    }
-    
-    document.getElementById('need' + i).textContent = need;
-  }
-}
-
-function clearGPA() {
-  for (let i = 0; i < mods.length; i++) {
-    const markEl = document.getElementById('gMark' + i);
-    if (markEl) markEl.value = '';
-  }
-  calcGPA();
-}
-
-function saveGPAData() {
-  const data = {};
-  for (let i = 0; i < mods.length; i++) {
-    const cred = document.getElementById('gCred' + i)?.value;
-    const mark = document.getElementById('gMark' + i)?.value;
-    if (cred) data[`cred_${i}`] = cred;
-    if (mark) data[`mark_${i}`] = mark;
-  }
-  data.gPts = document.getElementById('gPts').value;
-  data.gCr = document.getElementById('gCr').value;
-  
-  saveToLocal('gpaData', data);
-  showToast('GPA Data Saved', 'Your current marks have been saved locally.', 'success');
-}
-
-function loadGPAData() {
-  const data = loadFromLocal('gpaData', {});
-  
-  for (let i = 0; i < mods.length; i++) {
-    if (data[`cred_${i}`]) document.getElementById('gCred' + i).value = data[`cred_${i}`];
-    if (data[`mark_${i}`]) document.getElementById('gMark' + i).value = data[`mark_${i}`];
-  }
-  if (data.gPts) document.getElementById('gPts').value = data.gPts;
-  if (data.gCr) document.getElementById('gCr').value = data.gCr;
-  
-  calcGPA();
-  showToast('GPA Data Loaded', 'Your saved marks have been loaded.', 'success');
-}
-
-// Study Hub Functions
-function renderSMods() {
-  const container = document.getElementById('sMods');
-  if (!mods.length) {
-    container.innerHTML = '<p style="color:var(--muted);">No modules set up.</p>';
-    return;
-  }
-  
-  container.innerHTML = mods.map(m => `
-    <div class="mod-chip" onclick="pickMod('${m.code}')">${m.code}</div>
-  `).join('');
-}
-
-function pickMod(code) {
-  selMod = code;
-  document.querySelectorAll('.mod-chip').forEach(el => el.classList.remove('sel'));
-  event.target.classList.add('sel');
-}
-
-function handleOut(e) {
-  document.getElementById('outDone').classList.remove('hidden');
-  showToast('Course Outline Uploaded', 'Your outline has been processed.', 'success');
-}
-
-function searchRes() {
-  const topic = document.getElementById('topicIn').value.trim();
-  if (!selMod || !topic) {
-    showToast('Missing Info', 'Select a module and enter a topic.', 'warning');
-    return;
-  }
-  
-  const area = document.getElementById('resArea');
-  area.innerHTML = '<div class="search-loading"><div class="spinner"></div><p>Finding resources...</p></div>';
-  
-  setTimeout(() => {
-    area.innerHTML = `
-      <div class="res-grid">
-        <a href="#" class="res-card">
-          <div class="ri youtube">🎬</div>
-          <div class="res-info"><h4>Khan Academy: ${topic}</h4><p>Video lecture covering ${topic} in depth</p></div>
-          <div class="rbadge ry">YouTube</div>
-        </a>
-        <a href="#" class="res-card">
-          <div class="ri article">📄</div>
-          <div class="res-info"><h4>Study Notes: ${topic}</h4><p>Comprehensive notes with examples</p></div>
-          <div class="rbadge ra">Article</div>
-        </a>
-        <a href="#" class="res-card">
-          <div class="ri quiz">📝</div>
-          <div class="res-info"><h4>Practice Quiz</h4><p>Test your understanding of ${topic}</p></div>
-          <div class="rbadge rq">Quiz</div>
-        </a>
-      </div>
-    `;
-  }, 800);
-}
-
-// Utility Functions
-function populateModDropdowns() {
-  const opts = mods.length
-    ? mods.map(m => `<option value="${m.code} – ${m.name}">${m.code} – ${m.name}</option>`).join('')
-    : '<option value="">No modules — set up in Profile</option>';
-  
-  ['pMod', 'groupModule', 'ptsModule', 'sessionModSelect', 'pomodoroModule', 'stopwatchModule', 'sessionModule', 'roomModule'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.innerHTML = '<option value="">— Select module —</option>' + opts; }
-  });
-}
-
-function populateStreakModules() {
-  const opts = mods.length
-    ? mods.map(m => `<option value="${m.code} – ${m.name}">${m.code} – ${m.name}</option>`).join('')
-    : '<option value="">No modules — set in Profile</option>';
-  
-  ['pomodoroModule', 'stopwatchModule', 'sessionModule'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.innerHTML = '<option value="">— Select module —</option>' + opts;
-    }
-  });
-}
-
-function setLocation(loc) {
-  document.getElementById('sessionLocation').value = loc;
-  document.querySelectorAll('.location-preset').forEach(el => el.classList.remove('active'));
-  event.target.classList.add('active');
-}
-
+// ── MODAL HELPERS ─────────────────────────────────────────────
 function closeMod() {
   document.getElementById('mMod').classList.remove('on');
 }
 
-// Make functions available globally
+function closeModal(id) {
+  document.getElementById(id).classList.remove('on');
+}
+
+// ── Make functions available globally ───────────────────────────
 window.authTab = authTab;
 window.doLogin = doLogin;
 window.doRegister = doRegister;
@@ -4275,8 +4740,9 @@ window.addProfileMod = addProfileMod;
 window.removeProfileMod = removeProfileMod;
 window.saveProfile = saveProfile;
 window.pickMod = pickMod;
-window.handleOut = handleOut;
+window.handleOut = function() {};
 window.searchRes = searchRes;
+window.fRes = fRes;
 window.peerTab = peerTab;
 window.validatePrice = validatePrice;
 window.postReq = postReq;
@@ -4290,10 +4756,19 @@ window.setStar = setStar;
 window.toggleTag = toggleTag;
 window.submitRating = submitRating;
 window.closeRate = closeRate;
+window.openTip = openTip;
+window.closeTipDetail = closeTipDetail;
+window.askTipQuestion = askTipQuestion;
+window.scrollCareer = scrollCareer;
+window.loadCareerVideos = loadCareerVideos;
 window.calcGPA = calcGPA;
 window.clearGPA = clearGPA;
 window.saveGPAData = saveGPAData;
 window.loadGPAData = loadGPAData;
+window.contestTab = contestTab;
+window.createContest = createContest;
+window.handleScriptUpload = handleScriptUpload;
+window.submitScore = submitScore;
 window.pointsTab = pointsTab;
 window.previewPoints = previewPoints;
 window.handlePtsScript = handlePtsScript;
@@ -4304,6 +4779,14 @@ window.updateSettings = updateSettings;
 window.exportData = exportData;
 window.clearData = clearData;
 window.closeMod = closeMod;
+window.filterGroups = filterGroups;
+window.createPermanentGroup = createPermanentGroup;
+window.joinGroup = joinGroup;
+window.leaveGroup = leaveGroup;
+window.showMyGroups = showMyGroups;
+window.openGroupChat = openGroupChat;
+window.sendChatMsg = sendChatMsg;
+window.closeSquadChat = closeSquadChat;
 window.setPomodoroPreset = setPomodoroPreset;
 window.startPomodoro = startPomodoro;
 window.pausePomodoro = pausePomodoro;
@@ -4312,32 +4795,30 @@ window.startStopwatch = startStopwatch;
 window.pauseStopwatch = pauseStopwatch;
 window.resetStopwatch = resetStopwatch;
 window.lapStopwatch = lapStopwatch;
-window.logStudySession = logStudySession;
 window.changeMonth = changeMonth;
 window.goToToday = goToToday;
 window.selectCalendarDay = selectCalendarDay;
-window.squadTab = squadTab;
-window.clearSquadFilter = clearSquadFilter;
-window.filterSquad = filterSquad;
+window.sessionsTab = sessionsTab;
 window.setLocation = setLocation;
+window.clearFacultyFilter = clearFacultyFilter;
+window.filterSessions = filterSessions;
 window.createStudySession = createStudySession;
 window.joinSession = joinSession;
 window.leaveSession = leaveSession;
 window.deleteSession = deleteSession;
-window.createPermanentGroup = createPermanentGroup;
-window.joinGroup = joinGroup;
-window.leaveGroup = leaveGroup;
-window.deleteGroup = deleteGroup;
-window.openGroupChat = openGroupChat;
-window.sendChatMsg = sendChatMsg;
-window.closeSquadChat = closeSquadChat;
 window.renderFocusRooms = renderFocusRooms;
 window.createFocusRoom = createFocusRoom;
 window.joinFocusRoom = joinFocusRoom;
 window.leaveFocusRoom = leaveFocusRoom;
 window.endFocusRoom = endFocusRoom;
-window.contactTutor = contactTutor;
-window.markCompleted = markCompleted;
+window.showRoomDetail = showRoomDetail;
+window.startRoomTimer = startRoomTimer;
+window.stopRoomTimer = stopRoomTimer;
+window.askAI = askAI;
+window.summarizeNotes = summarizeNotes;
+window.generateQuiz = generateQuiz;
+window.studyPlan = studyPlan;
+window.logStudySession = logStudySession;
 </script>
 </body>
 </html>
