@@ -1514,6 +1514,84 @@ input:checked + .slider:before{transform:translateX(26px);}
         </div>
       </div>
 
+      <!-- ===== STUDY PET — above timers ===== -->
+      <div class="card" style="border-top:4px solid var(--purple);margin-bottom:22px;">
+        <div class="card-title">🐾 Study Pet</div>
+
+        <!-- Choose panel — shown when no pet owned -->
+        <div id="petChoosePanel">
+          <p style="font-size:.84rem;color:var(--muted);margin-bottom:16px;">Choose your study companion. It grows as you study — sell it for points!</p>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:4px;" id="petPickerGrid">
+            <div class="pet-pick-card" onclick="choosePet('cat')" data-pet="cat"><div class="pet-emoji">🐱</div><div class="pet-pick-name">Cat</div></div>
+            <div class="pet-pick-card" onclick="choosePet('dog')" data-pet="dog"><div class="pet-emoji">🐶</div><div class="pet-pick-name">Dog</div></div>
+            <div class="pet-pick-card" onclick="choosePet('bunny')" data-pet="bunny"><div class="pet-emoji">🐰</div><div class="pet-pick-name">Bunny</div></div>
+            <div class="pet-pick-card" onclick="choosePet('fox')" data-pet="fox"><div class="pet-emoji">🦊</div><div class="pet-pick-name">Fox</div></div>
+            <div class="pet-pick-card" onclick="choosePet('penguin')" data-pet="penguin"><div class="pet-emoji">🐧</div><div class="pet-pick-name">Penguin</div></div>
+          </div>
+          <p style="font-size:.73rem;color:var(--muted);margin-top:10px;">⚠️ You can only have one pet at a time. Selling or releasing lets you adopt a new one.</p>
+        </div>
+
+        <!-- Active pet panel -->
+        <div id="petActivePanel" style="display:none;">
+          <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+
+            <!-- 3D animated pet display -->
+            <div style="flex:0 0 auto;text-align:center;">
+              <div style="position:relative;width:180px;height:180px;margin:0 auto;">
+                <canvas id="petCanvas3D" width="180" height="180" style="border-radius:20px;display:block;"></canvas>
+              </div>
+              <div id="petMoodBadge" style="font-size:.8rem;font-weight:700;padding:5px 14px;border-radius:20px;background:var(--purple2);color:var(--purple);display:inline-block;margin-top:10px;"></div>
+              <div id="petNameDisplay" style="font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-top:5px;"></div>
+            </div>
+
+            <!-- Stats -->
+            <div style="flex:1;min-width:200px;">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+                <div style="background:var(--bg);border-radius:12px;padding:12px;text-align:center;">
+                  <div style="font-size:1.6rem;font-weight:900;font-family:'Fraunces',serif;color:var(--purple);" id="petAgeDisplay">0</div>
+                  <div style="font-size:.72rem;color:var(--muted);font-weight:600;">years old</div>
+                </div>
+                <div style="background:var(--bg);border-radius:12px;padding:12px;text-align:center;">
+                  <div style="font-size:1.6rem;font-weight:900;font-family:'Fraunces',serif;color:var(--green);" id="petHoursDisplay">0</div>
+                  <div style="font-size:.72rem;color:var(--muted);font-weight:600;">study hours</div>
+                </div>
+              </div>
+
+              <div style="margin-bottom:11px;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="font-size:.74rem;font-weight:700;color:var(--muted);">Happiness</span>
+                  <span id="petHappinessLabel" style="font-size:.74rem;font-weight:700;"></span>
+                </div>
+                <div style="height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;">
+                  <div id="petHappinessBar" style="height:100%;border-radius:4px;transition:width .6s;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom:14px;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="font-size:.74rem;font-weight:700;color:var(--muted);">Growth to next year</span>
+                  <span id="petGrowthLabel" style="font-size:.74rem;font-weight:700;color:var(--purple);"></span>
+                </div>
+                <div style="height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;">
+                  <div id="petGrowthBar" style="height:100%;background:linear-gradient(90deg,var(--purple),var(--pink));border-radius:4px;transition:width .6s;"></div>
+                </div>
+              </div>
+
+              <div style="background:linear-gradient(135deg,var(--gold3),var(--orange2));border-radius:12px;padding:11px 14px;margin-bottom:12px;">
+                <div style="font-size:.77rem;font-weight:700;color:var(--orange);margin-bottom:3px;">💰 Sell Value</div>
+                <div id="petSellValue" style="font-size:.82rem;color:var(--text);font-weight:600;"></div>
+                <div style="font-size:.69rem;color:var(--muted);margin-top:3px;">20 yrs → 10 pts &nbsp;·&nbsp; 30 yrs → 15 pts &nbsp;·&nbsp; 40 yrs → 20 pts</div>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button onclick="sellPet()" class="btn btn-gold btn-sm">💰 Sell Pet</button>
+                <button onclick="releasePet()" class="btn btn-outline btn-sm">🔄 Release</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="timer-section">
         <!-- Pomodoro Card (unchanged) -->
         <div class="timer-card">
@@ -1616,88 +1694,6 @@ input:checked + .slider:before{transform:translateX(26px);}
       <div class="card">
         <div class="card-title">Recent Study Sessions</div>
         <div id="sessionHistory" class="session-history"><div class="empty"><div class="ei">📋</div><p>No study sessions yet. Start your first session!</p></div></div>
-      </div>
-
-      <!-- ===== STUDY PET ===== -->
-      <div class="card" style="border-top:4px solid var(--purple);">
-        <div class="card-title">🐾 Study Pet</div>
-
-        <!-- No pet state -->
-        <div id="petChoosePanel">
-          <p style="font-size:.84rem;color:var(--muted);margin-bottom:16px;">Choose your study companion — it grows as you study, earns you points when you sell it!</p>
-          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px;" id="petPickerGrid">
-            <div class="pet-pick-card" onclick="choosePet('cat')" data-pet="cat">
-              <div class="pet-emoji">🐱</div><div class="pet-pick-name">Cat</div>
-            </div>
-            <div class="pet-pick-card" onclick="choosePet('dog')" data-pet="dog">
-              <div class="pet-emoji">🐶</div><div class="pet-pick-name">Dog</div>
-            </div>
-            <div class="pet-pick-card" onclick="choosePet('bunny')" data-pet="bunny">
-              <div class="pet-emoji">🐰</div><div class="pet-pick-name">Bunny</div>
-            </div>
-            <div class="pet-pick-card" onclick="choosePet('fox')" data-pet="fox">
-              <div class="pet-emoji">🦊</div><div class="pet-pick-name">Fox</div>
-            </div>
-            <div class="pet-pick-card" onclick="choosePet('penguin')" data-pet="penguin">
-              <div class="pet-emoji">🐧</div><div class="pet-pick-name">Penguin</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Active pet state -->
-        <div id="petActivePanel" style="display:none;">
-          <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
-            <!-- Pet display -->
-            <div style="flex:0 0 auto;text-align:center;background:linear-gradient(135deg,var(--purple2),var(--pink2));border-radius:20px;padding:22px 28px;min-width:160px;">
-              <div id="petDisplayEmoji" style="font-size:5rem;line-height:1;margin-bottom:8px;animation:float 3s ease-in-out infinite;display:block;">🐱</div>
-              <div id="petMoodBadge" style="font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.6);display:inline-block;"></div>
-              <div id="petNameDisplay" style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--purple);margin-top:8px;"></div>
-            </div>
-            <!-- Pet stats -->
-            <div style="flex:1;min-width:200px;">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-                <div style="background:var(--bg);border-radius:12px;padding:12px;text-align:center;">
-                  <div style="font-size:1.4rem;font-weight:900;font-family:'Fraunces',serif;color:var(--purple);" id="petAgeDisplay">0</div>
-                  <div style="font-size:.72rem;color:var(--muted);font-weight:600;">years old</div>
-                </div>
-                <div style="background:var(--bg);border-radius:12px;padding:12px;text-align:center;">
-                  <div style="font-size:1.4rem;font-weight:900;font-family:'Fraunces',serif;color:var(--green);" id="petHoursDisplay">0</div>
-                  <div style="font-size:.72rem;color:var(--muted);font-weight:600;">study hours</div>
-                </div>
-              </div>
-              <!-- Happiness bar -->
-              <div style="margin-bottom:12px;">
-                <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
-                  <span style="font-size:.75rem;font-weight:700;color:var(--muted);">Happiness</span>
-                  <span id="petHappinessLabel" style="font-size:.75rem;font-weight:700;color:var(--green);"></span>
-                </div>
-                <div style="height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;">
-                  <div id="petHappinessBar" style="height:100%;background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981);border-radius:4px;transition:width .6s;"></div>
-                </div>
-              </div>
-              <!-- Growth bar -->
-              <div style="margin-bottom:14px;">
-                <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
-                  <span style="font-size:.75rem;font-weight:700;color:var(--muted);">Growth (hrs to next year)</span>
-                  <span id="petGrowthLabel" style="font-size:.75rem;font-weight:700;color:var(--purple);"></span>
-                </div>
-                <div style="height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;">
-                  <div id="petGrowthBar" style="height:100%;background:linear-gradient(90deg,var(--purple),var(--pink));border-radius:4px;transition:width .6s;"></div>
-                </div>
-              </div>
-              <!-- Sell info & button -->
-              <div style="background:linear-gradient(135deg,var(--gold3),var(--orange2));border-radius:12px;padding:12px 14px;margin-bottom:12px;">
-                <div style="font-size:.78rem;font-weight:700;color:var(--orange);margin-bottom:4px;">💰 Sell Value</div>
-                <div id="petSellValue" style="font-size:.82rem;color:var(--text);"></div>
-                <div style="font-size:.7rem;color:var(--muted);margin-top:3px;">20 yrs = 10 pts · 30 yrs = 15 pts · 40 yrs = 20 pts</div>
-              </div>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <button onclick="sellPet()" class="btn btn-gold btn-sm">💰 Sell Pet</button>
-                <button onclick="releasePet()" class="btn btn-outline btn-sm">🔄 Release & Get New</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="card">
@@ -2697,40 +2693,44 @@ function updateStreakStats(){
   updatePetState();
 }
 
-// ==================== STUDY PETS ====================
+// ==================== STUDY PETS (3D canvas, 1 pet at a time) ====================
 const PET_DATA = {
-  cat:     { emoji:'🐱', sadEmoji:'😿', happyEmoji:'😸', name:'Whiskers' },
-  dog:     { emoji:'🐶', sadEmoji:'🐾', happyEmoji:'🐕', name:'Buddy' },
-  bunny:   { emoji:'🐰', sadEmoji:'🐇', happyEmoji:'🐇', name:'Cottontail' },
-  fox:     { emoji:'🦊', sadEmoji:'🦊', happyEmoji:'🦊', name:'Rusty' },
-  penguin: { emoji:'🐧', sadEmoji:'🐧', happyEmoji:'🐧', name:'Snowball' },
+  cat:     { name:'Whiskers', color:'#e8923a', accent:'#c8712a', earColor:'#f0b090', bodyShape:'round',   eyeColor:'#2d8a4e' },
+  dog:     { name:'Buddy',    color:'#c8a060', accent:'#a07840', earColor:'#c8a060', bodyShape:'round',   eyeColor:'#5a3010' },
+  bunny:   { name:'Cotton',   color:'#f0e8e0', accent:'#d8c8b8', earColor:'#f4b8c0', bodyShape:'tall',    eyeColor:'#e060a0' },
+  fox:     { name:'Rusty',    color:'#d86020', accent:'#a84010', earColor:'#f0a060', bodyShape:'pointy',  eyeColor:'#c05810' },
+  penguin: { name:'Snowball', color:'#f8f8f8', accent:'#1a1a2e', earColor:'#f8d060', bodyShape:'penguin', eyeColor:'#e05020' },
 };
-// 1 year = 2 hrs of study
 const PET_HRS_PER_YEAR = 2;
+let _petAnimFrame = null;
 
-function getPetData() { return loadFromLocal('studyPet_' + CUK, null); }
-function savePetData(pet) { saveToLocal('studyPet_' + CUK, pet); }
+function getPetSave() { return loadFromLocal('studyPet_' + CUK, null); }
+function savePetSave(pet) { saveToLocal('studyPet_' + CUK, pet); }
 
 function choosePet(type) {
-  document.querySelectorAll('.pet-pick-card').forEach(c => c.classList.remove('selected'));
-  const el = document.querySelector(`[data-pet="${type}"]`);
-  if (el) el.classList.add('selected');
-  const pet = {
-    type, adoptedAt: new Date().toISOString(),
-    studyHoursAtAdoption: CU?.studyStats?.totalHours || 0,
-  };
-  savePetData(pet);
-  showToast('🐾 New Pet!', `You adopted ${PET_DATA[type].name} the ${type}!`, 'success');
+  // Enforce 1 pet at a time — if one already exists, confirm replace
+  const existing = getPetSave();
+  if (existing) {
+    if (!confirm(`You already have ${PET_DATA[existing.type]?.name}! Adopting a new pet will release your current one (no points). Continue?`)) return;
+  }
+  const pet = { type, adoptedAt: new Date().toISOString(), studyHoursAtAdoption: CU?.studyStats?.totalHours || 0 };
+  savePetSave(pet);
+  showToast('🐾 New Pet!', `You adopted ${PET_DATA[type].name}!`, 'success');
   updatePetState();
 }
 
 function updatePetState() {
-  const pet = getPetData();
+  const pet = getPetSave();
   const choosePanel = document.getElementById('petChoosePanel');
   const activePanel = document.getElementById('petActivePanel');
   if (!choosePanel || !activePanel) return;
 
-  if (!pet) { choosePanel.style.display='block'; activePanel.style.display='none'; return; }
+  if (!pet) {
+    choosePanel.style.display = 'block';
+    activePanel.style.display = 'none';
+    if (_petAnimFrame) { cancelAnimationFrame(_petAnimFrame); _petAnimFrame = null; }
+    return;
+  }
 
   choosePanel.style.display = 'none';
   activePanel.style.display = 'block';
@@ -2738,68 +2738,281 @@ function updatePetState() {
   const totalHours = CU?.studyStats?.totalHours || 0;
   const petHours = Math.max(0, totalHours - (pet.studyHoursAtAdoption || 0));
   const age = Math.floor(petHours / PET_HRS_PER_YEAR);
-  const hrsIntoCurrentYear = petHours % PET_HRS_PER_YEAR;
-  const growthPct = (hrsIntoCurrentYear / PET_HRS_PER_YEAR) * 100;
+  const hrsInYear = petHours % PET_HRS_PER_YEAR;
+  const growthPct = (hrsInYear / PET_HRS_PER_YEAR) * 100;
 
-  // Happiness: based on recent study (last 7 days)
-  const today = new Date(); today.setHours(0,0,0,0);
-  const sevenDaysAgo = new Date(today); sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  // Happiness: based on study in last 7 days
+  const sevenAgo = new Date(); sevenAgo.setDate(sevenAgo.getDate() - 7); sevenAgo.setHours(0,0,0,0);
   const recentMins = _studySessions
-    .filter(s => s.userId===CUK && new Date(s.date+'T12:00')>=sevenDaysAgo)
-    .reduce((sum,s)=>sum+(s.duration||0),0);
-  // 7 hrs/week = 100% happy
+    .filter(s => s.userId === CUK && new Date(s.date + 'T12:00') >= sevenAgo)
+    .reduce((sum,s) => sum + (s.duration||0), 0);
   const happiness = Math.min(100, Math.round((recentMins / 420) * 100));
 
-  const pData = PET_DATA[pet.type] || PET_DATA.cat;
-  let mood, moodEmoji, moodColor;
-  if (happiness >= 75) { mood='Happy 😸'; moodColor='var(--green)'; moodEmoji = pData.happyEmoji; }
-  else if (happiness >= 40) { mood='Content 😊'; moodColor='var(--gold)'; moodEmoji = pData.emoji; }
-  else { mood='Sad 😢'; moodColor='var(--red)'; moodEmoji = pData.sadEmoji; }
+  let mood, moodColor, happinessGradient;
+  if (happiness >= 75)      { mood = '😸 Happy';   moodColor = 'var(--green)';  happinessGradient = 'linear-gradient(90deg,#10b981,#34d399)'; }
+  else if (happiness >= 40) { mood = '😊 Content'; moodColor = 'var(--gold)';   happinessGradient = 'linear-gradient(90deg,#f59e0b,#fbbf24)'; }
+  else                      { mood = '😢 Sad';     moodColor = 'var(--red)';    happinessGradient = 'linear-gradient(90deg,#ef4444,#f87171)'; }
 
-  document.getElementById('petDisplayEmoji').textContent = moodEmoji;
-  document.getElementById('petNameDisplay').textContent = pData.name;
   document.getElementById('petMoodBadge').textContent = mood;
+  document.getElementById('petMoodBadge').style.background = moodColor === 'var(--green)' ? 'var(--green2)' : moodColor === 'var(--gold)' ? 'var(--gold3)' : 'var(--red2)';
   document.getElementById('petMoodBadge').style.color = moodColor;
+  document.getElementById('petNameDisplay').textContent = PET_DATA[pet.type]?.name || '';
   document.getElementById('petAgeDisplay').textContent = age;
   document.getElementById('petHoursDisplay').textContent = Math.round(petHours);
   document.getElementById('petHappinessBar').style.width = happiness + '%';
+  document.getElementById('petHappinessBar').style.background = happinessGradient;
   document.getElementById('petHappinessLabel').textContent = happiness + '%';
   document.getElementById('petHappinessLabel').style.color = moodColor;
   document.getElementById('petGrowthBar').style.width = growthPct + '%';
-  document.getElementById('petGrowthLabel').textContent = `${hrsIntoCurrentYear.toFixed(1)} / ${PET_HRS_PER_YEAR} hrs`;
+  document.getElementById('petGrowthLabel').textContent = `${hrsInYear.toFixed(1)} / ${PET_HRS_PER_YEAR} hrs`;
 
   // Sell value
-  let sellPts = 0, sellMsg = '';
-  if (age >= 40) { sellPts = 20; sellMsg = `Age ${age} → 20 pts`; }
-  else if (age >= 30) { sellPts = 15; sellMsg = `Age ${age} → 15 pts`; }
-  else if (age >= 20) { sellPts = 10; sellMsg = `Age ${age} → 10 pts`; }
-  else { sellMsg = `Age ${age} — needs to be at least 20 yrs to sell`; }
-  document.getElementById('petSellValue').textContent = sellPts > 0 ? `🎉 ${sellMsg}` : `⏳ ${sellMsg}`;
+  let pts = age >= 40 ? 20 : age >= 30 ? 15 : age >= 20 ? 10 : 0;
+  document.getElementById('petSellValue').textContent = pts > 0 ? `🎉 Age ${age} — you can sell for ${pts} pts!` : `⏳ Age ${age} — reach 20 yrs to sell`;
+
+  // Start/update 3D canvas animation
+  startPet3D(pet.type, happiness);
+}
+
+// ---- 3D Pet Canvas ----
+function startPet3D(type, happiness) {
+  if (_petAnimFrame) cancelAnimationFrame(_petAnimFrame);
+  const canvas = document.getElementById('petCanvas3D');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pd = PET_DATA[type] || PET_DATA.cat;
+  let t = 0;
+
+  // Shared draw helpers
+  function sphere(cx, cy, rx, ry, topCol, botCol) {
+    const g = ctx.createRadialGradient(cx - rx*0.3, cy - ry*0.35, rx*0.05, cx, cy, Math.max(rx,ry));
+    g.addColorStop(0, lighten(topCol, 40)); g.addColorStop(0.4, topCol); g.addColorStop(1, darken(topCol, 30));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); ctx.fill();
+  }
+  function lighten(hex, amt) { return shiftColor(hex, amt); }
+  function darken(hex, amt)  { return shiftColor(hex, -amt); }
+  function shiftColor(hex, amt) {
+    let c = hex.replace('#',''); if (c.length===3) c=c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    const num = parseInt(c,16);
+    const r=Math.min(255,Math.max(0,((num>>16)&255)+amt)), g=Math.min(255,Math.max(0,((num>>8)&255)+amt)), b=Math.min(255,Math.max(0,(num&255)+amt));
+    return `rgb(${r},${g},${b})`;
+  }
+
+  function drawGround() {
+    const gg = ctx.createLinearGradient(0, H*0.72, 0, H);
+    gg.addColorStop(0,'rgba(200,230,200,0.6)'); gg.addColorStop(1,'rgba(150,190,150,0.3)');
+    ctx.fillStyle = gg; ctx.beginPath(); ctx.ellipse(W/2, H*0.85, W*0.42, H*0.1, 0, 0, Math.PI*2); ctx.fill();
+    // Shadow under pet
+    ctx.save(); ctx.globalAlpha = 0.18;
+    ctx.fillStyle = '#000'; ctx.beginPath(); ctx.ellipse(W/2, H*0.83, W*0.28, H*0.055, 0, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawBackground() {
+    const bg = ctx.createLinearGradient(0,0,0,H);
+    if (happiness >= 75) { bg.addColorStop(0,'#e8f5ff'); bg.addColorStop(1,'#f0fff4'); }
+    else if (happiness >= 40) { bg.addColorStop(0,'#fff8e8'); bg.addColorStop(1,'#fef9ee'); }
+    else { bg.addColorStop(0,'#f8f0ff'); bg.addColorStop(1,'#fff0f8'); }
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+    // Sparkles / rain based on mood
+    if (happiness >= 75) {
+      for (let i=0;i<4;i++) {
+        const sx = 20+i*40+(Math.sin(t*0.8+i)*12), sy = 20+i*15+(Math.cos(t*0.6+i)*8);
+        ctx.save(); ctx.globalAlpha=0.6+0.4*Math.sin(t*2+i); ctx.fillStyle='#ffd700';
+        ctx.beginPath(); for(let p=0;p<5;p++){const a=p/5*Math.PI*2-Math.PI/2,r=p%2===0?6:3;ctx.lineTo(sx+Math.cos(a)*r,sy+Math.sin(a)*r);}
+        ctx.closePath(); ctx.fill(); ctx.restore();
+      }
+    } else if (happiness < 40) {
+      // Rain drops
+      for (let i=0;i<5;i++){
+        const rx=(20+i*32+t*0.5)%W, ry=(t*50+i*30)%H;
+        ctx.save(); ctx.globalAlpha=0.4; ctx.strokeStyle='#90b8e0'; ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.moveTo(rx,ry); ctx.lineTo(rx+2,ry+10); ctx.stroke(); ctx.restore();
+      }
+    }
+  }
+
+  function drawCat(bobY) {
+    const cx=W/2, cy=H*0.58+bobY;
+    // Tail
+    ctx.save(); ctx.strokeStyle=pd.color; ctx.lineWidth=9; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(cx+28,cy+18); ctx.quadraticCurveTo(cx+55,cy+5+Math.sin(t)*14,cx+50,cy-20); ctx.stroke();
+    ctx.strokeStyle=lighten(pd.color,30); ctx.lineWidth=5;
+    ctx.beginPath(); ctx.moveTo(cx+28,cy+18); ctx.quadraticCurveTo(cx+55,cy+5+Math.sin(t)*14,cx+50,cy-20); ctx.stroke();
+    ctx.restore();
+    // Body
+    sphere(cx, cy, 36, 32, pd.color, pd.accent);
+    // Head
+    sphere(cx-2, cy-42, 28, 26, pd.color, pd.accent);
+    // Ears
+    ctx.fillStyle=pd.color;
+    ctx.beginPath(); ctx.moveTo(cx-22,cy-58); ctx.lineTo(cx-32,cy-82); ctx.lineTo(cx-10,cy-64); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(cx+8,cy-62); ctx.lineTo(cx+22,cy-84); ctx.lineTo(cx+28,cy-64); ctx.closePath(); ctx.fill();
+    ctx.fillStyle=pd.earColor; ctx.globalAlpha=0.6;
+    ctx.beginPath(); ctx.moveTo(cx-22,cy-62); ctx.lineTo(cx-30,cy-78); ctx.lineTo(cx-13,cy-66); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(cx+12,cy-64); ctx.lineTo(cx+21,cy-80); ctx.lineTo(cx+25,cy-67); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha=1;
+    drawEyes(cx-2, cy-42, happiness, t);
+    // Nose
+    ctx.fillStyle='#f090b0'; ctx.beginPath(); ctx.ellipse(cx-2,cy-37,4,3,0,0,Math.PI*2); ctx.fill();
+    // Mouth (happy/sad)
+    ctx.strokeStyle='#c06080'; ctx.lineWidth=1.5; ctx.lineCap='round';
+    if(happiness>=40){ctx.beginPath();ctx.arc(cx-2,cy-36,5,0.3,Math.PI-0.3);ctx.stroke();}
+    else{ctx.beginPath();ctx.arc(cx-2,cy-31,5,Math.PI+0.3,2*Math.PI-0.3);ctx.stroke();}
+    // Paws
+    sphere(cx-28,cy+22, 10,8, pd.color, pd.accent);
+    sphere(cx+24,cy+22, 10,8, pd.color, pd.accent);
+    // Blush
+    if(happiness>=75){ctx.save();ctx.globalAlpha=0.3;ctx.fillStyle='#ffb0c0';ctx.beginPath();ctx.ellipse(cx-17,cy-36,8,5,0,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.ellipse(cx+13,cy-36,8,5,0,0,Math.PI*2);ctx.fill();ctx.restore();}
+  }
+
+  function drawDog(bobY) {
+    const cx=W/2, cy=H*0.58+bobY;
+    // Tail (wag)
+    ctx.save(); ctx.strokeStyle=pd.color; ctx.lineWidth=8; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(cx+30,cy+10); ctx.quadraticCurveTo(cx+52,cy-10+Math.sin(t*2)*20,cx+48,cy-28); ctx.stroke(); ctx.restore();
+    sphere(cx, cy, 36,32, pd.color, pd.accent);
+    sphere(cx, cy-44, 30,27, pd.color, pd.accent);
+    // Floppy ears
+    ctx.fillStyle=darken(pd.color,20);
+    ctx.beginPath(); ctx.ellipse(cx-24,cy-42,10,20,-0.3,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx+24,cy-42,10,20,0.3,0,Math.PI*2); ctx.fill();
+    drawEyes(cx, cy-44, happiness, t);
+    ctx.fillStyle='#8b4513'; ctx.beginPath(); ctx.ellipse(cx,cy-36,8,6,0,0,Math.PI*2); ctx.fill();
+    if(happiness>=40){ctx.strokeStyle='#8b3010';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy-34,5,0.2,Math.PI-0.2);ctx.stroke();}
+    else{ctx.strokeStyle='#8b3010';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy-30,5,Math.PI+0.2,2*Math.PI-0.2);ctx.stroke();}
+    sphere(cx-28,cy+22, 11,9, pd.color, pd.accent);
+    sphere(cx+28,cy+22, 11,9, pd.color, pd.accent);
+  }
+
+  function drawBunny(bobY) {
+    const cx=W/2, cy=H*0.56+bobY;
+    sphere(cx, cy, 32,36, pd.color, pd.accent);
+    sphere(cx, cy-50, 26,24, pd.color, pd.accent);
+    // Long ears
+    ctx.fillStyle=pd.color;
+    ctx.beginPath(); ctx.ellipse(cx-14,cy-80,9,30,-(0.1+Math.sin(t)*0.05),0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx+14,cy-80,9,30,(0.1+Math.sin(t+1)*0.05),0,Math.PI*2); ctx.fill();
+    ctx.fillStyle=pd.earColor; ctx.globalAlpha=0.7;
+    ctx.beginPath(); ctx.ellipse(cx-14,cy-80,5,25,-(0.1+Math.sin(t)*0.05),0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx+14,cy-80,5,25,(0.1+Math.sin(t+1)*0.05),0,Math.PI*2); ctx.fill();
+    ctx.globalAlpha=1;
+    drawEyes(cx,cy-50,happiness,t);
+    ctx.fillStyle='#f090b0'; ctx.beginPath(); ctx.ellipse(cx,cy-43,3,2.5,0,0,Math.PI*2); ctx.fill();
+    if(happiness>=40){ctx.strokeStyle='#c06080';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy-42,4,0.3,Math.PI-0.3);ctx.stroke();}
+    else{ctx.strokeStyle='#c06080';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy-38,4,Math.PI+0.3,2*Math.PI-0.3);ctx.stroke();}
+    sphere(cx-24,cy+26,10,8,pd.color,pd.accent);
+    sphere(cx+24,cy+26,10,8,pd.color,pd.accent);
+    // Fluffy tail
+    sphere(cx+30,cy+10,10,10,lighten(pd.color,20),pd.color);
+  }
+
+  function drawFox(bobY) {
+    const cx=W/2, cy=H*0.58+bobY;
+    // Bushy tail
+    ctx.save(); ctx.strokeStyle=pd.color; ctx.lineWidth=14; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(cx+26,cy+20); ctx.quadraticCurveTo(cx+56,cy+8+Math.sin(t)*12,cx+52,cy-24); ctx.stroke();
+    ctx.strokeStyle='#fff'; ctx.lineWidth=6;
+    ctx.beginPath(); ctx.moveTo(cx+28,cy+16); ctx.quadraticCurveTo(cx+54,cy+6+Math.sin(t)*12,ctx.lineTo?0:cx+52,cy-20); ctx.stroke();
+    ctx.restore();
+    sphere(cx,cy,36,32,pd.color,pd.accent);
+    sphere(cx-2,cy-43,28,26,pd.color,pd.accent);
+    // Pointy ears
+    ctx.fillStyle=pd.color;
+    ctx.beginPath(); ctx.moveTo(cx-18,cy-60); ctx.lineTo(cx-28,cy-88); ctx.lineTo(cx-6,cy-66); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(cx+10,cy-64); ctx.lineTo(cx+26,cy-90); ctx.lineTo(cx+30,cy-66); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#1a0a00'; ctx.globalAlpha=0.6;
+    ctx.beginPath(); ctx.moveTo(cx-19,cy-63); ctx.lineTo(cx-27,cy-84); ctx.lineTo(cx-8,cy-68); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(cx+13,cy-66); ctx.lineTo(cx+25,cy-86); ctx.lineTo(cx+27,cy-68); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha=1;
+    // White muzzle patch
+    sphere(cx-2,cy-37,14,10,'#f5e8d8','#e0d0b8');
+    drawEyes(cx-2,cy-45,happiness,t);
+    ctx.fillStyle='#1a0a00'; ctx.beginPath(); ctx.ellipse(cx-2,cy-38,4,3,0,0,Math.PI*2); ctx.fill();
+    if(happiness>=40){ctx.strokeStyle='#8b3010';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx-2,cy-36,5,0.3,Math.PI-0.3);ctx.stroke();}
+    else{ctx.strokeStyle='#8b3010';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx-2,cy-32,5,Math.PI+0.3,2*Math.PI-0.3);ctx.stroke();}
+    sphere(cx-28,cy+22,11,9,pd.color,pd.accent);
+    sphere(cx+24,cy+22,11,9,pd.color,pd.accent);
+  }
+
+  function drawPenguin(bobY) {
+    const cx=W/2, cy=H*0.56+bobY;
+    // Body (black)
+    sphere(cx,cy,36,42,pd.accent,'#0d0d1a');
+    // White belly
+    sphere(cx,cy+5,22,28,'#f0f0f0','#d8d8d8');
+    // Head
+    sphere(cx,cy-52,26,24,pd.accent,'#0d0d1a');
+    // White face
+    sphere(cx,cy-50,16,16,'#f0f0f0','#d8d8d8');
+    // Beak
+    ctx.fillStyle=pd.earColor; ctx.beginPath(); ctx.moveTo(cx-5,cy-46); ctx.lineTo(cx,cy-40); ctx.lineTo(cx+5,cy-46); ctx.closePath(); ctx.fill();
+    drawEyes(cx,cy-54,happiness,t);
+    // Flippers (wave)
+    const flapL = Math.sin(t)*10;
+    ctx.fillStyle=pd.accent;
+    ctx.beginPath(); ctx.ellipse(cx-38,cy-10+flapL,12,22,-0.4,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx+38,cy-10-flapL,12,22,0.4,0,Math.PI*2); ctx.fill();
+    // Feet
+    ctx.fillStyle=pd.earColor;
+    ctx.beginPath(); ctx.ellipse(cx-16,cy+44,11,7,0.2,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx+16,cy+44,11,7,-0.2,0,Math.PI*2); ctx.fill();
+  }
+
+  function drawEyes(cx, cy, hap, t) {
+    [-10, 10].forEach(ox => {
+      // Eye white
+      sphere(cx+ox, cy, 6, 6, '#fff', '#e8e8e8');
+      // Pupil
+      ctx.fillStyle = pd.eyeColor;
+      ctx.beginPath(); ctx.ellipse(cx+ox+1, cy+1, 3, 3, 0, 0, Math.PI*2); ctx.fill();
+      // Pupil shine
+      ctx.fillStyle='#fff'; ctx.beginPath(); ctx.ellipse(cx+ox+2, cy, 1.2, 1.2, 0, 0, Math.PI*2); ctx.fill();
+      // Blink: random slow blink
+      if (Math.sin(t * 0.7) > 0.96) {
+        ctx.fillStyle = pd.color;
+        ctx.beginPath(); ctx.ellipse(cx+ox, cy, 6, 2, 0, 0, Math.PI*2); ctx.fill();
+      }
+    });
+  }
+
+  const drawFns = { cat:drawCat, dog:drawDog, bunny:drawBunny, fox:drawFox, penguin:drawPenguin };
+
+  function render() {
+    t += 0.04;
+    ctx.clearRect(0, 0, W, H);
+    drawBackground();
+    drawGround();
+    // Bob up/down
+    const bobY = Math.sin(t * 0.8) * (happiness >= 40 ? 5 : 2);
+    (drawFns[type] || drawFns.cat)(bobY);
+    _petAnimFrame = requestAnimationFrame(render);
+  }
+  render();
 }
 
 async function sellPet() {
-  const pet = getPetData();
+  const pet = getPetSave();
   if (!pet) return;
-  const totalHours = CU?.studyStats?.totalHours || 0;
-  const petHours = Math.max(0, totalHours - (pet.studyHoursAtAdoption || 0));
+  const petHours = Math.max(0, (CU?.studyStats?.totalHours || 0) - (pet.studyHoursAtAdoption || 0));
   const age = Math.floor(petHours / PET_HRS_PER_YEAR);
-  let pts = 0;
-  if (age >= 40) pts = 20;
-  else if (age >= 30) pts = 15;
-  else if (age >= 20) pts = 10;
+  const pts = age >= 40 ? 20 : age >= 30 ? 15 : age >= 20 ? 10 : 0;
   if (pts === 0) { showToast('Too young!', `${PET_DATA[pet.type]?.name} needs to be at least 20 years old to sell.`, 'warning'); return; }
   if (!confirm(`Sell ${PET_DATA[pet.type]?.name} (age ${age}) for ${pts} points? This cannot be undone.`)) return;
   const month = new Date().toISOString().slice(0,7);
   await window.FS.addPoint({ by:CUK, byName:CU.name, faculty:CU.faculty, module:'Study Pet', testName:`Sold ${PET_DATA[pet.type]?.name} (age ${age})`, mark:100, points:pts, month, date:new Date().toISOString() });
-  saveToLocal('studyPet_' + CUK, null);
-  showToast('🎉 Pet Sold!', `You earned ${pts} points! Time to adopt a new companion.`, 'success');
+  if (_petAnimFrame) { cancelAnimationFrame(_petAnimFrame); _petAnimFrame = null; }
+  savePetSave(null);
+  showToast('🎉 Sold!', `You earned ${pts} points! Adopt a new companion.`, 'success');
   updatePetState();
 }
 
 function releasePet() {
-  if (!confirm('Release your pet and start fresh? You will not earn any points.')) return;
-  saveToLocal('studyPet_' + CUK, null);
-  showToast('👋 Goodbye!', 'Your pet has been released. Adopt a new one!', 'info');
+  if (!confirm('Release your pet? You will not earn points.')) return;
+  if (_petAnimFrame) { cancelAnimationFrame(_petAnimFrame); _petAnimFrame = null; }
+  savePetSave(null);
+  showToast('👋 Released!', 'Your pet is free. Adopt a new one!', 'info');
   updatePetState();
 }
 
